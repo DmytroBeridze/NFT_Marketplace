@@ -1,0 +1,22 @@
+# Игнорировать node_modules в папках клиента и сервера
+/client/node_modules/
+/server/node_modules/
+
+# Игнорировать системные файлы MacOS
+.DS_Store
+
+# Игнорировать файлы с переменными окружения
+.env
+/server/.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Логи npm/yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Карты стилей (если не нужны в репозитории)
+*.css.map
