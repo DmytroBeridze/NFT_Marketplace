@@ -5,6 +5,8 @@ const { Schema } = mongoose;
 interface IUser {
   userName: string;
   password: string;
+  roles: mongoose.Types.ObjectId[];
+
   // posts: mongoose.Schema.Types.ObjectId[];
 }
 
@@ -20,12 +22,7 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-    // posts: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Post",
-    //   },
-    // ],
+    roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Roles" }],
   },
   { timestamps: true }
 );
