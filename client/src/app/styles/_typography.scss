@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;600&display=swap');
+
+@mixin font-space-mono-regular {
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin font-space-mono-bold {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin font-work-sans-regular {
+  font-family: 'Work Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin font-work-sans-semibold {
+  font-family: 'Work Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+// Пример использования
+
+// .title {
+//   @include font-work-sans-semibold;
+//   font-size: 2rem;
+// }
