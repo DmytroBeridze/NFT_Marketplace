@@ -4,6 +4,7 @@ import { ThemeContext } from '../context/ThemeContext';
 
 function App() {
   const [theme, setTheme] = useState<boolean>(true);
+
   return (
     <div className="App">
       <ThemeContext.Provider value={{ theme, setTheme }}>

@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import { Button } from '../../shared/ui/atoms/Button';
 
 export const ThemeSwitcher = () => {
   const themeContext = useContext(ThemeContext);
@@ -7,18 +8,18 @@ export const ThemeSwitcher = () => {
     throw new Error('ThemeSwitcher must be used within a ThemeProvider');
   }
   const { theme, setTheme } = themeContext;
-  console.log(theme);
 
-  return (
-    <div>
-      <button
-        style={{ fontSize: '2.2rem' }}
-        onClick={() => setTheme((prevState) => !prevState)}
-      >
-        Button Switch
-      </button>
-    </div>
-  );
+  const switcher = () => {
+    setTheme((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    theme
+      ? document.body.setAttribute('data-theme', 'dark')
+      : document.body.setAttribute('data-theme', 'light');
+  }, [theme]);
+
+  return <Button onClick={switcher}>Theme</Button>;
 };
 
 export default ThemeSwitcher;
