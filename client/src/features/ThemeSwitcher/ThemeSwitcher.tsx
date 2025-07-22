@@ -19,7 +19,12 @@ export const ThemeSwitcher = () => {
       : document.body.setAttribute('data-theme', 'light');
   }, [theme]);
 
-  return <Button onClick={switcher}>Theme</Button>;
+  return (
+    <>
+      <Button onClick={switcher}>Theme</Button>
+      <div className="text-5xl font-bold">Test test</div>
+    </>
+  );
 };
 
 export default ThemeSwitcher;

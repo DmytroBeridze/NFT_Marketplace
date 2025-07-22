@@ -8,7 +8,9 @@ function App() {
   return (
     <div className="App">
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        <div style={{ fontSize: '2.2rem' }}>Hello project </div>
+        <div className="bg-avocado text-mint-500 hover:bg-gray-400 text-5xl font-bold ">
+          Hello project{' '}
+        </div>
         <ThemeSwitcher />
       </ThemeContext.Provider>
     </div>

@@ -6,10 +6,15 @@ interface IButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+const variantClasses = {
+  primary: 'bg-blue-600 text-white hover:bg-blue-700',
+  secondary: 'bg-mint-500 text-gray-800 hover:bg-gray-400 ',
+};
+const baseClass = 'px-4 py-2 rounded';
 export const Button = ({
   type = 'button',
   children,
-  variant,
+  variant = 'secondary',
   onClick,
   className = '',
 }: IButtonProps) => {
@@ -17,9 +22,8 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`btn ${className} ${variant}`}
+      className={`${baseClass} ${variantClasses[variant]} ${className} `}
     >
-      {/* <button onClick={onClick} className={className ?? ''}> */}
       {children}
     </button>
   );
