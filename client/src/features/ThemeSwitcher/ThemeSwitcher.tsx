@@ -14,15 +14,18 @@ export const ThemeSwitcher = () => {
   };
 
   useEffect(() => {
+    document.documentElement.classList.remove('theme-dark', 'theme-light');
+
     theme
-      ? document.body.setAttribute('data-theme', 'dark')
-      : document.body.setAttribute('data-theme', 'light');
+      ? document.documentElement.classList.add('theme-dark')
+      : document.documentElement.classList.add('theme-light');
   }, [theme]);
 
   return (
     <>
-      <Button onClick={switcher}>Theme</Button>
-      <div className="text-5xl font-bold">Test test</div>
+      <Button onClick={switcher} className="px-5 py-7">
+        <div> {theme ? 'light' : 'dark'}</div>
+      </Button>
     </>
   );
 };

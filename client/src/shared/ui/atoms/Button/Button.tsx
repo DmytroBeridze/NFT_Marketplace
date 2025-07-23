@@ -7,14 +7,17 @@ interface IButtonProps {
 }
 
 const variantClasses = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700',
-  secondary: 'bg-mint-500 text-gray-800 hover:bg-gray-400 ',
+  primary: 'bg-general-background text-general-text hover:bg-avocado-100',
+  secondary: 'text',
+  // secondary: 'mint-500 text-avocado-100 hover:bg-gray-400',
 };
-const baseClass = 'px-4 py-2 rounded';
+
+const baseClass = 'rounded';
+
 export const Button = ({
   type = 'button',
   children,
-  variant = 'secondary',
+  variant = 'primary',
   onClick,
   className = '',
 }: IButtonProps) => {
@@ -22,6 +25,7 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
+      // className={`${baseClass}  ${className} `}
       className={`${baseClass} ${variantClasses[variant]} ${className} `}
     >
       {children}
