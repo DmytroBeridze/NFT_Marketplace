@@ -37,4 +37,11 @@
   /* shadows */
   --primary-shadow: 0px 0px 20px -3px rgba(2, 3, 16, 1);
   --secondary-shadow: 0px 0px 22px -6px rgba(18, 19, 19, 0.83);
+
+  /* layouts */
+  --outer-container-width: 1300px;
+  /* --inner-container-width: 315px; */
+  --inner-container-padding: 30px;
+
+  /* spacing */
 }
