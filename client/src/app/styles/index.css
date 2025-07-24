@@ -1,5 +1,6 @@
 @import './typography.css';
 @import './variables.css';
 @import './themes.css';
+@import './tokens.css';
 
 @import 'tailwindcss';

@@ -8,12 +8,17 @@ function App() {
   return (
     <div className="App">
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        <div className="bg-general-background text-general-text  hover:bg-gray-400 text-5xl font-bold  ">
+        <div
+          className="
+          font-space-mono-bold 
+          text-base 
+          bg-primary-background-color 
+          text-primary-text-color 
+          bg-hover-primary-accent-color   "
+        >
           Hello project
         </div>
-        {/* <div className="bg-general-background text-general-text hover:bg-gray-400 text-5xl font-bold  ">
-          Hello project
-        </div> */}
+
         <ThemeSwitcher />
       </ThemeContext.Provider>
     </div>

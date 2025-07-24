@@ -1,68 +1,40 @@
-.theme-dark {
-  --general-background: var(--primary-dark-background-color);
-  --general-text: var(
-    --light-primary-text-color
-  ); /* если текст светлый на тёмном фоне */
-  --accent-color: var(--primary-accent-color);
-  --shadow: var(--primary-shadow);
+/* 
+  ┌────────────────────────────────────────────────────────────┐
+  │        Runtime Theme Values — Light and Dark Modes         │
+  └────────────────────────────────────────────────────────────┘
+
+  These variables define the actual color values for each theme.
+  They are consumed by @theme proxy tokens (see variables.css),
+  which in turn are used by utility-style classes (see tokens.css).
+
+  ✅ Runtime-adaptive: values switch dynamically via .dark class
+  ✅ Centralized control: all theme values live here
+  ✅ Scalable: supports additional themes (e.g. .sepia, .high-contrast)
+
+  :root   → default (light) theme
+  .dark   → dark theme override (applied to <html> via JS)
+
+  Example:
+    --primary-background: #ffffff   → used in light mode
+    --primary-background: #2b2b2b   → used in dark mode
+
+  Note: Do not use these variables directly in JSX or CSS classes.
+  Always access them via @theme tokens (e.g. --primary-background-color).
+*/
+
+:root {
+  --primary-background: #ffffff;
+  --secondary-background: #c8c5c5;
+  --primary-text: #2b2b2b;
+  --secondary-text: #bab8b8;
+  --button-inversive-background: #2b2b2b;
+  --inversive-text: #ffffff;
 }
-
-.theme-light {
-  --general-background: var(--primary-light-background-color);
-  --general-text: var(
-    --dark-primary-text-color
-  ); /* если текст тёмный на светлом фоне */
-  --accent-color: var(--primary-accent-color);
-  --shadow: var(--primary-shadow);
-}
-
-@layer utilities {
-  /* Backgrounds */
-  .bg-general-background {
-    background-color: var(--general-background);
-  }
-
-  .bg-secondary-background {
-    background-color: var(--secondary-background);
-  }
-
-  /* Text colors */
-  .text-general-text {
-    color: var(--general-text);
-  }
-
-  .text-secondary-text {
-    color: var(--secondary-text);
-  }
-
-  /* Accent */
-  .text-accent {
-    color: var(--accent-color);
-  }
-
-  .bg-accent {
-    background-color: var(--accent-color);
-  }
-
-  /* Shadows */
-  .shadow-primary {
-    box-shadow: var(--primary-shadow);
-  }
-
-  .shadow-secondary {
-    box-shadow: var(--secondary-shadow);
-  }
-
-  /* Border radius */
-  .rounded-sm {
-    border-radius: var(--radius-sm);
-  }
-
-  .rounded-md {
-    border-radius: var(--radius-md);
-  }
-
-  .rounded-lg {
-    border-radius: var(--radius-lg);
-  }
+.dark {
+  --primary-background: #2b2b2b;
+  --secondary-background: #3b3b3b;
+  --primary-text: #ffffff;
+  --secondary-text: #858584;
+  --button-inversive-background: #ffffff;
+  --inversive-text: #2b2b2b;
 }

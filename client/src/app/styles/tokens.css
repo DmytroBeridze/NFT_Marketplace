@@ -1,0 +1,65 @@
+/* 
+  ┌────────────────────────────────────────────────────────────┐
+  │  Design Token DSL Classes for Tailwind-Compatible Styling  │
+  └────────────────────────────────────────────────────────────┘
+
+  These classes map CSS variables (defined via @theme) to utility-style class names.
+  They allow using Tailwind-like notation (e.g. bg-primary-background-color) in JSX,
+  while keeping full control over runtime theming via CSS variables.
+
+  ✅ Declarative: used directly in JSX like Tailwind utilities
+  ✅ Theme-adaptive: values come from @theme and runtime :root/.dark overrides
+  ✅ Scalable: avoids hardcoded colors, supports token-based design systems
+
+  Example usage in JSX:
+    <div className="bg-primary-background-color text-primary-text-color shadow-primary">
+      Hello project
+    </div>
+
+  Note: hover/focus/active states must be defined explicitly (see interactions.css)
+*/
+
+/* -------------------------backgrounds */
+.bg-primary-background-color {
+  background-color: var(--primary-background-color);
+}
+.bg-secondary-background-color {
+  background-color: var(--secondary-background-color);
+}
+
+.bg-adaptive-button-background-color {
+  background-color: var(--adaptive-button-background-color);
+}
+
+/*-------------------------- texts */
+.text-primary-text-color {
+  color: var(--primary-text-color);
+}
+.text-secondary-text-color {
+  color: var(--secondary-text-color);
+}
+.text-inversive-text-color {
+  color: var(--inversive-text-color);
+}
+
+/* -------------------------accents */
+.bg-primary-accent-color {
+  background-color: var(--primary-accent-color);
+}
+.bg-hover-primary-accent-color:hover {
+  background-color: var(--hover-primary-accent-color);
+}
+.border-primary-accent-color {
+  border-color: var(--primary-accent-color);
+}
+.border-hover-primary-accent-color:hover {
+  border-color: var(--hover-primary-accent-color);
+}
+
+/* ------------------------shadows */
+.shadow-primary {
+  box-shadow: var(--primary-shadow);
+}
+.shadow-secondary {
+  box-shadow: var(--secondary-shadow);
+}

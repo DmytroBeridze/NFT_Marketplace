@@ -2,17 +2,21 @@ interface IButtonProps {
   type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
   className?: string;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'outline' | 'secondary';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const variantClasses = {
-  primary: 'bg-general-background text-general-text hover:bg-avocado-100',
-  secondary: 'text',
-  // secondary: 'mint-500 text-avocado-100 hover:bg-gray-400',
+  primary:
+    'bg-primary-accent-color text-primary-text-color bg-hover-primary-accent-color shadow-secondary',
+  outline:
+    'border-2  border-primary-accent-color border-hover-primary-accent-color text-primary-text-color shadow-secondary',
+  secondary:
+    'bg-adaptive-button-background-color text-inversive-text-color shadow-secondary',
 };
 
-const baseClass = 'rounded';
+const baseClass =
+  'rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl cursor-pointer';
 
 export const Button = ({
   type = 'button',
