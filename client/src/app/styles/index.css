@@ -2,6 +2,6 @@
 @import './variables.css';
 @import './themes.css';
 @import './tokens.css';
-@import './media.css';
+/* @import './media.css'; */
 
 @import 'tailwindcss';

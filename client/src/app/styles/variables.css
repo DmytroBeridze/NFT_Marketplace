@@ -40,8 +40,8 @@
 
   /* layouts */
   --outer-container-width: 1300px;
-  /* --inner-container-width: 315px; */
-  --inner-container-padding: 30px;
+  --inner-container-padding: clamp(0.625rem, -1.563rem + 10.94vw, 7.188rem);
+  /* --inner-container-padding: 30px; */
 
   /* spacing */
 }

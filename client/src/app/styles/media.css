@@ -1,25 +1,15 @@
+:root {
+  --inner-container-padding: 30px;
+}
+
 @media (min-width: 375px) {
   :root {
-    --inner-container-padding: 30px;
+    --inner-container-padding: 72px;
   }
 }
 
 @media (min-width: 834px) {
-  /* @media (min-width: 1024px) { */
   :root {
     --inner-container-padding: 115px;
   }
 }
-
-/* @media (min-width: 375px) {
-  :root {
-    --inner-container-width: 690px;
-  }
-} */
-
-/* @media (min-width: 834px) {
-
-  :root {
-    --inner-container-width: 1050px;
-  }
-} */
