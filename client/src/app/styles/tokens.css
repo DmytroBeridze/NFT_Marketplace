@@ -68,9 +68,30 @@
   max-width: var(--outer-container-width);
 }
 
-/* .max-w-inner-container-width {
-  max-width: var(--inner-container-width);
-} */
 .p-x-inner-container-padding {
   padding-inline: var(--inner-container-padding);
+}
+
+/* ----------------------font sizes */
+
+.t-text-xs {
+  font-size: var(--font-size-xs); /* 12px */
+}
+.t-text-sm {
+  font-size: var(--font-size-sm); /* 16px */
+}
+.t-text-md {
+  font-size: var(--font-size-md); /* 22px */
+}
+.t-text-lg {
+  font-size: var(--font-size-lg); /* 28px */
+}
+.t-text-xl {
+  font-size: var(--font-size-xl); /* 38px */
+}
+.t-text-2xl {
+  font-size: var(--font-size-2xl); /* 51px */
+}
+.t-text-3xl {
+  font-size: var(--font-size-3xl); /* 67px */
 }

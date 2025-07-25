@@ -22,14 +22,24 @@
   Always access them via @theme tokens (e.g. --primary-background-color).
 */
 
-:root {
-  --primary-background: #ffffff;
+/* :root {
+  --primary-background: #f5f5f5;
   --secondary-background: #c8c5c5;
   --primary-text: #2b2b2b;
   --secondary-text: #bab8b8;
   --button-inversive-background: #2b2b2b;
   --inversive-text: #ffffff;
+} */
+
+:root {
+  --primary-background: #f5f5f5; /* Мягкий светлый фон */
+  --secondary-background: #ffffff; /* Поверхности: карточки, модалки */
+  --primary-text: #2b2b2b; /* Основной текст */
+  --secondary-text: #6a6a6a; /* Подписи, вторичный текст */
+  --button-inversive-background: #2b2b2b; /* Тёмная кнопка на светлом фоне */
+  --inversive-text: #ffffff; /* Белый текст на тёмной кнопке */
 }
+
 .dark {
   --primary-background: #2b2b2b;
   --secondary-background: #3b3b3b;
