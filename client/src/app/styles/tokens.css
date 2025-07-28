@@ -80,6 +80,9 @@
 .t-text-sm {
   font-size: var(--font-size-sm); /* 16px */
 }
+.t-text-ms {
+  font-size: var(--font-size-ms); /* 16px */
+}
 .t-text-md {
   font-size: var(--font-size-md); /* 22px */
 }
