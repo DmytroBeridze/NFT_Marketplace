@@ -1,7 +1,10 @@
+import type { CSSProperties } from 'react';
+
 export interface TextProps {
   children: React.ReactNode;
   className?: string;
   Element?: keyof HTMLElementTagNameMap;
+  style?: CSSProperties;
 
   //   Element?: 'p' | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4';
   size?:

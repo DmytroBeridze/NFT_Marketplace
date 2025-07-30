@@ -1,5 +1,8 @@
 {
-  "welcome": "Ласкаво просимо до застосунку!",
-  "text.readMore": "Читати далі",
-  "button.submit": "Відправити"
+  "nav": {
+    "marketplace": "Маркетплейс",
+    "rankings": "Рейтинги",
+    "connectWallet": "Під’єднати гаманець",
+    "dashboard": "Панель керування"
+  }
 }

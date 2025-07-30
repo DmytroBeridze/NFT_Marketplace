@@ -16,7 +16,7 @@ export const Icon: FC<IconProps> = ({ name, size = 24, className, style }) => {
       width={size}
       height={size}
       className={className}
-      style={style}
+      style={{ display: 'block', ...style }}
     />
   );
 };

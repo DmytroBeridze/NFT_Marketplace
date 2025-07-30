@@ -1,5 +1,8 @@
 {
-  "welcome": "Welcome to the app!",
-  "text.readMore": "Read more",
-  "button.submit": "Submit"
+  "nav": {
+    "marketplace": "Marketplace",
+    "rankings": "Rankings",
+    "connectWallet": "Connect a wallet",
+    "dashboard": "Dashboard "
+  }
 }

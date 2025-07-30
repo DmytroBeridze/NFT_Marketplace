@@ -1,22 +1,31 @@
 import { useTranslation } from 'react-i18next';
 import { Text } from '../../../shared/ui/atoms/Text';
-import { Button } from '../../../shared/ui/atoms/Button';
-import { useLanguage } from '../../../shared/lib/i18n';
-import { Icon } from '../../../shared/ui/atoms/Icon';
+import { NavLink } from 'react-router-dom';
 
 export const NavigationPanel = () => {
-  const { changeLang, lang } = useLanguage();
-
   const { t } = useTranslation();
 
+  const translateVariablesObj = t('nav', { returnObjects: true });
+  const navItems = Object.entries(translateVariablesObj);
+
   return (
-    <div>
-      <div className="flex gap-3">
-        <Icon name="logo-icon" size={32} />
-        <Text Element="div" font="font-space-mono-bold" size="t-text-ms">
-          {'NFT Marketplace'}
-        </Text>
-      </div>
-    </div>
+    <ul className="flex gap-12 items-center justify-center ">
+      {navItems.map(([key, value]) => {
+        return (
+          <li key={key} style={{ paddingTop: '2px' }}>
+            <NavLink to={`/${key}`}>
+              <Text
+                size="t-text-sm"
+                font="font-work-sans-semibold"
+                Element="span"
+                className="leading-normal"
+              >
+                {value}
+              </Text>
+            </NavLink>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
