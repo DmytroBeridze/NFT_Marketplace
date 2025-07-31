@@ -5,6 +5,8 @@ import { Button } from '../../../shared/ui/atoms/Button';
 import { Icon } from '../../../shared/ui/atoms/Icon';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { HeaderLogo } from './HeaderLogo';
+import { ThemeSelect } from '../../../shared/ui/atoms/ThemeSelect';
+import { ThemeSwitcher } from '../../../features/ThemeSwitcher';
 
 export const Header = () => {
   const { t } = useTranslation();
@@ -25,11 +27,12 @@ export const Header = () => {
           <NavigationPanel />
         </nav>
         <section className="flex gap-0.5 items-center ">
+          <ThemeSwitcher />
           <LangSwitcher />
           <Button className="py-5 px-7 flex gap-3 items-center whitespace-nowrap">
             <Icon name="user-icon" size={20} />
             <Text Element="p" font="font-work-sans-semibold" size="t-text-sm">
-              {t('button.signUp')}
+              {t('button.signIn')}
             </Text>
           </Button>
         </section>

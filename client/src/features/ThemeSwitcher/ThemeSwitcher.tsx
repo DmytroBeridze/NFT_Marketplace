@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Button } from '../../shared/ui/atoms/Button';
 import { useTheme } from '../../shared/lib/theme/useTheme';
+import { ThemeSelect } from '../../shared/ui/atoms/ThemeSelect';
 
 export const ThemeSwitcher = () => {
   const { toggleTheme, theme } = useTheme();
@@ -9,17 +9,7 @@ export const ThemeSwitcher = () => {
     document.documentElement.classList.toggle('dark');
   }, [theme]);
 
-  return (
-    <>
-      <Button
-        variant="primary"
-        onClick={toggleTheme}
-        className="px-12 py-5  font-work-sans-regular  "
-      >
-        <div> Get Started</div>
-      </Button>
-    </>
-  );
+  return <ThemeSelect toggleTheme={toggleTheme} />;
 };
 
 export default ThemeSwitcher;

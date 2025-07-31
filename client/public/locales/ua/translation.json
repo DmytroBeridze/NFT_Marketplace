@@ -3,9 +3,9 @@
     "marketplace": "Маркетплейс",
     "rankings": "Рейтинги",
     "connectWallet": "Під’єднати гаманець",
-    "dashboard": "Панель керування"
+    "dashboard": "Кабінет"
   },
   "button": {
-    "signUp": "Реєстрація"
+    "signIn": "Вхід"
   }
 }

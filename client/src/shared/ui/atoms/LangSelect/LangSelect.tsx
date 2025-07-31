@@ -8,6 +8,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { Text } from '../Text';
 import type { Dispatch } from 'react';
 import { IoCheckmarkOutline } from 'react-icons/io5';
+import { PiGlobeLight } from 'react-icons/pi';
 
 type Language = {
   id: string;
@@ -31,7 +32,7 @@ export const LangSelect = ({
     <Listbox value={selectedLang} onChange={setSelectedLang}>
       {({ open }) => (
         <div>
-          <ListboxButton className="rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl focus-visible:outline-none focus-visible:ring-0  cursor-pointer py-2 px-5 ">
+          <ListboxButton className="rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl focus-visible:outline-none focus-visible:ring-0  cursor-pointer py-2 px-2 ">
             {/* <ListboxButton className="rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl   cursor-pointer py-2 px-5  bg-adaptive-button-background-color"> */}
             {
               <Text
@@ -41,6 +42,7 @@ export const LangSelect = ({
                 // color="text-inversive-text-color"
                 className="flex items-center gap-0.5"
               >
+                <PiGlobeLight />
                 {selectedLang.name}
                 <IoIosArrowDown
                   className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
