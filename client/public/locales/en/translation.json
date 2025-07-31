@@ -4,5 +4,8 @@
     "rankings": "Rankings",
     "connectWallet": "Connect a wallet",
     "dashboard": "Dashboard "
+  },
+  "button": {
+    "signUp": "Sign Up"
   }
 }

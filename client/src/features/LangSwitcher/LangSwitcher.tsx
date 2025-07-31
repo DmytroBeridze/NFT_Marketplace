@@ -16,7 +16,7 @@ export const LangSwitcher = () => {
 
   useEffect(() => {
     changeLang(selectedLang.id);
-  }, [selectedLang, changeLang]);
+  }, [selectedLang]);
 
   return (
     <LangSelect

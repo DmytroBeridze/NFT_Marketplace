@@ -4,5 +4,8 @@
     "rankings": "Рейтинги",
     "connectWallet": "Під’єднати гаманець",
     "dashboard": "Панель керування"
+  },
+  "button": {
+    "signUp": "Реєстрація"
   }
 }

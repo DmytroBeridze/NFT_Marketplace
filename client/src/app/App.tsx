@@ -10,7 +10,7 @@ function App() {
       <AppProviders>
         <OuterContainer>
           <Header />
-          <InnerContainer>{<div>Content</div>}</InnerContainer>
+          {/* <InnerContainer>{<div>Content</div>}</InnerContainer> */}
         </OuterContainer>
       </AppProviders>
     </div>
