@@ -24,5 +24,7 @@ export interface TextProps {
   color?:
     | 'text-primary-text-color'
     | 'text-secondary-text-color'
-    | 'text-inversive-text-color';
+    | 'text-inversive-text-color'
+    | 'static-text-black-color'
+    | 'static-text-white-color';
 }

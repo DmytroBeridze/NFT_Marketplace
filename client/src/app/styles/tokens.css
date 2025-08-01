@@ -33,6 +33,11 @@
 .layout-adaptive-color {
   border: 1px solid var(--adaptive-button-background-color);
 }
+/*-------------------- link-underline color  */
+.link-underline::after {
+  background-color: var(--primary-accent-color);
+}
+
 /*-------------------------- texts */
 .text-primary-text-color {
   color: var(--primary-text-color);
@@ -42,6 +47,12 @@
 }
 .text-inversive-text-color {
   color: var(--inversive-text-color);
+}
+.static-text-white-color {
+  color: var(--static-text-white);
+}
+.static-text-black-color {
+  color: var(--static-text-black);
 }
 
 /* -------------------------accents */
@@ -101,7 +112,7 @@
   font-size: var(--font-size-3xl); /* 67px */
 }
 
-/* ua font correction */
+/* ---------------------ua font correction */
 .lang-ua {
   transform: scale(0.95);
   display: inline-block;

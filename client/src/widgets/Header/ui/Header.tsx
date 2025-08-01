@@ -5,7 +5,6 @@ import { Button } from '../../../shared/ui/atoms/Button';
 import { Icon } from '../../../shared/ui/atoms/Icon';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { HeaderLogo } from './HeaderLogo';
-import { ThemeSelect } from '../../../shared/ui/atoms/ThemeSelect';
 import { ThemeSwitcher } from '../../../features/ThemeSwitcher';
 
 export const Header = () => {
@@ -18,7 +17,6 @@ export const Header = () => {
      text-primary-text-color
      py-5
      px-2.5
-     
      "
     >
       <section className="my-0 mx-auto flex items-center justify-between max-w-[1180px] ">
@@ -31,7 +29,12 @@ export const Header = () => {
           <LangSwitcher />
           <Button className="py-5 px-7 flex gap-3 items-center whitespace-nowrap">
             <Icon name="user-icon" size={20} />
-            <Text Element="p" font="font-work-sans-semibold" size="t-text-sm">
+            <Text
+              Element="p"
+              font="font-work-sans-semibold"
+              size="t-text-sm"
+              color="static-text-white-color"
+            >
               {t('button.signIn')}
             </Text>
           </Button>

@@ -13,13 +13,18 @@ export const NavigationPanel = () => {
     <ul className="flex gap-12 items-center justify-center ">
       {navItems.map(([key, value]) => {
         return (
-          <li key={key} style={{ paddingTop: '2px' }}>
+          <li
+            key={key}
+            style={{ paddingTop: '2px' }}
+            className="relative after:absolute after:left-0  after:bottom-[-2px] after:h-0.5 after:w-full link-underline after:origin-center after:scale-x-0 after:transform after:transition-transform after:duration-300 after:ease  hover:after:scale-x-100 "
+            // className="relative after:absolute after:left-0  after:bottom-[-2px] after:h-0.5 after:w-full  after:bg-primary-accent-color after:origin-center after:scale-x-0 after:transform after:transition-transform after:duration-300 after:ease-in  hover:after:scale-x-100 "
+          >
             <NavLink to={`/${key}`}>
               <Text
                 size="t-text-sm"
                 font="font-work-sans-semibold"
                 Element="span"
-                className={`leading-normal ${lang === 'ua' ? 'lang-ua' : ''}`}
+                className={`leading-normal ${lang === 'ua' ? 'lang-ua' : ''} hover:opacity-60`}
               >
                 {value}
               </Text>
