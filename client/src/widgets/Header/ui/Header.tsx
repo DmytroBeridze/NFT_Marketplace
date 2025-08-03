@@ -1,15 +1,15 @@
-import { BurgerMenu } from '../../../features/BurgerMenu';
+import { BurgerButton, BurgerMenu } from '../../../features/BurgerMenu';
 import { Navigation } from './Navigation';
 import { HeaderActions } from './HeaderActions';
 import { NavigationPanel } from '../../../features/navigation';
 import { Text } from '../../../shared/ui/atoms/Text';
-import { BurgerButton } from '../../../shared/ui/molecules/BurgerButton';
 
 export const Header = () => {
   // const [toggle, setToggle] = useState(false);
 
   // const toggleHandler = () => {
   //   setToggle((prevState) => !prevState);
+
   // };
 
   return (

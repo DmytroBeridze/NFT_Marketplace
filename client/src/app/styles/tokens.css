@@ -142,6 +142,11 @@
     display: none;
   }
 }
+.burger-menue-responsive {
+  @media (min-width: 834px) {
+    display: none;
+  }
+}
 
 /* [data-checked] .bg-switch {
   background-color: var(--primary-accent-color);

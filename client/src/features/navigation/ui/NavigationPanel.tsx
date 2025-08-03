@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { NavLink } from 'react-router-dom';
 import i18n from '../../../shared/config/i18n/i18n';
-import { BurgerMenu } from '../../BurgerMenu';
 
 interface NavigationPanelProps {
   classNameList?: string;

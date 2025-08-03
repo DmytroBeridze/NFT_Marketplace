@@ -16,6 +16,7 @@ import { ReactComponent as VideoCameraIcon } from '../../assets/icons/VideoCamer
 import { ReactComponent as YoutubeIcon } from '../../assets/icons/YoutubeLogo.svg';
 import { ReactComponent as UserIcon } from '../../assets/icons/User.svg';
 import { ReactComponent as BurgerMenu } from '../../assets/icons/BurgerMenu.svg';
+import { ReactComponent as Close } from '../../assets/icons/close.svg';
 
 export const iconsMap = {
   'logo-icon': LogoIcon,
@@ -36,6 +37,7 @@ export const iconsMap = {
   'youtube-icon': YoutubeIcon,
   'user-icon': UserIcon,
   'BurgerMenu-icon': BurgerMenu,
+  'Close-icon': Close,
 } as const;
 
 export type IconName = keyof typeof iconsMap;
