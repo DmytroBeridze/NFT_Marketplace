@@ -29,7 +29,6 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
-      // className={`${baseClass}  ${className} `}
       className={`${baseClass} ${variantClasses[variant]} ${className} `}
     >
       {children}

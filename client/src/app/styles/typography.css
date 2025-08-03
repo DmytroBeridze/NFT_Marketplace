@@ -34,8 +34,8 @@
   transition: all 0.2s ease;
   transform: scaleX(0);
   transform-origin: center;
-} */
+}
 
-/* .nav-link-underline:hover::after {
+.nav-link-underline:hover::after {
   transform: scaleX(1);
 } */

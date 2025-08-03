@@ -6,13 +6,21 @@ interface IconProps {
   size?: number;
   className?: string;
   style?: React.CSSProperties;
+  fill?: string;
 }
 
-export const Icon: FC<IconProps> = ({ name, size = 24, className, style }) => {
+export const Icon: FC<IconProps> = ({
+  name,
+  size = 24,
+  className,
+  style,
+  fill,
+}) => {
   const IconComponent = iconsMap[name];
 
   return (
     <IconComponent
+      fill={fill}
       width={size}
       height={size}
       className={className}

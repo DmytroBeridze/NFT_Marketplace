@@ -3,15 +3,18 @@ import { Text } from '../../atoms/Text';
 
 export const Logo = () => {
   return (
-    <div className="flex gap-3 items-center">
-      <Icon name="logo-icon" size={32} />
+    <div className="flex flex-col gap-1 items-start  lg:flex-row lg:items-center lg:gap-3">
+      <Icon name="logo-icon" size={24} className="lg:w-8 lg:h-8  " />
       <Text
         Element="span"
         font="font-space-mono-bold"
-        size="t-text-ms"
+        size="responsive-size-ms"
         className="leading-normal"
       >
-        {'NFT Marketplace'}
+        NFT
+        <br className=" lg:hidden" />
+        <span>Marketplace</span>
+        {/* {'NFT Marketplace'} */}
       </Text>
     </div>
   );

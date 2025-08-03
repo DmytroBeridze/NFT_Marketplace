@@ -55,7 +55,13 @@
   --font-size-2xl: 3.188rem; /* 51px */
   --font-size-3xl: 4.188rem; /* 67px */
 
-  /* spacing */
+  --responsive-size-sm: clamp(0.625rem, 0.5rem + 0.63vw, 1rem);
+  --responsive-size-ms: clamp(0.625rem, 0.417rem + 1.04vw, 1.25rem);
+  /* --responsive-size-ms: clamp(0.625rem, 0.417rem + 1.04vw, 1.25rem); */
+
+  /* spacings */
+  --gap-nav-responsive: clamp(0.125rem, -0.667rem + 3.96vw, 2.5rem);
+  /* --gap-nav-responsive: clamp(0.313rem, -0.417rem + 3.65vw, 2.5rem); */
 
   /* border */
 }

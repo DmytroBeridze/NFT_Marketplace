@@ -26,7 +26,7 @@ export const ThemeSelect = ({ toggleTheme }: ThemeSelectProps) => {
     >
       <BsSunFill className="absolute left-1 static-text-black-color" />
       <span
-        className={`z-20 size-4 translate-x-1 rounded-full bg-white transition ${enabled ? 'translate-x-6' : 'translate-x-1'} ${enabled ? 'bg-primary-accent-color' : 'bg-gray-200'}`}
+        className={`z-1 size-4 translate-x-1 rounded-full bg-white transition ${enabled ? 'translate-x-6' : 'translate-x-1'} ${enabled ? 'bg-primary-accent-color' : 'bg-gray-200'}`}
         // className={`bg-switch size-4 translate-x-1 rounded-full bg-white transition ${enabled ? 'translate-x-6' : 'translate-x-1'}`}
       />
       <WiMoonWaningCrescent2 className=" absolute right-0.5 static-text-white-color" />

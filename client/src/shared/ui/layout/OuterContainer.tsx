@@ -8,8 +8,6 @@ export const OuterContainer = ({ children }: OuterContainerProps) => {
       className="
       max-w-outer-container-width
       m-auto mt-0 
-      sm:px-2.5
-      px-0
       "
     >
       {children}

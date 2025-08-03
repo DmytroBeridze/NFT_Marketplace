@@ -1,14 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import { LangSwitcher } from '../../../features/LangSwitcher';
+import { BurgerMenu } from '../../../features/BurgerMenu';
+import { Navigation } from './Navigation';
+import { HeaderActions } from './HeaderActions';
 import { NavigationPanel } from '../../../features/navigation';
-import { Button } from '../../../shared/ui/atoms/Button';
-import { Icon } from '../../../shared/ui/atoms/Icon';
 import { Text } from '../../../shared/ui/atoms/Text';
-import { HeaderLogo } from './HeaderLogo';
-import { ThemeSwitcher } from '../../../features/ThemeSwitcher';
+import { BurgerButton } from '../../../shared/ui/molecules/BurgerButton';
 
 export const Header = () => {
-  const { t } = useTranslation();
+  // const [toggle, setToggle] = useState(false);
+
+  // const toggleHandler = () => {
+  //   setToggle((prevState) => !prevState);
+  // };
+
   return (
     <header
       className="
@@ -16,29 +19,30 @@ export const Header = () => {
      bg-primary-background-color
      text-primary-text-color
      py-5
-     px-2.5
+     px-5
      "
     >
-      <section className="my-0 mx-auto flex items-center justify-between max-w-[1180px] ">
-        <nav className="flex items-center justify-between basis-[92%] mr-7">
-          <HeaderLogo />
-          <NavigationPanel />
-        </nav>
-        <section className="flex gap-0.5 items-center ">
-          <ThemeSwitcher />
-          <LangSwitcher />
-          <Button className="py-5 px-7 flex gap-3 items-center whitespace-nowrap">
-            <Icon name="user-icon" size={20} />
-            <Text
-              Element="p"
-              font="font-work-sans-semibold"
-              size="t-text-sm"
-              color="static-text-white-color"
-            >
-              {t('button.signIn')}
-            </Text>
-          </Button>
-        </section>
+      <section className="my-0 mx-auto flex items-center justify-between max-w-[1180px]">
+        <Navigation />
+        <HeaderActions />
+        <BurgerMenu>
+          <NavigationPanel
+            classNameList="flex flex-col items-center justify-center gap-nav-responsive  navigation-responsive"
+            classNameItem="relative after:absolute after:left-0  after:bottom-[-2px] after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:transform after:transition-transform after:duration-300 after:ease  hover:after:scale-x-100 link-underline-burger"
+            renderItem={(value, lang) => (
+              <Text
+                size="responsive-size-ms"
+                font="font-work-sans-semibold"
+                color="static-text-white-color"
+                Element="span"
+                className={`leading-normal ${lang === 'ua' ? 'lang-ua' : ''}  `}
+              >
+                {value}
+              </Text>
+            )}
+          />
+        </BurgerMenu>
+        <BurgerButton />
       </section>
     </header>
   );

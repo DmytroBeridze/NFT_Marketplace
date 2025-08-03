@@ -10,6 +10,7 @@ function App() {
       <AppProviders>
         <OuterContainer>
           <Header />
+          {/* <div id="burger-root"></div> */}
           {/* <InnerContainer>{<div>Content</div>}</InnerContainer> */}
         </OuterContainer>
       </AppProviders>

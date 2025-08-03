@@ -37,6 +37,9 @@
 .link-underline::after {
   background-color: var(--primary-accent-color);
 }
+.link-underline-burger::after {
+  background-color: var(--static-text-white);
+}
 
 /*-------------------------- texts */
 .text-primary-text-color {
@@ -86,7 +89,6 @@
 }
 
 /* ----------------------font sizes */
-
 .t-text-xs {
   font-size: var(--font-size-xs); /* 12px */
 }
@@ -111,11 +113,34 @@
 .t-text-3xl {
   font-size: var(--font-size-3xl); /* 67px */
 }
+.responsive-size-sm {
+  font-size: var(--responsive-size-sm);
+}
+.responsive-size-ms {
+  font-size: var(--responsive-size-ms);
+}
+
+/*-----------------------spacings  */
+.gap-nav-responsive {
+  gap: var(--gap-nav-responsive);
+}
 
 /* ---------------------ua font correction */
 .lang-ua {
   transform: scale(0.95);
   display: inline-block;
+}
+
+/* ---------------------adaptive */
+.navigation-responsive {
+  @media (min-width: 834px) {
+    display: flex;
+  }
+}
+.burger-button-responsive {
+  @media (min-width: 834px) {
+    display: none;
+  }
 }
 
 /* [data-checked] .bg-switch {
