@@ -1,8 +1,13 @@
-import { BurgerButton, BurgerMenu } from '../../../features/BurgerMenu';
+import {
+  BurgerActions,
+  BurgerButton,
+  BurgerMenu,
+} from '../../../features/BurgerMenu';
 import { Navigation } from './Navigation';
 import { HeaderActions } from './HeaderActions';
 import { NavigationPanel } from '../../../features/navigation';
 import { Text } from '../../../shared/ui/atoms/Text';
+import { HeaderLogo } from './HeaderLogo';
 
 export const Header = () => {
   // const [toggle, setToggle] = useState(false);
@@ -22,16 +27,19 @@ export const Header = () => {
      px-5
      "
     >
-      <section className="my-0 mx-auto flex items-center justify-between max-w-[1180px]">
+      <section className="  my-0 mx-auto flex items-center justify-between max-w-[1180px]">
         <Navigation />
         <HeaderActions />
+
         <BurgerMenu>
+          <HeaderLogo />
           <NavigationPanel
-            classNameList="flex flex-col items-center justify-center gap-nav-responsive  navigation-responsive"
-            classNameItem="relative after:absolute after:left-0  after:bottom-[-2px] after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:transform after:transition-transform after:duration-300 after:ease  hover:after:scale-x-100 link-underline-burger"
+            classNameList="flex flex-col  justify-center gap-nav-responsive  navigation-responsive"
+            classNameItem="ease-in-out duration-300 flex items-center py-6 px-4 bg-hover-light-primary-accent-color rounded-lg cursor-pointer"
+            // classNameItem="relative after:absolute after:left-0  after:bottom-[-2px] after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:transform after:transition-transform after:duration-300 after:ease  hover:after:scale-x-100 link-underline-burger"
             renderItem={(value, lang) => (
               <Text
-                size="responsive-size-ms"
+                size="t-text-md"
                 font="font-work-sans-semibold"
                 color="static-text-white-color"
                 Element="span"
@@ -41,7 +49,9 @@ export const Header = () => {
               </Text>
             )}
           />
+          <BurgerActions />
         </BurgerMenu>
+
         <BurgerButton />
       </section>
     </header>

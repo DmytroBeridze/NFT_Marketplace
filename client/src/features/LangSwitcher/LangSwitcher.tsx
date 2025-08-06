@@ -7,12 +7,26 @@ const languages = [
   { id: 'en', name: 'En' },
 ];
 
-export const LangSwitcher = () => {
+interface LangSwitcherProps {
+  className?: string;
+}
+export const LangSwitcher = ({ className }: LangSwitcherProps) => {
   const { language, changeLang } = useLanguage();
+
   const initialLang =
     languages.find((elem) => elem.id === language) || languages[0];
 
   const [selectedLang, setSelectedLang] = useState(initialLang);
+
+  // обновление selectedLang в зависимости от изменений в i18n
+  // иначе не изменяется значок языка в неактивном переключателе языка если их несколько
+  // так как у каждого переключателя свой стейт selectedLang
+  useEffect(() => {
+    const newLang = languages.find((elem) => elem.id === language);
+    if (newLang && newLang.id !== selectedLang.id) {
+      setSelectedLang(newLang);
+    }
+  }, [language]);
 
   useEffect(() => {
     changeLang(selectedLang.id);
@@ -24,6 +38,7 @@ export const LangSwitcher = () => {
       languages={languages}
       selectedLang={selectedLang}
       setSelectedLang={setSelectedLang}
+      className={className}
     ></LangSelect>
   );
 };

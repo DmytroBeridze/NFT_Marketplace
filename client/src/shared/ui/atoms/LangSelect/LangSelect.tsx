@@ -6,7 +6,7 @@ import {
 } from '@headlessui/react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { Text } from '../Text';
-import type { Dispatch } from 'react';
+import { type Dispatch } from 'react';
 import { IoCheckmarkOutline } from 'react-icons/io5';
 import { PiGlobeLight } from 'react-icons/pi';
 
@@ -20,6 +20,7 @@ interface LangSelectProps {
   setSelectedLang: Dispatch<Language>;
   languages: Language[];
   language: string;
+  className?: string;
 }
 
 export const LangSelect = ({
@@ -27,12 +28,15 @@ export const LangSelect = ({
   setSelectedLang,
   languages,
   language,
+  className,
 }: LangSelectProps) => {
   return (
     <Listbox value={selectedLang} onChange={setSelectedLang}>
       {({ open }) => (
         <div>
-          <ListboxButton className="rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl focus-visible:outline-none focus-visible:ring-0  cursor-pointer py-2 px-2 ">
+          <ListboxButton
+            className={`${className} rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl focus-visible:outline-none focus-visible:ring-0  cursor-pointer`}
+          >
             {/* <ListboxButton className="rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl   cursor-pointer py-2 px-5  bg-adaptive-button-background-color"> */}
             {
               <Text
@@ -43,6 +47,8 @@ export const LangSelect = ({
                 className="flex items-center gap-0.5"
               >
                 <PiGlobeLight />
+
+                {/* {nameLang} */}
                 {selectedLang.name}
                 <IoIosArrowDown
                   className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
@@ -52,7 +58,7 @@ export const LangSelect = ({
           </ListboxButton>
           <ListboxOptions
             anchor="bottom"
-            className=" w-(--button-width) py-1 px-1 mt-1  bg-white  focus-visible:outline-none focus-visible:ring-0  cursor-pointer rounded-lg shadow-secondary   "
+            className=" w-(--button-width) py-1 px-1 mt-1  bg-white  focus-visible:outline-none focus-visible:ring-0  cursor-pointer rounded-lg shadow-secondary z-[999]  "
           >
             {languages.map((lang) => (
               <ListboxOption

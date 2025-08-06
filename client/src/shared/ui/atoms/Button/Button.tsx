@@ -15,8 +15,8 @@ const variantClasses = {
     'bg-adaptive-button-background-color text-inversive-text-color shadow-secondary',
 };
 
-const baseClass =
-  'rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl cursor-pointer';
+const baseClass = 'rounded-md sm:rounded-lg  lg:rounded-3xl cursor-pointer';
+// 'rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl cursor-pointer';
 
 export const Button = ({
   type = 'button',

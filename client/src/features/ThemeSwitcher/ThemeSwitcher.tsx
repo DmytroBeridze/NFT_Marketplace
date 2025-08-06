@@ -6,7 +6,11 @@ export const ThemeSwitcher = () => {
   const { toggleTheme, theme } = useTheme();
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark');
+    if (theme === false) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [theme]);
 
   return <ThemeSelect toggleTheme={toggleTheme} />;

@@ -26,7 +26,7 @@ export const NavigationPanel = ({
           return (
             <li
               key={key}
-              style={{ paddingTop: '2px' }}
+              // style={{ paddingTop: '2px' }}
               className={classNameItem}
             >
               <NavLink to={`/${key}`}>

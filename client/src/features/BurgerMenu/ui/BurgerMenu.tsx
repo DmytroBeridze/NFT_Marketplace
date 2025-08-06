@@ -1,6 +1,27 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useAppSelector } from '../../../app/store/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../app/store/reduxHooks';
+import { closed } from '../model/burgerSlice';
+
+//! -------------------Transition---- винести налаштування окремо
+import { type TransitionStatus } from 'react-transition-group';
+import { TransitionWrapper } from '../../../shared/ui/atoms/TransitionWrapper';
+const duration = 300;
+
+const defaultStyle = {
+  transition: `transform ${duration}ms ease-in-out`,
+  transform: 'translateX(-110%)',
+};
+
+const transitionStyles: Record<TransitionStatus, React.CSSProperties> = {
+  entering: { transform: 'translateX(0)' },
+  entered: { transform: 'translateX(0)' },
+  exiting: { transform: 'translateX(-110%)' },
+  exited: { transform: 'translateX(-110%)' },
+  unmounted: {},
+};
+
+// --------------//-----Transition
 
 interface burgerMenuProps {
   children?: React.ReactNode;
@@ -8,7 +29,12 @@ interface burgerMenuProps {
 
 export const BurgerMenu = ({ children }: burgerMenuProps) => {
   const [mounted, setMounted] = useState(false);
-  const count = useAppSelector((state) => state.burger.isOpen);
+  const behavior = useAppSelector((state) => state.burger.isOpen);
+  const dispatch = useAppDispatch();
+
+  const closeBurger = () => {
+    dispatch(closed());
+  };
 
   // useEffect с пустым массивом зависимостей ставит mounted в true после первого рендера,
   // чтобы гарантировать, что следующий код (например, доступ к DOM) выполняется только на клиенте,
@@ -28,21 +54,28 @@ export const BurgerMenu = ({ children }: burgerMenuProps) => {
   const root = document.getElementById('burger-root');
   if (!root) return null;
 
-  // return (
-  //   <div className="fixed top-0 left-0 h-full w-[300px] bg-red-950 z-50">
-  //     {children}
-  //   </div>
-  // );
-
   return createPortal(
-    <div
-      className={`${count ? 'translate-x-0' : '-translate-x-[110%]'}  fixed burger-menue-responsive top-0 left-0 h-full max-w-[500px] w-full bg-purple-800 z-[999]`}
+    <TransitionWrapper
+      inProp={behavior}
+      transitionStyles={transitionStyles}
+      defaultStyle={defaultStyle}
     >
-      {/* <div className="fixed top-0 left-0 h-full max-w-[500px] w-full bg-purple-800 z-[999]"> */}
-      {children}
-    </div>,
+      {({ style, ref }) => (
+        <div
+          ref={ref}
+          style={style}
+          className={`fixed   burger-menue-responsive top-0 left-0 h-full   w-full bg-gray-950/80 z-[998] cursor-pointer`}
+          onClick={closeBurger}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-[65%] px-8 py-8 bg-primary-dark-accent-color  h-full cursor-default flex  flex-col gap-12"
+          >
+            {children}
+          </div>
+        </div>
+      )}
+    </TransitionWrapper>,
     root,
   );
 };
-
-// Transition --------------обернуть для анимации!!!

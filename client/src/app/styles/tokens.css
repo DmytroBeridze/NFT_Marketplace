@@ -62,7 +62,13 @@
 .bg-primary-accent-color {
   background-color: var(--primary-accent-color);
 }
+.bg-hover-light-primary-accent-color:hover {
+  background-color: var(--primary-accent-color);
+}
 .bg-hover-primary-accent-color:hover {
+  background-color: var(--hover-primary-accent-color);
+}
+.bg-primary-dark-accent-color {
   background-color: var(--hover-primary-accent-color);
 }
 .border-primary-accent-color {
