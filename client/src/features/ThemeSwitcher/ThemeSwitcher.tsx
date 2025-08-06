@@ -2,8 +2,13 @@ import { useEffect } from 'react';
 import { useTheme } from '../../shared/lib/theme/useTheme';
 import { ThemeSelect } from '../../shared/ui/atoms/ThemeSelect';
 
-export const ThemeSwitcher = () => {
-  const { toggleTheme, theme } = useTheme();
+interface ThemeSwitcherProps {
+  bgColor?: string;
+}
+
+export const ThemeSwitcher = ({ bgColor }: ThemeSwitcherProps) => {
+  const { theme } = useTheme();
+  // const { toggleTheme, theme } = useTheme();
 
   useEffect(() => {
     if (theme === false) {
@@ -13,7 +18,8 @@ export const ThemeSwitcher = () => {
     }
   }, [theme]);
 
-  return <ThemeSelect toggleTheme={toggleTheme} />;
+  return <ThemeSelect bgColor={bgColor} />;
+  // return <ThemeSelect toggleTheme={toggleTheme} bgColor={bgColor} />;
 };
 
 export default ThemeSwitcher;

@@ -64,12 +64,13 @@ export const BurgerMenu = ({ children }: burgerMenuProps) => {
         <div
           ref={ref}
           style={style}
-          className={`fixed   burger-menue-responsive top-0 left-0 h-full   w-full bg-gray-950/80 z-[998] cursor-pointer`}
+          className={`fixed burger-menue-responsive top-0 left-0 h-full   w-full bg-gray-950/80 z-[998] cursor-pointer`}
           onClick={closeBurger}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="max-w-[65%] px-8 py-8 bg-primary-dark-accent-color  h-full cursor-default flex  flex-col gap-12"
+            className="max-w-[65%] px-8 py-8 bg-burger-background-color  h-full cursor-default flex  flex-col gap-18 overflow-y-auto max-h-screen 
+            "
           >
             {children}
           </div>

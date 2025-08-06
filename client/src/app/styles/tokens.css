@@ -23,10 +23,20 @@
 .bg-primary-background-color {
   background-color: var(--primary-background-color);
 }
+.bg-static-primary-background-color {
+  background-color: var(--static-primary-background-color);
+}
 .bg-secondary-background-color {
   background-color: var(--secondary-background-color);
 }
 
+.bg-burger-background-color {
+  background-color: var(--burger-background-color);
+}
+
+.bg-burger-hover-background-color:hover {
+  background-color: var(--burger-hover-background-color);
+}
 .bg-adaptive-button-background-color {
   background-color: var(--adaptive-button-background-color);
 }
@@ -56,6 +66,10 @@
 }
 .static-text-black-color {
   color: var(--static-text-black);
+}
+
+.text-burger-color {
+  color: var(--text-burger-color);
 }
 
 /* -------------------------accents */

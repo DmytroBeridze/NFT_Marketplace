@@ -28,5 +28,6 @@ export interface TextProps {
     | 'text-secondary-text-color'
     | 'text-inversive-text-color'
     | 'static-text-black-color'
-    | 'static-text-white-color';
+    | 'static-text-white-color'
+    | 'text-burger-color';
 }

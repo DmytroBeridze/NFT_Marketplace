@@ -35,13 +35,13 @@ export const Header = () => {
           <HeaderLogo />
           <NavigationPanel
             classNameList="flex flex-col  justify-center gap-nav-responsive  navigation-responsive"
-            classNameItem="ease-in-out duration-300 flex items-center py-6 px-4 bg-hover-light-primary-accent-color rounded-lg cursor-pointer"
+            classNameItem="ease-in-out duration-300 flex items-center py-6 px-4 bg-burger-hover-background-color rounded-lg cursor-pointer"
             // classNameItem="relative after:absolute after:left-0  after:bottom-[-2px] after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:transform after:transition-transform after:duration-300 after:ease  hover:after:scale-x-100 link-underline-burger"
             renderItem={(value, lang) => (
               <Text
                 size="t-text-md"
                 font="font-work-sans-semibold"
-                color="static-text-white-color"
+                color="text-burger-color"
                 Element="span"
                 className={`leading-normal ${lang === 'ua' ? 'lang-ua' : ''}  `}
               >
@@ -49,6 +49,7 @@ export const Header = () => {
               </Text>
             )}
           />
+
           <BurgerActions />
         </BurgerMenu>
 

@@ -24,11 +24,7 @@ export const NavigationPanel = ({
       <ul className={classNameList}>
         {navItems.map(([key, value]: [string, string]) => {
           return (
-            <li
-              key={key}
-              // style={{ paddingTop: '2px' }}
-              className={classNameItem}
-            >
+            <li key={key} className={classNameItem}>
               <NavLink to={`/${key}`}>
                 {/* рендер пропс. если он передан, торендерится он, а не 
               тот компонент, который в коде */}

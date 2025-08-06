@@ -34,17 +34,23 @@
 :root {
   --primary-background: #f5f5f5; /* Мягкий светлый фон */
   --secondary-background: #ffffff; /* Поверхности: карточки, модалки */
+  --burger-background: #763fbf;
+  --burger-hover-background: #a259ff;
   --primary-text: #2b2b2b; /* Основной текст */
   --secondary-text: #6a6a6a; /* Подписи, вторичный текст */
   --button-inversive-background: #2b2b2b; /* Тёмная кнопка на светлом фоне */
   --inversive-text: #ffffff; /* Белый текст на тёмной кнопке */
+  --burger-text: #ffffff;
 }
 
 .dark {
   --primary-background: #2b2b2b;
   --secondary-background: #3b3b3b;
+  --burger-background: #2b2b2b;
+  --burger-hover-background: #3b3b3b;
   --primary-text: #ffffff;
   --secondary-text: #858584;
   --button-inversive-background: #ffffff;
   --inversive-text: #2b2b2b;
+  --burger-text: #a259ff;
 }
