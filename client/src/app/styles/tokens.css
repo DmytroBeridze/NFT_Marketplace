@@ -50,6 +50,10 @@
 .link-underline-burger::after {
   background-color: var(--static-text-white);
 }
+/* ---------------------burger divider */
+/* .burger-divider-color{
+  background-color:
+} */
 
 /*-------------------------- texts */
 .text-primary-text-color {
@@ -133,11 +137,15 @@
 .t-text-3xl {
   font-size: var(--font-size-3xl); /* 67px */
 }
+
 .responsive-size-sm {
   font-size: var(--responsive-size-sm);
 }
 .responsive-size-ms {
   font-size: var(--responsive-size-ms);
+}
+.responsive-size-md {
+  font-size: var(--responsive-size-md);
 }
 
 /*-----------------------spacings  */
@@ -165,6 +173,27 @@
 .burger-menue-responsive {
   @media (min-width: 834px) {
     display: none;
+  }
+}
+
+/*поведінка themeSwither в бузгері є ховер на контейнері, в хедері немає */
+@media (max-width: 639px) {
+  .only-mobile-hover:hover {
+    background-color: var(--burger-hover-background-color) !important;
+  }
+}
+
+/* @media (min-width: 640px) {
+  .only-mobile-hover:hover {
+    background-color: transparent !important;
+  }
+} */
+
+/* поведінка languageSwitcher в бургері є ховер в хедері немає */
+@media (min-width: 834px) {
+  .bg-burger-hover-background-color {
+    background-color: transparent !important;
+    padding: 0 1rem;
   }
 }
 

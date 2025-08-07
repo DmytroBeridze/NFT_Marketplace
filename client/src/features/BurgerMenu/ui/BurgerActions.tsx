@@ -16,13 +16,15 @@ export const BurgerActions = () => {
           before:bg-white/20"
     >
       <div
+        onClick={() => console.log('Click')}
         className="ease-in-out duration-300 
-      flex items-center justify-between py-6 px-4 bg-burger-hover-background-color 
+      flex flex-col sm:flex-row  sm:items-center gap-2.5 justify-between py-4 px-4 bg-burger-hover-background-color 
       rounded-lg cursor-pointer w-full"
       >
         <Button
           variant="secondary"
           className="py-3 px-6  lg:py-5 lg:px-7 flex gap-3 items-center whitespace-nowrap  "
+          // onClick={() => console.log('Click')}
         >
           <Icon name="user-icon" size={14} className="lg:w-5 lg:h-5" />
           <Text
@@ -34,16 +36,19 @@ export const BurgerActions = () => {
             {t('button.signIn')}
           </Text>
         </Button>
-        <ThemeSwitcher bgColor="bg-static-primary-background-color" />
+        <div className="hidden sm:block">
+          <ThemeSwitcher bgColor="bg-static-primary-background-color" />
+        </div>
       </div>
 
-      {/* <div className="ease-in-out duration-300 flex items-center py-6 px-4 bg-burger-hover-background-color rounded-lg cursor-pointer w-full">
+      {/* <div className="ease-in-out duration-300 sm:hidden  flex items-center py-6 px-4 bg-burger-hover-background-color rounded-lg cursor-pointer w-full"> */}
+      <div className="sm:hidden  flex items-center ">
         <ThemeSwitcher bgColor="bg-static-primary-background-color" />
-      </div> */}
-      <div className="ease-in-out duration-300 flex items-center py-6 px-4 bg-burger-hover-background-color rounded-lg cursor-pointer w-full">
+      </div>
+      <div>
+        {/* <div className="ease-in-out duration-300 flex items-center py-6 px-4 bg-burger-hover-background-color rounded-lg cursor-pointer w-full"> */}
         <LangSwitcher className="w-18" />
       </div>
-      {/* </div> */}
     </section>
   );
 };

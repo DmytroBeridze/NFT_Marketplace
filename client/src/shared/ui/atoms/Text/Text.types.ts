@@ -17,7 +17,8 @@ export interface TextProps {
     | 't-text-2xl'
     | 't-text-3xl'
     | 'responsive-size-sm'
-    | 'responsive-size-ms';
+    | 'responsive-size-ms'
+    | 'responsive-size-md';
   font?:
     | 'font-space-mono-regular'
     | 'font-space-mono-bold'

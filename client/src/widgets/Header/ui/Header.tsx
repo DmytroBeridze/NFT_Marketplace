@@ -39,7 +39,7 @@ export const Header = () => {
             // classNameItem="relative after:absolute after:left-0  after:bottom-[-2px] after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:transform after:transition-transform after:duration-300 after:ease  hover:after:scale-x-100 link-underline-burger"
             renderItem={(value, lang) => (
               <Text
-                size="t-text-md"
+                size="responsive-size-md"
                 font="font-work-sans-semibold"
                 color="text-burger-color"
                 Element="span"

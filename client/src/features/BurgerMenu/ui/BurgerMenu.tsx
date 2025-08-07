@@ -69,7 +69,7 @@ export const BurgerMenu = ({ children }: burgerMenuProps) => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="max-w-[65%] px-8 py-8 bg-burger-background-color  h-full cursor-default flex  flex-col gap-18 overflow-y-auto max-h-screen 
+            className="max-w-[72%] px-8 py-8 bg-burger-background-color  h-full cursor-default flex  flex-col gap-18 overflow-y-auto max-h-screen 
             "
           >
             {children}
