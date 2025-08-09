@@ -7,6 +7,7 @@ interface IconProps {
   className?: string;
   style?: React.CSSProperties;
   fill?: string;
+  onClick?: () => void;
 }
 
 export const Icon: FC<IconProps> = ({
@@ -15,6 +16,7 @@ export const Icon: FC<IconProps> = ({
   className,
   style,
   fill,
+  onClick,
 }) => {
   const IconComponent = iconsMap[name];
 
@@ -25,6 +27,7 @@ export const Icon: FC<IconProps> = ({
       height={size}
       className={className}
       style={{ display: 'block', ...style }}
+      onClick={onClick}
     />
   );
 };

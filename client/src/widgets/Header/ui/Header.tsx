@@ -8,14 +8,12 @@ import { HeaderActions } from './HeaderActions';
 import { NavigationPanel } from '../../../features/navigation';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { HeaderLogo } from './HeaderLogo';
+import { Icon } from '../../../shared/ui/atoms/Icon';
+import { closed } from '../../../features/BurgerMenu/model/burgerSlice';
+import { useAppDispatch } from '../../../app/store/reduxHooks';
 
 export const Header = () => {
-  // const [toggle, setToggle] = useState(false);
-
-  // const toggleHandler = () => {
-  //   setToggle((prevState) => !prevState);
-
-  // };
+  const dispatch = useAppDispatch();
 
   return (
     <header
@@ -32,7 +30,13 @@ export const Header = () => {
         <HeaderActions />
 
         <BurgerMenu>
-          <HeaderLogo />
+          <HeaderLogo className="px-4" />
+          <Icon
+            name="close-icon"
+            style={{ color: 'white' }}
+            className="absolute right-10 top-11 cursor-pointer"
+            onClick={() => dispatch(closed())}
+          />
           <NavigationPanel
             classNameList="flex flex-col  justify-center gap-nav-responsive  navigation-responsive"
             classNameItem="ease-in-out duration-300 flex items-center py-6 px-4 bg-burger-hover-background-color rounded-lg cursor-pointer"

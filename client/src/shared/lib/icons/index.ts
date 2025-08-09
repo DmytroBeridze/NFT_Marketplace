@@ -37,7 +37,7 @@ export const iconsMap = {
   'youtube-icon': YoutubeIcon,
   'user-icon': UserIcon,
   'BurgerMenu-icon': BurgerMenu,
-  'Close-icon': Close,
+  'close-icon': Close,
 } as const;
 
 export type IconName = keyof typeof iconsMap;
