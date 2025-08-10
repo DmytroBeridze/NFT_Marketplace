@@ -14,6 +14,7 @@ export const ThemeSelect = ({ bgColor }: ThemeSelectProps) => {
     e.stopPropagation();
     toggleTheme();
   };
+  console.log(bgColor);
 
   return (
     <div

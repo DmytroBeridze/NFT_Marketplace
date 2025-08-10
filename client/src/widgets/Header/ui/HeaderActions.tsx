@@ -1,5 +1,3 @@
-import { useAppDispatch } from '../../../app/store/reduxHooks';
-import { toggle } from '../../../features/AuthorizationModal';
 import { useToggleAuthorizationModal } from '../../../features/AuthorizationModal/hooks/useToggleAuthorizationModal';
 import { LangSwitcher } from '../../../features/LangSwitcher';
 import { ThemeSwitcher } from '../../../features/ThemeSwitcher';

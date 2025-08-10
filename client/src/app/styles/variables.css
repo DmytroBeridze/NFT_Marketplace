@@ -29,6 +29,8 @@
   --adaptive-button-background-color: var(--button-inversive-background);
   --burger-background-color: var(--burger-background);
   --burger-hover-background-color: var(--burger-hover-background);
+  --overlay-background-color: rgba(24, 24, 27, 0.8);
+  --static-surface-color: #f5f5f5;
   /* texts */
   --primary-text-color: var(--primary-text);
   --secondary-text-color: var(--secondary-text);
