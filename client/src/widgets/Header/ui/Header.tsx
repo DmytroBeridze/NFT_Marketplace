@@ -11,6 +11,7 @@ import { HeaderLogo } from './HeaderLogo';
 import { Icon } from '../../../shared/ui/atoms/Icon';
 import { closed } from '../../../features/BurgerMenu/model/burgerSlice';
 import { useAppDispatch } from '../../../app/store/reduxHooks';
+import { LogoVariantContext } from '../context/LogoVariantContext ';
 
 export const Header = () => {
   const dispatch = useAppDispatch();
@@ -18,19 +19,22 @@ export const Header = () => {
   return (
     <header
       className="
-     max-w-full
-     bg-primary-background-color
-     text-primary-text-color
-     py-5
-     px-5
-     "
+        max-w-full
+        bg-primary-background-color
+        text-primary-text-color
+        py-5
+        px-5
+        "
     >
       <section className="  my-0 mx-auto flex items-center justify-between max-w-[1180px]">
         <Navigation />
         <HeaderActions />
 
         <BurgerMenu>
-          <HeaderLogo className="px-4" />
+          {/* смена цвета иконки лого в бургере */}
+          <LogoVariantContext.Provider value="burger">
+            <HeaderLogo className="px-4" />
+          </LogoVariantContext.Provider>
           <Icon
             name="close-icon"
             style={{ color: 'white' }}

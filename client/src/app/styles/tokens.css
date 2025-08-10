@@ -65,11 +65,19 @@
 .text-inversive-text-color {
   color: var(--inversive-text-color);
 }
+
+.burger-icon-color {
+  color: var(--text-burger-color);
+}
+
 .static-text-white-color {
   color: var(--static-text-white);
 }
 .static-text-black-color {
   color: var(--static-text-black);
+}
+.static-text-purple-color {
+  color: var(--primary-accent-color);
 }
 
 .text-burger-color {
