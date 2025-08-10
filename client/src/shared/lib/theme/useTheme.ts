@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { ThemeContext } from './ThemeContext';
 
 export const useTheme = () => {
@@ -10,9 +10,9 @@ export const useTheme = () => {
 
   const { theme, setTheme } = themeContext;
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme((prevState) => !prevState);
-  };
+  }, [setTheme]);
 
   return { toggleTheme, theme };
 };

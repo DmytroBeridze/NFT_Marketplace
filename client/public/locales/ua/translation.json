@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "marketplace": "Маркетплейс",
+    "rankings": "Рейтинги",
+    "connectWallet": "Під’єднати гаманець",
+    "dashboard": "Кабінет"
+  },
+  "button": {
+    "signIn": "Вхід"
+  }
+}

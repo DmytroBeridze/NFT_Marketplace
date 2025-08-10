@@ -12,13 +12,13 @@
 }
 .font-work-sans-regular {
   font-family: 'Work Sans', sans-serif;
-  font-optical-sizing: auto;
+  /* font-optical-sizing: auto; */
   font-weight: 400;
   font-style: normal;
 }
 .font-work-sans-semibold {
   font-family: 'Work Sans', sans-serif;
-  font-optical-sizing: auto;
+  /* font-optical-sizing: auto; */
   font-weight: 600;
   font-style: normal;
 }

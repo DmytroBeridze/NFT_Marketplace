@@ -1,15 +1,15 @@
-:root {
+/* :root {
   --inner-container-padding: 30px;
-}
+} */
 
-@media (min-width: 375px) {
+/* @media (min-width: 375px) {
   :root {
     --inner-container-padding: 72px;
   }
-}
+} */
 
-@media (min-width: 834px) {
+/* @media (min-width: 834px) {
   :root {
     --inner-container-padding: 115px;
   }
-}
+} */

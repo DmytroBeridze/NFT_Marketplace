@@ -23,13 +23,37 @@
 .bg-primary-background-color {
   background-color: var(--primary-background-color);
 }
+.bg-static-primary-background-color {
+  background-color: var(--static-primary-background-color);
+}
 .bg-secondary-background-color {
   background-color: var(--secondary-background-color);
 }
 
+.bg-burger-background-color {
+  background-color: var(--burger-background-color);
+}
+
+.bg-burger-hover-background-color:hover {
+  background-color: var(--burger-hover-background-color);
+}
 .bg-adaptive-button-background-color {
   background-color: var(--adaptive-button-background-color);
 }
+.layout-adaptive-color {
+  border: 1px solid var(--adaptive-button-background-color);
+}
+/*-------------------- link-underline color  */
+.link-underline::after {
+  background-color: var(--primary-accent-color);
+}
+.link-underline-burger::after {
+  background-color: var(--static-text-white);
+}
+/* ---------------------burger divider */
+/* .burger-divider-color{
+  background-color:
+} */
 
 /*-------------------------- texts */
 .text-primary-text-color {
@@ -42,11 +66,35 @@
   color: var(--inversive-text-color);
 }
 
+.burger-icon-color {
+  color: var(--text-burger-color);
+}
+
+.static-text-white-color {
+  color: var(--static-text-white);
+}
+.static-text-black-color {
+  color: var(--static-text-black);
+}
+.static-text-purple-color {
+  color: var(--primary-accent-color);
+}
+
+.text-burger-color {
+  color: var(--text-burger-color);
+}
+
 /* -------------------------accents */
 .bg-primary-accent-color {
   background-color: var(--primary-accent-color);
 }
+.bg-hover-light-primary-accent-color:hover {
+  background-color: var(--primary-accent-color);
+}
 .bg-hover-primary-accent-color:hover {
+  background-color: var(--hover-primary-accent-color);
+}
+.bg-primary-dark-accent-color {
   background-color: var(--hover-primary-accent-color);
 }
 .border-primary-accent-color {
@@ -68,9 +116,95 @@
   max-width: var(--outer-container-width);
 }
 
-/* .max-w-inner-container-width {
-  max-width: var(--inner-container-width);
-} */
 .p-x-inner-container-padding {
   padding-inline: var(--inner-container-padding);
 }
+
+/* ----------------------font sizes */
+.t-text-xs {
+  font-size: var(--font-size-xs); /* 12px */
+}
+.t-text-sm {
+  font-size: var(--font-size-sm); /* 16px */
+}
+.t-text-ms {
+  font-size: var(--font-size-ms); /* 20px */
+}
+.t-text-md {
+  font-size: var(--font-size-md); /* 22px */
+}
+.t-text-lg {
+  font-size: var(--font-size-lg); /* 28px */
+}
+.t-text-xl {
+  font-size: var(--font-size-xl); /* 38px */
+}
+.t-text-2xl {
+  font-size: var(--font-size-2xl); /* 51px */
+}
+.t-text-3xl {
+  font-size: var(--font-size-3xl); /* 67px */
+}
+
+.responsive-size-sm {
+  font-size: var(--responsive-size-sm);
+}
+.responsive-size-ms {
+  font-size: var(--responsive-size-ms);
+}
+.responsive-size-md {
+  font-size: var(--responsive-size-md);
+}
+
+/*-----------------------spacings  */
+.gap-nav-responsive {
+  gap: var(--gap-nav-responsive);
+}
+
+/* ---------------------ua font correction */
+.lang-ua {
+  transform: scale(0.95);
+  display: inline-block;
+}
+
+/* ---------------------adaptive */
+.navigation-responsive {
+  @media (min-width: 834px) {
+    display: flex;
+  }
+}
+.burger-button-responsive {
+  @media (min-width: 834px) {
+    display: none;
+  }
+}
+.burger-menue-responsive {
+  @media (min-width: 834px) {
+    display: none;
+  }
+}
+
+/*поведінка themeSwither в бузгері є ховер на контейнері, в хедері немає */
+@media (max-width: 639px) {
+  .only-mobile-hover:hover {
+    background-color: var(--burger-hover-background-color) !important;
+  }
+}
+
+/* @media (min-width: 640px) {
+  .only-mobile-hover:hover {
+    background-color: transparent !important;
+  }
+} */
+
+/* поведінка languageSwitcher в бургері є ховер в хедері немає */
+@media (min-width: 834px) {
+  .bg-burger-hover-background-color {
+    background-color: transparent !important;
+    padding: 0 1rem;
+  }
+}
+
+/* [data-checked] .bg-switch {
+  background-color: var(--primary-accent-color);
+} */

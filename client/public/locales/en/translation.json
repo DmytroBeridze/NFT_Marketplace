@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "marketplace": "Marketplace",
+    "rankings": "Rankings",
+    "connectWallet": "Connect a wallet",
+    "dashboard": "Dashboard "
+  },
+  "button": {
+    "signIn": "Sign In"
+  }
+}

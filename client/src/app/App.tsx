@@ -1,27 +1,19 @@
-import { ThemeSwitcher } from '../features/ThemeSwitcher';
+import { AuthorizationModal } from '../features/AuthorizationModal';
 import { InnerContainer, OuterContainer } from '../shared/ui/layout';
+import { Header } from '../widgets/Header';
 import { AppProviders } from './providers/AppProviders';
+import { useAppSelector } from './store/reduxHooks';
 
 function App() {
-  // const [theme, setTheme] = useState<boolean>(true);
-
   return (
     <div className="App">
       <AppProviders>
+        <AuthorizationModal />
+        {/* {isOpen && <AuthorizationModal />} */}
         <OuterContainer>
-          <InnerContainer>
-            <div
-              className="
-              font-space-mono-bold 
-              text-base 
-              bg-primary-background-color 
-              text-primary-text-color 
-              bg-hover-primary-accent-color   "
-            >
-              Hello project
-            </div>
-          </InnerContainer>
-          <ThemeSwitcher />
+          <Header />
+          {/* <div id="burger-root"></div> */}
+          {/* <InnerContainer>{<div>Content</div>}</InnerContainer> */}
         </OuterContainer>
       </AppProviders>
     </div>
