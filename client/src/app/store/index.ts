@@ -1,6 +1,6 @@
 import { configureStore, type Middleware } from '@reduxjs/toolkit';
 import burgerReducer from '../../features/BurgerMenu/model/burgerSlice';
-import authorizationModalReducer from '../../features/AuthorizationModal/model/AuthorizationModalSlice';
+import overlayReducer from '../../shared/ui/molecules/Overlay/model/OverlaySlice';
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
   console.log('[Test action]:', action.type);
@@ -11,7 +11,7 @@ const testMiddleware: Middleware = (store) => (next) => (action: any) => {
 export const store = configureStore({
   reducer: {
     burger: burgerReducer,
-    authorizationModal: authorizationModalReducer,
+    overlay: overlayReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(testMiddleware),

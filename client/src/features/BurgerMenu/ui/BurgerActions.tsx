@@ -4,11 +4,11 @@ import { Button } from '../../../shared/ui/atoms/Button';
 import { Icon } from '../../../shared/ui/atoms/Icon';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { useTranslation } from 'react-i18next';
-import { useToggleAuthorizationModal } from '../../AuthorizationModal/hooks/useToggleAuthorizationModal';
+import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 
 export const BurgerActions = () => {
   const { t } = useTranslation();
-  const { toggleHandler } = useToggleAuthorizationModal();
+  const { openHandler } = useToggleOverlay();
   return (
     <section
       className="flex flex-col navigation-responsive 
@@ -17,7 +17,7 @@ export const BurgerActions = () => {
           before:bg-white/20"
     >
       <div
-        onClick={() => console.log('Click')}
+        // onClick={() => openHandler('authorization')}
         className="ease-in-out duration-300 
       flex flex-col sm:flex-row  sm:items-center gap-2.5 justify-between py-4 px-4 bg-burger-hover-background-color 
       rounded-lg cursor-pointer w-full"
@@ -25,7 +25,7 @@ export const BurgerActions = () => {
         <Button
           variant="secondary"
           className="py-3 px-6  lg:py-5 lg:px-7 flex gap-3 items-center whitespace-nowrap  "
-          onClick={toggleHandler}
+          onClick={() => openHandler('authorization')}
         >
           <Icon name="user-icon" size={14} className="lg:w-5 lg:h-5" />
           <Text
