@@ -9,7 +9,12 @@
     "signIn": "Sign In"
   },
   "modal": {
-    "login": "Login",
-    "signUp": "Sign Up"
+    "tabs": {
+      "login": "Login",
+      "signUp": "Sign Up"
+    },
+    "button": {
+      "someBtn": "Button"
+    }
   }
 }

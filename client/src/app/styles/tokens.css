@@ -51,6 +51,10 @@
 .bg-static-surface {
   background-color: var(--static-surface-color);
 }
+.bg-tab-active-background-color {
+  background-color: var(--tab-active-background-color);
+}
+
 /*-------------------- link-underline color  */
 .link-underline::after {
   background-color: var(--primary-accent-color);

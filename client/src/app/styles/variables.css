@@ -31,6 +31,8 @@
   --burger-hover-background-color: var(--burger-hover-background);
   --overlay-background-color: rgba(24, 24, 27, 0.8);
   --static-surface-color: #f5f5f5;
+  --tab-active-background-color: #b6b9cc;
+  /* --tab-active-background-color: #8588a6; */
   /* texts */
   --primary-text-color: var(--primary-text);
   --secondary-text-color: var(--secondary-text);
