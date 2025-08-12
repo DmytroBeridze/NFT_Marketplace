@@ -6,6 +6,7 @@ import {
   modalDefaultStyle,
   transitionStyles,
 } from '../config/transitionStyles.ts.ts';
+import { useToggleOverlay } from '../hooks/useToggleOverlay.ts';
 
 interface OverlayProps {
   children?: React.ReactNode;
@@ -15,7 +16,7 @@ export const Overlay = ({ children }: OverlayProps) => {
   const [mounted, setMounted] = useState(false);
 
   const modalType = useAppSelector((store) => store.overlay.openModalType);
-
+  const { closeHandler } = useToggleOverlay();
   // useEffect с пустым массивом зависимостей ставит mounted в true после первого рендера,
   // чтобы гарантировать, что следующий код (например, доступ к DOM) выполняется только на клиенте,
   // когда DOM уже загружен —  находится root ждя портала.
@@ -46,7 +47,8 @@ export const Overlay = ({ children }: OverlayProps) => {
         <div
           ref={ref}
           style={style}
-          className="fixed inset-0 flex items-center justify-center  bg-overlay-background-color z-[999] "
+          className="fixed inset-0 flex items-center justify-center  bg-overlay-background-color z-[999] p-5"
+          onClick={() => closeHandler()}
         >
           {children}
         </div>

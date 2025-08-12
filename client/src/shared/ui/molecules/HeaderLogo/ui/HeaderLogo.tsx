@@ -1,4 +1,4 @@
-import { Logo } from '../../../shared/ui/molecules/Logo';
+import { Logo } from '../../Logo';
 import { Link } from 'react-router-dom';
 
 interface HeaderLogoProps {

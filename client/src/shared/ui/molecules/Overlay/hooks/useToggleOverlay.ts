@@ -11,7 +11,7 @@ export const useToggleOverlay = () => {
   const closeHandler = () => {
     dispatch(closeModal());
   };
-  const openHandler = (modalType: OverlayState['isOpenModalType']) => {
+  const openHandler = (modalType: OverlayState['openModalType']) => {
     dispatch(openModal(modalType));
   };
   return { closeHandler, openHandler };

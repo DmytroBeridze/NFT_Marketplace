@@ -11,6 +11,7 @@ export const useLanguage = () => {
 
     i18n.changeLanguage(ln);
   };
+
   useEffect(() => {
     const change = (val: string) => {
       setLanguage(val);
