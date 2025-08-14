@@ -110,6 +110,7 @@
 .bg-primary-dark-accent-color {
   background-color: var(--hover-primary-accent-color);
 }
+/* --------------------------border */
 .border-primary-accent-color {
   border-color: var(--primary-accent-color);
 }
@@ -124,6 +125,16 @@
 .shadow-secondary {
   box-shadow: var(--secondary-shadow);
 }
+/* ---------------------focus */
+.input-focus:focus {
+  border: 1px solid var(--primary-accent-color);
+  outline: none;
+  box-shadow: var(--primary-accent-shadow);
+  transition:
+    border 0.3s,
+    box-shadow 0.3s;
+}
+
 /* -----------------------layouts */
 .max-w-outer-container-width {
   max-width: var(--outer-container-width);
@@ -203,12 +214,6 @@
     background-color: var(--burger-hover-background-color) !important;
   }
 }
-
-/* @media (min-width: 640px) {
-  .only-mobile-hover:hover {
-    background-color: transparent !important;
-  }
-} */
 
 /* поведінка languageSwitcher в бургері є ховер в хедері немає */
 @media (min-width: 834px) {

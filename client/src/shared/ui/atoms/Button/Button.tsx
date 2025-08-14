@@ -4,6 +4,7 @@ interface IButtonProps {
   className?: string;
   variant?: 'primary' | 'outline' | 'secondary';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  radius?: 'sm' | 'md' | 'lg' | 'xl' | 'responsive';
 }
 
 const variantClasses = {
@@ -15,13 +16,21 @@ const variantClasses = {
     'bg-adaptive-button-background-color text-inversive-text-color shadow-secondary',
 };
 
-const baseClass = 'rounded-md sm:rounded-lg  lg:rounded-3xl cursor-pointer';
-// 'rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl cursor-pointer';
+const baseClass = 'cursor-pointer';
+
+const responsiveRadius = {
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-3xl',
+  responsive: 'rounded-md sm:rounded-lg lg:rounded-3xl',
+};
 
 export const Button = ({
   type = 'button',
   children,
   variant = 'primary',
+  radius = 'responsive',
   onClick,
   className = '',
 }: IButtonProps) => {
@@ -29,7 +38,7 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`${baseClass} ${variantClasses[variant]} ${className} `}
+      className={`${baseClass} ${variantClasses[variant]} ${responsiveRadius[radius]} ${className} `}
     >
       {children}
     </button>

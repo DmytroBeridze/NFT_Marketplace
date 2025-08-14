@@ -14,7 +14,8 @@
       "signUp": "Sign Up"
     },
     "button": {
-      "someBtn": "Button"
+      "LogInNow": "Log in now",
+      "JoinNow": " Join now"
     }
   }
 }

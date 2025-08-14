@@ -5,6 +5,7 @@ import { closed } from '../model/burgerSlice';
 
 import { TransitionWrapper } from '../../../shared/ui/atoms/TransitionWrapper';
 import { defaultStyle, transitionStyles } from '../config/transitionStyles';
+import { Icon } from '../../../shared/ui/atoms/Icon';
 
 interface burgerMenuProps {
   children?: React.ReactNode;
