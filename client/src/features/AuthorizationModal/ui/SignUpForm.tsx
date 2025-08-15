@@ -29,8 +29,8 @@ export const SignUpForm = () => {
             placeholder="E-mail"
             autoComplete="email"
             wrapperClass="w-full flex flex-col"
-            icon={<IoMailOutline className=" text-gray-400" size={20} />}
-            iconPosition="left"
+            leftIcon={<IoMailOutline className=" text-gray-400" size={20} />}
+            // iconPosition="left"
           />
           <Input
             type="password"
@@ -42,8 +42,8 @@ export const SignUpForm = () => {
             placeholder="Password"
             autoComplete="password"
             wrapperClass="w-full flex flex-col"
-            icon={<GoKey className=" text-gray-400" size={20} />}
-            iconPosition="left"
+            leftIcon={<GoKey className=" text-gray-400" size={20} />}
+            // iconPosition="left"
           />
           <Input
             type="password"
@@ -52,11 +52,11 @@ export const SignUpForm = () => {
             className="w-full border-2 border-gray-300
            rounded-sm h-12 p-2.5 pl-14
            input-focus focus:ring-1"
-            placeholder="Password"
-            autoComplete="password"
+            placeholder="Confirm Password"
+            autoComplete="confirm password"
             wrapperClass="w-full flex flex-col"
-            icon={<GoUnlock className=" text-gray-400" size={20} />}
-            iconPosition="left"
+            leftIcon={<GoUnlock className=" text-gray-400" size={20} />}
+            // iconPosition="left"
           />
           <Button
             type="submit"
