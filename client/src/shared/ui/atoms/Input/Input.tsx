@@ -1,42 +1,21 @@
-import { useField } from 'formik';
-
-type InputType = 'text' | 'email' | 'password' | 'number' | 'file' | 'image';
-// type IconPosition = 'left' | 'right';
-interface InputProps {
-  id: string;
-  name: string;
-  type: InputType;
-  placeholder?: string;
-  className?: string;
-  leftIcon?: React.ReactNode;
-  //   iconPosition?: IconPosition;
-  rightIcon?: React.ReactNode;
-  onRightIconClick?: () => void;
-  accept?: string;
-  label?: string;
-  labelClass?: string;
-  autoComplete?: string;
-  wrapperClass?: string;
-}
+import type { InputProps } from './types';
 
 export const Input = ({
   id,
-  name,
   type = 'text',
+  field,
+  meta,
   placeholder,
   className,
   leftIcon,
-  //   iconPosition = 'left',
   rightIcon,
   onRightIconClick,
-  accept,
+  accept, // вказується для завантаження файлів
   label,
   labelClass,
   autoComplete,
-  wrapperClass,
+  wrapperClass, //для розтягування інпута на всю довжину  wrapperClass="w-full flex "
 }: InputProps) => {
-  const [field, meta] = useField(name);
-
   return (
     <div className={wrapperClass}>
       {label && (
@@ -65,7 +44,6 @@ export const Input = ({
             {leftIcon}
           </span>
         )}
-
         <input
           {...field}
           id={id}

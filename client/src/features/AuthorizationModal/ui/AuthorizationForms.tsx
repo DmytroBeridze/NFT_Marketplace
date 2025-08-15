@@ -7,11 +7,6 @@ interface AuthorizationFormsProps {
 }
 
 export const AuthorizationForms = ({ name }: AuthorizationFormsProps) => {
-  const baseClass =
-    'transition-opacity duration-300 p-9 absolute w-full bg-static-surface rounded-bl-lg rounded-br-lg';
-  const visibleClass = 'opacity-100 visible pointer-events-auto';
-  const hideClass = 'opacity-0 invisible pointer-events-none';
-
   return (
     <div className="p-9">
       {name === 'login' ? <LoginForm /> : <SignUpForm />}

@@ -1,143 +1,134 @@
 import { IoMailOutline } from 'react-icons/io5';
 import { GoKey } from 'react-icons/go';
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { FaRegEyeSlash } from 'react-icons/fa6';
+import { PiUser } from 'react-icons/pi';
 import { GoUnlock } from 'react-icons/go';
+
+import { FormikProvider, useFormik } from 'formik';
+
 import { Button } from '../../../shared/ui/atoms/Button';
 import { useTranslation } from 'react-i18next';
-import { Formik } from 'formik';
-import { Input } from '../../../shared/ui/atoms/Input/Input';
+import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
+import { usePasswordVisibility } from '../lib/usePasswordVisibility';
+import { Text } from '../../../shared/ui/atoms/Text';
+
 export const SignUpForm = () => {
   const { t } = useTranslation();
+  const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
+
+  const formik = useFormik({
+    initialValues: {
+      userName: '',
+      userMail: '',
+      userPass: '',
+      userconfirmPass: '',
+    },
+
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   return (
-    <Formik
-      initialValues={{ userMail: '', userPass: '', userconfirmPass: '' }}
-      onSubmit={(values, actions) => {
-        console.log(values);
-      }}
-    >
-      {(props) => (
-        <form
-          onSubmit={props.handleSubmit}
-          className=" w-full flex  flex-col gap-8 items-center justify-between"
-        >
-          <Input
-            id="mail"
-            type="email"
-            name="userMail"
-            className="w-full border-2 border-gray-300
+    <FormikProvider value={formik}>
+      <form
+        onSubmit={formik.handleSubmit}
+        className=" w-full flex  flex-col gap-6 items-center justify-between "
+      >
+        <FormikInput
+          id="name"
+          name="userName"
+          type="text"
+          className="w-full border-2 border-gray-300
+          rounded-sm h-12 p-2.5 pl-14
+          input-focus focus:ring-1 "
+          placeholder="User name"
+          wrapperClass="w-full flex flex-col"
+          leftIcon={<PiUser className=" text-gray-400" size={20} />}
+          autoComplete="name"
+        />
+        <FormikInput
+          id="email"
+          name="userMail"
+          type="email"
+          className="w-full border-2 border-gray-300
+          rounded-sm h-12 p-2.5 pl-14
+          input-focus focus:ring-1 "
+          placeholder="E-mail"
+          wrapperClass="w-full flex flex-col"
+          leftIcon={<IoMailOutline className=" text-gray-400" size={20} />}
+          autoComplete="email"
+        />
+        <FormikInput
+          id="pass"
+          name="userPass"
+          type={`${passVisible.userPass ? 'text' : 'password'}`}
+          className="w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
           input-focus focus:ring-1"
-            placeholder="E-mail"
-            autoComplete="email"
-            wrapperClass="w-full flex flex-col"
-            leftIcon={<IoMailOutline className=" text-gray-400" size={20} />}
-            // iconPosition="left"
-          />
-          <Input
-            type="password"
-            id="pass"
-            name="userPass"
-            className="w-full border-2 border-gray-300
-           rounded-sm h-12 p-2.5 pl-14
-           input-focus focus:ring-1"
-            placeholder="Password"
-            autoComplete="password"
-            wrapperClass="w-full flex flex-col"
-            leftIcon={<GoKey className=" text-gray-400" size={20} />}
-            // iconPosition="left"
-          />
-          <Input
-            type="password"
-            id="confirmPass"
-            name="userconfirmPass"
-            className="w-full border-2 border-gray-300
-           rounded-sm h-12 p-2.5 pl-14
-           input-focus focus:ring-1"
-            placeholder="Confirm Password"
-            autoComplete="confirm password"
-            wrapperClass="w-full flex flex-col"
-            leftIcon={<GoUnlock className=" text-gray-400" size={20} />}
-            // iconPosition="left"
-          />
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-full p-3"
-            radius="sm"
+          placeholder="Password"
+          wrapperClass="w-full flex flex-col"
+          leftIcon={<GoKey className=" text-gray-400" size={20} />}
+          autoComplete="password"
+          rightIcon={
+            passVisible.userPass ? (
+              <FaRegEyeSlash
+                size={16}
+                className="cursor-pointer text-gray-400"
+              />
+            ) : (
+              <MdOutlineRemoveRedEye
+                size={16}
+                className="cursor-pointer text-gray-400"
+              />
+            )
+          }
+          onRightIconClick={() => togglePasswordVisibility('userPass')}
+        />
+
+        <FormikInput
+          id="confirmPass"
+          name="userconfirmPass"
+          type={`${passVisible.userconfirmPass ? 'text' : 'password'}`}
+          className="w-full border-2 border-gray-300
+          rounded-sm h-12 p-2.5 pl-14
+          input-focus focus:ring-1"
+          placeholder="Confirm Password"
+          wrapperClass="w-full flex flex-col"
+          leftIcon={<GoUnlock className=" text-gray-400" size={20} />}
+          autoComplete="confirm password"
+          rightIcon={
+            passVisible.userconfirmPass ? (
+              <FaRegEyeSlash
+                size={16}
+                className="cursor-pointer text-gray-400"
+              />
+            ) : (
+              <MdOutlineRemoveRedEye
+                size={16}
+                className="cursor-pointer text-gray-400"
+              />
+            )
+          }
+          onRightIconClick={() => togglePasswordVisibility('userconfirmPass')}
+        />
+
+        <Button
+          type="submit"
+          variant="primary"
+          className="w-full p-3"
+          radius="sm"
+        >
+          <Text
+            color="static-text-white-color"
+            size="t-text-sm"
+            font="font-work-sans-regular"
           >
             {t('modal.button.JoinNow')}
-          </Button>
-        </form>
-      )}
-    </Formik>
+          </Text>
+        </Button>
+      </form>
+    </FormikProvider>
   );
 };
-// import { IoMailOutline } from 'react-icons/io5';
-// import { GoKey } from 'react-icons/go';
-// import { GoUnlock } from 'react-icons/go';
-// import { Button } from '../../../shared/ui/atoms/Button';
-// import { useTranslation } from 'react-i18next';
-// export const SignUpForm = () => {
-//   const { t } = useTranslation();
-//   return (
-//     <form
-//       name="login"
-//       id="userLogin"
-//       className=" w-full flex  flex-col gap-8 items-center justify-between"
-//     >
-//       <label htmlFor="mail" className="w-full relative">
-//         <IoMailOutline
-//           className="absolute top-1/2 -translate-y-1/2 left-4 text-gray-400"
-//           size={20}
-//         />
-
-//         <input
-//           type="email"
-//           id="mail"
-//           name="userMail"
-//           className="w-full border-2 border-gray-300
-//           rounded-sm h-12 p-2.5 pl-14
-//           input-focus"
-//           placeholder="E-mail"
-//         />
-//       </label>
-//       <label htmlFor="pass" className="w-full relative">
-//         <GoKey
-//           className="absolute top-1/2 -translate-y-1/2 left-4 text-gray-400"
-//           size={20}
-//         />
-//         <input
-//           type="password"
-//           id="pass"
-//           name="userPass"
-//           className="w-full border-2 border-gray-300
-//           rounded-sm h-12 p-2.5 pl-14
-//           input-focus"
-//           placeholder="Password"
-//         />
-//       </label>
-//       <label htmlFor="pass" className="w-full relative">
-//         <GoUnlock
-//           className="absolute top-1/2 -translate-y-1/2 left-4 text-gray-400"
-//           size={20}
-//         />
-//         <input
-//           type="password"
-//           id="confirmPass"
-//           name="userconfirmPass"
-//           className="w-full border-2 border-gray-300
-//           rounded-sm h-12 p-2.5 pl-14
-//           input-focus"
-//           placeholder="Confirm Password"
-//         />
-//       </label>
-//       <Button
-//         type="submit"
-//         variant="primary"
-//         className="w-full p-3"
-//         radius="sm"
-//       >
-//         {t('modal.button.JoinNow')}
-//       </Button>
-//     </form>
-//   );
-// };
