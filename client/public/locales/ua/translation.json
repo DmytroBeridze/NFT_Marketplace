@@ -16,6 +16,24 @@
     "button": {
       "LogInNow": "Продовжити",
       "JoinNow": "Приєднатися"
+    },
+    "errors": {
+      "tooShort": "Занадто короткий",
+      "required": "Обов’язкове поле",
+      "containLetters": "Повинно містити літери",
+      "containNumbers": "Повинно містити цифри",
+      "passwordsMustMatch": "Паролі мають співпадати",
+      "invalidEmail": "Невірний email"
+    },
+    "placeholders": {
+      "userName": "Ім'я",
+      "password": "Пароль",
+      "mail": "Пошта",
+      "confirmPassword": "Підтвердити пароль"
+    },
+    "labels": {
+      "asClient": "як клієнт",
+      "asAuthor": "як автор"
     }
   }
 }

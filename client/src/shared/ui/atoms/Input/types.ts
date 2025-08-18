@@ -7,7 +7,9 @@ export type InputType =
   | 'password'
   | 'number'
   | 'file'
-  | 'image';
+  | 'image'
+  | 'radio'
+  | 'checkbox';
 
 export interface InputProps {
   id: string;
@@ -24,6 +26,7 @@ export interface InputProps {
   labelClass?: string;
   autoComplete?: string;
   wrapperClass?: string;
+  value?: string;
 }
 
 // --------------------------reusable input wrapper

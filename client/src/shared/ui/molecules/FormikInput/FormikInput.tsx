@@ -1,6 +1,7 @@
 import { Input } from '../../atoms/Input/Input';
 import { useField } from 'formik';
 import type { InputWrapper } from '../../atoms/Input/types';
+import { useTranslate } from '../../../lib/i18n';
 
 export const FormikInput = ({
   id,
@@ -16,12 +17,22 @@ export const FormikInput = ({
   labelClass,
   autoComplete,
   wrapperClass,
+  value,
 }: InputWrapper) => {
   const [field, meta] = useField(name);
+
+  const error = meta.error;
+  const { translateVariables } = useTranslate({
+    translateKey: error ? `modal.errors.${error}` : '',
+  });
+  // const { translateVariables } = useTranslate({ translateKey: error ?? '' });
+
+  console.log(error);
+
   return (
     <Input
       field={field}
-      meta={meta}
+      meta={{ ...meta, error: translateVariables }}
       id={id}
       type={type}
       className={className}
@@ -34,6 +45,7 @@ export const FormikInput = ({
       accept={accept}
       label={label}
       labelClass={labelClass}
+      value={value}
     />
   );
 };

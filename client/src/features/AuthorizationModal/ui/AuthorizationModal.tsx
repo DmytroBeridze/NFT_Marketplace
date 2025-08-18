@@ -25,7 +25,7 @@ export const AuthorizationModal = () => {
   return (
     <section
       onClick={(e) => e.stopPropagation()}
-      className="relative w-full max-w-150 max-h-150 bg-static-surface rounded-lg"
+      className="relative w-full max-w-150 max-h-180 bg-static-surface rounded-lg"
       // className="relative w-full h-full  max-w-150 max-h-120 bg-static-surface rounded-lg"
     >
       <Icon

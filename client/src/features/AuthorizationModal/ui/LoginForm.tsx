@@ -1,5 +1,5 @@
-import { IoMailOutline } from 'react-icons/io5';
 import { GoKey } from 'react-icons/go';
+import { PiUser } from 'react-icons/pi';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { FaRegEyeSlash } from 'react-icons/fa6';
 
@@ -10,6 +10,7 @@ import { Button } from '../../../shared/ui/atoms/Button';
 import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Text } from '../../../shared/ui/atoms/Text';
+import { loginSchema } from '../config';
 
 export const LoginForm = () => {
   const { t } = useTranslation();
@@ -17,10 +18,10 @@ export const LoginForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      userMail: '',
+      userName: '',
       userPass: '',
     },
-
+    validationSchema: loginSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
@@ -41,17 +42,18 @@ export const LoginForm = () => {
         className=" w-full flex  flex-col gap-6 items-center justify-between "
       >
         <FormikInput
-          id="email"
-          name="userMail"
-          type="email"
+          id="name"
+          name="userName"
+          type="text"
           className="w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
           input-focus focus:ring-1 "
-          placeholder="E-mail"
+          placeholder={t('modal.placeholders.userName')}
           wrapperClass="w-full flex flex-col"
-          leftIcon={<IoMailOutline className=" text-gray-400" size={20} />}
-          autoComplete="email"
+          leftIcon={<PiUser className=" text-gray-400" size={20} />}
+          autoComplete="user name"
         />
+
         <FormikInput
           id="pass"
           name="userPass"
@@ -59,7 +61,7 @@ export const LoginForm = () => {
           className="w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
           input-focus focus:ring-1"
-          placeholder="Password"
+          placeholder={t('modal.placeholders.password')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<GoKey className=" text-gray-400" size={20} />}
           autoComplete="password"

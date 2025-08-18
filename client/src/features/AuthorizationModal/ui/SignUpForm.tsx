@@ -12,18 +12,20 @@ import { useTranslation } from 'react-i18next';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { Text } from '../../../shared/ui/atoms/Text';
+import { signupSchema } from '../config/signupSchema';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
-
   const formik = useFormik({
     initialValues: {
       userName: '',
       userMail: '',
       userPass: '',
       userconfirmPass: '',
+      userType: '',
     },
+    validationSchema: signupSchema,
 
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
@@ -43,7 +45,7 @@ export const SignUpForm = () => {
           className="w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
           input-focus focus:ring-1 "
-          placeholder="User name"
+          placeholder={t('modal.placeholders.userName')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<PiUser className=" text-gray-400" size={20} />}
           autoComplete="name"
@@ -55,7 +57,7 @@ export const SignUpForm = () => {
           className="w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
           input-focus focus:ring-1 "
-          placeholder="E-mail"
+          placeholder={t('modal.placeholders.mail')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<IoMailOutline className=" text-gray-400" size={20} />}
           autoComplete="email"
@@ -67,7 +69,7 @@ export const SignUpForm = () => {
           className="w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
           input-focus focus:ring-1"
-          placeholder="Password"
+          placeholder={t('modal.placeholders.password')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<GoKey className=" text-gray-400" size={20} />}
           autoComplete="password"
@@ -94,7 +96,7 @@ export const SignUpForm = () => {
           className="w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
           input-focus focus:ring-1"
-          placeholder="Confirm Password"
+          placeholder={t('modal.placeholders.confirmPassword')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<GoUnlock className=" text-gray-400" size={20} />}
           autoComplete="confirm password"
@@ -113,6 +115,31 @@ export const SignUpForm = () => {
           }
           onRightIconClick={() => togglePasswordVisibility('userconfirmPass')}
         />
+
+        <fieldset className="w-full flex justify-between items-center ">
+          <FormikInput
+            id="author"
+            name="userType"
+            type="radio"
+            label={t('modal.labels.asAuthor')}
+            value="author"
+            className="h-4 w-4 cursor-pointer"
+            wrapperClass="w-full flex gap-2"
+            autoComplete="User Type"
+            labelClass="-mt-[5px] text-gray-500 font-work-sans-regular"
+          />
+          <FormikInput
+            id="client"
+            name="userType"
+            type="radio"
+            label={t('modal.labels.asClient')}
+            value="client"
+            className="h-4 w-4 cursor-pointer "
+            wrapperClass="w-full flex  gap-3 "
+            autoComplete="User Type"
+            labelClass="-mt-[5px] text-gray-500 font-work-sans-regular "
+          />
+        </fieldset>
 
         <Button
           type="submit"

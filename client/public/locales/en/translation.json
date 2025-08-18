@@ -16,6 +16,24 @@
     "button": {
       "LogInNow": "Log in now",
       "JoinNow": " Join now"
+    },
+    "errors": {
+      "tooShort": "Too Short",
+      "required": "Required",
+      "containLetters": "Must contain letters",
+      "containNumbers": "Must contain numbers",
+      "passwordsMustMatch": "Passwords Must Match",
+      "invalidEmail": "Invalid email"
+    },
+    "placeholders": {
+      "userName": "User name",
+      "password": "Password",
+      "mail": "E-mail",
+      "confirmPassword": "Confirm Password"
+    },
+    "labels": {
+      "asClient": "as client",
+      "asAuthor": "as author"
     }
   }
 }
