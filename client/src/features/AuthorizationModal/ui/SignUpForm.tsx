@@ -13,6 +13,8 @@ import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { signupSchema } from '../config/signupSchema';
+import { CheckControl } from '../../../shared/ui/atoms/CheckControl';
+import { FormikCheckControl } from '../../../shared/ui/molecules/FormikCheckControl';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
@@ -27,8 +29,9 @@ export const SignUpForm = () => {
     },
     validationSchema: signupSchema,
 
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       alert(JSON.stringify(values, null, 2));
+      resetForm();
     },
   });
 
@@ -117,27 +120,21 @@ export const SignUpForm = () => {
         />
 
         <fieldset className="w-full flex justify-between items-center ">
-          <FormikInput
+          <FormikCheckControl
             id="author"
             name="userType"
             type="radio"
-            label={t('modal.labels.asAuthor')}
             value="author"
-            className="h-4 w-4 cursor-pointer"
-            wrapperClass="w-full flex gap-2"
-            autoComplete="User Type"
-            labelClass="-mt-[5px] text-gray-500 font-work-sans-regular"
+            label={t('modal.labels.asAuthor')}
+            autoComplete="author"
           />
-          <FormikInput
+          <FormikCheckControl
             id="client"
             name="userType"
             type="radio"
-            label={t('modal.labels.asClient')}
             value="client"
-            className="h-4 w-4 cursor-pointer "
-            wrapperClass="w-full flex  gap-3 "
-            autoComplete="User Type"
-            labelClass="-mt-[5px] text-gray-500 font-work-sans-regular "
+            label={t('modal.labels.asClient')}
+            autoComplete="client"
           />
         </fieldset>
 

@@ -17,7 +17,6 @@ export const FormikInput = ({
   labelClass,
   autoComplete,
   wrapperClass,
-  value,
 }: InputWrapper) => {
   const [field, meta] = useField(name);
 
@@ -26,8 +25,6 @@ export const FormikInput = ({
     translateKey: error ? `modal.errors.${error}` : '',
   });
   // const { translateVariables } = useTranslate({ translateKey: error ?? '' });
-
-  console.log(error);
 
   return (
     <Input
@@ -45,7 +42,7 @@ export const FormikInput = ({
       accept={accept}
       label={label}
       labelClass={labelClass}
-      value={value}
+      // value={value}
     />
   );
 };

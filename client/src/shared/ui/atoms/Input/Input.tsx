@@ -15,7 +15,6 @@ export const Input = ({
   labelClass,
   autoComplete,
   wrapperClass, //для розтягування інпута на всю довжину  wrapperClass="w-full flex "
-  value, //для radio і checkBox
 }: InputProps) => {
   return (
     <div className={wrapperClass}>
@@ -43,7 +42,6 @@ export const Input = ({
             className={className}
             accept={accept}
             autoComplete={autoComplete}
-            value={value}
           />
           {rightIcon && (
             <span
