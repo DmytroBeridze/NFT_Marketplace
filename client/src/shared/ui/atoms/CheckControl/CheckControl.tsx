@@ -8,11 +8,15 @@ export const CheckControl = ({
   label,
   className,
   wrapperClass,
+  labelClass,
   autoComplete,
 }: CheckControlProps) => {
   return (
     <div className={wrapperClass}>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className={labelClass}>
+        {label}
+      </label>
+
       <input
         {...field}
         id={id}

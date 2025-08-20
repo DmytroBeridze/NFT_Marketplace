@@ -13,7 +13,6 @@ import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { signupSchema } from '../config/signupSchema';
-import { CheckControl } from '../../../shared/ui/atoms/CheckControl';
 import { FormikCheckControl } from '../../../shared/ui/molecules/FormikCheckControl';
 
 export const SignUpForm = () => {
@@ -119,7 +118,7 @@ export const SignUpForm = () => {
           onRightIconClick={() => togglePasswordVisibility('userconfirmPass')}
         />
 
-        <fieldset className="w-full flex justify-between items-center ">
+        <fieldset className="w-full flex justify-center gap-9 items-center ">
           <FormikCheckControl
             id="author"
             name="userType"
@@ -127,6 +126,8 @@ export const SignUpForm = () => {
             value="author"
             label={t('modal.labels.asAuthor')}
             autoComplete="author"
+            className="h-4 w-4 cursor-pointer accent-active"
+            wrapperClass="flex items-center gap-2 text-gray-500"
           />
           <FormikCheckControl
             id="client"
@@ -135,6 +136,8 @@ export const SignUpForm = () => {
             value="client"
             label={t('modal.labels.asClient')}
             autoComplete="client"
+            className="h-4 w-4  cursor-pointer accent-active"
+            wrapperClass="flex items-center gap-2 text-gray-500"
           />
         </fieldset>
 

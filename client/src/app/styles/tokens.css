@@ -110,6 +110,10 @@
 .bg-primary-dark-accent-color {
   background-color: var(--hover-primary-accent-color);
 }
+
+.accent-active {
+  accent-color: var(--primary-accent-color);
+}
 /* --------------------------border */
 .border-primary-accent-color {
   border-color: var(--primary-accent-color);

@@ -11,11 +11,11 @@ export const FormikCheckControl = ({
   className,
   label,
   wrapperClass,
+  labelClass,
   autoComplete,
   value,
 }: FormikCheckControlProps) => {
   const [field, meta] = useField({ name, type, value });
-  console.log(field);
 
   return (
     <CheckControl
@@ -27,6 +27,7 @@ export const FormikCheckControl = ({
       autoComplete={autoComplete}
       field={field}
       meta={meta}
+      labelClass={labelClass}
     />
   );
 };
