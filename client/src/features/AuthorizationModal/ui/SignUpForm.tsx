@@ -6,18 +6,23 @@ import { PiUser } from 'react-icons/pi';
 import { GoUnlock } from 'react-icons/go';
 
 import { FormikProvider, useFormik } from 'formik';
-
-import { Button } from '../../../shared/ui/atoms/Button';
 import { useTranslation } from 'react-i18next';
+
+import { signupSchema } from '../config/signupSchema';
+import { FormikCheckControl } from '../../../shared/ui/molecules/FormikCheckControl';
+import { useRegisterMutation } from '../model/authSlice';
+import { Button } from '../../../shared/ui/atoms/Button';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { Text } from '../../../shared/ui/atoms/Text';
-import { signupSchema } from '../config/signupSchema';
-import { FormikCheckControl } from '../../../shared/ui/molecules/FormikCheckControl';
+
+import { QueryStatus } from './QueryStatus';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
+  const [register, { isLoading, error, data }] = useRegisterMutation();
+
   const formik = useFormik({
     initialValues: {
       userName: '',
@@ -28,9 +33,20 @@ export const SignUpForm = () => {
     },
     validationSchema: signupSchema,
 
-    onSubmit: (values, { resetForm }) => {
-      alert(JSON.stringify(values, null, 2));
-      resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      const { userconfirmPass, ...body } = values;
+
+      try {
+        const result = await register(body);
+        // const result = await register(body).unwrap(); // result — это данные с сервера
+        console.log(result);
+
+        resetForm();
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
     },
   });
 
@@ -155,6 +171,9 @@ export const SignUpForm = () => {
             {t('modal.button.JoinNow')}
           </Text>
         </Button>
+
+        {/* ------------render  messages after request  */}
+        <QueryStatus data={data} isLoading={isLoading} error={error} />
       </form>
     </FormikProvider>
   );

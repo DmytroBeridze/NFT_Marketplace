@@ -30,5 +30,7 @@ export interface TextProps {
     | 'text-inversive-text-color'
     | 'static-text-black-color'
     | 'static-text-white-color'
-    | 'text-burger-color';
+    | 'text-burger-color'
+    | 'text-error-color'
+    | 'text-success-color';
 }

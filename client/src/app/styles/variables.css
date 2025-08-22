@@ -40,6 +40,9 @@
   --static-text-white: #ffffff;
   --static-text-black: #2b2b2b;
   --text-burger-color: var(--burger-text);
+  --text-error-color: #ef4444;
+  --text-success-color: #22c55e;
+
   /* accents */
   --primary-accent-color: #a259ff;
   --hover-primary-accent-color: #763fbf;

@@ -11,10 +11,15 @@ import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { loginSchema } from '../config';
+import { useLoginMutation } from '../model/authSlice';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { Spinner } from '../../../shared/ui/atoms/Spinner';
+import { QueryStatus } from './QueryStatus';
 
 export const LoginForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
+  const [login, { error, isLoading, data }] = useLoginMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -22,8 +27,15 @@ export const LoginForm = () => {
       userPass: '',
     },
     validationSchema: loginSchema,
-    onSubmit: (values, { resetForm }) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const result = await login(values);
+        console.log(result);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
       resetForm();
     },
   });
@@ -84,9 +96,10 @@ export const LoginForm = () => {
 
         <Button
           type="submit"
-          variant="primary"
-          className="w-full p-3"
+          variant={isLoading ? 'loading' : 'primary'}
+          className={`w-full p-3 `}
           radius="sm"
+          disabled={isLoading}
         >
           <Text
             color="static-text-white-color"
@@ -96,6 +109,9 @@ export const LoginForm = () => {
             {t('modal.button.LogInNow')}
           </Text>
         </Button>
+
+        {/*-------- render  messages after request  */}
+        <QueryStatus data={data} error={error} isLoading={isLoading} />
       </form>
     </FormikProvider>
   );
