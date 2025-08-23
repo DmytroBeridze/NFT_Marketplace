@@ -12,9 +12,12 @@ import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { loginSchema } from '../config';
 import { useLoginMutation } from '../model/authSlice';
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { Spinner } from '../../../shared/ui/atoms/Spinner';
+
 import { QueryStatus } from './QueryStatus';
+import {
+  isErrorWithMessage,
+  isFetchBaseQueryError,
+} from '../../../shared/lib/rtk-guards';
 
 export const LoginForm = () => {
   const { t } = useTranslation();
@@ -29,21 +32,27 @@ export const LoginForm = () => {
     validationSchema: loginSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const result = await login(values);
-        console.log(result);
+        const result = await login(values).unwrap(); // Якщо помилка- кидає виключення
+        resetForm(); // Виконується тільки коли
       } catch (error) {
-        if (error instanceof Error) {
-          console.log(error.message);
+        if (isFetchBaseQueryError(error)) {
+          console.log(
+            t(
+              `modal.serverMessages.error.${(error.data as { message: string }).message}`,
+            ),
+            error.data as { message: string },
+          );
+        } else if (isErrorWithMessage(error)) {
+          console.log(t(`modal.serverMessages.error.${error.message}`));
         }
       }
-      resetForm();
     },
   });
 
   return (
     /*
      огортаємо в провайдер, бо в кастомному компоненті Input вікористовується 
-     хук useField, який бере данные (getFieldProps, errors, touched) з контексту Formik
+     хук useField, який бере дані (getFieldProps, errors, touched) з контексту Formik
      а при useFormik цей контекст не створюється автоматично
      Тому або використовуємо useFormik і огортаємо в FormikProvider 
     або використовуємо import { Formik } from 'formik

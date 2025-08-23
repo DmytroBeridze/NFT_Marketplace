@@ -1,6 +1,7 @@
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { Spinner } from '../../../shared/ui/atoms/Spinner';
+import { useTranslation } from 'react-i18next';
+import { isFetchBaseQueryError } from '../../../shared/lib/rtk-guards';
 
 interface QueryStatusProps {
   error: unknown;
@@ -9,23 +10,21 @@ interface QueryStatusProps {
 }
 
 export const QueryStatus = ({ data, error, isLoading }: QueryStatusProps) => {
-  const isFetchBaseQueryError = (
-    error: unknown,
-  ): error is FetchBaseQueryError => {
-    return typeof error === 'object' && error !== null && 'status' in error;
-  };
+  const { t } = useTranslation();
 
   return (
     <section>
       {data && data.message && (
         <Text color="text-success-color" size="t-text-sm">
-          {data.message}
+          {t(`modal.serverMessages.data.${data.message}`)}
         </Text>
       )}
 
       {isFetchBaseQueryError(error) && (
         <Text color="text-error-color" size="t-text-sm">
-          {(error.data as { message: string }).message}
+          {t(
+            `modal.serverMessages.error.${(error.data as { message: string }).message}`,
+          )}
         </Text>
       )}
 

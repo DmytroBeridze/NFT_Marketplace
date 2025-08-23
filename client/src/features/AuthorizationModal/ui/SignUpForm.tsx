@@ -17,6 +17,10 @@ import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { Text } from '../../../shared/ui/atoms/Text';
 
 import { QueryStatus } from './QueryStatus';
+import {
+  isErrorWithMessage,
+  isFetchBaseQueryError,
+} from '../../../shared/lib/rtk-guards';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
@@ -37,14 +41,18 @@ export const SignUpForm = () => {
       const { userconfirmPass, ...body } = values;
 
       try {
-        const result = await register(body);
-        // const result = await register(body).unwrap(); // result — это данные с сервера
-        console.log(result);
+        const result = await register(body).unwrap(); // Якщо помилка- кидає виключення
 
         resetForm();
       } catch (error) {
-        if (error instanceof Error) {
-          console.log(error.message);
+        if (isFetchBaseQueryError(error)) {
+          console.log(
+            t(
+              `modal.serverMessages.error.${(error.data as { message: string }).message}`,
+            ),
+          );
+        } else if (isErrorWithMessage(error)) {
+          console.log(t(`modal.serverMessages.error.${error.message}`));
         }
       }
     },

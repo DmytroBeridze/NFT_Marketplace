@@ -34,6 +34,27 @@
     "labels": {
       "asClient": "як клієнт",
       "asAuthor": "як автор"
+    },
+    "serverMessages": {
+      "data": {
+        "registered": "Користувач зареєстрований",
+        "accessGranted": "Доступ надано",
+        "logged": "Ви увійшли"
+      },
+      "error": {
+        "usernameExists": "Ім'я користувача вже існує",
+        "mailExists": "Електронна пошта вже існує",
+        "roleNotFound": "Роль USER не знайдена в базі даних",
+        "registrationError": "Помилка реєстрації користувача",
+        "userNotFound": "Користувача не знайдено",
+        "incorrectPassword": "Невірний пароль",
+        "loginError": "Помилка входу користувача",
+        "accessDenied": "Доступ заборонено",
+        "noAccessToken": "Відсутній токен доступу",
+        "usernameIsRequired": "Ім'я користувача обов'язкове",
+        "passwordIsRequired": "Пароль обов'язковий",
+        "passwordLength": "Пароль повинен містити щонайменше 3 символи"
+      }
     }
   }
 }
