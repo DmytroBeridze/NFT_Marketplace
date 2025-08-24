@@ -22,12 +22,15 @@ import {
   isFetchBaseQueryError,
 } from '../../../shared/lib/rtk-guards';
 import type { RegisterValues } from '../../../shared/types';
+import { useAuthorizationContext } from '../context';
+import { useEffect } from 'react';
+import { useTimeoutAction } from '../../../shared/lib/hooks';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
   const [register, { isLoading, error, data }] = useRegisterMutation();
-  // const {message}=data
+  const { setTab } = useAuthorizationContext();
 
   const formik = useFormik<RegisterValues>({
     initialValues: {
@@ -60,6 +63,12 @@ export const SignUpForm = () => {
       }
     },
   });
+
+  useTimeoutAction<string | undefined>(
+    data?.userData._id,
+    () => setTab('login'),
+    2000,
+  );
 
   return (
     <FormikProvider value={formik}>

@@ -1,4 +1,5 @@
 import { AuthorizationModal } from '../features/AuthorizationModal';
+import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';
 import { Icon } from '../shared/ui/atoms/Icon';
 import { InnerContainer, OuterContainer } from '../shared/ui/layout';
 import { Overlay } from '../shared/ui/molecules/Overlay';
@@ -12,8 +13,13 @@ function App() {
     <div className="App">
       <AppProviders>
         <Overlay>
-          {modalType === 'authorization' && <AuthorizationModal />}
+          {modalType === 'authorization' && (
+            <AuthorizationContextProvider>
+              <AuthorizationModal />
+            </AuthorizationContextProvider>
+          )}
         </Overlay>
+
         {/* {isOpen && <Overlay />} */}
         <OuterContainer>
           <Header />
