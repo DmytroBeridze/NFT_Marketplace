@@ -1,33 +1,47 @@
 import { Text } from '../../../shared/ui/atoms/Text';
 import { Spinner } from '../../../shared/ui/atoms/Spinner';
 import { useTranslation } from 'react-i18next';
-import { isFetchBaseQueryError } from '../../../shared/lib/rtk-guards';
+import {
+  isErrorWithMessage,
+  isFetchBaseQueryError,
+  isFetchErrorWithMessage,
+} from '../../../shared/lib/rtk-guards';
 
 interface QueryStatusProps {
   error: unknown;
   isLoading: boolean;
-  data: { message: string };
+  message?: string;
 }
 
-export const QueryStatus = ({ data, error, isLoading }: QueryStatusProps) => {
+export const QueryStatus = ({
+  message,
+  error,
+  isLoading,
+}: QueryStatusProps) => {
   const { t } = useTranslation();
 
   return (
     <section>
-      {data && data.message && (
+      {message && (
         <Text color="text-success-color" size="t-text-sm">
-          {t(`modal.serverMessages.data.${data.message}`)}
+          {t(`modal.serverMessages.data.${message}`)}
         </Text>
       )}
+      {/* ------------------ */}
 
-      {isFetchBaseQueryError(error) && (
+      {isFetchBaseQueryError(error) && isFetchErrorWithMessage(error) && (
         <Text color="text-error-color" size="t-text-sm">
-          {t(
-            `modal.serverMessages.error.${(error.data as { message: string }).message}`,
-          )}
+          {t(`modal.serverMessages.error.${error.data.message}`)}
         </Text>
       )}
 
+      {isErrorWithMessage(error) && (
+        <Text color="text-error-color" size="t-text-sm">
+          {t(`modal.serverMessages.error.${error.message}`)}
+        </Text>
+      )}
+
+      {/* ------------------ */}
       {isLoading && (
         <Spinner
           fill={`var(--hover-primary-accent-color)`}

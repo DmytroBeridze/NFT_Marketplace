@@ -21,13 +21,15 @@ import {
   isErrorWithMessage,
   isFetchBaseQueryError,
 } from '../../../shared/lib/rtk-guards';
+import type { RegisterValues } from '../../../shared/types';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
   const [register, { isLoading, error, data }] = useRegisterMutation();
+  // const {message}=data
 
-  const formik = useFormik({
+  const formik = useFormik<RegisterValues>({
     initialValues: {
       userName: '',
       userMail: '',
@@ -42,6 +44,7 @@ export const SignUpForm = () => {
 
       try {
         const result = await register(body).unwrap(); // Якщо помилка- кидає виключення
+        console.log(result);
 
         resetForm();
       } catch (error) {
@@ -181,7 +184,11 @@ export const SignUpForm = () => {
         </Button>
 
         {/* ------------render  messages after request  */}
-        <QueryStatus data={data} isLoading={isLoading} error={error} />
+        <QueryStatus
+          message={data?.message}
+          isLoading={isLoading}
+          error={error}
+        />
       </form>
     </FormikProvider>
   );

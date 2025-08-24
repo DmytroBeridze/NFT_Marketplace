@@ -18,13 +18,14 @@ import {
   isErrorWithMessage,
   isFetchBaseQueryError,
 } from '../../../shared/lib/rtk-guards';
+import type { LoginValues } from '../../../shared/types';
 
 export const LoginForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
   const [login, { error, isLoading, data }] = useLoginMutation();
 
-  const formik = useFormik({
+  const formik = useFormik<LoginValues>({
     initialValues: {
       userName: '',
       userPass: '',
@@ -33,6 +34,8 @@ export const LoginForm = () => {
     onSubmit: async (values, { resetForm }) => {
       try {
         const result = await login(values).unwrap(); // Якщо помилка- кидає виключення
+        console.log(result);
+
         resetForm(); // Виконується тільки коли
       } catch (error) {
         if (isFetchBaseQueryError(error)) {
@@ -40,7 +43,6 @@ export const LoginForm = () => {
             t(
               `modal.serverMessages.error.${(error.data as { message: string }).message}`,
             ),
-            error.data as { message: string },
           );
         } else if (isErrorWithMessage(error)) {
           console.log(t(`modal.serverMessages.error.${error.message}`));
@@ -120,7 +122,11 @@ export const LoginForm = () => {
         </Button>
 
         {/*-------- render  messages after request  */}
-        <QueryStatus data={data} error={error} isLoading={isLoading} />
+        <QueryStatus
+          message={data?.message}
+          error={error}
+          isLoading={isLoading}
+        />
       </form>
     </FormikProvider>
   );
