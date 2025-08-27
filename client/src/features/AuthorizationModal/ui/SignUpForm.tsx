@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 import { signupSchema } from '../config/signupSchema';
 import { FormikCheckControl } from '../../../shared/ui/molecules/FormikCheckControl';
-import { useRegisterMutation } from '../model/authSlice';
+import { useRegisterMutation } from '../model/authApi';
 import { Button } from '../../../shared/ui/atoms/Button';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { usePasswordVisibility } from '../lib/usePasswordVisibility';
@@ -23,7 +23,6 @@ import {
 } from '../../../shared/lib/rtk-guards';
 import type { RegisterValues } from '../../../shared/types';
 import { useAuthorizationContext } from '../context';
-import { useEffect } from 'react';
 import { useTimeoutAction } from '../../../shared/lib/hooks';
 
 export const SignUpForm = () => {
@@ -64,6 +63,7 @@ export const SignUpForm = () => {
     },
   });
 
+  // move to login
   useTimeoutAction<string | undefined>(
     data?.userData._id,
     () => setTab('login'),

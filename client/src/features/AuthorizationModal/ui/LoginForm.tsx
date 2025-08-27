@@ -11,7 +11,7 @@ import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { loginSchema } from '../config';
-import { useLoginMutation } from '../model/authSlice';
+import { useLoginMutation } from '../model/authApi';
 
 import { QueryStatus } from './QueryStatus';
 import {
@@ -19,24 +19,32 @@ import {
   isFetchBaseQueryError,
 } from '../../../shared/lib/rtk-guards';
 import type { LoginValues } from '../../../shared/types';
+import { useNavigate } from 'react-router-dom';
+import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
+import { useTimeoutAction } from '../../../shared/lib/hooks';
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
+  const { closeHandler } = useToggleOverlay();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
-  const [login, { error, isLoading, data }] = useLoginMutation();
 
+  const [login, { error, isLoading, data }] = useLoginMutation();
   const formik = useFormik<LoginValues>({
     initialValues: {
       userName: '',
       userPass: '',
     },
+
     validationSchema: loginSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
         const result = await login(values).unwrap(); // Якщо помилка- кидає виключення
-        console.log(result);
+        localStorage.setItem('token', result.token);
 
-        resetForm(); // Виконується тільки коли
+        // ⚠️ dispatch замінено на addMatcher в userSlice для автоматичного оновлення стану
+        // dispatch(addUserData(result.userData));
+        resetForm();
       } catch (error) {
         if (isFetchBaseQueryError(error)) {
           console.log(
@@ -50,6 +58,15 @@ export const LoginForm = () => {
       }
     },
   });
+
+  // move to userpage
+  useTimeoutAction<string | undefined>(
+    data?.userData._id,
+    () => {
+      closeHandler(), navigate('/dashboard');
+    },
+    2000,
+  );
 
   return (
     /*

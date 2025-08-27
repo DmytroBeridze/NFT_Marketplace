@@ -13,27 +13,3 @@ export const AuthorizationForms = ({ name }: AuthorizationFormsProps) => {
     </div>
   );
 };
-// export const AuthorizationForms = ({ name }: AuthorizationFormsProps) => {
-//   const baseClass =
-//     'transition-opacity duration-300 p-9 absolute w-full bg-gray-300';
-//   const visibleClass = 'opacity-100 visible pointer-events-auto';
-//   const hideClass = 'opacity-0 invisible pointer-events-none';
-
-//   return (
-//     <>
-//       <div
-//         className={`${name === 'login' ? visibleClass : hideClass}
-//        ${baseClass}   `}
-//       >
-//         <LoginForm />
-//       </div>
-
-//       <div
-//         className={`${name === 'signUp' ? visibleClass : hideClass}
-//              ${baseClass}  `}
-//       >
-//         <SignUpForm />
-//       </div>
-//     </>
-//   );
-// };

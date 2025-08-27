@@ -27,7 +27,12 @@ export type UserData = {
   userType: 'client' | 'author';
 };
 
-export interface IResponse {
+export interface IRegisterResponse {
   message: string;
   userData: UserData;
+}
+export interface ILoginResponse {
+  message: string;
+  userData: UserData;
+  token: string;
 }
