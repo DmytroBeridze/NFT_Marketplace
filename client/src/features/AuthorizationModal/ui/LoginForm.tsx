@@ -65,7 +65,7 @@ export const LoginForm = () => {
     () => {
       closeHandler(), navigate('/dashboard');
     },
-    2000,
+    1000,
   );
 
   return (

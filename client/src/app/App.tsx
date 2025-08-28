@@ -8,10 +8,12 @@ import { Header } from '../widgets/Header';
 import { AppProviders } from './providers/AppProviders';
 import { useAppSelector } from './store/reduxHooks';
 import { useGetMeQuery } from '../features/AuthorizationModal/model';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
   const { data, error, isLoading } = useGetMeQuery();
+
   // const data = useAppSelector((store) => store.user.data);
   // Пока идёт проверка токена — рендерим лоадер
   if (isLoading) {
@@ -37,8 +39,7 @@ function App() {
         <OuterContainer>
           <Header />
           <main>
-            {data ? <div>COntent</div> : <div>Login please</div>}
-
+            <Outlet />
             {/* <div id="burger-root"></div> */}
             {/* <InnerContainer>{<div>Content</div>}</InnerContainer> */}
           </main>

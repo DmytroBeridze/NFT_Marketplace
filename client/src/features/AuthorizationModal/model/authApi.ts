@@ -37,12 +37,11 @@ const baseQueryWithReauth: BaseQueryFn<
   if (result.error && result.error.status === 401) {
     // clear local storage
     localStorage.removeItem('token');
-
-    // open modal
-    api.dispatch(openModal('authorization'));
-
     // logout
     api.dispatch(clearUser());
+
+    // open modal
+    // api.dispatch(openModal('authorization'));
   }
 
   return result;

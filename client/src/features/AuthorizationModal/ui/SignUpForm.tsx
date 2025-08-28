@@ -28,9 +28,9 @@ import { useTimeoutAction } from '../../../shared/lib/hooks';
 export const SignUpForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
-  const [register, { isLoading, error, data }] = useRegisterMutation();
   const { setTab } = useAuthorizationContext();
 
+  const [register, { isLoading, error, data }] = useRegisterMutation();
   const formik = useFormik<RegisterValues>({
     initialValues: {
       userName: '',
