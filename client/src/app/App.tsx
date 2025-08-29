@@ -12,17 +12,6 @@ import { Outlet } from 'react-router-dom';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
-  const { data, error, isLoading } = useGetMeQuery();
-
-  // const data = useAppSelector((store) => store.user.data);
-  // Пока идёт проверка токена — рендерим лоадер
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        Loading...
-      </div>
-    );
-  }
 
   return (
     <div className="App">
