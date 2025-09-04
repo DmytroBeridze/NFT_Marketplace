@@ -25,7 +25,8 @@ export const Logo = () => {
         Element="span"
         font="font-space-mono-bold"
         size="responsive-size-ms"
-        className="leading-normal"
+        className="leading-normal "
+        color="text-primary-text-color"
       >
         NFT
         <br className=" lg:hidden" />

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { AuthorizationModal } from '../features/AuthorizationModal';
 import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';
 import { Icon } from '../shared/ui/atoms/Icon';
@@ -12,7 +11,7 @@ import { Outlet } from 'react-router-dom';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
-
+  const {} = useGetMeQuery();
   return (
     <div className="App">
       <AppProviders>

@@ -32,5 +32,7 @@ export interface TextProps {
     | 'static-text-white-color'
     | 'text-burger-color'
     | 'text-error-color'
-    | 'text-success-color';
+    | 'text-success-color'
+    | 'text-inherit'
+    | 
 }

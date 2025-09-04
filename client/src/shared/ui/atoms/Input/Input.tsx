@@ -39,7 +39,7 @@ export const Input = ({
             id={id}
             type={type}
             placeholder={placeholder}
-            className={className}
+            className={`${className} ${meta.error && meta.touched ? '!border border-red-500' : ''}`}
             accept={accept}
             autoComplete={autoComplete}
           />

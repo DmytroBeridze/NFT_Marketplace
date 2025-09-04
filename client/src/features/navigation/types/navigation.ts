@@ -5,7 +5,11 @@ export interface NavigationPanelProps {
   classNameItem?: string;
   navItems: NavItemTuple[];
   lang: string;
-  renderItem?: (value: string, lang: string) => React.ReactNode;
+  renderItem?: (
+    value: string,
+    lang: string,
+    isActive?: boolean,
+  ) => React.ReactNode;
 }
 
 export type NavigationPanelItemProps = Omit<

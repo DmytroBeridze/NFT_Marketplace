@@ -7,7 +7,8 @@ export const Text = ({
   Element = 'div',
   size = 't-text-md',
   font = 'font-work-sans-regular',
-  color = 'text-primary-text-color',
+  color,
+  // color = 'text-primary-text-color',
 }: TextProps) => {
   return (
     <Element style={style} className={` ${font} ${color} ${size} ${className}`}>

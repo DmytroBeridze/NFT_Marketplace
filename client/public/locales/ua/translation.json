@@ -6,7 +6,8 @@
     "dashboard": "Кабінет"
   },
   "button": {
-    "signIn": "Вхід"
+    "signIn": "Вхід",
+    "signOut": "Вихід"
   },
   "modal": {
     "tabs": {
@@ -53,7 +54,8 @@
         "noAccessToken": "Відсутній токен доступу",
         "usernameIsRequired": "Ім'я користувача обов'язкове",
         "passwordIsRequired": "Пароль обов'язковий",
-        "passwordLength": "Пароль повинен містити щонайменше 3 символи"
+        "passwordLength": "Пароль повинен містити щонайменше 3 символи",
+        "unknownError": "Щось пішло не так"
       }
     }
   }

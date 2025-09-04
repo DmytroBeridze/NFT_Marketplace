@@ -5,23 +5,21 @@ import { FaRegEyeSlash } from 'react-icons/fa6';
 import { PiUser } from 'react-icons/pi';
 import { GoUnlock } from 'react-icons/go';
 
-import { FormikProvider, useFormik } from 'formik';
+import { FormikProvider } from 'formik';
 import { useTranslation } from 'react-i18next';
 
-import { signupSchema } from '../config/signupSchema';
 import { FormikCheckControl } from '../../../shared/ui/molecules/FormikCheckControl';
-import { useRegisterMutation } from '../model/authApi';
 import { Button } from '../../../shared/ui/atoms/Button';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
-import { usePasswordVisibility } from '../lib/usePasswordVisibility';
 import { Text } from '../../../shared/ui/atoms/Text';
+import {
+  getFieldErrorClass,
+  usePasswordVisibility,
+  useSignUpForm,
+} from '../lib';
 
 import { QueryStatus } from './QueryStatus';
-import {
-  isErrorWithMessage,
-  isFetchBaseQueryError,
-} from '../../../shared/lib/rtk-guards';
-import type { RegisterValues } from '../../../shared/types';
+
 import { useAuthorizationContext } from '../context';
 import { useTimeoutAction } from '../../../shared/lib/hooks';
 
@@ -29,39 +27,7 @@ export const SignUpForm = () => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
   const { setTab } = useAuthorizationContext();
-
-  const [register, { isLoading, error, data }] = useRegisterMutation();
-  const formik = useFormik<RegisterValues>({
-    initialValues: {
-      userName: '',
-      userMail: '',
-      userPass: '',
-      userconfirmPass: '',
-      userType: '',
-    },
-    validationSchema: signupSchema,
-
-    onSubmit: async (values, { resetForm }) => {
-      const { userconfirmPass, ...body } = values;
-
-      try {
-        const result = await register(body).unwrap(); // Якщо помилка- кидає виключення
-        console.log(result);
-
-        resetForm();
-      } catch (error) {
-        if (isFetchBaseQueryError(error)) {
-          console.log(
-            t(
-              `modal.serverMessages.error.${(error.data as { message: string }).message}`,
-            ),
-          );
-        } else if (isErrorWithMessage(error)) {
-          console.log(t(`modal.serverMessages.error.${error.message}`));
-        }
-      }
-    },
-  });
+  const { formik, isLoading, error, data } = useSignUpForm();
 
   // move to login
   useTimeoutAction<string | undefined>(
@@ -80,9 +46,9 @@ export const SignUpForm = () => {
           id="name"
           name="userName"
           type="text"
-          className="w-full border-2 border-gray-300
+          className={`w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
-          input-focus focus:ring-1 "
+          input-focus focus:ring-1 ${getFieldErrorClass(error, 'userName')}`}
           placeholder={t('modal.placeholders.userName')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<PiUser className=" text-gray-400" size={20} />}
@@ -92,9 +58,9 @@ export const SignUpForm = () => {
           id="email"
           name="userMail"
           type="email"
-          className="w-full border-2 border-gray-300
+          className={`w-full border-2 border-gray-300
           rounded-sm h-12 p-2.5 pl-14
-          input-focus focus:ring-1 "
+          input-focus focus:ring-1  ${getFieldErrorClass(error, 'userMail')}`}
           placeholder={t('modal.placeholders.mail')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<IoMailOutline className=" text-gray-400" size={20} />}

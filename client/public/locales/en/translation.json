@@ -6,7 +6,8 @@
     "dashboard": "Dashboard "
   },
   "button": {
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
   },
   "modal": {
     "tabs": {
@@ -53,7 +54,8 @@
         "noAccessToken": "No access token",
         "usernameIsRequired": "Username is required",
         "passwordIsRequired": "Password is required",
-        "passwordLength": "Password should be at least 3 chars"
+        "passwordLength": "Password should be at least 3 chars",
+        "unknownError": "Something went wrong"
       }
     }
   }

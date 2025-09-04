@@ -96,6 +96,7 @@
 .text-burger-color {
   color: var(--text-burger-color);
 }
+
 .text-error-color {
   color: var(--text-error-color);
 }
@@ -126,6 +127,9 @@
 }
 .border-hover-primary-accent-color:hover {
   border-color: var(--hover-primary-accent-color);
+}
+.border-theme-accent {
+  border-color: var(--burger-hover-background);
 }
 
 /* ------------------------shadows */

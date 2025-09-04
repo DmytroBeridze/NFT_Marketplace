@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     Component: App,
     children: [
       { index: true, Component: Marketplace },
-      { path: 'marketplace', Component: Marketplace },
+      // { path: 'marketplace', Component: Marketplace },
       { path: 'rankings', Component: Rankings },
       { path: 'connectWallet', Component: ConnectWallet },
       {

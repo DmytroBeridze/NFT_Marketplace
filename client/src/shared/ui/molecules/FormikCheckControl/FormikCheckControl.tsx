@@ -22,6 +22,7 @@ export const FormikCheckControl = ({
       id={id}
       type={type}
       className={className}
+      // className={className}
       label={label}
       wrapperClass={wrapperClass}
       autoComplete={autoComplete}
