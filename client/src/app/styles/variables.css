@@ -29,6 +29,10 @@
   --adaptive-button-background-color: var(--button-inversive-background);
   --burger-background-color: var(--burger-background);
   --burger-hover-background-color: var(--burger-hover-background);
+  --overlay-background-color: rgba(24, 24, 27, 0.8);
+  --static-surface-color: #f5f5f5;
+  --tab-active-background-color: #b6b9cc;
+  /* --tab-active-background-color: #8588a6; */
   /* texts */
   --primary-text-color: var(--primary-text);
   --secondary-text-color: var(--secondary-text);
@@ -36,6 +40,9 @@
   --static-text-white: #ffffff;
   --static-text-black: #2b2b2b;
   --text-burger-color: var(--burger-text);
+  --text-error-color: #ef4444;
+  --text-success-color: #22c55e;
+
   /* accents */
   --primary-accent-color: #a259ff;
   --hover-primary-accent-color: #763fbf;
@@ -43,6 +50,7 @@
   /* shadows */
   --primary-shadow: 0px 0px 20px -3px rgba(2, 3, 16, 1);
   --secondary-shadow: 0px 0px 22px -6px rgba(18, 19, 19, 0.83);
+  --primary-accent-shadow: 0 0 0 2px rgba(162, 89, 255, 0.3);
 
   /* layouts */
   --outer-container-width: 1300px;

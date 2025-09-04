@@ -6,6 +6,57 @@
     "dashboard": "Dashboard "
   },
   "button": {
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "modal": {
+    "tabs": {
+      "login": "Login",
+      "signUp": "Sign Up"
+    },
+    "button": {
+      "LogInNow": "Log in now",
+      "JoinNow": " Join now"
+    },
+    "errors": {
+      "tooShort": "Too Short",
+      "required": "Required",
+      "containLetters": "Must contain letters",
+      "containNumbers": "Must contain numbers",
+      "passwordsMustMatch": "Passwords Must Match",
+      "invalidEmail": "Invalid email"
+    },
+    "placeholders": {
+      "userName": "User name",
+      "password": "Password",
+      "mail": "E-mail",
+      "confirmPassword": "Confirm Password"
+    },
+    "labels": {
+      "asClient": "as client",
+      "asAuthor": "as author"
+    },
+    "serverMessages": {
+      "data": {
+        "registered": "User is registered",
+        "accessGranted": "Access granted",
+        "logged": "You are logged"
+      },
+      "error": {
+        "usernameExists": "Username already exists",
+        "mailExists": "Mail already exists",
+        "roleNotFound": "Role USER not found in database",
+        "registrationError": "User registration error",
+        "userNotFound": "User not found",
+        "incorrectPassword": "Incorrect password",
+        "loginError": "User Login error",
+        "accessDenied": "Access denied",
+        "noAccessToken": "No access token",
+        "usernameIsRequired": "Username is required",
+        "passwordIsRequired": "Password is required",
+        "passwordLength": "Password should be at least 3 chars",
+        "unknownError": "Something went wrong"
+      }
+    }
   }
 }

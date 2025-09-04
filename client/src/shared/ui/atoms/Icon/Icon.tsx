@@ -1,21 +1,14 @@
 import type { FC } from 'react';
-import { iconsMap, type IconName } from '../../../lib/icons';
-
-interface IconProps {
-  name: IconName;
-  size?: number;
-  className?: string;
-  style?: React.CSSProperties;
-  fill?: string;
-  onClick?: () => void;
-}
+import { iconsMap } from '../../../lib/icons';
+import type { IconProps } from './types';
 
 export const Icon: FC<IconProps> = ({
   name,
   size = 24,
+  height,
   className,
   style,
-  fill,
+  fill = 'currentColor',
   onClick,
 }) => {
   const IconComponent = iconsMap[name];
@@ -24,7 +17,7 @@ export const Icon: FC<IconProps> = ({
     <IconComponent
       fill={fill}
       width={size}
-      height={size}
+      height={height || size}
       className={className}
       style={{ display: 'block', ...style }}
       onClick={onClick}

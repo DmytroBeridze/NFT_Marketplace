@@ -43,6 +43,18 @@
 .layout-adaptive-color {
   border: 1px solid var(--adaptive-button-background-color);
 }
+
+.bg-overlay-background-color {
+  background-color: var(--overlay-background-color);
+}
+
+.bg-static-surface {
+  background-color: var(--static-surface-color);
+}
+.bg-tab-active-background-color {
+  background-color: var(--tab-active-background-color);
+}
+
 /*-------------------- link-underline color  */
 .link-underline::after {
   background-color: var(--primary-accent-color);
@@ -72,6 +84,7 @@
 
 .static-text-white-color {
   color: var(--static-text-white);
+  /* color: var(--static-text-white); */
 }
 .static-text-black-color {
   color: var(--static-text-black);
@@ -82,6 +95,13 @@
 
 .text-burger-color {
   color: var(--text-burger-color);
+}
+
+.text-error-color {
+  color: var(--text-error-color);
+}
+.text-success-color {
+  color: var(--text-success-color);
 }
 
 /* -------------------------accents */
@@ -97,11 +117,19 @@
 .bg-primary-dark-accent-color {
   background-color: var(--hover-primary-accent-color);
 }
+
+.accent-active {
+  accent-color: var(--primary-accent-color);
+}
+/* --------------------------border */
 .border-primary-accent-color {
   border-color: var(--primary-accent-color);
 }
 .border-hover-primary-accent-color:hover {
   border-color: var(--hover-primary-accent-color);
+}
+.border-theme-accent {
+  border-color: var(--burger-hover-background);
 }
 
 /* ------------------------shadows */
@@ -111,6 +139,16 @@
 .shadow-secondary {
   box-shadow: var(--secondary-shadow);
 }
+/* ---------------------focus */
+.input-focus:focus {
+  border: 1px solid var(--primary-accent-color);
+  outline: none;
+  box-shadow: var(--primary-accent-shadow);
+  transition:
+    border 0.3s,
+    box-shadow 0.3s;
+}
+
 /* -----------------------layouts */
 .max-w-outer-container-width {
   max-width: var(--outer-container-width);
@@ -190,12 +228,6 @@
     background-color: var(--burger-hover-background-color) !important;
   }
 }
-
-/* @media (min-width: 640px) {
-  .only-mobile-hover:hover {
-    background-color: transparent !important;
-  }
-} */
 
 /* поведінка languageSwitcher в бургері є ховер в хедері немає */
 @media (min-width: 834px) {

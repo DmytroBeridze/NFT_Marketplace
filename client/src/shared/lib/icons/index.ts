@@ -17,6 +17,8 @@ import { ReactComponent as YoutubeIcon } from '../../assets/icons/YoutubeLogo.sv
 import { ReactComponent as UserIcon } from '../../assets/icons/User.svg';
 import { ReactComponent as BurgerMenu } from '../../assets/icons/BurgerMenu.svg';
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
+import { ReactComponent as Spinner } from '../../assets/icons/spinner.svg';
+import { ReactComponent as Door } from '../../assets/icons/Door.svg';
 
 export const iconsMap = {
   'logo-icon': LogoIcon,
@@ -38,8 +40,8 @@ export const iconsMap = {
   'user-icon': UserIcon,
   'BurgerMenu-icon': BurgerMenu,
   'close-icon': Close,
+  'door-icon': Door,
+  spinner: Spinner,
 } as const;
 
 export type IconName = keyof typeof iconsMap;
-
-/* NFT Marketplace */

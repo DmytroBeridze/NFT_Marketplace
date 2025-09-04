@@ -1,55 +1,74 @@
-import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { useAppSelector } from '../../../app/store/reduxHooks';
-import { TransitionWrapper } from '../../../shared/ui/atoms/TransitionWrapper';
-import { useToggleAuthorizationModal } from '../hooks/useToggleAuthorizationModal';
-import {
-  modalDefaultStyle,
-  transitionStyles,
-} from '../config/transitionStyles.ts';
+import { Icon } from '../../../shared/ui/atoms/Icon';
+import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
+import { useTranslate } from '../../../shared/lib/i18n';
+import { type MouseEvent } from 'react';
+import { AuthorizationForms } from './AuthorizationForms';
+import { Text } from '../../../shared/ui/atoms/Text';
+import { useAuthorizationContext } from '../context';
+
+type FormsName = 'login' | 'signUp';
 
 export const AuthorizationModal = () => {
-  const [mounted, setMounted] = useState(false);
-  const { toggleHandler } = useToggleAuthorizationModal();
-  const isOpen = useAppSelector((store) => store.authorizationModal.isOpen);
-  // useEffect с пустым массивом зависимостей ставит mounted в true после первого рендера,
-  // чтобы гарантировать, что следующий код (например, доступ к DOM) выполняется только на клиенте,
-  // когда DOM уже загружен —  находится root ждя портала.
+  const { setTab, tab } = useAuthorizationContext();
 
-  // Иначе document.getElementById('burger-root') может сработать слишком рано
+  const { closeHandler } = useToggleOverlay();
+  const { translateVariables } = useTranslate({
+    translateKey: 'modal.tabs',
+    returnObjects: true,
+  });
+  const buttonsNames = Object.entries(translateVariables);
 
-  // Если BurgerMenu вызывается до того, как DOM полностью загрузился
-  // (например, до монтирования #burger-root в index.html), тогда getElementById вернёт null.
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const tabHandler = (e: MouseEvent<HTMLLIElement>, name: FormsName) => {
+    e.stopPropagation();
+    setTab(name);
+  };
 
-  if (!mounted) return null;
+  return (
+    <section className="relative w-full max-w-150 overflow-y-auto max-h-[90vh] ">
+      <div className="flex justify-end sticky  -top-8">
+        <Icon
+          className="cursor-pointer"
+          style={{ color: 'white' }}
+          onClick={() => closeHandler()}
+          name="close-icon"
+          // fill="black"
+        />
+      </div>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-static-surface rounded-lg border "
+      >
+        <ul className="w-full  flex justify-between">
+          {buttonsNames.map(([key, value]: [string, string], i) => {
+            return (
+              <li
+                key={key}
+                className={`flex justify-center 
+                items-center basis-1/2 px-5 py-6
+                cursor-pointer  ${i === 1 ? 'rounded-tr-lg' : 'rounded-tl-lg'}
+                ${tab === key ? 'bg-static-surface' : 'bg-tab-active-background-color'}
+                duration-200 ease-in-out
+                
+                `}
+                onClick={(e) => {
+                  tabHandler(e, key as FormsName);
+                }}
+              >
+                <Text
+                  size="responsive-size-sm"
+                  color={`${tab === key ? 'static-text-black-color' : 'static-text-white-color'}`}
+                  // color="static-text-black-color"
+                  font="font-work-sans-semibold"
+                >
+                  {value}
+                </Text>
+              </li>
+            );
+          })}
+        </ul>
 
-  const root = document.getElementById('authorizationModal-root');
-
-  if (!root) {
-    return null;
-  }
-
-  return createPortal(
-    <TransitionWrapper
-      inProp={isOpen}
-      transitionStyles={transitionStyles}
-      defaultStyle={modalDefaultStyle}
-    >
-      {({ style, ref }) => (
-        <div
-          ref={ref}
-          style={style}
-          className="fixed top-0 w-full h-full bg-amber-700 z-[999]"
-        >
-          <button onClick={toggleHandler}>Test btn</button>
-          <p>This child is placed in the document body.</p>
-        </div>
-      )}
-    </TransitionWrapper>,
-
-    root,
+        <AuthorizationForms name={tab} />
+      </div>
+    </section>
   );
 };

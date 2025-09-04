@@ -6,6 +6,57 @@
     "dashboard": "Кабінет"
   },
   "button": {
-    "signIn": "Вхід"
+    "signIn": "Вхід",
+    "signOut": "Вихід"
+  },
+  "modal": {
+    "tabs": {
+      "login": "Увійти",
+      "signUp": "Зареєструватися"
+    },
+    "button": {
+      "LogInNow": "Продовжити",
+      "JoinNow": "Приєднатися"
+    },
+    "errors": {
+      "tooShort": "Занадто короткий",
+      "required": "Обов’язкове поле",
+      "containLetters": "Повинно містити літери",
+      "containNumbers": "Повинно містити цифри",
+      "passwordsMustMatch": "Паролі мають співпадати",
+      "invalidEmail": "Невірний email"
+    },
+    "placeholders": {
+      "userName": "Ім'я",
+      "password": "Пароль",
+      "mail": "Пошта",
+      "confirmPassword": "Підтвердити пароль"
+    },
+    "labels": {
+      "asClient": "як клієнт",
+      "asAuthor": "як автор"
+    },
+    "serverMessages": {
+      "data": {
+        "registered": "Користувач зареєстрований",
+        "accessGranted": "Доступ надано",
+        "logged": "Ви увійшли"
+      },
+      "error": {
+        "usernameExists": "Ім'я користувача вже існує",
+        "mailExists": "Електронна пошта вже існує",
+        "roleNotFound": "Роль USER не знайдена в базі даних",
+        "registrationError": "Помилка реєстрації користувача",
+        "userNotFound": "Користувача не знайдено",
+        "incorrectPassword": "Невірний пароль",
+        "loginError": "Помилка входу користувача",
+        "accessDenied": "Доступ заборонено",
+        "noAccessToken": "Відсутній токен доступу",
+        "usernameIsRequired": "Ім'я користувача обов'язкове",
+        "passwordIsRequired": "Пароль обов'язковий",
+        "passwordLength": "Пароль повинен містити щонайменше 3 символи",
+        "unknownError": "Щось пішло не так"
+      }
+    }
   }
 }

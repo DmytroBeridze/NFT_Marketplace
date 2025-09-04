@@ -3,9 +3,9 @@ import { createPortal } from 'react-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/store/reduxHooks';
 import { closed } from '../model/burgerSlice';
 
-//! -------------------Transition---- винести налаштування окремо
 import { TransitionWrapper } from '../../../shared/ui/atoms/TransitionWrapper';
 import { defaultStyle, transitionStyles } from '../config/transitionStyles';
+import { Icon } from '../../../shared/ui/atoms/Icon';
 
 interface burgerMenuProps {
   children?: React.ReactNode;
@@ -48,7 +48,7 @@ export const BurgerMenu = ({ children }: burgerMenuProps) => {
         <div
           ref={ref}
           style={style}
-          className={`fixed burger-menue-responsive top-0 left-0 h-full   w-full bg-gray-950/80 z-[998] cursor-pointer`}
+          className={`fixed burger-menue-responsive top-0 left-0 h-full   w-full bg-overlay-background-color z-[998] cursor-pointer`}
           onClick={closeBurger}
         >
           <div

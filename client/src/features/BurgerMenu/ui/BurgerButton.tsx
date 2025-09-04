@@ -1,8 +1,7 @@
-import { useAppDispatch } from '../../../app/store/reduxHooks';
 import type { IconName } from '../../../shared/lib/icons';
 import { useTheme } from '../../../shared/lib/theme/useTheme';
 import { Icon } from '../../../shared/ui/atoms/Icon';
-import { toggle } from '../model/burgerSlice';
+import { useCloseBurgerMenu } from '../lib/useCloseBurgerMenu';
 
 interface BurgerButtonProps {
   iconName?: IconName;
@@ -11,16 +10,12 @@ interface BurgerButtonProps {
 export const BurgerButton = ({
   iconName = 'BurgerMenu-icon',
 }: BurgerButtonProps) => {
-  const dispatch = useAppDispatch();
   const { theme } = useTheme();
-
-  const toggleHandler = () => {
-    dispatch(toggle());
-  };
+  const { openBurger } = useCloseBurgerMenu();
 
   return (
     <div
-      onClick={toggleHandler}
+      onClick={openBurger}
       className="burger-button-responsive cursor-pointer"
       aria-label="Toggle burger menu"
     >
