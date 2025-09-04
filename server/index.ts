@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRouter from "./routes/authRouts";
+import themeRouter from "./routes/themeRouts";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
@@ -27,8 +29,11 @@ process.on("unhandledRejection", (reason, promise) => {
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+
 // http://localhost:3002/
 app.use("/api/auth", authRouter);
+app.use("/api/theme", themeRouter);
 
 const start = async () => {
   try {

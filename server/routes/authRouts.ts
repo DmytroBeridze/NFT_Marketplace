@@ -11,8 +11,8 @@ const router = Router();
 router.post(
   "/register",
   [
-    check("userName", "Username is required").notEmpty(),
-    check("password", "Password should be at least 3 chars").isLength({
+    check("userName", "usernameIsRequired").notEmpty(),
+    check("userPass", "passwordLength").isLength({
       min: 3,
     }),
     checkValidation,
@@ -25,8 +25,8 @@ router.post(
 router.post(
   "/login",
   [
-    check("userName", "Username is required").notEmpty(),
-    check("password", "Password is required").notEmpty(),
+    check("userName", "usernameIsRequired").notEmpty(),
+    check("userPass", "passwordIsRequired").notEmpty(),
     checkValidation,
   ],
   login
