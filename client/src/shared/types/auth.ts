@@ -18,13 +18,13 @@ export type LoginValues = Omit<
 
 export type UserData = {
   _id: string;
-
   createdAt: string;
   roles: string[];
   updatedAt: string;
   userMail: string;
   userName: string;
   userType: 'client' | 'author';
+  theme?: string;
 };
 
 export interface IRegisterResponse {
@@ -36,3 +36,7 @@ export interface ILoginResponse {
   userData: UserData;
   token: string;
 }
+// export interface IGetMeResponse {
+//   message: string;
+//   userData: UserData;
+// }

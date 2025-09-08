@@ -11,8 +11,11 @@ export const useTheme = () => {
   const { theme, setTheme } = themeContext;
 
   const toggleTheme = useCallback(() => {
-    setTheme((prevState) => !prevState);
+    setTheme((prevState) => (prevState === 'dark' ? 'light' : 'dark'));
   }, [setTheme]);
+  // const toggleTheme = useCallback(() => {
+  //   setTheme((prevState) => !prevState);
+  // }, [setTheme]);
 
   return { toggleTheme, theme };
 };

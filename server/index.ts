@@ -27,7 +27,13 @@ process.on("unhandledRejection", (reason, promise) => {
 
 // ---
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    // замінити на URL за яким розгорнутий фронт на сервері
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 

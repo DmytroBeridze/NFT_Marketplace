@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useGetMeQuery, useSetThemeMutation } from '../entities/user/model';
 import { AuthorizationModal } from '../features/AuthorizationModal';
 import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';
 import { Icon } from '../shared/ui/atoms/Icon';
@@ -6,12 +8,12 @@ import { Overlay } from '../shared/ui/molecules/Overlay';
 import { Header } from '../widgets/Header';
 import { AppProviders } from './providers/AppProviders';
 import { useAppSelector } from './store/reduxHooks';
-import { useGetMeQuery } from '../features/AuthorizationModal/model';
 import { Outlet } from 'react-router-dom';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
   const {} = useGetMeQuery();
+
   return (
     <div className="App">
       <AppProviders>

@@ -1,17 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { UserData } from '../../../shared/types';
 import { authApi } from '../../../features/AuthorizationModal/model';
+import { userApi } from './userApi';
 
-// export type UserData = {
-//   _id: string;
-
-//   createdAt: string;
-//   roles: string[];
-//   updatedAt: string;
-//   userMail: string;
-//   userName: string;
-//   userType: 'client' | 'author';
-// };
 interface UserState {
   data: UserData | null;
 }
@@ -46,9 +37,9 @@ export const userSlice = createSlice({
         },
       )
       .addMatcher(
-        authApi.endpoints.getMe.matchFulfilled,
+        userApi.endpoints.getMe.matchFulfilled,
         (state, { payload }) => {
-          state.data = payload;
+          state.data = payload.userData;
         },
       );
   },

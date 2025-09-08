@@ -3,6 +3,7 @@ import burgerReducer from '../../features/BurgerMenu/model/burgerSlice';
 import overlayReducer from '../../shared/ui/molecules/Overlay/model/OverlaySlice';
 import userReducer from '../../entities/user/model/userSlice';
 import { authApi } from '../../features/AuthorizationModal/model';
+import { userApi } from '../../entities/user/model';
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
   console.log('[Test action]:', action.type);
@@ -16,9 +17,14 @@ export const store = configureStore({
     overlay: overlayReducer,
     user: userReducer,
     [authApi.reducerPath]: authApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware).prepend(testMiddleware),
+    getDefaultMiddleware()
+      .concat(authApi.middleware)
+      .concat(userApi.middleware)
+
+      .prepend(testMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

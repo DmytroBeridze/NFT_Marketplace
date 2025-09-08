@@ -1,9 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks';
 import { Outlet, useNavigate } from 'react-router';
 import { useToggleOverlay } from '../ui/molecules/Overlay';
-import { clearUser } from '../../entities/user/model';
+import { clearUser, useGetMeQuery } from '../../entities/user/model';
 import { useEffect } from 'react';
-import { useGetMeQuery } from '../../features/AuthorizationModal/model';
 import { useLocalStorage } from '../lib/hooks';
 
 export const ProtectedRoute = () => {
