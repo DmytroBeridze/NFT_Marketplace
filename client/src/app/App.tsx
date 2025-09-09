@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useGetMeQuery } from '../entities/user/model';
 import { AuthorizationModal } from '../features/AuthorizationModal';
 import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';

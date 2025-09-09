@@ -19,7 +19,11 @@ export const BurgerButton = ({
       className="burger-button-responsive cursor-pointer"
       aria-label="Toggle burger menu"
     >
-      <Icon name={iconName} size={24} fill={theme ? 'black ' : 'white'} />
+      <Icon
+        name={iconName}
+        size={24}
+        fill={theme === 'light' ? 'black ' : 'white'}
+      />
     </div>
   );
 };

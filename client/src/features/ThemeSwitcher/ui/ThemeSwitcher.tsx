@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { ThemeSelect } from '../../../shared/ui/atoms/ThemeSelect';
 import { useTheme } from '../../../shared/lib/theme/useTheme';
-import { useSetThemeMutation } from '../../../entities/user/model';
 
 interface ThemeSwitcherProps {
   bgColor?: string;
@@ -9,9 +8,9 @@ interface ThemeSwitcherProps {
 
 export const ThemeSwitcher = ({ bgColor }: ThemeSwitcherProps) => {
   const { theme } = useTheme();
-  // const [setTheme] = useSetThemeMutation();
 
   // тема відправляється не в body а в cookie яка встаеовлена в ThemeProvider
+
   // useEffect(() => {
   //   setTheme();
   // }, [theme]);

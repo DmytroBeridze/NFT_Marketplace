@@ -4,13 +4,12 @@ import { Icon } from '../../../shared/ui/atoms/Icon';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { useTranslation } from 'react-i18next';
 import { useAuthAction, useLocalStorage } from '../../../shared/lib/hooks';
-import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import ThemeSwitcher from '../../../features/ThemeSwitcher/ui/ThemeSwitcher';
 
 export const HeaderActions = () => {
   const { getLocal } = useLocalStorage();
   const { t } = useTranslation();
-  const { loginLogoutHandler, user } = useAuthAction();
+  const { loginLogoutHandler } = useAuthAction();
   const token = getLocal('token');
   // const token = localStorage.getItem('token');
   // const { openHandler } = useToggleOverlay();
