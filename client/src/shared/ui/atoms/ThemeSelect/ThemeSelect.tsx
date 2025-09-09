@@ -2,8 +2,6 @@ import { Switch } from '@headlessui/react';
 import { BsSunFill } from 'react-icons/bs';
 import { WiMoonWaningCrescent2 } from 'react-icons/wi';
 import { useTheme } from '../../../lib/theme/useTheme';
-import { useEffect } from 'react';
-import { useSetThemeMutation } from '../../../../entities/user/model';
 
 interface ThemeSelectProps {
   bgColor?: string;

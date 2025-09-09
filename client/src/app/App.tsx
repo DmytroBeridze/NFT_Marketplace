@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useGetMeQuery, useSetThemeMutation } from '../entities/user/model';
+import { useGetMeQuery } from '../entities/user/model';
 import { AuthorizationModal } from '../features/AuthorizationModal';
 import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';
 import { Icon } from '../shared/ui/atoms/Icon';

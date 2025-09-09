@@ -9,12 +9,12 @@ interface ThemeSwitcherProps {
 
 export const ThemeSwitcher = ({ bgColor }: ThemeSwitcherProps) => {
   const { theme } = useTheme();
-  const [setTheme] = useSetThemeMutation();
+  // const [setTheme] = useSetThemeMutation();
 
   // тема відправляється не в body а в cookie яка встаеовлена в ThemeProvider
-  useEffect(() => {
-    setTheme();
-  }, [theme]);
+  // useEffect(() => {
+  //   setTheme();
+  // }, [theme]);
 
   useEffect(() => {
     if (theme === 'dark') {

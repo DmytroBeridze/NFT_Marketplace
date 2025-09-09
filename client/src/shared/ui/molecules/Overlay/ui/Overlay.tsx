@@ -7,6 +7,8 @@ import {
   transitionStyles,
 } from '../config/transitionStyles.ts.ts';
 import { useToggleOverlay } from '../hooks/useToggleOverlay.ts';
+import { useSetThemeMutation } from '../../../../../entities/user/model/userApi.ts';
+import { useTheme } from '../../../../lib/theme/useTheme.ts';
 
 interface OverlayProps {
   children?: React.ReactNode;
