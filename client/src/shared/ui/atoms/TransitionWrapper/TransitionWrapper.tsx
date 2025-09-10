@@ -6,6 +6,7 @@ interface TransitionWrapperProps {
     style: React.CSSProperties;
     ref: Ref<HTMLDivElement>;
   }) => React.ReactNode;
+
   inProp: boolean;
   duration?: number;
   defaultStyle?: React.CSSProperties;

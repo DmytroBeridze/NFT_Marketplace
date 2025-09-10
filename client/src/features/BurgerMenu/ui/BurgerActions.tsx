@@ -1,16 +1,14 @@
 import { LangSwitcher } from '../../../features/LangSwitcher';
-import { ThemeSwitcher } from '../../../features/ThemeSwitcher';
 import { Button } from '../../../shared/ui/atoms/Button';
 import { Icon } from '../../../shared/ui/atoms/Icon';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { useTranslation } from 'react-i18next';
-import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import { useAuthAction, useLocalStorage } from '../../../shared/lib/hooks';
+import ThemeSwitcher from '../../ThemeSwitcher/ui/ThemeSwitcher';
 
 export const BurgerActions = () => {
   const { t } = useTranslation();
-  const { openHandler } = useToggleOverlay();
-  const { loginLogoutHandler, user } = useAuthAction();
+  const { loginLogoutHandler } = useAuthAction();
   const { getLocal } = useLocalStorage();
   const token = getLocal('token');
   // const token = localStorage.getItem('token');

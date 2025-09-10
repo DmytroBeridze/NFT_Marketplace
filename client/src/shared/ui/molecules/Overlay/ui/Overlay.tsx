@@ -7,24 +7,23 @@ import {
   transitionStyles,
 } from '../config/transitionStyles.ts.ts';
 import { useToggleOverlay } from '../hooks/useToggleOverlay.ts';
+import type { OpenModalType } from '../model/OverlaySlice.ts';
 
 interface OverlayProps {
   children?: React.ReactNode;
+  modalType: OpenModalType;
 }
 
-export const Overlay = ({ children }: OverlayProps) => {
+export const Overlay = ({ children, modalType }: OverlayProps) => {
   const [mounted, setMounted] = useState(false);
 
-  const modalType = useAppSelector((store) => store.overlay.openModalType);
+  const openModalType = useAppSelector((store) => store.overlay.openModalType);
   const { closeHandler } = useToggleOverlay();
+
   // useEffect с пустым массивом зависимостей ставит mounted в true после первого рендера,
   // чтобы гарантировать, что следующий код (например, доступ к DOM) выполняется только на клиенте,
-  // когда DOM уже загружен —  находится root ждя портала.
-
-  // Иначе document.getElementById('burger-root') может сработать слишком рано
-
-  // Если BurgerMenu вызывается до того, как DOM полностью загрузился
-  // (например, до монтирования #burger-root в index.html), тогда getElementById вернёт null.
+  // когда DOM уже загружен —  находится root для портала модалки.
+  // Без этого document.getElementById('authorizationModal-root') может вернуть null.
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -39,7 +38,7 @@ export const Overlay = ({ children }: OverlayProps) => {
 
   return createPortal(
     <TransitionWrapper
-      inProp={modalType ? true : false}
+      inProp={openModalType === modalType ? true : false}
       transitionStyles={transitionStyles}
       defaultStyle={modalDefaultStyle}
     >

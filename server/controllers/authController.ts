@@ -19,23 +19,24 @@ interface IRequest extends Request {
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { userName, password } = req.body;
+    const { userName, userPass, userMail, userType } = req.body;
     const isUsed = await UserSchema.findOne({ userName });
+    const isUsedMail = await UserSchema.findOne({ userMail });
     const role = await Roles.findOne({ value: "USER" });
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
+    const hash = bcrypt.hashSync(userPass, salt);
     const result = validationResult(req);
 
     if (isUsed) {
       return res.status(409).json({
-        message: "Username already exists",
+        message: "usernameExists",
       });
+    } else if (isUsedMail) {
+      return res.status(409).json({ message: "mailExists" });
     }
 
     if (!role) {
-      return res
-        .status(500)
-        .json({ message: "Role USER not found in database" });
+      return res.status(500).json({ message: "roleNotFound" });
     }
 
     //! Валидируем не здесь а в authRouts.ts при помощи миддлвара checkValidation
@@ -46,15 +47,21 @@ export const register = async (req: Request, res: Response) => {
     const newUser = new UserSchema({
       userName: userName,
       password: hash,
+      userMail: userMail,
+      userType: userType,
       roles: [role?._id],
     });
 
     await newUser.save();
 
-    res.status(200).json({ newUser, message: "User is registered" });
+    const { password: _, ...userData } = newUser.toObject();
+
+    res.status(200).json({ userData, message: "registered" });
+    // res.status(200).json({ newUser, message: "registered" });
   } catch (error) {
     console.error("Registration error:", error);
-    res.status(500).json("User registration error");
+    res.status(500).json("registrationError");
+    // res.status(500).json("User registration error");
   }
 };
 
@@ -62,19 +69,21 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   try {
-    const { userName, password } = req.body;
+    const { userName, userPass } = req.body;
     const user = await UserSchema.findOne({ userName }).populate("roles");
     const JWT_SECRET = getEnvVar("JWT_SECRET");
     const result = validationResult(req);
 
     if (!user || !user.password) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "userNotFound" });
+      // return res.status(404).json({ message: "User not found" });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await bcrypt.compare(userPass, user.password);
 
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Incorrect password" });
+      return res.status(400).json({ message: "incorrectPassword" });
+      // return res.status(400).json({ message: "Incorrect password" });
     }
 
     //! Валидируем не здесь а в authRouts.ts при помощи миддлвара checkValidation
@@ -85,41 +94,55 @@ export const login = async (req: Request, res: Response) => {
     const token = jwt.sign(
       {
         id: user._id,
+        userType: user.userType,
       },
       JWT_SECRET,
       { expiresIn: "30d" }
     );
-    // Щоб пароль не потрапив в респонс деструктуризуємо user
-    // Метод .toObject() конвертирует Mongoose-документ в обычный JavaScript-объект
+
+    //💡 Щоб пароль не потрапив в респонс деструктуризуємо user
+    //⚠️ Метод .toObject() конвертирует Mongoose-документ в обычный JavaScript-объект
     const { password: _, ...userData } = user.toObject();
 
     res.status(200).json({
       userData,
       token,
-      message: "You are logged",
+      message: "logged",
     });
+    // res.status(200).json({
+    //   userData,
+    //   token,
+    //   message: "You are logged",
+    // });
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json("User Login error");
+    res.status(500).json({ message: "loginError" });
+    // res.status(500).json({ message: "User Login error" });
   }
 };
 
 //--------------------------- Get profile
 
+//💡 id в req записує міддлвар коли перевіряє токен (він бере його з токена)
+// ⚠️IRequest розштрює Response тому що в req записується id міддлваром в authRouts
 export const getMe = async (req: IRequest, res: Response) => {
   try {
     const user = await UserSchema.findById(req.userId).populate("roles");
     if (!user || !user.password) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "userNotFound" });
+      // return res.status(404).json({ message: "User not found" });
     }
 
     const { password: _, ...userData } = user.toObject();
-    res.status(200).json({ userData, message: "Access granted" });
+    res.status(200).json({ userData, message: "accessGranted" });
+    // res.status(200).json({ userData, message: "Access granted" });
   } catch (error) {
     console.error("Get user error:", error);
-    res.status(404).json("Access denied");
+    res.status(404).json({ message: "accessDenied" });
+    // res.status(404).json("Access denied");
   }
 };
 
+// ----------------------
 // ---------------------------------------------------------
 // https://youtu.be/QxTeE5EMiWI?t=4665

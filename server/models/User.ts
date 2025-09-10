@@ -4,7 +4,10 @@ const { Schema } = mongoose;
 // interface
 interface IUser {
   userName: string;
+  userMail: string;
   password: string;
+  userType: "author" | "client";
+  theme: "light" | "dark";
   roles: mongoose.Types.ObjectId[];
 
   // posts: mongoose.Schema.Types.ObjectId[];
@@ -18,9 +21,26 @@ const UserSchema = new Schema<IUser>(
       required: true,
       unique: true,
     },
+    userMail: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     password: {
       type: String,
       required: true,
+    },
+    userType: {
+      type: String,
+      required: true,
+
+      enum: ["author", "client"],
+    },
+    theme: {
+      type: String,
+      default: "light",
+
+      enum: ["light", "dark"],
     },
     roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Roles" }],
   },
