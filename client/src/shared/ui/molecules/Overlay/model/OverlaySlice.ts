@@ -1,7 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+export type OpenModalType = 'authorization' | 'burgerMenu' | null;
+
 export interface OverlayState {
-  openModalType: 'authorization' | 'profile' | null;
+  openModalType: OpenModalType;
 }
 
 const initialState: OverlayState = {

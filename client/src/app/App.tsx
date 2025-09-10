@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <AppProviders>
-        <Overlay>
+        <Overlay modalType={'authorization'}>
           {modalType === 'authorization' && (
             <AuthorizationContextProvider>
               <AuthorizationModal />

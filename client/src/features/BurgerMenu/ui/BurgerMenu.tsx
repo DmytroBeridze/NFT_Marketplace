@@ -4,8 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../../app/store/reduxHooks';
 import { closed } from '../model/burgerSlice';
 
 import { TransitionWrapper } from '../../../shared/ui/atoms/TransitionWrapper';
-import { defaultStyle, transitionStyles } from '../config/transitionStyles';
-import { Icon } from '../../../shared/ui/atoms/Icon';
+import {
+  burgerOverlayDefaultStyle,
+  burgerOverlayTransitionStyles,
+  burgerDefaultStyle,
+  burgerBransitionStyles,
+} from '../config/transitionStyles';
+import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 
 interface burgerMenuProps {
   children?: React.ReactNode;
@@ -39,28 +44,47 @@ export const BurgerMenu = ({ children }: burgerMenuProps) => {
   if (!root) return null;
 
   return createPortal(
-    <TransitionWrapper
-      inProp={behavior}
-      transitionStyles={transitionStyles}
-      defaultStyle={defaultStyle}
-    >
-      {({ style, ref }) => (
-        <div
-          ref={ref}
-          style={style}
-          className={`fixed burger-menue-responsive top-0 left-0 h-full   w-full bg-overlay-background-color z-[998] cursor-pointer`}
-          onClick={closeBurger}
-        >
+    <>
+      <TransitionWrapper
+        inProp={behavior}
+        defaultStyle={burgerOverlayDefaultStyle}
+        transitionStyles={burgerOverlayTransitionStyles}
+      >
+        {({ style, ref }) => (
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="max-w-[72%] px-8 py-8 bg-burger-background-color  h-full cursor-default flex  flex-col gap-18 overflow-y-auto max-h-screen relative 
-            "
+            ref={ref}
+            style={style}
+            className="fixed burger-menue-responsive top-0 left-0 h-full
+               w-full  z-[997] bg-overlay-background-color"
+          ></div>
+        )}
+      </TransitionWrapper>
+      <TransitionWrapper
+        inProp={behavior}
+        transitionStyles={burgerBransitionStyles}
+        defaultStyle={burgerDefaultStyle}
+      >
+        {({ style, ref }) => (
+          <div
+            ref={ref}
+            style={style}
+            className={`fixed burger-menue-responsive top-0 left-0 h-full
+               w-full  z-[998] cursor-pointer`}
+            onClick={closeBurger}
           >
-            {children}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-[72%] px-8 py-8 bg-burger-background-color 
+            h-full cursor-default flex  flex-col gap-18 overflow-y-auto max-h-screen relative 
+            "
+            >
+              {children}
+            </div>
           </div>
-        </div>
-      )}
-    </TransitionWrapper>,
+        )}
+      </TransitionWrapper>
+      ,
+    </>,
     root,
   );
 };

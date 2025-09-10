@@ -1,6 +1,7 @@
 import type { TransitionStatus } from 'react-transition-group';
 
 export const MODAL_TRANSITION_DURATION = 300;
+
 export const modalDefaultStyle = {
   transition: `opacity ${MODAL_TRANSITION_DURATION}ms ease-in-out`,
   opacity: 0,
