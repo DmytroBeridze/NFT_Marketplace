@@ -10,7 +10,6 @@ import {
   burgerDefaultStyle,
   burgerBransitionStyles,
 } from '../config/transitionStyles';
-import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 
 interface burgerMenuProps {
   children?: React.ReactNode;

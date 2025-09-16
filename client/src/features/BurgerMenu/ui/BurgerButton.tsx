@@ -1,7 +1,6 @@
 import type { IconName } from '../../../shared/lib/icons';
 import { useTheme } from '../../../shared/lib/theme/useTheme';
 import { Icon } from '../../../shared/ui/atoms/Icon';
-import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import { useCloseBurgerMenu } from '../lib/useCloseBurgerMenu';
 
 interface BurgerButtonProps {
@@ -13,16 +12,10 @@ export const BurgerButton = ({
 }: BurgerButtonProps) => {
   const { theme } = useTheme();
   const { openBurger } = useCloseBurgerMenu();
-  const { openHandler } = useToggleOverlay();
-
-  const open = () => {
-    openBurger();
-    // openHandler('burgerMenu');
-  };
 
   return (
     <div
-      onClick={open}
+      onClick={openBurger}
       className="burger-button-responsive cursor-pointer"
       aria-label="Toggle burger menu"
     >

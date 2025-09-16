@@ -1,10 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getEnvVar } from "../utils/getEnvVar";
+import { IRequest, IRole } from "../types/role";
 
-interface IRequest extends Request {
-  userId?: string;
-}
+// type Roles = "USER" | "ADMIN";
+// interface IRequest extends Request {
+//   userId?: string;
+//   roles?: IRole[];
+// }
 
 export const checkAuth = (req: IRequest, res: Response, next: NextFunction) => {
   const token = (req.headers.authorization || "").replace("Bearer ", "");
@@ -18,11 +21,21 @@ export const checkAuth = (req: IRequest, res: Response, next: NextFunction) => {
 
       const decoded = jwt.verify(token, JWT_SECRET);
 
-      if (typeof decoded === "object" && "id" in decoded) {
-        const userId = (decoded as JwtPayload).id as string;
-
-        req.userId = userId;
+      if (typeof decoded === "object") {
+        if ("id" in decoded) req.userId = decoded.id as string;
+        if ("roles" in decoded) req.roles = decoded.roles as IRole[];
       }
+      // if (typeof decoded === "object") {
+      //   if ("id" in decoded) req.userId = (decoded as JwtPayload).id as string;
+      //   if ("roles" in decoded)
+      //     req.roles = (decoded as JwtPayload).roles as Roles;
+      // }
+
+      // if (typeof decoded === "object" && "id" in decoded) {
+      //   const userId = (decoded as JwtPayload).id as string;
+
+      //   req.userId = userId;
+      // }
 
       next();
     } catch (error) {

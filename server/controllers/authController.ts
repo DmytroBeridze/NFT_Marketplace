@@ -5,18 +5,19 @@ import jwt from "jsonwebtoken";
 import { getEnvVar } from "../utils/getEnvVar";
 import Roles from "../models/Roles";
 import { validationResult } from "express-validator";
+import { IRequest } from "../types/role";
 
-interface IRequest extends Request {
-  userId?: string;
-}
+// interface IRequest extends Request {
+//   userId?: string;
+// }
 
 // const JWT_SECRET = process.env.JWT_SECRET as string;
 
 // if (!JWT_SECRET) {
 //   throw new Error("JWT_SECRET is not defined in .env");
 // }
-//------------------Registration
 
+//------------------🧩 Registration
 export const register = async (req: Request, res: Response) => {
   try {
     const { userName, userPass, userMail, userType } = req.body;
@@ -25,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
     const role = await Roles.findOne({ value: "USER" });
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(userPass, salt);
-    const result = validationResult(req);
+    // const result = validationResult(req);
 
     if (isUsed) {
       return res.status(409).json({
@@ -65,14 +66,16 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-// ------------------------Login
+// ------------------------🧩 Login
 
 export const login = async (req: Request, res: Response) => {
   try {
     const { userName, userPass } = req.body;
-    const user = await UserSchema.findOne({ userName }).populate("roles");
+    const user = await UserSchema.findOne({ userName })
+      .populate("roles")
+      .lean(); //lean приводить до об'єкта інакше Mongoose поверне Document[] і його не можна перебрати мапом   при встановленні в токен
     const JWT_SECRET = getEnvVar("JWT_SECRET");
-    const result = validationResult(req);
+    // const result = validationResult(req);
 
     if (!user || !user.password) {
       return res.status(404).json({ message: "userNotFound" });
@@ -95,6 +98,7 @@ export const login = async (req: Request, res: Response) => {
       {
         id: user._id,
         userType: user.userType,
+        roles: user.roles.map((role: any) => role.value),
       },
       JWT_SECRET,
       { expiresIn: "30d" }
@@ -102,7 +106,9 @@ export const login = async (req: Request, res: Response) => {
 
     //💡 Щоб пароль не потрапив в респонс деструктуризуємо user
     //⚠️ Метод .toObject() конвертирует Mongoose-документ в обычный JavaScript-объект
-    const { password: _, ...userData } = user.toObject();
+    // const { password: _, ...userData } = user.toObject();
+
+    const { password: _, ...userData } = user; //не треба user.toObject() тому що використовуємо lean() вище, який приводить до об'єкта user
 
     res.status(200).json({
       userData,
@@ -121,7 +127,7 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-//--------------------------- Get profile
+//--------------------------- 🧩 Get profile
 
 //💡 id в req записує міддлвар коли перевіряє токен (він бере його з токена)
 // ⚠️IRequest розштрює Response тому що в req записується id міддлваром в authRouts

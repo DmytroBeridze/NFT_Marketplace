@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import User from "../models/User";
 import { log } from "console";
+import { IRequest } from "../types/role";
 
-interface IRequest extends Request {
-  userId?: string;
-}
+// interface IRequest extends Request {
+//   userId?: string;
+// }
 
 export const theme = async (req: IRequest, res: Response) => {
   try {
