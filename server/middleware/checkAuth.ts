@@ -25,11 +25,6 @@ export const checkAuth = (req: IRequest, res: Response, next: NextFunction) => {
         if ("id" in decoded) req.userId = decoded.id as string;
         if ("roles" in decoded) req.roles = decoded.roles as IRole[];
       }
-      // if (typeof decoded === "object") {
-      //   if ("id" in decoded) req.userId = (decoded as JwtPayload).id as string;
-      //   if ("roles" in decoded)
-      //     req.roles = (decoded as JwtPayload).roles as Roles;
-      // }
 
       // if (typeof decoded === "object" && "id" in decoded) {
       //   const userId = (decoded as JwtPayload).id as string;

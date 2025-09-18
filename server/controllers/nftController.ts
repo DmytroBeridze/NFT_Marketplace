@@ -12,7 +12,9 @@ import { Request, Response } from "express";
 import Nft, { INft } from "../models/Ntf";
 import mongoose from "mongoose";
 import { IUser } from "../models/User";
-import { IRequest } from "../types/role";
+import { ImageRequest, IRequest } from "../types/role";
+import axios from "axios";
+import FormData from "form-data";
 
 // type Roles = "USER" | "ADMIN";
 
@@ -199,3 +201,84 @@ export const deleteNFT = async (req: IRequest, res: Response) => {
     }
   }
 };
+
+// --------------------------🧩 send NFT image to imgBB
+export const setNftImage = async (req: ImageRequest, res: Response) => {
+  try {
+    const apikey = process.env.IMGBB_API_KEY;
+    const file = req.file;
+
+    if (!file) return res.status(400).json({ message: "File not found" });
+
+    // Конвертація в base64
+    const base64 = file.buffer.toString("base64");
+
+    // Відправка на ImgBB
+    // FormData для Node.js
+    const formData = new FormData();
+    formData.append("image", base64);
+    formData.append("name", "nft-gallery-bd");
+
+    const response = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${apikey}`,
+      formData,
+      {
+        headers: formData.getHeaders(),
+        timeout: 20000,
+      }
+    );
+
+    const imageUrl = response.data.data.url;
+    const imageTitle = response.data.data.title;
+
+    return res
+      .status(200)
+      .json({ message: "Image upload", imageUrl, imageTitle });
+  } catch (error: any) {
+    if (error.response) {
+      return res
+        .status(error.response.status)
+        .json({ message: error.response.data });
+    }
+    return res.status(500).json({ message: error.message || "Unknown error" });
+  }
+};
+// export const setNftImage = async (req: ImageRequest, res: Response) => {
+//   try {
+//     const apikey = process.env.IMGBB_API_KEY;
+//     const file = req.file;
+
+//     console.log(file);
+
+//     if (!file) return res.status(400).json({ message: "File not found" });
+
+//     // Конвертація в base64
+//     const base64 = file.buffer.toString("base64");
+
+//     // Відправка на ImgBB
+//     // FormData для Node.js
+//     const formData = new FormData();
+//     formData.append("image", base64);
+
+//     // POST-запрос к ImgBB
+//     const instance = axios.create({
+//       baseURL: `https://api.imgbb.com/1/upload?key=${apikey}`,
+//       method: "POST",
+//       timeout: 20000,
+
+//       headers: formData.getHeaders(),
+//     });
+
+//     // axios.post(`https://api.imgbb.com/1/upload?key=${apikey}`);
+//     const response = await instance.post("", formData);
+//     const imageUrl = response.data.url;
+//     return res.status(200).json({ message: "Image upload", imageUrl });
+//   } catch (error: any) {
+//     if (error.response) {
+//       return res
+//         .status(error.response.status)
+//         .json({ message: error.response.data });
+//     }
+//     return res.status(500).json({ message: error.message || "Unknown error" });
+//   }
+// };

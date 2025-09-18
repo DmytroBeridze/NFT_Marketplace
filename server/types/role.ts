@@ -10,3 +10,6 @@ export interface IRequest extends Request {
   userId?: string;
   roles?: IRole[];
 }
+export interface ImageRequest extends Request {
+  file?: any;
+}
