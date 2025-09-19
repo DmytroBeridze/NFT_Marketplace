@@ -12,4 +12,5 @@ export interface IRequest extends Request {
 }
 export interface ImageRequest extends Request {
   file?: any;
+  userId?: string;
 }

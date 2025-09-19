@@ -18,6 +18,7 @@ import { IRequest } from "../types/role";
 // }
 
 //------------------🧩 Registration
+
 export const register = async (req: Request, res: Response) => {
   try {
     const { userName, userPass, userMail, userType } = req.body;

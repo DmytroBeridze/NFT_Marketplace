@@ -26,11 +26,18 @@ import FormData from "form-data";
 // ---------------------------------🧩 get NFT
 export const getNft = async (req: Request, res: Response) => {
   try {
-    const { authorId, galleryId, sold, page = 1, limit = 12 } = req.query;
+    const {
+      authorId,
+      galleryId,
+      sold,
+      page = 1,
+      limit = 12,
+      keywords,
+    } = req.query;
 
     //  фільтр
-    const filter: Partial<INft> = {};
-    // const filter: any = {};
+    // const filter: Partial<INft> = {};
+    const filter: any = {};
     // перевірка
     if (authorId && mongoose.Types.ObjectId.isValid(authorId as string))
       filter.authorId = new mongoose.Types.ObjectId(authorId as string);
@@ -39,11 +46,18 @@ export const getNft = async (req: Request, res: Response) => {
 
     if (sold !== undefined) filter.sold = sold === "true";
 
+    if (keywords) {
+      const arrKeys = (keywords as string)
+        .split(",")
+        .map((elem) => elem.trim());
+      filter.keywords = { $in: arrKeys };
+    }
+
     // пагінація
     const skip = (Number(page) - 1) * Number(limit);
 
     //  запит з populate
-    const ntfs = await Nft.find(filter)
+    const nfts = await Nft.find(filter)
       .populate("authorId", "userName userMail")
       .skip(skip)
       .limit(Number(limit));
@@ -56,7 +70,7 @@ export const getNft = async (req: Request, res: Response) => {
       limit: Number(limit),
       total,
       pages: Math.ceil(total / Number(limit)),
-      items: ntfs,
+      items: nfts,
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -67,7 +81,18 @@ export const getNft = async (req: Request, res: Response) => {
 
 // -------------------------------------🧩 set NFT
 export const setNft = async (req: IRequest, res: Response) => {
-  let { name, imageUrl, authorId, galleryId, price, sold } = req.body;
+  let {
+    name,
+    description,
+    imageUrl,
+    authorId,
+    galleryId,
+    price,
+    sold,
+    likes,
+    views,
+    keywords,
+  } = req.body;
 
   // userId переданий міддлваром
   const userId = req.userId;
@@ -77,13 +102,21 @@ export const setNft = async (req: IRequest, res: Response) => {
       name,
       imageUrl,
     };
-
-    if (!name) return res.status(400).json({ message: "Name id required" });
-    if (!imageUrl)
-      return res.status(400).json({ message: "Image id required" });
-    if (!price) return res.status(400).json({ message: "Price id required" });
-
     if (!userId) return res.status(401).json({ message: "No access" });
+
+    // if (!name) return res.status(400).json({ message: "Name is required" });
+    // if (!imageUrl)
+    //   return res.status(400).json({ message: "Image is required" });
+
+    // // щоб не затирався 0 бо 0 спрацює як "falsey"
+    // if (price === undefined)
+    //   return res.status(400).json({ message: "Price is required" });
+
+    // if (!keywords || (Array.isArray(keywords) && keywords.length < 3))
+    //   return res.status(400).json({ message: "Need at least three keywords" });
+
+    // if (!description)
+    //   return res.status(400).json({ message: "Description is required" });
 
     newItem.authorId = new mongoose.Types.ObjectId(userId);
 
@@ -106,6 +139,15 @@ export const setNft = async (req: IRequest, res: Response) => {
       // if (sold === "true" || sold === true) newItem.sold = true;
       // if (sold === "false" || sold === false) newItem.sold = false;
     }
+
+    if (likes !== undefined) newItem.likes = Number(likes);
+    if (views !== undefined) newItem.views = Number(views);
+
+    newItem.description = description;
+
+    newItem.keywords = Array.isArray(keywords)
+      ? keywords.map((elem: string) => elem.trim())
+      : keywords.split(",").map((elem: string) => elem.trim());
 
     //  Створюємо новий документ
     const nft = new Nft(newItem);
@@ -208,6 +250,8 @@ export const setNftImage = async (req: ImageRequest, res: Response) => {
     const apikey = process.env.IMGBB_API_KEY;
     const file = req.file;
 
+    if (!req.userId) return res.status(403).json({ message: "No access" });
+
     if (!file) return res.status(400).json({ message: "File not found" });
 
     // Конвертація в base64
@@ -217,7 +261,8 @@ export const setNftImage = async (req: ImageRequest, res: Response) => {
     // FormData для Node.js
     const formData = new FormData();
     formData.append("image", base64);
-    formData.append("name", "nft-gallery-bd");
+    formData.append("name", `${req.body.name || ""}:nft-gallery-bd`);
+    // formData.append("name", "nft-gallery-bd");
 
     const response = await axios.post(
       `https://api.imgbb.com/1/upload?key=${apikey}`,

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 
-export const checkValidation = (
+const checkNftValidation = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -11,5 +11,8 @@ export const checkValidation = (
   if (!result.isEmpty()) {
     return res.status(400).json({ message: result.array()[0].msg });
   }
+
   next();
 };
+
+export default checkNftValidation;
