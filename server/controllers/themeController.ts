@@ -12,6 +12,8 @@ export const theme = async (req: IRequest, res: Response) => {
     const userId = req.userId;
     const theme = req.cookies.theme;
 
+    console.log(theme);
+
     if (!["light", "dark"].includes(theme)) {
       return res.status(400).json({ message: "Invalid theme" });
     }

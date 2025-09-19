@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ThemeContext } from '../../shared/lib/theme/ThemeContext';
 import Cookies from 'js-cookie';
 import { useAppSelector } from '../store/reduxHooks';
@@ -10,6 +10,7 @@ type Theme = 'dark' | 'light';
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const userTheme = useAppSelector((state) => state.user.data?.theme);
+  const mounted = useRef(false);
   const [setThemeInBase] = useSetThemeMutation();
   const [theme, setTheme] = useState<Theme>(
     () => (Cookies.get('theme') as Theme) || 'dark',
@@ -27,14 +28,17 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   /*
  запит на зміну теми в базі при переключенні на фронті
- і перевірка щоб не викликати повторний запит при монтуванні
+ і перевірка щоб не викликати повторний запит при першому монтуванні
   коли ще не завантажився юзер, або користувач- гість 
  */
   useEffect(() => {
     if (!userTheme) return;
-    if (userTheme !== theme) {
-      setThemeInBase();
+
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
     }
+    setThemeInBase();
   }, [theme, userTheme]);
 
   return (
