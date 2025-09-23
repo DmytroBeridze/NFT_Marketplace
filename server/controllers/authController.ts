@@ -5,7 +5,8 @@ import jwt from "jsonwebtoken";
 import { getEnvVar } from "../utils/getEnvVar";
 import Roles from "../models/Roles";
 import { validationResult } from "express-validator";
-import { IRequest } from "../types/role";
+import { IRequest } from "../types/types";
+import { handleControllerError } from "../utils/handleControllerError";
 
 // interface IRequest extends Request {
 //   userId?: string;
@@ -24,6 +25,7 @@ export const register = async (req: Request, res: Response) => {
     const { userName, userPass, userMail, userType } = req.body;
     const isUsed = await UserSchema.findOne({ userName });
     const isUsedMail = await UserSchema.findOne({ userMail });
+    // const role = await Roles.findOne("USER");
     const role = await Roles.findOne({ value: "USER" });
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(userPass, salt);
@@ -61,8 +63,10 @@ export const register = async (req: Request, res: Response) => {
     res.status(200).json({ userData, message: "registered" });
     // res.status(200).json({ newUser, message: "registered" });
   } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json("registrationError");
+    const errorMessage = "registrationError";
+    handleControllerError(error, res, errorMessage, 500);
+    // console.error("Registration error:", error);
+    // res.status(500).json({ message: "registrationError" });
     // res.status(500).json("User registration error");
   }
 };
@@ -122,8 +126,11 @@ export const login = async (req: Request, res: Response) => {
     //   message: "You are logged",
     // });
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ message: "loginError" });
+    const errorMessage = "loginError";
+    handleControllerError(error, res, errorMessage, 500);
+
+    // console.error("Login error:", error);
+    // res.status(500).json({ message: "loginError" });
     // res.status(500).json({ message: "User Login error" });
   }
 };
@@ -144,8 +151,11 @@ export const getMe = async (req: IRequest, res: Response) => {
     res.status(200).json({ userData, message: "accessGranted" });
     // res.status(200).json({ userData, message: "Access granted" });
   } catch (error) {
-    console.error("Get user error:", error);
-    res.status(404).json({ message: "accessDenied" });
+    const errorMessage = "accessDenied";
+    handleControllerError(error, res, errorMessage, 404);
+
+    // console.error("Get user error:", error);
+    // res.status(404).json({ message: "accessDenied" });
     // res.status(404).json("Access denied");
   }
 };

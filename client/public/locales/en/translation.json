@@ -40,7 +40,12 @@
       "data": {
         "registered": "User is registered",
         "accessGranted": "Access granted",
-        "logged": "You are logged"
+        "logged": "You are logged",
+
+        "imageUploaded": "Image uploaded",
+        "nftDeleted": "NFT deleted",
+        "nftChanged": "NFT changed",
+        "nftAdded": "NFT added"
       },
       "error": {
         "usernameExists": "Username already exists",
@@ -55,7 +60,18 @@
         "usernameIsRequired": "Username is required",
         "passwordIsRequired": "Password is required",
         "passwordLength": "Password should be at least 3 chars",
-        "unknownError": "Something went wrong"
+        "unknownError": "Something went wrong",
+
+        "internalServerError": "Internal Server Error",
+        "nftNotFound": "NFT not found",
+        "invalidNftId": "Invalid NFT ID",
+        "failedToUpdateNft": "Failed to update NFT",
+        "failedToDeleteNft": "Failed to delete NFT",
+        "failedToUploadImage": "Failed to update Image",
+        "fileNotFound": "File not found",
+        "failedToCreateNft": "Failed to create NFT",
+        "failedToGetNftList": "Failed to get NFT list",
+        "categoryNotFound": "Category not found"
       }
     }
   }

@@ -5,6 +5,8 @@ import cors from "cors";
 import authRouter from "./routes/authRouts";
 import themeRouter from "./routes/themeRouts";
 import nftRouter from "./routes/nftRouts";
+import categoriesRout from "./routes/categoriesRouts";
+import rolesRout from "./routes/roleRouts";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -42,6 +44,8 @@ app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/theme", themeRouter);
 app.use("/api/nfts", nftRouter);
+app.use("/api/category", categoriesRout);
+app.use("/api/roles", rolesRout);
 
 const start = async () => {
   try {

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getEnvVar } from "../utils/getEnvVar";
-import { IRequest, IRole } from "../types/role";
+import { IRequest, IRole } from "../types/types";
 
 // type Roles = "USER" | "ADMIN";
 // interface IRequest extends Request {

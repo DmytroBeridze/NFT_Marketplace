@@ -40,7 +40,12 @@
       "data": {
         "registered": "Користувач зареєстрований",
         "accessGranted": "Доступ надано",
-        "logged": "Ви увійшли"
+        "logged": "Ви увійшли",
+
+        "imageUploaded": "Зображення завантажене",
+        "nftDeleted": "NFT видалене",
+        "nftChanged": "NFT змінене",
+        "nftAdded": "NFT додана"
       },
       "error": {
         "usernameExists": "Ім'я користувача вже існує",
@@ -55,7 +60,18 @@
         "usernameIsRequired": "Ім'я користувача обов'язкове",
         "passwordIsRequired": "Пароль обов'язковий",
         "passwordLength": "Пароль повинен містити щонайменше 3 символи",
-        "unknownError": "Щось пішло не так"
+        "unknownError": "Щось пішло не так",
+
+        "internalServerError": "Внутрішня помилка сервера",
+        "nftNotFound": "NFT не знайдено",
+        "invalidNftId": "Невірний NFT ідентифікатор",
+        "failedToUpdateNft": "Помилка оновлення NFT",
+        "failedToDeleteNft": "Помилка видалення NFT",
+        "failedToUploadImage": "Помилка завантаження зображення",
+        "fileNotFound": "Файл не знайдено",
+        "failedToCreateNft": "Помилка створення NFT",
+        "failedToGetNftList": "Помилка завантаження списку NFT",
+        "categoryNotFound": "Категорія не знайдена"
       }
     }
   }

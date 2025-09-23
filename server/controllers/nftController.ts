@@ -9,19 +9,12 @@
 // 7. Повертає об’єкт із даними та параметрами сторінок у JSON.
 
 import { Request, Response } from "express";
-import Nft, { INft } from "../models/Ntf";
 import mongoose from "mongoose";
-import { IUser } from "../models/User";
-import { ImageRequest, IRequest } from "../types/role";
+import Nft, { INft } from "../models/Ntf";
+import { ImageRequest, IRequest } from "../types/types";
 import axios from "axios";
 import FormData from "form-data";
-
-// type Roles = "USER" | "ADMIN";
-
-// interface IRequest extends Request {
-//   userId?: string;
-//   roles?: Roles;
-// }
+import { handleControllerError } from "../utils/handleControllerError";
 
 // ---------------------------------🧩 get NFT
 export const getNft = async (req: Request, res: Response) => {
@@ -29,6 +22,7 @@ export const getNft = async (req: Request, res: Response) => {
     const {
       authorId,
       galleryId,
+      categoryId,
       sold,
       page = 1,
       limit = 12,
@@ -43,6 +37,8 @@ export const getNft = async (req: Request, res: Response) => {
       filter.authorId = new mongoose.Types.ObjectId(authorId as string);
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string))
       filter.galleryId = new mongoose.Types.ObjectId(galleryId as string);
+    if (categoryId && mongoose.Types.ObjectId.isValid(categoryId as string))
+      filter.category = new mongoose.Types.ObjectId(categoryId as string);
 
     if (sold !== undefined) filter.sold = sold === "true";
 
@@ -72,10 +68,15 @@ export const getNft = async (req: Request, res: Response) => {
       pages: Math.ceil(total / Number(limit)),
       items: nfts,
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).json({ error: error.message });
-    }
+  } catch (error: any) {
+    const errorMessage = "failedToGetNftList";
+    return handleControllerError(error, res, errorMessage);
+    // if (error.response) {
+    //   return res
+    //     .status(error.response.status)
+    //     .json({ error: error.response.data });
+    // }
+    // return res.status(500).json({ error: error.message });
   }
 };
 
@@ -85,6 +86,7 @@ export const setNft = async (req: IRequest, res: Response) => {
     name,
     description,
     imageUrl,
+    deleteImageUrl,
     authorId,
     galleryId,
     price,
@@ -92,17 +94,29 @@ export const setNft = async (req: IRequest, res: Response) => {
     likes,
     views,
     keywords,
+    categoryId,
   } = req.body;
 
   // userId переданий міддлваром
   const userId = req.userId;
 
+  // const categoryId = await Category.findOne({ _id: category });
+
   try {
     const newItem: Partial<INft> = {
       name,
       imageUrl,
+      deleteImageUrl,
+      description,
     };
-    if (!userId) return res.status(401).json({ message: "No access" });
+    if (!userId) return res.status(401).json({ message: "accessDenied" });
+
+    if (categoryId === null) newItem.category = undefined;
+
+    if (categoryId && mongoose.Types.ObjectId.isValid(categoryId)) {
+      newItem.category = new mongoose.Types.ObjectId(categoryId as string);
+    }
+    newItem.authorId = new mongoose.Types.ObjectId(userId);
 
     // if (!name) return res.status(400).json({ message: "Name is required" });
     // if (!imageUrl)
@@ -118,16 +132,9 @@ export const setNft = async (req: IRequest, res: Response) => {
     // if (!description)
     //   return res.status(400).json({ message: "Description is required" });
 
-    newItem.authorId = new mongoose.Types.ObjectId(userId);
-
-    //  Перевірка та конвертація authorId
-    // if (authorId && mongoose.Types.ObjectId.isValid(authorId as string)) {
-    //   newItem.authorId = new mongoose.Types.ObjectId(authorId as string);
-    // } else {
-    //   return res.status(400).json({ error: "Invalid authorId" });
-    // }
-
     //  Перевірка та конвертація galleryId
+    if (galleryId === null) newItem.galleryId = undefined;
+
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
       newItem.galleryId = new mongoose.Types.ObjectId(galleryId as string);
     }
@@ -143,8 +150,6 @@ export const setNft = async (req: IRequest, res: Response) => {
     if (likes !== undefined) newItem.likes = Number(likes);
     if (views !== undefined) newItem.views = Number(views);
 
-    newItem.description = description;
-
     newItem.keywords = Array.isArray(keywords)
       ? keywords.map((elem: string) => elem.trim())
       : keywords.split(",").map((elem: string) => elem.trim());
@@ -155,56 +160,96 @@ export const setNft = async (req: IRequest, res: Response) => {
     //  Зберігаємо у БД
     await nft.save();
 
-    res.status(201).json({ message: "item added", item: nft });
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).json({ error: error.message });
-    }
+    res.status(201).json({ message: "nftAdded", item: nft });
+  } catch (error: any) {
+    const errorMessage = "failedToCreateNft";
+    return handleControllerError(error, res, errorMessage);
+    // if (error.response) {
+    //   return res.status(error.response).json({ error: error.response.data });
+    // }
+    // return res.status(500).json({ error: error.message });
   }
 };
 
 // ------------------------------🧩 patch NFT
 export const patchNft = async (req: IRequest, res: Response) => {
   try {
-    const { name, imageUrl, galleryId, price } = req.body;
-    const { id } = req.params; // id NFT з URL
+    const {
+      name,
+      imageUrl,
+      galleryId,
+      price,
+      keywords,
+      description,
+      deleteImageUrl,
+    } = req.body;
 
-    // знаходимо nft
-    const nft = await Nft.findById(id);
-    if (!nft) return res.status(404).json({ message: "NFT not found" });
+    const { id } = req.params; // id NFT з URL
 
     // перевіряємо чи існує  id NFT з параметрів
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid NFT ID" });
+      return res.status(400).json({ message: "invalidNftId" });
     }
+
+    // знаходимо nft
+    const nft = await Nft.findById(id);
+    if (!nft) return res.status(404).json({ message: "nftNotFound" });
 
     //  перевіряємо  співвідношення authorId з nft та userId з міддлвар
-    if (nft.authorId?.toString() !== req.userId) {
-      return res.status(403).json({ message: "No access" });
+    const isAuthor = nft.authorId?.toString() == req.userId; //userId встановлений мідлваром
+    const isAdmin = req.roles?.includes("ADMIN");
+
+    if (!isAuthor && !isAdmin) {
+      return res.status(403).json({ message: "accessDenied" });
     }
 
+    // Нові дані
     const updateData: Partial<INft> = {};
-    if (name !== undefined) updateData.name = name;
-    if (imageUrl !== undefined) updateData.imageUrl = imageUrl;
-    if (price !== undefined) updateData.price = price;
 
+    // Тільки автор може змінювати ім'я, опис та зображення ,
+    if (isAuthor) {
+      if (name !== undefined) updateData.name = name;
+      if (imageUrl !== undefined) updateData.imageUrl = imageUrl;
+      if (deleteImageUrl !== undefined)
+        updateData.deleteImageUrl = deleteImageUrl;
+      if (description !== undefined) updateData.description = description;
+    }
+
+    if (keywords !== undefined) {
+      const keys = Array.isArray(keywords)
+        ? keywords.map((k: string) => k.trim())
+        : keywords.split(",").map((k: string) => k.trim());
+
+      if (keys.length >= 3) updateData.keywords = keys;
+    }
+
+    if (price !== undefined) updateData.price = Number(price);
+
+    // скидаємо галерею
     if (galleryId === null) {
       updateData.galleryId = undefined;
     }
+
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
       updateData.galleryId = new mongoose.Types.ObjectId(galleryId as string);
     }
+
     // патчимо дані
     const updatedNft = await Nft.findByIdAndUpdate(id, updateData, {
       new: true, // вертаємо вже оновлений документ
       runValidators: true, // mongoose перевірить дані за схемою навіть при update
     });
 
-    res.status(200).json({ message: "Element changed", item: updatedNft });
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).json({ error: error.message });
-    }
+    res.status(200).json({ message: "nftChanged", item: updatedNft });
+  } catch (error: any) {
+    const errorMessage = "failedToUpdateNft";
+    return handleControllerError(error, res, errorMessage);
+    // if (error.response) {
+    //   return res
+    //     .status(error.response.status)
+    //     .json({ message: error.response.data });
+    // }
+    // return res.status(500).json({ error: error.message });
   }
 };
 
@@ -220,27 +265,40 @@ export const deleteNFT = async (req: IRequest, res: Response) => {
 
     // перевіряємо чи існує  id NFT з параметрів
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid NFT ID" });
+      return res.status(400).json({ message: "invalidNftId" });
     }
 
     const nft = await Nft.findById(id);
+    const deleteImageUrl = nft?.deleteImageUrl;
 
-    if (!nft) return res.status(404).json({ message: "NFT not found" });
+    if (!nft) return res.status(404).json({ message: "nftNotFound" });
 
     //перевіряємо якщо юзер з nft не співпадає з юзером з req або якщо роль не ADMIN
     if (nft.authorId?.toString() !== userId && !req.roles?.includes("ADMIN")) {
-      return res.status(403).json({ message: "No access" });
+      return res.status(403).json({ message: "accessDenied" });
     }
 
     await nft.deleteOne();
+
     // const deletedNft = await Nft.findByIdAndDelete(id);
+
+    //?  ⚠️--- delete image in imageBB
+    // if (deleteImageUrl) {
+    //   console.log(deleteImageUrl);
+
+    //   await axios.get(deleteImageUrl);
+    // }
+    // res.status(500).json({
+    //   message: `Error deleting image from ImgBB`,
+    // });
+    //? ---------------------------
+
     return res
       .status(200)
-      .json({ message: "NFT deleted", item: nft.toObject() }); //вертаємо перетворюючи в об'єкт щоб забрати службові поля
-  } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ error: error.message });
-    }
+      .json({ message: "nftDeleted", item: nft.toObject() }); //вертаємо перетворюючи в об'єкт щоб забрати службові поля
+  } catch (error: any) {
+    const errorMessage = "failedToDeleteNft";
+    return handleControllerError(error, res, errorMessage);
   }
 };
 
@@ -250,9 +308,9 @@ export const setNftImage = async (req: ImageRequest, res: Response) => {
     const apikey = process.env.IMGBB_API_KEY;
     const file = req.file;
 
-    if (!req.userId) return res.status(403).json({ message: "No access" });
+    if (!req.userId) return res.status(403).json({ message: "accessDenied" });
 
-    if (!file) return res.status(400).json({ message: "File not found" });
+    if (!file) return res.status(400).json({ message: "fileNotFound" });
 
     // Конвертація в base64
     const base64 = file.buffer.toString("base64");
@@ -274,18 +332,22 @@ export const setNftImage = async (req: ImageRequest, res: Response) => {
     );
 
     const imageUrl = response.data.data.url;
+    const deleteImageUrl = response.data.data.delete_url;
     const imageTitle = response.data.data.title;
 
     return res
       .status(200)
-      .json({ message: "Image upload", imageUrl, imageTitle });
+      .json({ message: "imageUploaded", imageUrl, deleteImageUrl, imageTitle });
   } catch (error: any) {
-    if (error.response) {
-      return res
-        .status(error.response.status)
-        .json({ message: error.response.data });
-    }
-    return res.status(500).json({ message: error.message || "Unknown error" });
+    const errorMessage = "failedToUploadImage";
+    return handleControllerError(error, res, errorMessage);
+
+    // if (error.response) {
+    //   return res
+    //     .status(error.response.status)
+    //     .json({ message: error.response.data });
+    // }
+    // return res.status(500).json({ message: error.message || "Unknown error" });
   }
 };
 // export const setNftImage = async (req: ImageRequest, res: Response) => {

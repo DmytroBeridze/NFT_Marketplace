@@ -1,11 +1,26 @@
-import mongoose from "mongoose";
-import { IRole } from "../types/role";
+import mongoose, { Document } from "mongoose";
+import { IRole } from "../types/types";
 
 const { Schema } = mongoose;
+
+export interface IRoleDocument extends Document {
+  value: IRole;
+}
 
 // interface IRole {
 //   value: "USER" | "ADMIN" | "MODERATOR";
 // }
+
+// const RoleSchema = new Schema({
+//   value: {
+//     type: String,
+//     unique: true,
+//     required: true,
+//     default: "USER",
+//     enum: ["USER", "ADMIN", "MODERATOR"],
+//   },
+// });
+// export default mongoose.model("Roles", RoleSchema);
 
 const RoleSchema = new Schema({
   value: {
@@ -16,15 +31,4 @@ const RoleSchema = new Schema({
     enum: ["USER", "ADMIN", "MODERATOR"],
   },
 });
-export default mongoose.model("Roles", RoleSchema);
-
-// const RoleSchema = new Schema<IRole>({
-//   value: {
-//     type: String,
-//     unique: true,
-//     required: true,
-//     default: "USER",
-//     enum: ["USER", "ADMIN", "MODERATOR"],
-//   },
-// });
-// export default mongoose.model<IRole>("Roles", RoleSchema);
+export default mongoose.model<IRoleDocument>("Roles", RoleSchema);

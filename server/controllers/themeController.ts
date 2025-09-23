@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import User from "../models/User";
 import { log } from "console";
-import { IRequest } from "../types/role";
+import { IRequest } from "../types/types";
+import { handleControllerError } from "../utils/handleControllerError";
 
 // interface IRequest extends Request {
 //   userId?: string;
@@ -30,7 +31,10 @@ export const theme = async (req: IRequest, res: Response) => {
 
     res.json({ message: "Theme updated", theme });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Server error" });
+    //  const errorMessage = "loginError";
+    handleControllerError(error, res);
+
+    // console.log(error);
+    // res.status(500).json({ message: "Server error" });
   }
 };
