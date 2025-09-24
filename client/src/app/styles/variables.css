@@ -67,10 +67,35 @@
   --font-size-2xl: 3.188rem; /* 51px */
   --font-size-3xl: 4.188rem; /* 67px */
 
-  --responsive-size-sm: clamp(0.625rem, 0.5rem + 0.63vw, 1rem);
-  --responsive-size-ms: clamp(0.625rem, 0.417rem + 1.04vw, 1.25rem);
-  --responsive-size-md: clamp(1rem, 0.878rem + 0.61vw, 1.375rem);
-  /* --responsive-size-ms: clamp(0.625rem, 0.417rem + 1.04vw, 1.25rem); */
+  --responsive-size-sm: clamp(
+    0.625rem,
+    0.5rem + 0.63vw,
+    1rem
+  ); /*от 10 px до 16*/
+
+  --responsive-size-ms: clamp(
+    0.625rem,
+    0.417rem + 1.04vw,
+    1.25rem
+  ); /* от 10 px до 20 px*/
+
+  --responsive-size-md: clamp(
+    1rem,
+    0.878rem + 0.61vw,
+    1.375rem
+  ); /*от 16 px до 22 px*/
+
+  --hero-counter-number-size: clamp(
+    1.375rem,
+    1.253rem + 0.61vw,
+    1.75rem
+  ); /*от 16 px до 28 px*/
+
+  --hero-tytle-size: clamp(
+    1.75rem,
+    0.762rem + 4.22vw,
+    4.188rem
+  ); /*от 28 px до 67 px*/
 
   /* spacings */
   --gap-nav-responsive: clamp(0.125rem, -0.667rem + 3.96vw, 2.5rem);

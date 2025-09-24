@@ -28,9 +28,10 @@ function App() {
         <OuterContainer>
           <Header />
           <main>
-            <Outlet />
             {/* <div id="burger-root"></div> */}
-            {/* <InnerContainer>{<div>Content</div>}</InnerContainer> */}
+            {/* <InnerContainer> */}
+            <Outlet />
+            {/* </InnerContainer> */}
           </main>
         </OuterContainer>
       </AppProviders>

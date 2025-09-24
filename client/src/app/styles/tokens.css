@@ -184,14 +184,27 @@
   font-size: var(--font-size-3xl); /* 67px */
 }
 
+/*от 10 px до 16*/
 .responsive-size-sm {
   font-size: var(--responsive-size-sm);
 }
+
+/* от 10 px до 20 px*/
 .responsive-size-ms {
   font-size: var(--responsive-size-ms);
 }
+
+/*от 16 px до 22 px*/
 .responsive-size-md {
   font-size: var(--responsive-size-md);
+}
+
+/* счеичик в HeroContent */
+.hero-counter-number-size {
+  font-size: var(--hero-counter-number-size);
+}
+.hero-tytle-size {
+  font-size: var(--hero-tytle-size);
 }
 
 /*-----------------------spacings  */
