@@ -201,8 +201,11 @@
 
 /* счеичик в HeroContent */
 .hero-counter-number-size {
-  font-size: var(--hero-counter-number-size);
+  font-size: var(--padding-10-20-responsive);
 }
+/* .hero-counter-number-size {
+  font-size: var(--hero-counter-number-size);
+} */
 .hero-tytle-size {
   font-size: var(--hero-tytle-size);
 }
@@ -211,6 +214,12 @@
 .gap-nav-responsive {
   gap: var(--gap-nav-responsive);
 }
+.padding-10-20-responsive {
+  padding: var(--hero-counter-number-size);
+}
+/* .padding-10-20-responsive {
+  padding: var(--padding-10-20-responsive);
+} */
 
 /* ---------------------ua font correction */
 .lang-ua {
@@ -247,6 +256,9 @@
   .bg-burger-hover-background-color {
     background-color: transparent !important;
     padding: 0 1rem;
+  }
+  .hero-counter-number-size {
+    font-size: var(--hero-counter-number-size);
   }
 }
 

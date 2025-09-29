@@ -85,6 +85,12 @@
     1.375rem
   ); /*от 16 px до 22 px*/
 
+  --hero-counter-number-size-10-28: clamp(
+    0.625rem,
+    0.258rem + 1.84vw,
+    1.75rem
+  ); /*от 10 px до 28 px*/
+
   --hero-counter-number-size: clamp(
     1.375rem,
     1.253rem + 0.61vw,
@@ -101,5 +107,7 @@
   --gap-nav-responsive: clamp(0.125rem, -0.667rem + 3.96vw, 2.5rem);
   /* --gap-nav-responsive: clamp(0.313rem, -0.417rem + 3.65vw, 2.5rem); */
 
-  /* border */
+  /* padding */
+  --padding-10-20-responsive: clamp(0.625rem, 0.421rem + 1.02vw, 1.25rem)
+    /* border */;
 }

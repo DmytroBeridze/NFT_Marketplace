@@ -6,6 +6,7 @@ export interface IUser {
   userName: string;
   userMail: string;
   password: string;
+  avatar: string;
   userType: "author" | "client";
   theme: "light" | "dark";
   roles: mongoose.Types.ObjectId[];
@@ -29,6 +30,9 @@ const UserSchema = new Schema<IUser>(
     password: {
       type: String,
       required: true,
+    },
+    avatar: {
+      type: String,
     },
     userType: {
       type: String,
