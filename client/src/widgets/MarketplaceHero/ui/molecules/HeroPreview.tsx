@@ -7,10 +7,14 @@ import { NavLink } from 'react-router-dom';
 export const HeroPreview = () => {
   return (
     <div
-      className="basis-1/2 w-full h-full max-w-[519px]
+      className="basis-1/2 w-full h-full 
      aspect-square bg-secondary-background-color rounded-2xl
       flex flex-col  justify-center items-start overflow-clip
       shadow-secondary"
+      //   className="basis-1/2 w-full h-full max-w-[519px]
+      //  aspect-square bg-secondary-background-color rounded-2xl
+      //   flex flex-col  justify-center items-start overflow-clip
+      //   shadow-secondary"
     >
       {/* Картинка */}
       <div
@@ -35,9 +39,13 @@ export const HeroPreview = () => {
       </div>
 
       {/* Text */}
-      <div className="padding-10-20-responsive   text-primary-text-color flex flex-col gap-2.5">
-        {/* <div className="p-5 h-[21%]  text-primary-text-color flex flex-col gap-2.5"> */}
-        <Text font="font-work-sans-semibold" className="responsive-size-md">
+      <div className="padding-md-responsive  text-primary-text-color flex flex-col gap-2.5">
+        {/* <div className="padding-10-20-responsive   text-primary-text-color flex flex-col gap-2.5"> */}
+        <Text
+          font="font-work-sans-semibold"
+          className="heroContent-text-responsive"
+        >
+          {/* <Text font="font-work-sans-semibold" className="responsive-size-md"> */}
           Space Walking
         </Text>
 
@@ -57,7 +65,7 @@ export const HeroPreview = () => {
             to={'http://localhost:5173/rankings'}
             className="flex items-center"
           >
-            <Text className="font-work-sans-regular responsive-size-sm ">
+            <Text className="font-work-sans-regular heroContent-author-responsive ">
               Animakid
             </Text>
           </NavLink>

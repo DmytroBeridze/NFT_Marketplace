@@ -23,6 +23,7 @@ export const HeaderActions = () => {
         onClick={loginLogoutHandler}
         // onClick={() => openHandler('authorization')}
         className="py-3 px-4  lg:py-5 lg:px-7 flex gap-3 items-center whitespace-nowrap "
+        radius="xl"
       >
         {token ? (
           <Icon

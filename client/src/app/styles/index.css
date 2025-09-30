@@ -5,3 +5,6 @@
 @import './media.css';
 
 @import 'tailwindcss';
+
+/* components */
+@import './components/marketplaceHero/index.css';

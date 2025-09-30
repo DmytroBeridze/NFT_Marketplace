@@ -1,0 +1,60 @@
+@import './tokens.css';
+
+.hero-counter-number-size {
+  font-size: var(--hero-counter-number-size);
+}
+.hero-tytle-size {
+  font-size: var(--hero-tytle-size);
+}
+
+/*от  870px – до 1300px */
+.responsive-size-md-md {
+  font-size: var(--responsive-size-md-md);
+}
+/*----------------------spacings*/
+.heroContent-gap-responsive {
+  gap: clamp(0.625rem, 0.258rem + 1.84vw, 1.75rem);
+  /* gap: 1.75rem; */
+}
+
+/* ---------------------adaptive */
+.marketplaceHero-responsive {
+  @media (min-width: 834px) {
+    flex-direction: row;
+  }
+}
+
+.padding-md-responsive {
+  padding: var(--hero-image-text-padding-sm);
+
+  @media (min-width: 834px) {
+    padding: var(--hero-image-text-padding-md);
+  }
+}
+/* image name */
+.heroContent-text-responsive {
+  font-size: var(--responsive-size-md-sm);
+
+  @media (min-width: 834px) {
+    font-size: var(--responsive-size-md-md);
+  }
+}
+/* author name*/
+.heroContent-author-responsive {
+  font-size: var(--responsive-size-sm-sm);
+
+  @media (min-width: 834px) {
+    font-size: var(--responsive-size-sm);
+  }
+}
+
+.marketplaceHero-button-smallSize-hidden {
+  @media (max-width: 834px) {
+    display: none;
+  }
+}
+.marketplaceHero-button-bigSize-hidden {
+  @media (min-width: 834px) {
+    display: none;
+  }
+}
