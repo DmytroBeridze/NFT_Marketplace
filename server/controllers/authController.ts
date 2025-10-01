@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import UserSchema from "../models/User";
+import User from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { getEnvVar } from "../utils/getEnvVar";
@@ -23,8 +23,8 @@ import { handleControllerError } from "../utils/handleControllerError";
 export const register = async (req: Request, res: Response) => {
   try {
     const { userName, userPass, userMail, userType } = req.body;
-    const isUsed = await UserSchema.findOne({ userName });
-    const isUsedMail = await UserSchema.findOne({ userMail });
+    const isUsed = await User.findOne({ userName });
+    const isUsedMail = await User.findOne({ userMail });
     // const role = await Roles.findOne("USER");
     const role = await Roles.findOne({ value: "USER" });
     const salt = bcrypt.genSaltSync(10);
@@ -48,7 +48,7 @@ export const register = async (req: Request, res: Response) => {
     //   return res.status(400).json({ message: result.array()[0].msg });
     // }
 
-    const newUser = new UserSchema({
+    const newUser = new User({
       userName: userName,
       password: hash,
       userMail: userMail,
@@ -76,9 +76,7 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { userName, userPass } = req.body;
-    const user = await UserSchema.findOne({ userName })
-      .populate("roles")
-      .lean(); //lean приводить до об'єкта інакше Mongoose поверне Document[] і його не можна перебрати мапом   при встановленні в токен
+    const user = await User.findOne({ userName }).populate("roles").lean(); //lean приводить до об'єкта інакше Mongoose поверне Document[] і його не можна перебрати мапом   при встановленні в токен
     const JWT_SECRET = getEnvVar("JWT_SECRET");
     // const result = validationResult(req);
 
@@ -141,7 +139,9 @@ export const login = async (req: Request, res: Response) => {
 // ⚠️IRequest розштрює Response тому що в req записується id міддлваром в authRouts
 export const getMe = async (req: IRequest, res: Response) => {
   try {
-    const user = await UserSchema.findById(req.userId).populate("roles");
+    const user = await User.findById(req.userId)
+      .populate("roles")
+      .populate("gallery");
     if (!user || !user.password) {
       return res.status(404).json({ message: "userNotFound" });
       // return res.status(404).json({ message: "User not found" });

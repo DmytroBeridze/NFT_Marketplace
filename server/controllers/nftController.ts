@@ -109,6 +109,7 @@ export const setNft = async (req: IRequest, res: Response) => {
       deleteImageUrl,
       description,
     };
+
     if (!userId) return res.status(401).json({ message: "accessDenied" });
 
     if (categoryId === null) newItem.category = undefined;
@@ -133,10 +134,10 @@ export const setNft = async (req: IRequest, res: Response) => {
     //   return res.status(400).json({ message: "Description is required" });
 
     //  Перевірка та конвертація galleryId
-    if (galleryId === null) newItem.galleryId = undefined;
+    if (galleryId === null) newItem.gallery = undefined;
 
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
-      newItem.galleryId = new mongoose.Types.ObjectId(galleryId as string);
+      newItem.gallery = new mongoose.Types.ObjectId(galleryId as string);
     }
 
     //  Приведення типів
@@ -227,11 +228,11 @@ export const patchNft = async (req: IRequest, res: Response) => {
 
     // скидаємо галерею
     if (galleryId === null) {
-      updateData.galleryId = undefined;
+      updateData.gallery = undefined;
     }
 
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
-      updateData.galleryId = new mongoose.Types.ObjectId(galleryId as string);
+      updateData.gallery = new mongoose.Types.ObjectId(galleryId as string);
     }
 
     // патчимо дані
