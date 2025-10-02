@@ -108,6 +108,8 @@ export const setNft = async (req: IRequest, res: Response) => {
       imageUrl,
       deleteImageUrl,
       description,
+      likes: 0,
+      views: 0,
     };
 
     if (!userId) return res.status(401).json({ message: "accessDenied" });
@@ -148,8 +150,8 @@ export const setNft = async (req: IRequest, res: Response) => {
       // if (sold === "false" || sold === false) newItem.sold = false;
     }
 
-    if (likes !== undefined) newItem.likes = Number(likes);
-    if (views !== undefined) newItem.views = Number(views);
+    // if (likes !== undefined) newItem.likes = Number(likes);
+    // if (views !== undefined) newItem.views = Number(views);
 
     newItem.keywords = Array.isArray(keywords)
       ? keywords.map((elem: string) => elem.trim())
@@ -183,6 +185,7 @@ export const patchNft = async (req: IRequest, res: Response) => {
       keywords,
       description,
       deleteImageUrl,
+      categoryId,
     } = req.body;
 
     const { id } = req.params; // id NFT з URL
@@ -233,6 +236,15 @@ export const patchNft = async (req: IRequest, res: Response) => {
 
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
       updateData.gallery = new mongoose.Types.ObjectId(galleryId as string);
+    }
+
+    // скидаємо категорії
+    if (categoryId === null) {
+      updateData.category = undefined;
+    }
+
+    if (categoryId && mongoose.Types.ObjectId.isValid(categoryId as string)) {
+      updateData.category = new mongoose.Types.ObjectId(categoryId as string);
     }
 
     // патчимо дані

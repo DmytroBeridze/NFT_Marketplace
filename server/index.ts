@@ -8,6 +8,7 @@ import nftRouter from "./routes/nftRouts";
 import categoriesRout from "./routes/categoriesRouts";
 import rolesRout from "./routes/roleRouts";
 import galleriesRout from "./routes/galleryRouts";
+import updateNftStats from "./routes/updateNftStatsRouts";
 
 import cookieParser from "cookie-parser";
 
@@ -49,6 +50,7 @@ app.use("/api/nfts", nftRouter);
 app.use("/api/category", categoriesRout);
 app.use("/api/roles", rolesRout);
 app.use("/api/galleries", galleriesRout);
+app.use("/api/updateNftStats", updateNftStats);
 
 const start = async () => {
   try {
