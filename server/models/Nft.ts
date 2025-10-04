@@ -11,7 +11,7 @@ export interface INft {
   price?: number;
   sold?: boolean;
   description?: string;
-  likes?: number;
+  likes?: mongoose.Types.ObjectId[];
   views?: number;
   keywords?: string[];
 }
@@ -59,8 +59,9 @@ export const NftSchema = new Schema<NftDocument>(
       default: false,
     },
     likes: {
-      type: Number,
-      default: 0,
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
     },
     views: {
       type: Number,

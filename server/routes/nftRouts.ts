@@ -23,7 +23,11 @@ const upload = multer({
 });
 
 // http://localhost:3002/api/nfts
+
+//-------------------------getNft
 router.get("/", getNft);
+
+// ----------------------set Nft
 router.post(
   "/",
   checkAuth,
@@ -53,6 +57,8 @@ router.post(
   ],
   setNft
 );
+
+//------------------ patch Nft
 router.patch(
   "/:id",
   checkAuth,
@@ -87,7 +93,12 @@ router.patch(
   ],
   patchNft
 );
+
+// ------------------------------delete Nft
+
 router.delete("/:id", checkAuth, deleteNFT);
+
+// ------------------------image upload
 router.post(
   "/imgUpload",
 

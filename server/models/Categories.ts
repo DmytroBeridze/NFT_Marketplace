@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { ICategory } from "../types/types";
 const { Schema } = mongoose;
 
-const CategoryShema = new Schema({
+const CategoryShema = new Schema<ICategory>({
   name: {
     type: String,
     enum: [

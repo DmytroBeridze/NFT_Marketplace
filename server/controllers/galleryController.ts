@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Gallery from "../models/Gallery";
-import Nft from "../models/Ntf";
+import Nft from "../models/Nft";
 import { handleControllerError } from "../utils/handleControllerError";
 import mongoose from "mongoose";
 

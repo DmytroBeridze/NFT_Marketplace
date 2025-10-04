@@ -10,7 +10,7 @@
 
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import Nft, { INft } from "../models/Ntf";
+import Nft, { INft } from "../models/Nft";
 import { ImageRequest, IRequest } from "../types/types";
 import axios from "axios";
 import FormData from "form-data";
@@ -108,7 +108,8 @@ export const setNft = async (req: IRequest, res: Response) => {
       imageUrl,
       deleteImageUrl,
       description,
-      likes: 0,
+      likes: [],
+      // likes: 0,
       views: 0,
     };
 
