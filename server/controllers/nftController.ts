@@ -10,7 +10,7 @@
 
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import Nft, { INft } from "../models/Ntf";
+import Nft, { INft } from "../models/Nft";
 import { ImageRequest, IRequest } from "../types/types";
 import axios from "axios";
 import FormData from "form-data";
@@ -108,7 +108,11 @@ export const setNft = async (req: IRequest, res: Response) => {
       imageUrl,
       deleteImageUrl,
       description,
+      likes: [],
+      // likes: 0,
+      views: 0,
     };
+
     if (!userId) return res.status(401).json({ message: "accessDenied" });
 
     if (categoryId === null) newItem.category = undefined;
@@ -133,10 +137,10 @@ export const setNft = async (req: IRequest, res: Response) => {
     //   return res.status(400).json({ message: "Description is required" });
 
     //  Перевірка та конвертація galleryId
-    if (galleryId === null) newItem.galleryId = undefined;
+    if (galleryId === null) newItem.gallery = undefined;
 
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
-      newItem.galleryId = new mongoose.Types.ObjectId(galleryId as string);
+      newItem.gallery = new mongoose.Types.ObjectId(galleryId as string);
     }
 
     //  Приведення типів
@@ -147,8 +151,8 @@ export const setNft = async (req: IRequest, res: Response) => {
       // if (sold === "false" || sold === false) newItem.sold = false;
     }
 
-    if (likes !== undefined) newItem.likes = Number(likes);
-    if (views !== undefined) newItem.views = Number(views);
+    // if (likes !== undefined) newItem.likes = Number(likes);
+    // if (views !== undefined) newItem.views = Number(views);
 
     newItem.keywords = Array.isArray(keywords)
       ? keywords.map((elem: string) => elem.trim())
@@ -182,6 +186,7 @@ export const patchNft = async (req: IRequest, res: Response) => {
       keywords,
       description,
       deleteImageUrl,
+      categoryId,
     } = req.body;
 
     const { id } = req.params; // id NFT з URL
@@ -227,11 +232,20 @@ export const patchNft = async (req: IRequest, res: Response) => {
 
     // скидаємо галерею
     if (galleryId === null) {
-      updateData.galleryId = undefined;
+      updateData.gallery = undefined;
     }
 
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
-      updateData.galleryId = new mongoose.Types.ObjectId(galleryId as string);
+      updateData.gallery = new mongoose.Types.ObjectId(galleryId as string);
+    }
+
+    // скидаємо категорії
+    if (categoryId === null) {
+      updateData.category = undefined;
+    }
+
+    if (categoryId && mongoose.Types.ObjectId.isValid(categoryId as string)) {
+      updateData.category = new mongoose.Types.ObjectId(categoryId as string);
     }
 
     // патчимо дані

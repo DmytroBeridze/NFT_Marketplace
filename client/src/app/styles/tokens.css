@@ -199,14 +199,6 @@
   font-size: var(--responsive-size-md);
 }
 
-/* счеичик в HeroContent */
-.hero-counter-number-size {
-  font-size: var(--hero-counter-number-size);
-}
-.hero-tytle-size {
-  font-size: var(--hero-tytle-size);
-}
-
 /*-----------------------spacings  */
 .gap-nav-responsive {
   gap: var(--gap-nav-responsive);
@@ -217,7 +209,6 @@
   transform: scale(0.95);
   display: inline-block;
 }
-
 /* ---------------------adaptive */
 .navigation-responsive {
   @media (min-width: 834px) {

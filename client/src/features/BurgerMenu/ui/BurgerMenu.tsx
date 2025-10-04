@@ -82,7 +82,6 @@ export const BurgerMenu = ({ children }: burgerMenuProps) => {
           </div>
         )}
       </TransitionWrapper>
-      ,
     </>,
     root,
   );

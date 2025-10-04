@@ -6,12 +6,12 @@ export interface INft {
   imageUrl?: string;
   deleteImageUrl?: string;
   authorId?: mongoose.Types.ObjectId;
-  galleryId?: mongoose.Types.ObjectId;
+  gallery?: mongoose.Types.ObjectId;
   category?: mongoose.Types.ObjectId;
   price?: number;
   sold?: boolean;
   description?: string;
-  likes?: number;
+  likes?: mongoose.Types.ObjectId[];
   views?: number;
   keywords?: string[];
 }
@@ -42,7 +42,7 @@ export const NftSchema = new Schema<NftDocument>(
       ref: "User",
       required: true,
     },
-    galleryId: {
+    gallery: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Gallery",
     },
@@ -59,8 +59,9 @@ export const NftSchema = new Schema<NftDocument>(
       default: false,
     },
     likes: {
-      type: Number,
-      default: 0,
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
     },
     views: {
       type: Number,
@@ -80,5 +81,6 @@ export const NftSchema = new Schema<NftDocument>(
 NftSchema.index({ authorId: 1 });
 NftSchema.index({ keywords: 1 });
 NftSchema.index({ category: 1 });
+NftSchema.index({ gallery: 1 });
 // NftSchema.index({ keywords: "text" });
 export default mongoose.model<NftDocument>("Nft", NftSchema);

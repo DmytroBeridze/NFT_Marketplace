@@ -29,6 +29,7 @@ export const BurgerActions = () => {
         <Button
           variant="secondary"
           className="py-3 px-6  lg:py-5 lg:px-7 flex gap-3 items-center whitespace-nowrap  "
+          radius="xl"
           onClick={loginLogoutHandler}
         >
           {token ? (

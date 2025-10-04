@@ -22,6 +22,7 @@ export interface IRequest extends Request {
   roles?: IRole[];
   categoryId?: string;
 }
+
 export interface ImageRequest extends Request {
   file?: any;
   userId?: string;
