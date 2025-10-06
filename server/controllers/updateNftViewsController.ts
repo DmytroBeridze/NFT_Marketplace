@@ -17,15 +17,14 @@ export const updateNftViews = async (req: StatsRequest, res: Response) => {
     //   return res.status(400).json("Invalid NFT ID");
     // }
 
-    if (!userId)
-      return res.status(401).json({ message: "User not registered" });
+    if (!userId) return res.status(401).json({ message: "UserNotRegistered" });
 
     const nft = await Nft.findById(nftId);
-    if (!nft) return res.status(404).json({ message: "Nft not found" });
+    if (!nft) return res.status(404).json({ message: "nftNotFound" });
 
     // перевірка , якщо це автор то не відображаються перегляди
     if (nft?.authorId?.toString() === userId.toString()) {
-      return res.status(403).json({ message: "Access denied" });
+      return res.status(403).json({ message: "accessDenied" });
     }
 
     const updateData: any = {};
@@ -44,9 +43,9 @@ export const updateNftViews = async (req: StatsRequest, res: Response) => {
     //   { $inc: updateData },
     //   { new: true }
     // );
-    res.status(200).json({ message: "Nfs updated", updatedNft });
+    res.status(200).json({ message: "NftUpdated", updatedNft });
   } catch (error) {
-    const errorMessage = "Nfs not updated";
+    const errorMessage = "NftNotUpdated";
     handleControllerError(error, res, errorMessage);
   }
 };

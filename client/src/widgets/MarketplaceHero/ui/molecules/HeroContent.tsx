@@ -1,8 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../../../shared/ui/atoms/Button';
 import { Icon } from '../../../../shared/ui/atoms/Icon';
 import { Text } from '../../../../shared/ui/atoms/Text';
 
 export const HeroContent = () => {
+  const { t } = useTranslation('heroContent');
+  const { t: tt } = useTranslation('translation');
   return (
     <div className="basis-1/2 flex flex-col heroContent-gap-responsive">
       <Text
@@ -11,7 +14,7 @@ export const HeroContent = () => {
         // size="t-text-3xl"
         Element="h1"
       >
-        Discover digital art & Collect NFTs
+        {t('heroTitle')}
       </Text>
       <Text
         className="text-primary-text-color px-2.5 leading-[160%] responsive-size-md-md"
@@ -19,8 +22,7 @@ export const HeroContent = () => {
         size="t-text-md"
         Element="p"
       >
-        NFT marketplace UI created with Anima for Figma. Collect, buy and sell
-        art from more than 20k NFT artists.
+        {t('heroDesc')}
       </Text>
 
       {/* button */}
@@ -35,7 +37,7 @@ export const HeroContent = () => {
           font="font-work-sans-semibold"
           className="static-text-white-color"
         >
-          Get Started
+          {tt('button.getStarted')}
         </Text>
       </Button>
       {/* CounterStat */}
@@ -49,9 +51,10 @@ export const HeroContent = () => {
             170k+
           </Text>
           <Text Element="span" size="t-text-md" font="font-work-sans-regular">
-            TotalSale
+            {t('totalSale')}
           </Text>
         </div>
+
         <div className=" basis-1/3 ">
           <Text
             Element="h4"
@@ -61,9 +64,10 @@ export const HeroContent = () => {
             170k+
           </Text>
           <Text Element="span" size="t-text-md" font="font-work-sans-regular">
-            Artists
+            {t('artists')}
           </Text>
         </div>
+
         <div className=" basis-1/3 ">
           <Text
             Element="h4"
@@ -73,7 +77,7 @@ export const HeroContent = () => {
             170k+
           </Text>
           <Text Element="span" size="t-text-md" font="font-work-sans-regular">
-            Images
+            {t('images')}
           </Text>
         </div>
       </div>

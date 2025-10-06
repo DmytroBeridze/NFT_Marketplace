@@ -13,10 +13,11 @@ i18n
   .init({
     // lng: 'en', // Язык по умолчанию
     fallbackLng: 'en', // Запасной язык, если ключ не найден
-
+    ns: ['heroContent', 'translation'],
     backend: {
       // Шаблон пути, откуда загружаются переводы
-      loadPath: '/locales/{{lng}}/translation.json',
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
+      // loadPath: '/locales/{{lng}}/translation.json',
     },
 
     interpolation: {

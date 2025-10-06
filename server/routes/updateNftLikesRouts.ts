@@ -8,7 +8,7 @@ const router = express.Router();
 // --------------guest patch
 router.patch(
   "/:nftId",
-  [param("nftId").isMongoId().withMessage("Invalid NFT ID")],
+  [param("nftId").isMongoId().withMessage("invalidNftId")],
   checkAuth,
   updateLikes
 );

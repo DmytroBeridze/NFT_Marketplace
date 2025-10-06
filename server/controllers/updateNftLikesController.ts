@@ -14,8 +14,7 @@ export const updateLikes = async (req: StatsRequest, res: Response) => {
     const { nftId } = req.params;
     // const { likes, views } = req.body;
 
-    if (!userId)
-      return res.status(401).json({ message: "User not registered" });
+    if (!userId) return res.status(401).json({ message: "UserNotRegistered" });
 
     //!  ----------перевірка в роуті в міддлварі
     // if (!mongoose.Types.ObjectId.isValid(nftId)) {
@@ -23,11 +22,11 @@ export const updateLikes = async (req: StatsRequest, res: Response) => {
     // }
 
     const nft = await Nft.findById(nftId);
-    if (!nft) return res.status(404).json({ message: "Nft not found" });
+    if (!nft) return res.status(404).json({ message: "nftNotFound" });
 
     // перевірка , якщо це автор то він не має права ставити лайки
     if (nft?.authorId?.toString() === userId.toString()) {
-      return res.status(403).json({ message: "Access denied" });
+      return res.status(403).json({ message: "accessDenied" });
     }
 
     const userIdObj = new mongoose.Types.ObjectId(userId);
@@ -47,13 +46,13 @@ export const updateLikes = async (req: StatsRequest, res: Response) => {
     await nft.populate("likes", "userName _id avatar");
 
     res.status(200).json({
-      message: "Nfs updated",
+      message: "NftUpdated",
       updatedNft: nft,
       interestedUsers: nft.likes,
     });
     // .json({ message: "Nfs updated", updatedNft, interestedUsers: nft.likes });
   } catch (error) {
-    const errorMessage = "Nfs not updated";
+    const errorMessage = "NftNotUpdated";
     handleControllerError(error, res, errorMessage);
   }
 };
