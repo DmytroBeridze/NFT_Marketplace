@@ -5,14 +5,16 @@ interface useTranslateProps {
   translateKey: string;
   options?: Record<string, unknown>;
   returnObjects?: boolean;
+  document?: string;
 }
 
 export const useTranslate = <T = string>({
   translateKey,
   options = {},
   returnObjects = false,
+  document = undefined,
 }: useTranslateProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(document);
   const lang = i18n.language;
   const translateVariables = t(translateKey, {
     returnObjects: returnObjects,
