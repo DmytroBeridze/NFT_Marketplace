@@ -12,6 +12,9 @@
   font-size: var(--responsive-size-md-md);
 }
 /*----------------------spacings*/
+.hero-padding-responsive {
+  padding: var(--hero-padding) 0;
+}
 .heroContent-gap-responsive {
   gap: clamp(0.625rem, 0.258rem + 1.84vw, 1.75rem);
   /* gap: 1.75rem; */
@@ -45,6 +48,30 @@
 
   @media (min-width: 834px) {
     font-size: var(--responsive-size-sm);
+  }
+}
+.heroContent-heroactionBlock-responsive {
+  width: 100%;
+  @media (max-width: 340px) {
+    align-items: center;
+  }
+}
+.heroContent-statistics-responsive {
+  @media (max-width: 340px) {
+    max-width: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+  }
+}
+.heroContent-Statistics-elements-responsive {
+  @media (max-width: 340px) {
+    max-width: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+
+    gap: 20px;
   }
 }
 

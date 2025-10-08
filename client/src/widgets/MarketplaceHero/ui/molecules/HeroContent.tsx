@@ -1,14 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Button } from '../../../../shared/ui/atoms/Button';
-import { Icon } from '../../../../shared/ui/atoms/Icon';
 import { Text } from '../../../../shared/ui/atoms/Text';
 import { useTranslate } from '../../../../shared/lib/i18n';
-
-type Statistics = {
-  totalSale: number;
-  artists: number;
-  images: number;
-};
+import { StatisticItem } from './StatisticItem';
+import { ButtonWithIcon } from './ButtonWithIcon';
+import type { Statistics } from '../../model';
 
 export const HeroContent = () => {
   const { t } = useTranslation('heroContent');
@@ -27,15 +22,6 @@ export const HeroContent = () => {
   });
 
   const statisticsArr = Object.entries(statisticsName.translateVariables);
-
-  // !-------------винести і змерджити гілки
-  const formatter = (num: number) => {
-    if (num > 10000 && num < 1000000) {
-      return Math.floor(num / 1000) + 'k+';
-    } else if (num >= 1000000) {
-      return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+';
-    } else return num.toString();
-  };
 
   return (
     <div className="basis-1/2 flex flex-col heroContent-gap-responsive">
@@ -57,42 +43,22 @@ export const HeroContent = () => {
       </Text>
 
       {/* button */}
-      <Button
+      <ButtonWithIcon
         className="py-5 px-12 max-w-[224px] flex marketplaceHero-button-smallSize-hidden"
         radius="xl"
+        onClick={() => console.log('Hero click')}
       >
-        <Icon name="rocket-icon" className="mr-3" size={20} />
-        <Text
-          Element="span"
-          size="t-text-sm"
-          font="font-work-sans-semibold"
-          className="static-text-white-color"
-        >
-          {tt('button.getStarted')}
-        </Text>
-      </Button>
+        {tt('button.getStarted')}
+      </ButtonWithIcon>
 
       {/* CounterStat */}
-      <div className="flex gap-7  text-primary-text-color marketplaceHero-button-smallSize-hidden">
+      <div
+        className="flex gap-7  text-primary-text-color
+       marketplaceHero-button-smallSize-hidden"
+      >
         {statisticsArr.map(([key, val]) => {
-          return (
-            <div className=" basis-1/3 " key={key}>
-              <Text
-                Element="h4"
-                font="font-space-mono-bold"
-                className="hero-counter-number-size"
-              >
-                {formatter(statistics[key as keyof Statistics])}
-              </Text>
-              <Text
-                Element="span"
-                size="t-text-md"
-                font="font-work-sans-regular"
-              >
-                {t(val)}
-              </Text>
-            </div>
-          );
+          const value = t(val);
+          return StatisticItem({ key, value, statistics });
         })}
       </div>
     </div>

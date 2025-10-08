@@ -3,17 +3,18 @@ const { Schema } = mongoose;
 
 export interface INft {
   name?: string;
-  imageUrl?: string;
-  deleteImageUrl?: string;
+  description?: string;
   authorId?: mongoose.Types.ObjectId;
   gallery?: mongoose.Types.ObjectId;
   category?: mongoose.Types.ObjectId;
   price?: number;
   sold?: boolean;
-  description?: string;
+  imageUrl?: string;
+  deleteImageUrl?: string;
+  keywords?: string[];
+
   likes?: mongoose.Types.ObjectId[];
   views?: number;
-  keywords?: string[];
 }
 
 // ✅ Тип документа (дані + методи документа .save()  .populate()
