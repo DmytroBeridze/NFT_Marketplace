@@ -3,27 +3,29 @@ import { Text } from '../../../../shared/ui/atoms/Text';
 import type { Statistics } from '../../model';
 
 interface StatisticItemProps {
-  key: string;
+  statKey: string;
   value: string;
-  statistics: Statistics;
+  statistics?: Statistics;
 }
 
 export const StatisticItem = ({
-  key,
+  statKey,
   value,
   statistics,
 }: StatisticItemProps) => {
+  if (!statistics) return null;
+
   return (
     <div
       className=" basis-1/3 heroContent-Statistics-elements-responsive"
-      key={key}
+      key={statKey}
     >
       <Text
         Element="h4"
         font="font-space-mono-bold"
         className="hero-counter-number-size"
       >
-        {numberFormatter(statistics[key as keyof Statistics])}
+        {numberFormatter(statistics[statKey as keyof Statistics])}
       </Text>
       <Text Element="span" size="t-text-md" font="font-work-sans-regular">
         {value}

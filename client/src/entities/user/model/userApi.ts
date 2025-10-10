@@ -8,7 +8,7 @@ import type {
 import { clearUser } from './userSlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:3002/api/',
+  baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3002/api/',
 
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('token');

@@ -3,23 +3,28 @@ import { Text } from '../../../../shared/ui/atoms/Text';
 import { useTranslate } from '../../../../shared/lib/i18n';
 import { StatisticItem } from './StatisticItem';
 import { ButtonWithIcon } from './ButtonWithIcon';
-import type { Statistics } from '../../model';
+import { useGetStatisticsQuery } from '../../model';
+import { Icon } from '../../../../shared/ui/atoms/Icon';
 
 export const HeroContent = () => {
   const { t } = useTranslation('heroContent');
   const { t: tt } = useTranslation('translation');
 
-  const statistics: Statistics = {
-    totalSale: 170000,
-    artists: 20000,
-    images: 1500000,
-  };
+  const { isLoading, data } = useGetStatisticsQuery();
+  const statistics = data?.statistics;
 
   const statisticsName = useTranslate({
     document: 'heroContent',
     translateKey: 'statistics',
     returnObjects: true,
   });
+
+  let isError = true;
+  // const statistics: Statistics = {
+  //   totalSale: 170000,
+  //   artists: 20000,
+  //   images: 1500000,
+  // };
 
   const statisticsArr = Object.entries(statisticsName.translateVariables);
 
@@ -56,10 +61,27 @@ export const HeroContent = () => {
         className="flex gap-7  text-primary-text-color
        marketplaceHero-button-smallSize-hidden"
       >
-        {statisticsArr.map(([key, val]) => {
-          const value = t(val);
-          return StatisticItem({ key, value, statistics });
-        })}
+        {isLoading && <Icon name="spinner" className="w-full" />}
+        {isError && (
+          <span className="text-red-700 w-full  text-center">
+            Loading Error...
+          </span>
+        )}
+
+        {!isLoading &&
+          !isError &&
+          statisticsArr.map(([key, val]) => {
+            const value = t(val);
+
+            return (
+              <StatisticItem
+                key={key}
+                statKey={key}
+                value={value}
+                statistics={statistics}
+              />
+            );
+          })}
       </div>
     </div>
   );
