@@ -63,7 +63,7 @@ export const HeroContent = () => {
       >
         {isLoading && <Icon name="spinner" className="w-full" />}
         {isError && (
-          <span className="text-red-700 w-full  text-center">
+          <span className="text-red-700 w-full  text-center responsive-size-sm">
             Loading Error...
           </span>
         )}

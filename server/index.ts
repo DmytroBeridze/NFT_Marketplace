@@ -1,13 +1,17 @@
 import express from "express";
+import morgan from "morgan";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+
 import authRouter from "./routes/authRouts";
 import themeRouter from "./routes/themeRouts";
 import nftRouter from "./routes/nftRouts";
 import categoriesRout from "./routes/categoriesRouts";
 import rolesRout from "./routes/roleRouts";
 import galleriesRout from "./routes/galleryRouts";
+import statisticsRout from "./routes/statisticsRouts";
+
 import updateNftLikes from "./routes/updateNftLikesRouts";
 import updateNftViews from "./routes/updateNftViewsRouts";
 
@@ -43,7 +47,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(morgan("dev"));
 // http://localhost:3002/
 app.use("/api/auth", authRouter);
 app.use("/api/theme", themeRouter);
@@ -53,6 +57,7 @@ app.use("/api/roles", rolesRout);
 app.use("/api/galleries", galleriesRout);
 app.use("/api/updateLikes", updateNftLikes);
 app.use("/api/updateViews", updateNftViews);
+app.use("/api/statistics", statisticsRout);
 
 const start = async () => {
   try {

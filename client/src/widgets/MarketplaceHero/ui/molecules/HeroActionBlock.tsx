@@ -32,7 +32,7 @@ export const HeroActionBlock = () => {
       {/* CounterStat */}
       <div className="flex heroContent-statistics-responsive gap-7  text-primary-text-color">
         {isLoading && <Icon name="spinner" className="w-full" />}
-        <span className="text-red-700 w-full  text-center">
+        <span className="text-red-700 w-full  text-center responsive-size-sm">
           Loading Error...
         </span>
 

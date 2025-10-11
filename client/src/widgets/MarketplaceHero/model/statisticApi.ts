@@ -16,7 +16,6 @@ export const statisticsApi = createApi({
   }),
   endpoints: (build) => ({
     getStatistics: build.query<Istatistics, void>({
-      // getStatistics: build.query<Istatistics, void>({
       query: () => `statistics`,
     }),
   }),
