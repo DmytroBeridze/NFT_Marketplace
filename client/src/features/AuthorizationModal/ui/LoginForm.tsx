@@ -6,7 +6,6 @@ import { FaRegEyeSlash } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
 import { FormikProvider } from 'formik';
 
-import { Button } from '../../../shared/ui/atoms/Button';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { QueryStatus } from './QueryStatus';
@@ -19,6 +18,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import { useTimeoutAction } from '../../../shared/lib/hooks';
+import { Button } from '../../../shared/ui/atoms';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -115,35 +115,3 @@ export const LoginForm = () => {
     </FormikProvider>
   );
 };
-
-// const { submitLogin, error, isLoading, data } = useLoginApi();
-// const [login, { error, isLoading, data }] = useLoginMutation();
-
-// const formik = useFormik<LoginValues>({
-//   initialValues: {
-//     userName: '',
-//     userPass: '',
-//   },
-
-//   validationSchema: loginSchema,
-//   onSubmit: async (values, { resetForm }) => {
-//     try {
-//       const result = await login(values).unwrap();
-//       localStorage.setItem('token', result.token);
-
-//       // ⚠️ dispatch замінено на addMatcher в userSlice для автоматичного оновлення стану
-//       // dispatch(addUserData(result.userData));
-//       resetForm();
-//     } catch (error) {
-//       if (isFetchBaseQueryError(error)) {
-//         console.log(
-//           t(
-//             `modal.serverMessages.error.${(error.data as { message: string }).message}`,
-//           ),
-//         );
-//       } else if (isErrorWithMessage(error)) {
-//         console.log(t(`modal.serverMessages.error.${error.message}`));
-//       }
-//     }
-//   },
-// });

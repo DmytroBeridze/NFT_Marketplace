@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../../shared/lib/i18n';
-import { LangSelect } from '../../shared/ui/atoms/LangSelect';
+import { LangSelect } from '../../shared/ui/atoms';
 
 const languages = [
   { id: 'ua', name: 'Ua' },

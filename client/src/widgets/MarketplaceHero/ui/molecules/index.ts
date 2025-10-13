@@ -4,3 +4,4 @@ export * from './HeroActionBlock';
 export * from './MarketplaceHero';
 export * from './StatisticItem';
 export * from './ButtonWithIcon';
+export * from './StatisticsContent';

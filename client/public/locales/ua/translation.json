@@ -72,6 +72,7 @@
         "failedToCreateNft": "Помилка створення NFT",
         "failedToGetNftList": "Помилка завантаження списку NFT",
         "NftNotUpdated": "NFT не оновлено",
+        "FailedToGetTopNfts": "Не вдалося отримати найпопулярніші NFT",
 
         "failedToUploadImage": "Помилка завантаження зображення",
         "fileNotFound": "Файл не знайдено",
@@ -85,7 +86,8 @@
         "DeleteImageUrlIsRequired": "Посилання для видалення зображення обов'язкове",
         "NeedAtLeastThreeKeywords": "Потрібно щонайменше три ключові слова",
 
-        "UserNotRegistered": "Користувач не зареєстрований"
+        "UserNotRegistered": "Користувач не зареєстрований",
+        "alreadyViewed": "Вже переглянуто"
       }
     }
   }

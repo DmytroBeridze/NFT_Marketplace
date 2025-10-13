@@ -1,5 +1,5 @@
 import { numberFormatter } from '../../../../shared/lib/formatters';
-import { Text } from '../../../../shared/ui/atoms/Text';
+import { Text } from '../../../../shared/ui/atoms';
 import type { Statistics } from '../../model';
 
 interface StatisticItemProps {

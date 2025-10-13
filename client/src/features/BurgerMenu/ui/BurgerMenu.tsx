@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/store/reduxHooks';
 
-import { TransitionWrapper } from '../../../shared/ui/atoms/TransitionWrapper';
 import {
   burgerOverlayDefaultStyle,
   burgerOverlayTransitionStyles,
@@ -11,6 +10,7 @@ import {
 } from '../config/transitionStyles';
 
 import { useBurgerToggle } from '../../../shared/lib/hooks/useBurgerToggle';
+import { TransitionWrapper } from '../../../shared/ui/atoms';
 
 interface burgerMenuProps {
   children?: React.ReactNode;

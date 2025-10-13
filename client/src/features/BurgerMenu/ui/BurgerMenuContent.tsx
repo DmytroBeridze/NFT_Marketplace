@@ -1,16 +1,13 @@
-import { Icon } from '../../../shared/ui/atoms/Icon';
-import { Text } from '../../../shared/ui/atoms/Text';
-
+import type { NavItems } from '../../../shared/types';
 import { NavigationPanel, type NavItemTuple } from '../../navigation';
-
 import { BurgerActions } from './BurgerActions';
 import {
   HeaderLogo,
   LogoVariantContext,
 } from '../../../shared/ui/molecules/HeaderLogo';
 import { useTranslate } from '../../../shared/lib/i18n';
-import type { NavItems } from '../../../shared/types';
 import { useBurgerToggle } from '../../../shared/lib/hooks/useBurgerToggle';
+import { Icon, Text } from '../../../shared/ui/atoms';
 
 export const BurgerMenuContent = () => {
   // ---- закриття бургера і включення скрола

@@ -1,10 +1,10 @@
 import { LangSwitcher } from '../../../features/LangSwitcher';
-import { Button } from '../../../shared/ui/atoms/Button';
 import { Icon } from '../../../shared/ui/atoms/Icon';
 import { Text } from '../../../shared/ui/atoms/Text';
 import { useTranslation } from 'react-i18next';
 import { useAuthAction, useLocalStorage } from '../../../shared/lib/hooks';
 import ThemeSwitcher from '../../../features/ThemeSwitcher/ui/ThemeSwitcher';
+import { Button } from '../../../shared/ui/atoms';
 
 export const HeaderActions = () => {
   const { getLocal } = useLocalStorage();

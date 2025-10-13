@@ -72,6 +72,7 @@
         "failedToCreateNft": "Failed to create NFT",
         "failedToGetNftList": "Failed to get NFT list",
         "NftNotUpdated": "NFT not updated",
+        "FailedToGetTopNfts": "Failed to get top NFTs",
 
         "failedToUploadImage": "Failed to update Image",
         "fileNotFound": "File not found",
@@ -85,7 +86,8 @@
         "DeleteImageUrlIsRequired": "Image removal link required",
         "NeedAtLeastThreeKeywords": "Need at least three keywords",
 
-        "UserNotRegistered": "User not registered"
+        "UserNotRegistered": "User not registered",
+        "alreadyViewed": "Already viewed"
       }
     }
   }

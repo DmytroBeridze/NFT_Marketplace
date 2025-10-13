@@ -80,6 +80,24 @@ export const getNft = async (req: Request, res: Response) => {
   }
 };
 
+// -------------------------------------🧩 get NFT by rating
+
+export const getNftByRating = async (req: Request, res: Response) => {
+  try {
+    const limit = Number(req.query.limit) || 10;
+
+    const nfts = await Nft.find({ rating: { $ne: null } }) // виключаємо ті, в яких поля рейтинга немає
+      .sort({ rating: -1 })
+      .limit(limit)
+      .populate("authorId", "userName avatar")
+      .populate("gallery", "name");
+
+    res.status(200).json({ items: nfts });
+  } catch (error) {
+    return handleControllerError(error, res, "FailedToGetTopNfts");
+  }
+};
+
 // -------------------------------------🧩 set NFT
 export const setNft = async (req: IRequest, res: Response) => {
   let {

@@ -1,7 +1,6 @@
 import { useGetMeQuery } from '../entities/user/model';
 import { AuthorizationModal } from '../features/AuthorizationModal';
 import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';
-import { Icon } from '../shared/ui/atoms/Icon';
 import { InnerContainer, OuterContainer } from '../shared/ui/layout';
 import { Overlay } from '../shared/ui/molecules/Overlay';
 import { Header } from '../widgets/Header';

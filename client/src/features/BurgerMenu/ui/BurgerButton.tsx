@@ -1,7 +1,7 @@
 import { useBurgerToggle } from '../../../shared/lib/hooks/useBurgerToggle';
 import type { IconName } from '../../../shared/lib/icons';
 import { useTheme } from '../../../shared/lib/theme/useTheme';
-import { Icon } from '../../../shared/ui/atoms/Icon';
+import { Icon } from '../../../shared/ui/atoms';
 
 interface BurgerButtonProps {
   iconName?: IconName;

@@ -1,8 +1,5 @@
 import { useField } from 'formik';
-import {
-  CheckControl,
-  type FormikCheckControlProps,
-} from '../../atoms/CheckControl';
+import { CheckControl, type FormikCheckControlProps } from '../../atoms';
 
 export const FormikCheckControl = ({
   id,

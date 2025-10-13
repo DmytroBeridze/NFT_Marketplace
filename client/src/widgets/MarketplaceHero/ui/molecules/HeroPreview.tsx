@@ -1,7 +1,6 @@
 import PlugImage from '../../../../shared/assets/images/plugImage.png';
+import { Image, Text } from '../../../../shared/ui/atoms';
 
-import { Text } from '../../../../shared/ui/atoms/Text';
-import { Image } from '../../../../shared/ui/atoms/Image/Image';
 import { NavLink } from 'react-router-dom';
 
 export const HeroPreview = () => {

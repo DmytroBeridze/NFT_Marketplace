@@ -1,6 +1,7 @@
 import {
   deleteNFT,
   getNft,
+  getNftByRating,
   patchNft,
   setNft,
   setNftImage,
@@ -26,6 +27,9 @@ const upload = multer({
 
 //-------------------------getNft
 router.get("/", getNft);
+//-------------------------get NFT by rating
+
+router.get("/byRating", getNftByRating);
 
 // ----------------------set Nft
 router.post(

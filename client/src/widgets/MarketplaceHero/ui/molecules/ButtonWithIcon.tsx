@@ -1,6 +1,4 @@
-import { Button } from '../../../../shared/ui/atoms/Button';
-import { Icon } from '../../../../shared/ui/atoms/Icon';
-import { Text } from '../../../../shared/ui/atoms/Text';
+import { Button, Icon, Text } from '../../../../shared/ui/atoms';
 
 interface ButtonWithIconProps {
   className?: string;

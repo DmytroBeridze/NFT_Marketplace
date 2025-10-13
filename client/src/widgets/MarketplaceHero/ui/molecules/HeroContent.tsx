@@ -1,17 +1,14 @@
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text } from '../../../../shared/ui/atoms/Text';
 import { useTranslate } from '../../../../shared/lib/i18n';
-import { StatisticItem } from './StatisticItem';
+
+import { Text } from '../../../../shared/ui/atoms/Text';
 import { ButtonWithIcon } from './ButtonWithIcon';
-import { useGetStatisticsQuery } from '../../model';
-import { Icon } from '../../../../shared/ui/atoms/Icon';
+import { StatystycsContent } from './StatisticsContent';
 
 export const HeroContent = () => {
   const { t } = useTranslation('heroContent');
   const { t: tt } = useTranslation('translation');
-
-  const { isLoading, data } = useGetStatisticsQuery();
-  const statistics = data?.statistics;
 
   const statisticsName = useTranslate({
     document: 'heroContent',
@@ -19,21 +16,16 @@ export const HeroContent = () => {
     returnObjects: true,
   });
 
-  let isError = true;
-  // const statistics: Statistics = {
-  //   totalSale: 170000,
-  //   artists: 20000,
-  //   images: 1500000,
-  // };
-
-  const statisticsArr = Object.entries(statisticsName.translateVariables);
+  const statisticsArr = useMemo(
+    () => Object.entries(statisticsName.translateVariables),
+    [statisticsName.translateVariables],
+  );
 
   return (
     <div className="basis-1/2 flex flex-col heroContent-gap-responsive">
       <Text
         className="text-primary-text-color px-2.5 leading-[110%] hero-tytle-size"
         font="font-work-sans-semibold"
-        // size="t-text-3xl"
         Element="h1"
       >
         {t('heroTitle')}
@@ -47,7 +39,7 @@ export const HeroContent = () => {
         {t('heroDesc')}
       </Text>
 
-      {/* button */}
+      {/* --------------button */}
       <ButtonWithIcon
         className="py-5 px-12 max-w-[224px] flex marketplaceHero-button-smallSize-hidden"
         radius="xl"
@@ -56,32 +48,13 @@ export const HeroContent = () => {
         {tt('button.getStarted')}
       </ButtonWithIcon>
 
-      {/* CounterStat */}
+      {/*---------------Statistics */}
       <div
         className="flex gap-7  text-primary-text-color
        marketplaceHero-button-smallSize-hidden"
       >
-        {isLoading && <Icon name="spinner" className="w-full" />}
-        {isError && (
-          <span className="text-red-700 w-full  text-center responsive-size-sm">
-            Loading Error...
-          </span>
-        )}
-
-        {!isLoading &&
-          !isError &&
-          statisticsArr.map(([key, val]) => {
-            const value = t(val);
-
-            return (
-              <StatisticItem
-                key={key}
-                statKey={key}
-                value={value}
-                statistics={statistics}
-              />
-            );
-          })}
+        {/* -------------Content*/}
+        <StatystycsContent statisticsArr={statisticsArr} />
       </div>
     </div>
   );

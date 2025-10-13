@@ -1,7 +1,6 @@
-import { Text } from '../../../shared/ui/atoms/Text';
-import { Spinner } from '../../../shared/ui/atoms/Spinner';
 import { useTranslation } from 'react-i18next';
 import { extractErrorKey } from '../lib';
+import { Spinner, Text } from '../../../shared/ui/atoms';
 
 interface QueryStatusProps {
   error: unknown;
