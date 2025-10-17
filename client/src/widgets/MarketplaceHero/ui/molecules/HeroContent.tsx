@@ -2,9 +2,9 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../../../shared/lib/i18n';
 
-import { Text } from '../../../../shared/ui/atoms/Text';
 import { ButtonWithIcon } from './ButtonWithIcon';
 import { StatystycsContent } from './StatisticsContent';
+import { Text } from '../../../../shared/ui/atoms';
 
 export const HeroContent = () => {
   const { t } = useTranslation('heroContent');
@@ -51,7 +51,7 @@ export const HeroContent = () => {
       {/*---------------Statistics */}
       <div
         className="flex gap-7  text-primary-text-color
-       marketplaceHero-button-smallSize-hidden"
+       marketplaceHero-button-smallSize-hidden "
       >
         {/* -------------Content*/}
         <StatystycsContent statisticsArr={statisticsArr} />

@@ -1,8 +1,9 @@
-import { t } from 'i18next';
-import { useGetStatisticsQuery } from '../../model';
-import { StatisticItem } from './StatisticItem';
 import { memo } from 'react';
-import { ErrorText, Spinner } from '../../../../shared/ui/atoms';
+import { t } from 'i18next';
+
+import { useGetStatisticsQuery } from '../../model';
+import { ErrorText } from '../../../../shared/ui/atoms';
+import { StatisticItem } from './StatisticItem';
 
 interface StatystycsContentProps {
   statisticsArr: [string, string][];
@@ -15,18 +16,13 @@ export const StatystycsContent = memo(
 
     return (
       <>
-        {isLoading && (
-          <Spinner wrapperClassName="w-full flex justify-center " />
-        )}
-
         {isError && (
-          <ErrorText className="text-red-700 w-full  text-center responsive-size-sm">
+          <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
             Loading Error...
           </ErrorText>
         )}
 
-        {!isLoading &&
-          !isError &&
+        {!isError &&
           statisticsArr.map(([key, val]) => {
             const value = t(val);
 
@@ -35,6 +31,8 @@ export const StatystycsContent = memo(
                 key={key}
                 statKey={key}
                 value={value}
+                // isLoading={true}
+                isLoading={isLoading}
                 statistics={statistics}
               />
             );

@@ -5,6 +5,7 @@ import userReducer from '../../entities/user/model/userSlice';
 import { authApi } from '../../features/AuthorizationModal/model';
 import { userApi } from '../../entities/user/model';
 import { statisticsApi } from '../../widgets/MarketplaceHero/model/statisticApi';
+import { topNftApi } from '../../widgets/MarketplaceHero/model/topNftApi';
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
   console.log('[Test action]:', action.type);
@@ -20,12 +21,14 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [statisticsApi.reducerPath]: statisticsApi.reducer,
+    [topNftApi.reducerPath]: topNftApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(authApi.middleware)
       .concat(userApi.middleware)
       .concat(statisticsApi.middleware)
+      .concat(topNftApi.middleware)
 
       .prepend(testMiddleware),
 });
