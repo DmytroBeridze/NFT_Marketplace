@@ -1,5 +1,6 @@
-import PlugImage from '../../../../shared/assets/images/plugImage.png';
-import { Image, Spinner, Text } from '../../../../shared/ui/atoms';
+import PlugImage from '../../../../shared/assets/images/plugImage.webp';
+import UserPlug from '../../../../shared/assets/images/user_plug.png';
+import { Image, Text } from '../../../../shared/ui/atoms';
 
 import { NavLink } from 'react-router-dom';
 import { useGetTopNftsQuery } from '../../model/topNftApi';
@@ -12,8 +13,8 @@ export const HeroPreview = () => {
   const items = data?.items || [];
   const { randomElement, updateRandom } = useRandomItem(items);
 
-  const image = randomElement?.imageUrl || '';
-  // const image = randomElement ? randomElement?.imageUrl : PlugImage;
+  const image = randomElement?.imageUrl || PlugImage;
+  const avtar = randomElement?.imageUrl || UserPlug;
 
   if (isError) return <div>Error loading...</div>;
 
@@ -88,7 +89,7 @@ export const HeroPreview = () => {
             {!isLoading ? (
               <Image
                 alt="img"
-                src={image}
+                src={avtar}
                 height="h-full"
                 width="w-full"
                 objectFit="object-cover"
