@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { register, login, getMe } from "../controllers/authController";
+import {
+  register,
+  login,
+  getMe,
+  deleteProfile,
+} from "../controllers/authController";
 import { checkAuth } from "../middleware/checkAuth";
 import { check } from "express-validator";
 import { checkValidation } from "../middleware/checkValidation";
@@ -36,4 +41,7 @@ router.post(
 // http://localhost:3002/api/auth/me
 router.get("/me", checkAuth, getMe);
 
+// http://localhost:3002/api/auth/delete
+// Delete profile
+router.get("/delete/:id", checkAuth, deleteProfile);
 export default router;

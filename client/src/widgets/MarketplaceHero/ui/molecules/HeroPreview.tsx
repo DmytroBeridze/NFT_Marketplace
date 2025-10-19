@@ -1,3 +1,5 @@
+import { gsap } from 'gsap';
+
 import PlugImage from '../../../../shared/assets/images/plugImage.webp';
 import UserPlug from '../../../../shared/assets/images/user_plug.png';
 import { Image, Text } from '../../../../shared/ui/atoms';
@@ -6,6 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { useGetTopNftsQuery } from '../../model/topNftApi';
 import { useRandomItem } from '../../lib';
 import { Skeleton } from '../../../../shared/ui/atoms/Skeleton';
+import { useEffect } from 'react';
 
 export const HeroPreview = () => {
   const { isError, isLoading, data } = useGetTopNftsQuery(10);
@@ -18,103 +21,127 @@ export const HeroPreview = () => {
 
   if (isError) return <div>Error loading...</div>;
 
+  // -------GSAP previw anination
+  useEffect(() => {
+    gsap.set('.turn-effect', { rotateY: -10 });
+    const anim = gsap.to('.turn-effect', {
+      rotateY: 10,
+      duration: 2.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      transformOrigin: 'center center',
+    });
+
+    return () => {
+      anim.kill();
+    };
+  }, []);
+
   return (
     <div
-      className={`basis-1/2 w-full h-full 
-     aspect-square  ${!isLoading ? 'bg-secondary-background-color shadow-secondary' : ''}  rounded-2xl
+      className="basis-1/2 w-full h-full"
+      style={{
+        perspective: 800, // 👈 добавляет глубину
+      }}
+    >
+      <div
+        className={` turn-effect  w-full h-full
+        aspect-square  ${!isLoading ? 'bg-secondary-background-color shadow-secondary' : ''}  rounded-2xl
       flex flex-col  justify-center items-start overflow-clip
       `}
 
-      //   className="basis-1/2 w-full h-full max-w-[519px]
-      //  aspect-square bg-secondary-background-color rounded-2xl
-      //   flex flex-col  justify-center items-start overflow-clip
-      //   shadow-secondary"
-    >
-      {/* Картинка */}
-      <Skeleton
-        isLoading={isLoading}
-        background={'skeleton-adaptive-background rounded-md w-full h-full'}
-      />
-      <div
-        className=" w-full h-[80%] flex-1 overflow-hidden relative"
-        onClick={updateRandom}
-        // style={{
-        //   backgroundImage: `url(${PlugImage})`,
-        //   backgroundPosition: 'center',
-        //   backgroundSize: 'cover',
-        //   backgroundRepeat: 'no-repeat',
-        // }}
+        //   className="basis-1/2 w-full h-full max-w-[519px]
+        //  aspect-square bg-secondary-background-color rounded-2xl
+        //   flex flex-col  justify-center items-start overflow-clip
+        //   shadow-secondary"
       >
-        {/* Prewiew */}
-
-        {!isLoading ? (
-          <Image
-            alt={randomElement?.name || 'img'}
-            src={image}
-            height="h-full"
-            width="w-full"
-            objectFit="object-cover"
-            objectPosition="object-center"
-          />
-        ) : null}
-      </div>
-
-      {/* Text */}
-      <div className="padding-md-responsive   text-primary-text-color flex flex-col gap-2.5">
-        {/* <div className="padding-10-20-responsive   text-primary-text-color flex flex-col gap-2.5"> */}
-
+        {/* Картинка */}
         <Skeleton
           isLoading={isLoading}
-          Component="div"
-          background={'skeleton-adaptive-background rounded-md w-40 h-6'}
+          background={'skeleton-adaptive-background rounded-md w-full h-full'}
         />
-        <Text
-          font="font-work-sans-semibold"
-          className="heroContent-text-responsive relative"
+        <div
+          className=" w-full h-[80%] flex-1 overflow-hidden relative"
+          onClick={updateRandom}
+          // style={{
+          //   backgroundImage: `url(${PlugImage})`,
+          //   backgroundPosition: 'center',
+          //   backgroundSize: 'cover',
+          //   backgroundRepeat: 'no-repeat',
+          // }}
         >
-          {randomElement?.name}
-        </Text>
+          {/* Prewiew */}
 
-        {/* Avatar */}
-        <div className="flex gap-3 align-middle justify-start">
-          <div className="h-6 w-6 rounded-full overflow-hidden ">
-            <Skeleton
-              isLoading={isLoading}
-              Component="div"
-              background={
-                'skeleton-adaptive-background rounded-full w-full h-full'
-              }
+          {!isLoading ? (
+            <Image
+              alt={randomElement?.name || 'img'}
+              src={image}
+              height="h-full"
+              width="w-full"
+              objectFit="object-cover"
+              objectPosition="object-center"
             />
+          ) : null}
+        </div>
 
-            {!isLoading ? (
-              <Image
-                alt="img"
-                src={avtar}
-                height="h-full"
-                width="w-full"
-                objectFit="object-cover"
-                objectPosition="object-center"
-                className="rounded-full"
-              />
-            ) : null}
-          </div>
+        {/* Text */}
+        <div className="padding-md-responsive   text-primary-text-color flex flex-col gap-2.5">
+          {/* <div className="padding-10-20-responsive   text-primary-text-color flex flex-col gap-2.5"> */}
 
-          <NavLink
-            to={'http://localhost:5173/rankings'}
-            className="flex items-center"
+          <Skeleton
+            isLoading={isLoading}
+            Component="div"
+            background={'skeleton-adaptive-background rounded-md w-40 h-6'}
+          />
+          <Text
+            font="font-work-sans-semibold"
+            className="heroContent-text-responsive relative"
           >
-            <Skeleton
-              isLoading={isLoading}
-              background={'skeleton-adaptive-background rounded-md w-30 h-6'}
-            />
-            <Text className="font-work-sans-regular heroContent-author-responsive relative ">
-              {randomElement?.authorId.userName}
-            </Text>
-          </NavLink>
+            {randomElement?.name}
+          </Text>
 
-          {/* <Text className="font-work-sans-regular responsive-size-sm">
+          {/* Avatar */}
+          <div className="flex gap-3 align-middle justify-start">
+            <div className="h-6 w-6 rounded-full overflow-hidden ">
+              <Skeleton
+                isLoading={isLoading}
+                Component="div"
+                background={
+                  'skeleton-adaptive-background rounded-full w-full h-full'
+                }
+              />
+
+              {!isLoading ? (
+                <Image
+                  alt="img"
+                  src={avtar}
+                  height="h-full"
+                  width="w-full"
+                  objectFit="object-cover"
+                  objectPosition="object-center"
+                  className="rounded-full"
+                />
+              ) : null}
+            </div>
+
+            <NavLink
+              to={'http://localhost:5173/rankings'}
+              className="flex items-center"
+            >
+              <Skeleton
+                isLoading={isLoading}
+                background={'skeleton-adaptive-background rounded-md w-30 h-6'}
+              />
+              <Text className="font-work-sans-regular heroContent-author-responsive relative ">
+                {randomElement?.authorId.userName}
+              </Text>
+            </NavLink>
+
+            {/* <Text className="font-work-sans-regular responsive-size-sm">
             Animakid
           </Text> */}
+          </div>
         </div>
       </div>
     </div>

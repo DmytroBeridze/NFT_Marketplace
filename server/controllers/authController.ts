@@ -7,6 +7,7 @@ import Roles from "../models/Roles";
 import { validationResult } from "express-validator";
 import { IRequest } from "../types/types";
 import { handleControllerError } from "../utils/handleControllerError";
+import mongoose from "mongoose";
 
 // interface IRequest extends Request {
 //   userId?: string;
@@ -158,6 +159,20 @@ export const getMe = async (req: IRequest, res: Response) => {
     // res.status(404).json({ message: "accessDenied" });
     // res.status(404).json("Access denied");
   }
+};
+// --------------------------------🧩-delete profile
+
+export const deleteProfile = async (req: IRequest, res: Response) => {
+  const userid = req.userId;
+  const deletedProfileId = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(userid)) return;
+
+  const user = await User.findById(userid);
+
+  if (!userid) return res.status(403).json({ message: "accessDenied" });
+
+  res.status(200).json({ messege: "delete profile" });
 };
 
 // ----------------------
