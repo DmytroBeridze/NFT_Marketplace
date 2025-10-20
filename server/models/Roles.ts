@@ -22,7 +22,7 @@ export interface IRoleDocument extends Document {
 // });
 // export default mongoose.model("Roles", RoleSchema);
 
-const RoleSchema = new Schema({
+const RoleSchema = new Schema<IRoleDocument>({
   value: {
     type: String,
     unique: true,

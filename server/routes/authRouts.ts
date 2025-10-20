@@ -41,7 +41,7 @@ router.post(
 // http://localhost:3002/api/auth/me
 router.get("/me", checkAuth, getMe);
 
-// http://localhost:3002/api/auth/delete
+// http://localhost:3002/api/auth/profile
 // Delete profile
-router.get("/delete/:id", checkAuth, deleteProfile);
+router.delete("/profile/:id", checkAuth, deleteProfile);
 export default router;
