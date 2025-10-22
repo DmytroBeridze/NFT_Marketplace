@@ -33,6 +33,5 @@ export interface TextProps {
     | 'text-burger-color'
     | 'text-error-color'
     | 'text-success-color'
-    | 'text-inherit'
-    | 
+    | 'text-inherit';
 }

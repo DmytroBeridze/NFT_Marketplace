@@ -26,6 +26,11 @@
     flex-direction: row;
   }
 }
+.heroPrewiew-responsive {
+  @media (min-width: 834px) {
+    transform: translateY(-120px);
+  }
+}
 
 .padding-md-responsive {
   padding: var(--hero-image-text-padding-sm);

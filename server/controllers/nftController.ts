@@ -54,7 +54,7 @@ export const getNft = async (req: Request, res: Response) => {
 
     //  запит з populate
     const nfts = await Nft.find(filter)
-      .populate("authorId", "userName userMail")
+      .populate("authorId", "userName userMail avatar")
       .skip(skip)
       .limit(Number(limit));
 

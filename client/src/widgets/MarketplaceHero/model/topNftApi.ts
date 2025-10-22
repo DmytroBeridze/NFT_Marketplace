@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export interface INft {
+  _id: string;
   name: string;
   description: string;
   authorId: { _id: string; userName: string; avatar?: string };

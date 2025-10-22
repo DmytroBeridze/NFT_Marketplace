@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+// !-----------------------🔨-Перевірити чи використовується, якщо  ні- видалити
+
 export const useRandomItem = <T>(
   arr: T[],
 ): { randomElement: T | undefined; updateRandom: () => void } => {
