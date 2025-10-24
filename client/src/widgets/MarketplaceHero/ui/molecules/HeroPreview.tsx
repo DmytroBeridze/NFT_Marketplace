@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Autoplay, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,7 +10,6 @@ import { useGetTopNftsQuery } from '../../model/topNftApi';
 import { useEffect, useRef, useState } from 'react';
 import { HeroSlide } from './HeroSlide';
 import { CenteredMessage } from '../../../../shared/ui/helpers';
-import { Icon } from '../../../../shared/ui/atoms';
 import { SwiperNavButton } from '../atoms';
 
 export const HeroPreview = () => {
@@ -21,6 +20,7 @@ export const HeroPreview = () => {
   const nextRef = useRef(null);
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+  const [shine, setShine] = useState<boolean>(false);
   // const { randomElement, updateRandom } = useRandomItem(items);
 
   // ------🏷️-GSAP previw anination
@@ -40,6 +40,25 @@ export const HeroPreview = () => {
     };
   }, []);
 
+  // !--------------------------------------вынести
+  useEffect(() => {
+    let intervalId: any;
+    // let intervalId:NodeJS.Timeout;
+
+    const timeoutId = setTimeout(() => {
+      intervalId = setInterval(() => {
+        setShine((prevState) => !prevState);
+
+        // setTimeout(() => setShine(false), 800);
+      }, 2500);
+    }, 1200);
+
+    return () => {
+      clearTimeout(intervalId);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   // --------------Error
   if (isError) return <CenteredMessage message="Error loading..." />;
 
@@ -49,14 +68,14 @@ export const HeroPreview = () => {
 
   return (
     <div
-      className="basis-1/2 min-w-0  h-full flex-1  relative"
+      className="basis-1/2 min-w-0  h-full flex-1  relative  "
       style={{
         perspective: 800, // 👈 добавляет глубину
       }}
     >
       <Swiper
         ref={swiperRef}
-        className=" w-full h-full mySwiper shadow-secondary rounded-2xl relative"
+        className={`w-full h-full mySwiper shadow-secondary rounded-2xl relative  overflow-hidden  ${shine ? 'shine' : ''}`}
         modules={[Navigation, Autoplay]}
         slidesPerView={1}
         onSlideChange={(swiper) => {

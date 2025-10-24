@@ -1,6 +1,6 @@
 import { Skeleton } from '../../../../shared/ui/atoms/Skeleton';
 import { NavLink } from 'react-router-dom';
-import { Icon, Image, Text } from '../../../../shared/ui/atoms';
+import { Image, Text } from '../../../../shared/ui/atoms';
 import type { INft } from '../../model/topNftApi';
 
 import PlugImage from '../../../../shared/assets/images/plugImage.webp';
@@ -27,7 +27,7 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
         background={'skeleton-adaptive-background rounded-md w-full h-full'}
       />
       <div
-        className=" w-full h-[80%] flex-1 overflow-hidden relative"
+        className=" w-full h-[80%] flex-1 overflow-hidden relative "
         // onClick={updateRandom}
       >
         {!isLoading ? (

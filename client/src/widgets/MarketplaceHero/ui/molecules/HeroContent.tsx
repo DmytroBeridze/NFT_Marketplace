@@ -22,7 +22,7 @@ export const HeroContent = () => {
   );
 
   return (
-    <div className="basis-1/2 flex flex-col heroContent-gap-responsive">
+    <div className="basis-1/2 flex flex-col heroContent-gap-responsive ">
       <Text
         className="text-primary-text-color px-2.5 leading-[110%] hero-tytle-size"
         font="font-work-sans-semibold"
