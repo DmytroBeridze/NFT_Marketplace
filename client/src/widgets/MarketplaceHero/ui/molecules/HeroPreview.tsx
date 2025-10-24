@@ -1,23 +1,26 @@
 import { gsap } from 'gsap';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { A11y, Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { Text } from '../../../../shared/ui/atoms';
 import { useGetTopNftsQuery } from '../../model/topNftApi';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HeroSlide } from './HeroSlide';
 import { CenteredMessage } from '../../../../shared/ui/helpers';
+import { Icon } from '../../../../shared/ui/atoms';
+import { SwiperNavButton } from '../atoms';
 
 export const HeroPreview = () => {
   const { isError, isLoading, data } = useGetTopNftsQuery(10);
-
   const items = data?.items || [];
   const swiperRef = useRef(null);
-
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
+  const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
   // const { randomElement, updateRandom } = useRandomItem(items);
 
   // ------🏷️-GSAP previw anination
@@ -37,27 +40,12 @@ export const HeroPreview = () => {
     };
   }, []);
 
-  if (isError)
-    return (
-      <CenteredMessage message="Error loading..." />
-      // <Text
-      //   size="responsive-size-ms"
-      //   className=" basis-1/2 min-w-0  h-full flex-1 m-auto relative  heroPrewiew-responsive  text-center text-red-700"
-      // >
-      //   Error loading...
-      // </Text>
-    );
+  // --------------Error
+  if (isError) return <CenteredMessage message="Error loading..." />;
 
+  // --------------Loading
   if (!isLoading && items.length === 0)
-    return (
-      <CenteredMessage message="No NFTs found..." />
-      // <Text
-      //   size="responsive-size-ms"
-      //   className=" basis-1/2 min-w-0  h-full flex-1 m-auto relative  heroPrewiew-responsive  text-center text-red-700"
-      // >
-      //   No NFTs found...
-      // </Text>
-    );
+    return <CenteredMessage message="No NFTs found..." />;
 
   return (
     <div
@@ -68,11 +56,36 @@ export const HeroPreview = () => {
     >
       <Swiper
         ref={swiperRef}
-        className=" turn-effect w-full h-full mySwiper shadow-secondary rounded-2xl "
-        modules={[Navigation]}
-        navigation={true}
+        className=" w-full h-full mySwiper shadow-secondary rounded-2xl relative"
+        modules={[Navigation, Autoplay]}
         slidesPerView={1}
+        onSlideChange={(swiper) => {
+          setIsFirstSlide(swiper.isBeginning);
+          setIsLastSlide(swiper.isEnd);
+        }}
+        // autoplay={{
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // }}
+        // loop={true}
+
+        navigation={{
+          nextEl: nextRef.current,
+          prevEl: prevRef.current,
+        }}
       >
+        {/*--------- buttons */}
+        <SwiperNavButton
+          direction="next"
+          nawRef={nextRef}
+          isLastSlide={isLastSlide}
+        />
+        <SwiperNavButton
+          direction="prev"
+          nawRef={prevRef}
+          isFirstSlide={isFirstSlide}
+        />
+
         {items.map((nft, index) => {
           return (
             <SwiperSlide

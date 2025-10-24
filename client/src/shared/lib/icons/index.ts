@@ -19,6 +19,8 @@ import { ReactComponent as BurgerMenu } from '../../assets/icons/BurgerMenu.svg'
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import { ReactComponent as Spinner } from '../../assets/icons/spinner.svg';
 import { ReactComponent as Door } from '../../assets/icons/Door.svg';
+import { ReactComponent as Arrow } from '../../assets/icons/Arrow.svg';
+import { ReactComponent as UserPlug } from '../../assets/icons/user_plug.svg';
 
 export const iconsMap = {
   'logo-icon': LogoIcon,
@@ -41,6 +43,8 @@ export const iconsMap = {
   'BurgerMenu-icon': BurgerMenu,
   'close-icon': Close,
   'door-icon': Door,
+  'arrow-icon': Arrow,
+  'userPlug-icon': UserPlug,
   spinner: Spinner,
 } as const;
 

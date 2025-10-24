@@ -1,5 +1,4 @@
 import { Text } from '../atoms';
-import type { TextProps } from '../atoms/Text/Text.types';
 
 type CenteredMessageProps = {
   message: string;
