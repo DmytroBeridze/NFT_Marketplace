@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.patch(
   "/:nftId",
-  [param("nftId").isMongoId().withMessage("Invalid NFT ID")],
+  [param("nftId").isMongoId().withMessage("invalidNftId")],
   checkAuth,
   updateNftViews
 );

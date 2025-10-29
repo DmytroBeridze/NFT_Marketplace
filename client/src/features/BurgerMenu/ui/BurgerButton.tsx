@@ -1,7 +1,7 @@
+import { useBurgerToggle } from '../../../shared/lib/hooks/useBurgerToggle';
 import type { IconName } from '../../../shared/lib/icons';
 import { useTheme } from '../../../shared/lib/theme/useTheme';
-import { Icon } from '../../../shared/ui/atoms/Icon';
-import { useCloseBurgerMenu } from '../lib/useCloseBurgerMenu';
+import { Icon } from '../../../shared/ui/atoms';
 
 interface BurgerButtonProps {
   iconName?: IconName;
@@ -11,12 +11,13 @@ export const BurgerButton = ({
   iconName = 'BurgerMenu-icon',
 }: BurgerButtonProps) => {
   const { theme } = useTheme();
-  const { openBurger } = useCloseBurgerMenu();
+
+  const { toggleBurgerMenu } = useBurgerToggle();
 
   return (
     <div
-      onClick={openBurger}
-      className="burger-button-responsive cursor-pointer"
+      onClick={toggleBurgerMenu}
+      className="burger-button-responsive cursor-pointer "
       aria-label="Toggle burger menu"
     >
       <Icon

@@ -1,6 +1,7 @@
 import {
   deleteNFT,
   getNft,
+  getNftByRating,
   patchNft,
   setNft,
   setNftImage,
@@ -26,19 +27,20 @@ const upload = multer({
 
 //-------------------------getNft
 router.get("/", getNft);
+//-------------------------get NFT by rating
+
+router.get("/byRating", getNftByRating);
 
 // ----------------------set Nft
 router.post(
   "/",
   checkAuth,
   [
-    check("name").notEmpty().withMessage("Name is required"),
-    check("description").notEmpty().withMessage("Description is required"),
-    check("imageUrl").notEmpty().withMessage("Image is required"),
-    check("price").notEmpty().withMessage("Price is required"),
-    check("deleteImageUrl")
-      .notEmpty()
-      .withMessage("DeleteImageUrl is required"),
+    check("name").notEmpty().withMessage("NameIsRequired"),
+    check("description").notEmpty().withMessage("DescriptionIsRequired"),
+    check("imageUrl").notEmpty().withMessage("ImageIsRequired"),
+    check("price").notEmpty().withMessage("PriceIsRequired"),
+    check("deleteImageUrl").notEmpty().withMessage("DeleteImageUrlIsRequired"),
 
     check("keywords")
       .notEmpty()
@@ -48,10 +50,10 @@ router.post(
           : val
               .split(",") //якщо строка робимо масив по комам
               .map((v: string) => v.trim()) // обрізаєм пробіли
-              .filter((v: string) => Boolean(v)); // позбуваємось пустих сирок в середені
+              .filter((v: string) => Boolean(v)); // позбуваємось пустих строк в середені
         return arr.length >= 3;
       })
-      .withMessage("Need at least three keywords"),
+      .withMessage("NeedAtLeastThreeKeywords"),
 
     checkNftValidation,
   ],
@@ -63,17 +65,17 @@ router.patch(
   "/:id",
   checkAuth,
   [
-    check("name").optional().notEmpty().withMessage("Name is required"),
+    check("name").optional().notEmpty().withMessage("NameIsRequired"),
     check("description")
       .optional()
       .notEmpty()
-      .withMessage("Description is required"),
-    check("imageUrl").optional().notEmpty().withMessage("Image is required"),
-    check("price").optional().notEmpty().withMessage("Price is required"),
+      .withMessage("DescriptionIsRequired"),
+    check("imageUrl").optional().notEmpty().withMessage("ImageIsRequired"),
+    check("price").optional().notEmpty().withMessage("PriceIsRequired"),
     check("deleteImageUrl")
       .optional()
       .notEmpty()
-      .withMessage("DeleteImageUrl is required"),
+      .withMessage("DeleteImageUrlIsRequired"),
 
     check("keywords")
       .optional()
@@ -87,7 +89,7 @@ router.patch(
               .filter((v: string) => Boolean(v)); // позбуваємось пустих сирок в середені
         return arr.length >= 3;
       })
-      .withMessage("Need at least three keywords"),
+      .withMessage("NeedAtLeastThreeKeywords"),
 
     checkNftValidation,
   ],

@@ -3,17 +3,19 @@ const { Schema } = mongoose;
 
 export interface INft {
   name?: string;
-  imageUrl?: string;
-  deleteImageUrl?: string;
+  description?: string;
   authorId?: mongoose.Types.ObjectId;
   gallery?: mongoose.Types.ObjectId;
   category?: mongoose.Types.ObjectId;
   price?: number;
   sold?: boolean;
-  description?: string;
+  imageUrl?: string;
+  deleteImageUrl?: string;
+  keywords?: string[];
+
   likes?: mongoose.Types.ObjectId[];
   views?: number;
-  keywords?: string[];
+  rating?: number;
 }
 
 // ✅ Тип документа (дані + методи документа .save()  .populate()
@@ -67,6 +69,11 @@ export const NftSchema = new Schema<NftDocument>(
       type: Number,
       default: 0,
     },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+
     keywords: {
       type: [String],
       required: true,
@@ -82,5 +89,15 @@ NftSchema.index({ authorId: 1 });
 NftSchema.index({ keywords: 1 });
 NftSchema.index({ category: 1 });
 NftSchema.index({ gallery: 1 });
+NftSchema.index({ rating: 1 });
+
+NftSchema.pre("save", function (next) {
+  const likesCount = this.likes?.length || 0;
+  const viewsCount = this.views || 0;
+  this.rating = likesCount * 2 + viewsCount * 0.5;
+
+  next();
+});
+
 // NftSchema.index({ keywords: "text" });
 export default mongoose.model<NftDocument>("Nft", NftSchema);

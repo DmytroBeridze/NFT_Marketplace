@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { ThemeSelect } from '../../../shared/ui/atoms/ThemeSelect';
 import { useTheme } from '../../../shared/lib/theme/useTheme';
+import { ThemeSelect } from '../../../shared/ui/atoms';
 
 interface ThemeSwitcherProps {
   bgColor?: string;

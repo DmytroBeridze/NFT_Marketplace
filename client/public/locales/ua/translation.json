@@ -7,7 +7,8 @@
   },
   "button": {
     "signIn": "Вхід",
-    "signOut": "Вихід"
+    "signOut": "Вихід",
+    "getStarted": "Розпочати"
   },
   "modal": {
     "tabs": {
@@ -45,7 +46,8 @@
         "imageUploaded": "Зображення завантажене",
         "nftDeleted": "NFT видалене",
         "nftChanged": "NFT змінене",
-        "nftAdded": "NFT додана"
+        "nftAdded": "NFT додана",
+        "NftUpdated": "NFT оновлено"
       },
       "error": {
         "usernameExists": "Ім'я користувача вже існує",
@@ -67,11 +69,25 @@
         "invalidNftId": "Невірний NFT ідентифікатор",
         "failedToUpdateNft": "Помилка оновлення NFT",
         "failedToDeleteNft": "Помилка видалення NFT",
-        "failedToUploadImage": "Помилка завантаження зображення",
-        "fileNotFound": "Файл не знайдено",
         "failedToCreateNft": "Помилка створення NFT",
         "failedToGetNftList": "Помилка завантаження списку NFT",
-        "categoryNotFound": "Категорія не знайдена"
+        "NftNotUpdated": "NFT не оновлено",
+        "FailedToGetTopNfts": "Не вдалося отримати найпопулярніші NFT",
+
+        "failedToUploadImage": "Помилка завантаження зображення",
+        "fileNotFound": "Файл не знайдено",
+
+        "categoryNotFound": "Категорія не знайдена",
+
+        "NameIsRequired": "Ім'я обов'язкове",
+        "DescriptionIsRequired": "Опис обов'язковий",
+        "ImageIsRequired": "Опис обов'язковий",
+        "PriceIsRequired": "Ціна обов'язкова",
+        "DeleteImageUrlIsRequired": "Посилання для видалення зображення обов'язкове",
+        "NeedAtLeastThreeKeywords": "Потрібно щонайменше три ключові слова",
+
+        "UserNotRegistered": "Користувач не зареєстрований",
+        "alreadyViewed": "Вже переглянуто"
       }
     }
   }

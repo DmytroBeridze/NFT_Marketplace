@@ -54,7 +54,9 @@
 .bg-tab-active-background-color {
   background-color: var(--tab-active-background-color);
 }
-
+.skeleton-adaptive-background {
+  background-color: var(--skeleton-adaptive-background);
+}
 /*-------------------- link-underline color  */
 .link-underline::after {
   background-color: var(--primary-accent-color);

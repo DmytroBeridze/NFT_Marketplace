@@ -9,9 +9,8 @@ import { FormikProvider } from 'formik';
 import { useTranslation } from 'react-i18next';
 
 import { FormikCheckControl } from '../../../shared/ui/molecules/FormikCheckControl';
-import { Button } from '../../../shared/ui/atoms/Button';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
-import { Text } from '../../../shared/ui/atoms/Text';
+
 import {
   getFieldErrorClass,
   usePasswordVisibility,
@@ -22,6 +21,7 @@ import { QueryStatus } from './QueryStatus';
 
 import { useAuthorizationContext } from '../context';
 import { useTimeoutAction } from '../../../shared/lib/hooks';
+import { Button, Text } from '../../../shared/ui/atoms';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();

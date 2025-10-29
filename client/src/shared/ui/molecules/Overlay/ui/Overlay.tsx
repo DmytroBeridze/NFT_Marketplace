@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useAppSelector } from '../../../../../app/store/reduxHooks.ts';
-import { TransitionWrapper } from '../../../atoms/TransitionWrapper';
 import {
   modalDefaultStyle,
   transitionStyles,
 } from '../config/transitionStyles.ts.ts';
 import { useToggleOverlay } from '../hooks/useToggleOverlay.ts';
 import type { OpenModalType } from '../model/OverlaySlice.ts';
+import { TransitionWrapper } from '../../../atoms/index.ts';
 
 interface OverlayProps {
   children?: React.ReactNode;

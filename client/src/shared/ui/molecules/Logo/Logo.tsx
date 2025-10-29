@@ -1,7 +1,6 @@
 import { useContext } from 'react';
-import { Icon } from '../../atoms/Icon';
-import { Text } from '../../atoms/Text';
 import { LogoVariantContext } from '../HeaderLogo/context/LogoVariantContext ';
+import { Icon, Text } from '../../atoms';
 
 export const Logo = () => {
   const color = useContext(LogoVariantContext);

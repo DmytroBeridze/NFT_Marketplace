@@ -1,104 +1,111 @@
-import PlugImage from '../../../../shared/assets/images/plugImage.png';
+import { gsap } from 'gsap';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper/modules';
 
-import { Text } from '../../../../shared/ui/atoms/Text';
-import { Image } from '../../../../shared/ui/atoms/Image/Image';
-import { NavLink } from 'react-router-dom';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+import { useGetTopNftsQuery } from '../../model/topNftApi';
+import { useEffect, useRef, useState } from 'react';
+import { HeroSlide } from './HeroSlide';
+import { CenteredMessage } from '../../../../shared/ui/helpers';
+import { SwiperNavButton } from '../atoms';
+// import { useShineEffect } from '../../../../shared/lib/hooks/useShineEffect';
 
 export const HeroPreview = () => {
+  const { isError, isLoading, data } = useGetTopNftsQuery(10);
+  const items = data?.items || [];
+  const swiperRef = useRef(null);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
+  const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+  // const { shine, setShine } = useShineEffect();
+  const [shine, setShine] = useState<boolean>(false);
+
+  // const { randomElement, updateRandom } = useRandomItem(items);
+
+  // ------🏷️-GSAP previw anination
+  useEffect(() => {
+    gsap.set(swiperRef.current, { rotateY: -10 });
+    const anim = gsap.to(swiperRef.current, {
+      rotateY: 10,
+      duration: 2.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      transformOrigin: 'center center',
+      onRepeat: () => {
+        setTimeout(() => {
+          setShine((prev) => !prev);
+        }, 1500);
+      },
+    });
+
+    return () => {
+      anim.kill();
+    };
+  }, []);
+
+  // --------------Error
+  if (isError) return <CenteredMessage message="Error loading..." />;
+
+  // --------------Loading
+  if (!isLoading && items.length === 0)
+    return <CenteredMessage message="No NFTs found..." />;
+
   return (
     <div
-      className="basis-1/2 w-full h-full 
-     aspect-square bg-secondary-background-color rounded-2xl
-      flex flex-col  justify-center items-start overflow-clip
-      shadow-secondary"
-      //   className="basis-1/2 w-full h-full max-w-[519px]
-      //  aspect-square bg-secondary-background-color rounded-2xl
-      //   flex flex-col  justify-center items-start overflow-clip
-      //   shadow-secondary"
+      className="basis-1/2 min-w-0  h-full flex-1  relative  "
+      style={{
+        perspective: 800, // 👈 добавляет глубину
+      }}
     >
-      {/* Картинка */}
-      <div
-        className=" w-full h-[80%] flex-1 overflow-hidden"
-        // style={{
-        //   backgroundImage: `url(${PlugImage})`,
-        //   backgroundPosition: 'center',
-        //   backgroundSize: 'cover',
-        //   backgroundRepeat: 'no-repeat',
+      <Swiper
+        ref={swiperRef}
+        className={`w-full h-full mySwiper shadow-secondary
+           rounded-2xl relative  overflow-hidden  ${shine ? 'shine' : ''}`}
+        modules={[Navigation, Autoplay]}
+        slidesPerView={1}
+        onSlideChange={(swiper) => {
+          setIsFirstSlide(swiper.isBeginning);
+          setIsLastSlide(swiper.isEnd);
+        }}
+        // autoplay={{
+        //   delay: 6000,
+        //   disableOnInteraction: false,
         // }}
+        // loop={true}
+
+        navigation={{
+          nextEl: nextRef.current,
+          prevEl: prevRef.current,
+        }}
       >
-        {/* Prewiew */}
-
-        <Image
-          alt="plug"
-          src={PlugImage}
-          height="h-full"
-          width="w-full"
-          objectFit="object-cover"
-          objectPosition="object-center"
+        {/*--------- buttons */}
+        <SwiperNavButton
+          direction="next"
+          nawRef={nextRef}
+          isLastSlide={isLastSlide}
         />
-      </div>
+        <SwiperNavButton
+          direction="prev"
+          nawRef={prevRef}
+          isFirstSlide={isFirstSlide}
+        />
 
-      {/* Text */}
-      <div className="padding-md-responsive  text-primary-text-color flex flex-col gap-2.5">
-        {/* <div className="padding-10-20-responsive   text-primary-text-color flex flex-col gap-2.5"> */}
-        <Text
-          font="font-work-sans-semibold"
-          className="heroContent-text-responsive"
-        >
-          {/* <Text font="font-work-sans-semibold" className="responsive-size-md"> */}
-          Space Walking
-        </Text>
-
-        {/* Avatar */}
-        <div className="flex gap-3 align-middle justify-start">
-          <Image
-            alt="plug"
-            src={PlugImage}
-            height="max-h-[24px]"
-            width="max-w-[24px]"
-            objectFit="object-cover"
-            objectPosition="object-center"
-            className="rounded-full"
-          />
-
-          <NavLink
-            to={'http://localhost:5173/rankings'}
-            className="flex items-center"
-          >
-            <Text className="font-work-sans-regular heroContent-author-responsive ">
-              Animakid
-            </Text>
-          </NavLink>
-
-          {/* <Text className="font-work-sans-regular responsive-size-sm">
-            Animakid
-          </Text> */}
-        </div>
-      </div>
+        {items.map((nft, index) => {
+          return (
+            <SwiperSlide
+              key={nft._id || index}
+              className="w-full h-full flex justify-center"
+            >
+              <HeroSlide isLoading={isLoading} nft={nft} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </div>
   );
 };
-// export const HeroPreview = () => {
-//   return (
-//     <div
-//       className="basis-1/2 w-full h-full max-w-[519px]
-//      aspect-square bg-secondary-background-color rounded-2xl
-//       flex flex-col  ustify-center items-center overflow-clip"
-//     >
-//       <div className="max-h-[400px] h-full w-full max-w-[519px] flex-1 basis-1/2 ">
-//         <img
-//           src={PlugImage}
-//           alt="rthrh"
-//           className="w-full h-full object-cover object-center"
-//         />
-//       </div>
-
-//       <div className="p-5 w-full min-h-[100px] flex-1 border border-amber-400">
-//         {/* <div className="p-5 w-full h-[200px] flex-1 border border-amber-400"> */}
-//         <Text font="font-work-sans-semibold" className="responsive-size-md">
-//           Space Walking
-//         </Text>
-//       </div>
-//     </div>
-//   );
-// };

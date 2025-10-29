@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { Text } from '../../../shared/ui/atoms/Text';
 import type { NavigationPanelItemProps } from '../types/navigation';
 import type { Dispatch } from '@reduxjs/toolkit';
 import { useContext, type SetStateAction } from 'react';
 import { LogoVariantContext } from '../../../shared/ui/molecules/HeaderLogo';
 import { useAppDispatch } from '../../../app/store/reduxHooks';
 import { closed } from '../../BurgerMenu/model/burgerSlice';
+import { Text } from '../../../shared/ui/atoms';
 
 export const NavigationPanelItem = ({
   routeKey,

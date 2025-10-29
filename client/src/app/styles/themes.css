@@ -35,6 +35,7 @@
   --primary-background: #f5f5f5; /* Мягкий светлый фон */
   --secondary-background: #ffffff; /* Поверхности: карточки, модалки */
   --burger-background: #763fbf;
+  --skeleton-background: #e1e0e0;
   --burger-hover-background: #a259ff;
   --primary-text: #2b2b2b; /* Основной текст */
   --secondary-text: #6a6a6a; /* Подписи, вторичный текст */
@@ -47,6 +48,7 @@
   --primary-background: #2b2b2b;
   --secondary-background: #3b3b3b;
   --burger-background: #2b2b2b;
+  --skeleton-background: #403f3f;
   --burger-hover-background: #3b3b3b;
   --primary-text: #ffffff;
   --secondary-text: #858584;

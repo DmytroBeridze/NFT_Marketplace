@@ -1,19 +1,18 @@
-import { Icon } from '../../../shared/ui/atoms/Icon';
-import { Text } from '../../../shared/ui/atoms/Text';
-
+import type { NavItems } from '../../../shared/types';
 import { NavigationPanel, type NavItemTuple } from '../../navigation';
-import { useCloseBurgerMenu } from '../lib/useCloseBurgerMenu';
-
 import { BurgerActions } from './BurgerActions';
 import {
   HeaderLogo,
   LogoVariantContext,
 } from '../../../shared/ui/molecules/HeaderLogo';
 import { useTranslate } from '../../../shared/lib/i18n';
-import type { NavItems } from '../../../shared/types';
+import { useBurgerToggle } from '../../../shared/lib/hooks/useBurgerToggle';
+import { Icon, Text } from '../../../shared/ui/atoms';
 
 export const BurgerMenuContent = () => {
-  const { closeBurger } = useCloseBurgerMenu();
+  // ---- закриття бургера і включення скрола
+  const { closeBurgerMenu } = useBurgerToggle();
+
   const { lang, translateVariables } = useTranslate<NavItems>({
     translateKey: 'nav',
     returnObjects: true,
@@ -31,7 +30,7 @@ export const BurgerMenuContent = () => {
           name="close-icon"
           style={{ color: 'white' }}
           className="absolute right-10 top-11 cursor-pointer"
-          onClick={closeBurger}
+          onClick={closeBurgerMenu}
         />
         <NavigationPanel
           classNameList="flex flex-col  justify-center gap-nav-responsive  navigation-responsive"

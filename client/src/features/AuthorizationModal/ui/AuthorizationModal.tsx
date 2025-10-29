@@ -3,8 +3,8 @@ import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import { useTranslate } from '../../../shared/lib/i18n';
 import { type MouseEvent } from 'react';
 import { AuthorizationForms } from './AuthorizationForms';
-import { Text } from '../../../shared/ui/atoms/Text';
 import { useAuthorizationContext } from '../context';
+import { Text } from '../../../shared/ui/atoms';
 
 type FormsName = 'login' | 'signUp';
 

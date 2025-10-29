@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { IRoleDocument } from "./Roles";
 const { Schema } = mongoose;
 
 // interface
@@ -9,7 +10,7 @@ export interface IUser {
   avatar: string;
   userType: "author" | "client";
   theme: "light" | "dark";
-  roles: mongoose.Types.ObjectId[];
+  roles: (mongoose.Types.ObjectId | IRoleDocument)[];
   gallery: mongoose.Types.ObjectId[];
 
   // posts: mongoose.Schema.Types.ObjectId[];

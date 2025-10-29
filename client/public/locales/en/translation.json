@@ -7,7 +7,8 @@
   },
   "button": {
     "signIn": "Sign In",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "getStarted": "Get Started"
   },
   "modal": {
     "tabs": {
@@ -45,7 +46,8 @@
         "imageUploaded": "Image uploaded",
         "nftDeleted": "NFT deleted",
         "nftChanged": "NFT changed",
-        "nftAdded": "NFT added"
+        "nftAdded": "NFT added",
+        "NftUpdated": "NFT updated"
       },
       "error": {
         "usernameExists": "Username already exists",
@@ -67,11 +69,25 @@
         "invalidNftId": "Invalid NFT ID",
         "failedToUpdateNft": "Failed to update NFT",
         "failedToDeleteNft": "Failed to delete NFT",
-        "failedToUploadImage": "Failed to update Image",
-        "fileNotFound": "File not found",
         "failedToCreateNft": "Failed to create NFT",
         "failedToGetNftList": "Failed to get NFT list",
-        "categoryNotFound": "Category not found"
+        "NftNotUpdated": "NFT not updated",
+        "FailedToGetTopNfts": "Failed to get top NFTs",
+
+        "failedToUploadImage": "Failed to update Image",
+        "fileNotFound": "File not found",
+
+        "categoryNotFound": "Category not found",
+
+        "NameIsRequired": "Name is required",
+        "DescriptionIsRequired": "Description is required",
+        "ImageIsRequired": "Image is required",
+        "PriceIsRequired": "Price is required",
+        "DeleteImageUrlIsRequired": "Image removal link required",
+        "NeedAtLeastThreeKeywords": "Need at least three keywords",
+
+        "UserNotRegistered": "User not registered",
+        "alreadyViewed": "Already viewed"
       }
     }
   }

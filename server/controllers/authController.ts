@@ -7,6 +7,8 @@ import Roles from "../models/Roles";
 import { validationResult } from "express-validator";
 import { IRequest } from "../types/types";
 import { handleControllerError } from "../utils/handleControllerError";
+import mongoose from "mongoose";
+import Nft from "../models/Nft";
 
 // interface IRequest extends Request {
 //   userId?: string;
@@ -159,6 +161,45 @@ export const getMe = async (req: IRequest, res: Response) => {
     // res.status(404).json("Access denied");
   }
 };
+// --------------------------------🧩-delete profile
+
+export const deleteProfile = async (req: IRequest, res: Response) => {
+  try {
+    const userid = req.userId;
+    const deletedProfileId = req.params.id;
+    const role = req.roles;
+
+    if (!userid) return res.status(403).json({ message: "accessDenied" });
+
+    if (
+      !mongoose.Types.ObjectId.isValid(userid) ||
+      !mongoose.Types.ObjectId.isValid(deletedProfileId)
+    )
+      return;
+
+    const user = await User.findById(userid).populate("roles", "value");
+
+    if (user?.id !== deletedProfileId && !role?.includes("ADMIN")) {
+      return res.status(403).json({ message: "accessDenied" });
+    }
+
+    // !---------проверить после создания UI
+
+    await Promise.all([
+      User.findByIdAndDelete(deletedProfileId),
+      Nft.deleteMany({ authorId: deletedProfileId }),
+    ]);
+    // await User.findByIdAndDelete(deletedProfileId);
+    // await Nft.deleteMany({ authorId: deletedProfileId });
+
+    res.status(200).json({ messege: "delete profile" });
+  } catch (error) {
+    handleControllerError(error, res, "Not deleted profile");
+  }
+};
+
+// admin token
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjY5MWUxMjFkMDI2NjVkZThjMmFiNiIsInVzZXJUeXBlIjoiYXV0aG9yIiwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNzYwOTk1MTQzLCJleHAiOjE3NjM1ODcxNDN9.AmG_xyAnVkmMyU3uVnm7GgpT5i20ewZpeBvKFSucMe8
 
 // ----------------------
 // ---------------------------------------------------------

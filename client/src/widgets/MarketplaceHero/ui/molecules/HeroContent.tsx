@@ -1,17 +1,34 @@
-import { Button } from '../../../../shared/ui/atoms/Button';
-import { Icon } from '../../../../shared/ui/atoms/Icon';
-import { Text } from '../../../../shared/ui/atoms/Text';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTranslate } from '../../../../shared/lib/i18n';
+
+import { ButtonWithIcon } from './ButtonWithIcon';
+import { StatystycsContent } from './StatisticsContent';
+import { Text } from '../../../../shared/ui/atoms';
 
 export const HeroContent = () => {
+  const { t } = useTranslation('heroContent');
+  const { t: tt } = useTranslation('translation');
+
+  const statisticsName = useTranslate({
+    document: 'heroContent',
+    translateKey: 'statistics',
+    returnObjects: true,
+  });
+
+  const statisticsArr = useMemo(
+    () => Object.entries(statisticsName.translateVariables),
+    [statisticsName.translateVariables],
+  );
+
   return (
-    <div className="basis-1/2 flex flex-col heroContent-gap-responsive">
+    <div className="basis-1/2 flex flex-col heroContent-gap-responsive ">
       <Text
         className="text-primary-text-color px-2.5 leading-[110%] hero-tytle-size"
         font="font-work-sans-semibold"
-        // size="t-text-3xl"
         Element="h1"
       >
-        Discover digital art & Collect NFTs
+        {t('heroTitle')}
       </Text>
       <Text
         className="text-primary-text-color px-2.5 leading-[160%] responsive-size-md-md"
@@ -19,63 +36,25 @@ export const HeroContent = () => {
         size="t-text-md"
         Element="p"
       >
-        NFT marketplace UI created with Anima for Figma. Collect, buy and sell
-        art from more than 20k NFT artists.
+        {t('heroDesc')}
       </Text>
 
-      {/* button */}
-      <Button
+      {/* --------------button */}
+      <ButtonWithIcon
         className="py-5 px-12 max-w-[224px] flex marketplaceHero-button-smallSize-hidden"
         radius="xl"
+        onClick={() => console.log('Hero click')}
       >
-        <Icon name="rocket-icon" className="mr-3" size={20} />
-        <Text
-          Element="span"
-          size="t-text-sm"
-          font="font-work-sans-semibold"
-          className="static-text-white-color"
-        >
-          Get Started
-        </Text>
-      </Button>
-      {/* CounterStat */}
-      <div className="flex gap-7  text-primary-text-color marketplaceHero-button-smallSize-hidden">
-        <div className=" basis-1/3  ">
-          <Text
-            Element="h4"
-            font="font-space-mono-bold"
-            className="hero-counter-number-size"
-          >
-            170k+
-          </Text>
-          <Text Element="span" size="t-text-md" font="font-work-sans-regular">
-            TotalSale
-          </Text>
-        </div>
-        <div className=" basis-1/3 ">
-          <Text
-            Element="h4"
-            font="font-space-mono-bold"
-            className="hero-counter-number-size"
-          >
-            170k+
-          </Text>
-          <Text Element="span" size="t-text-md" font="font-work-sans-regular">
-            Artists
-          </Text>
-        </div>
-        <div className=" basis-1/3 ">
-          <Text
-            Element="h4"
-            font="font-space-mono-bold"
-            className="hero-counter-number-size"
-          >
-            170k+
-          </Text>
-          <Text Element="span" size="t-text-md" font="font-work-sans-regular">
-            Images
-          </Text>
-        </div>
+        {tt('button.getStarted')}
+      </ButtonWithIcon>
+
+      {/*---------------Statistics */}
+      <div
+        className="flex gap-7  text-primary-text-color
+       marketplaceHero-button-smallSize-hidden "
+      >
+        {/* -------------Content*/}
+        <StatystycsContent statisticsArr={statisticsArr} />
       </div>
     </div>
   );

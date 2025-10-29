@@ -1,7 +1,7 @@
-import { Input } from '../../atoms/Input/Input';
 import { useField } from 'formik';
-import type { InputWrapper } from '../../atoms/Input/types';
 import { useTranslate } from '../../../lib/i18n';
+import { Input } from '../../atoms';
+import type { InputWrapper } from '../../atoms/Input/types';
 
 export const FormikInput = ({
   id,
