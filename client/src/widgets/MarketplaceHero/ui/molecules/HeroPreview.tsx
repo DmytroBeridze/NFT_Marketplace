@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { HeroSlide } from './HeroSlide';
 import { CenteredMessage } from '../../../../shared/ui/helpers';
 import { SwiperNavButton } from '../atoms';
+// import { useShineEffect } from '../../../../shared/lib/hooks/useShineEffect';
 
 export const HeroPreview = () => {
   const { isError, isLoading, data } = useGetTopNftsQuery(10);
@@ -20,7 +21,9 @@ export const HeroPreview = () => {
   const nextRef = useRef(null);
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+  // const { shine, setShine } = useShineEffect();
   const [shine, setShine] = useState<boolean>(false);
+
   // const { randomElement, updateRandom } = useRandomItem(items);
 
   // ------🏷️-GSAP previw anination
@@ -33,29 +36,15 @@ export const HeroPreview = () => {
       yoyo: true,
       ease: 'sine.inOut',
       transformOrigin: 'center center',
+      onRepeat: () => {
+        setTimeout(() => {
+          setShine((prev) => !prev);
+        }, 1500);
+      },
     });
 
     return () => {
       anim.kill();
-    };
-  }, []);
-
-  // !--------------------------------------вынести
-  useEffect(() => {
-    let intervalId: any;
-    // let intervalId:NodeJS.Timeout;
-
-    const timeoutId = setTimeout(() => {
-      intervalId = setInterval(() => {
-        setShine((prevState) => !prevState);
-
-        // setTimeout(() => setShine(false), 800);
-      }, 2500);
-    }, 1200);
-
-    return () => {
-      clearTimeout(intervalId);
-      clearTimeout(timeoutId);
     };
   }, []);
 
@@ -75,7 +64,8 @@ export const HeroPreview = () => {
     >
       <Swiper
         ref={swiperRef}
-        className={`w-full h-full mySwiper shadow-secondary rounded-2xl relative  overflow-hidden  ${shine ? 'shine' : ''}`}
+        className={`w-full h-full mySwiper shadow-secondary
+           rounded-2xl relative  overflow-hidden  ${shine ? 'shine' : ''}`}
         modules={[Navigation, Autoplay]}
         slidesPerView={1}
         onSlideChange={(swiper) => {
