@@ -73,3 +73,44 @@ export const deleteGallery = async (req: Request, res: Response) => {
     handleControllerError(error, res, "Gallery delete error");
   }
 };
+
+// ---------------------------------🧩 get Gallery by rating
+
+export const getGalleryByRating = async (req: Request, res: Response) => {
+  try {
+    const galleries = await Gallery.aggregate([
+      //  Подтянуть к каждой галерее массив NFT, которые принадлежат ей
+      {
+        $lookup: {
+          from: "nfts", // коллекция, из которой подтягиваем данные (NFT)
+          localField: "_id", // поле в Gallery (id галереи)
+          foreignField: "gallery", // поле в NFT, которое хранит id галереи
+          as: "nfts", // как назвать поле с найденными NFT у галереи
+        },
+      },
+      //  Посчитать средний рейтинг NFT внутри каждой галереи
+      {
+        $addFields: {
+          avgRating: { $ifNull: [{ $avg: "$nfts.rating" }, 0] }, // если нет рейтинга → 0
+        },
+      },
+      //  Отсортировать галереи по среднему рейтингу (от большего к меньшему)
+      { $sort: { avgRating: -1 } },
+      //  Оставить только топ-3 галереи
+      { $limit: 3 },
+      //  Выбрать, какие поля отправить клиенту
+      {
+        $project: {
+          name: 1, // отдать поле name
+          cover: 1, // отдать обложку галереи
+          avgRating: 1, // отдать средний рейтинг
+          nfts: { $slice: ["$nfts", 3] }, // оставить только первые 3 NFT в массиве для превь
+        },
+      },
+    ]);
+
+    res.status(200).json({ message: "Galleries loaded", galleries });
+  } catch (error) {
+    handleControllerError(error, res, "Galleries loading error");
+  }
+};
