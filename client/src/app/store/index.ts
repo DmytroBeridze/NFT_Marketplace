@@ -6,6 +6,7 @@ import { authApi } from '../../features/AuthorizationModal/model';
 import { userApi } from '../../entities/user/model';
 import { statisticsApi } from '../../widgets/MarketplaceHero/model/statisticApi';
 import { topNftApi } from '../../widgets/MarketplaceHero/model/topNftApi';
+import { trendingCollectionApi } from '../../widgets/TrendingCollection/model/trendingCollectionApi';
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
   console.log('[Test action]:', action.type);
@@ -22,6 +23,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [statisticsApi.reducerPath]: statisticsApi.reducer,
     [topNftApi.reducerPath]: topNftApi.reducer,
+    [trendingCollectionApi.reducerPath]: trendingCollectionApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -29,6 +31,7 @@ export const store = configureStore({
       .concat(userApi.middleware)
       .concat(statisticsApi.middleware)
       .concat(topNftApi.middleware)
+      .concat(trendingCollectionApi.middleware)
 
       .prepend(testMiddleware),
 });

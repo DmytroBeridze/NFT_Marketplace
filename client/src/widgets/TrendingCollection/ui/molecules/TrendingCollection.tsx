@@ -1,9 +1,12 @@
-import { Image, Text } from '../../../../shared/ui/atoms';
 import { SectionHeader } from '../../../../shared/ui/molecules/SectionHeader';
-import plugImg from '../../../../shared/assets/images/plugImage.png';
-import plugAvatar from '../../../../shared/assets/images/user_plug.png';
+import { useGetTrendingCollectionQuery } from '../../model';
+import { CollectionCard } from './CollectionCard';
 
 export const TrendingCollection = () => {
+  const { isError, isLoading, data } = useGetTrendingCollectionQuery();
+  const gallerits = data?.galleries;
+  console.log(data?.galleries);
+
   return (
     <section className="main-padding-responsive">
       <SectionHeader
@@ -12,47 +15,21 @@ export const TrendingCollection = () => {
       />
 
       <div className="grid grid-cols-3 gap-7 ">
-        <article className="  grid grid-cols-3 gap-3.5">
-          <div className="aspect-square col-start-1 col-end-4 rounded-[20px] overflow-hidden border border-emerald-700">
-            <Image alt="avatar" src={plugImg} />
-          </div>
-          <div className="aspect-square rounded-[20px] overflow-hidden border border-emerald-700">
-            <Image alt="avatar" src={plugImg} />
-          </div>
-          <div className="aspect-square rounded-[20px] overflow-hidden border border-emerald-700">
-            <Image alt="avatar" src={plugImg} />
-          </div>
-          <div className="aspect-square rounded-[20px] overflow-hidden border border-emerald-700">
-            <Image alt="avatar" src={plugImg} />
-          </div>
-          <div className=" col-start-1 col-end-4 overflow-hidden border border-emerald-700">
-            <Text
-              Element="h3"
-              font="font-work-sans-semibold"
-              size="t-text-md"
-              color="text-primary-text-color"
-            >
-              DSGN Animals
-            </Text>
-            <div className="flex items-center gap-3">
-              <Image
-                alt="avatar"
-                width="w-[24px]"
-                height="h-[24px]"
-                src={plugAvatar}
-              />
+        {gallerits?.map((gallery) => {
+          const { _id, author, authorAvatar, name, nfts, nftsQuantity } =
+            gallery;
+          return (
+            <CollectionCard
+              key={_id}
+              author={author}
+              authorAvatar={authorAvatar}
+              name={name}
+              nfts={nfts}
+              nftsQuantity={nftsQuantity}
+            />
+          );
+        })}
 
-              <Text
-                Element="span"
-                font="font-work-sans-regular"
-                size="t-text-sm"
-                color="text-primary-text-color"
-              >
-                MrFox
-              </Text>
-            </div>
-          </div>
-        </article>
         {/* --- */}
       </div>
     </section>

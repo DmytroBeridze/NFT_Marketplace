@@ -78,9 +78,6 @@ export const deleteGallery = async (req: Request, res: Response) => {
 
 export const getGalleryByRating = async (req: Request, res: Response) => {
   try {
-    const galleries1 = await Gallery.find();
-    console.log(galleries1);
-
     const galleries = await Gallery.aggregate([
       //  Подтянуть к каждой галерее массив NFT, которые принадлежат ей
       {
