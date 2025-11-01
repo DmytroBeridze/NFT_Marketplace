@@ -11,7 +11,7 @@ export interface IUser {
   userType: "author" | "client";
   theme: "light" | "dark";
   roles: (mongoose.Types.ObjectId | IRoleDocument)[];
-  gallery: mongoose.Types.ObjectId[];
+  // gallery: mongoose.Types.ObjectId[];
 
   // posts: mongoose.Schema.Types.ObjectId[];
 }
@@ -48,12 +48,12 @@ const UserSchema = new Schema<IUser>(
 
       enum: ["light", "dark"],
     },
-    gallery: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Gallery",
-      },
-    ],
+    // gallery: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Gallery",
+    //   },
+    // ],
     roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Roles" }],
   },
   { timestamps: true }

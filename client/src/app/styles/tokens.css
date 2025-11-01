@@ -200,10 +200,21 @@
 .responsive-size-md {
   font-size: var(--responsive-size-md);
 }
+/*от 28 px до 38 px*/
+.responsive-size-lg {
+  font-size: var(--responsive-size-lg);
+}
 
 /*-----------------------spacings  */
 .gap-nav-responsive {
   gap: var(--gap-nav-responsive);
+}
+/* -----------------------padding */
+.main-padding-responsive {
+  padding: var(--main-padding) 0;
+}
+.block-title-padding-responsive {
+  padding: 0 0 var(--title-padding-responsive);
 }
 
 /* ---------------------ua font correction */

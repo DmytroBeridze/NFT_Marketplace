@@ -78,6 +78,9 @@ export const deleteGallery = async (req: Request, res: Response) => {
 
 export const getGalleryByRating = async (req: Request, res: Response) => {
   try {
+    const galleries1 = await Gallery.find();
+    console.log(galleries1);
+
     const galleries = await Gallery.aggregate([
       //  Подтянуть к каждой галерее массив NFT, которые принадлежат ей
       {
@@ -88,9 +91,18 @@ export const getGalleryByRating = async (req: Request, res: Response) => {
           as: "nfts", // как назвать поле с найденными NFT у галереи
         },
       },
+      {
+        $lookup: {
+          from: "users",
+          localField: "author",
+          foreignField: "_id",
+          as: "authorInfo",
+        },
+      },
       //  Посчитать средний рейтинг NFT внутри каждой галереи
       {
         $addFields: {
+          authorInfo: { $arrayElemAt: ["$authorInfo", 0] }, // Оставляем только одного автора, а не массив
           avgRating: { $ifNull: [{ $avg: "$nfts.rating" }, 0] }, // если нет рейтинга → 0
         },
       },
@@ -105,6 +117,12 @@ export const getGalleryByRating = async (req: Request, res: Response) => {
           cover: 1, // отдать обложку галереи
           avgRating: 1, // отдать средний рейтинг
           nfts: { $slice: ["$nfts", 3] }, // оставить только первые 3 NFT в массиве для превь
+          nftsQuantity: { $size: "$nfts" }, //колличество работ в галлерее
+
+          // сокращаем данные автора (чтобы не отдавать пароль и лишнее)
+          author: "$authorInfo.userName",
+          authorAvatar: "$authorInfo.avatar",
+          authorId: "$authorInfo._id",
         },
       },
     ]);

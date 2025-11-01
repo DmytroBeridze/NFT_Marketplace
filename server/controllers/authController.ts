@@ -141,9 +141,8 @@ export const login = async (req: Request, res: Response) => {
 // ⚠️IRequest розштрює Response тому що в req записується id міддлваром в authRouts
 export const getMe = async (req: IRequest, res: Response) => {
   try {
-    const user = await User.findById(req.userId)
-      .populate("roles")
-      .populate("gallery");
+    const user = await User.findById(req.userId).populate("roles");
+    // .populate("gallery");
     if (!user || !user.password) {
       return res.status(404).json({ message: "userNotFound" });
       // return res.status(404).json({ message: "User not found" });

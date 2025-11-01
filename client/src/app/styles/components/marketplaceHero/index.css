@@ -12,9 +12,9 @@
   font-size: var(--responsive-size-md-md);
 }
 /*----------------------spacings*/
-.hero-padding-responsive {
+/* .hero-padding-responsive {
   padding: var(--hero-padding) 0;
-}
+} */
 .heroContent-gap-responsive {
   gap: clamp(0.625rem, 0.258rem + 1.84vw, 1.75rem);
   /* gap: 1.75rem; */
