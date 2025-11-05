@@ -22,12 +22,12 @@
 
 /* ---------------------adaptive */
 .marketplaceHero-responsive {
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     flex-direction: row;
   }
 }
 .heroPrewiew-responsive {
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     transform: translateY(-120px);
   }
 }
@@ -35,7 +35,7 @@
 .padding-md-responsive {
   padding: var(--hero-image-text-padding-sm);
 
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     padding: var(--hero-image-text-padding-md);
   }
 }
@@ -43,7 +43,7 @@
 .heroContent-text-responsive {
   font-size: var(--responsive-size-md-sm);
 
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     font-size: var(--responsive-size-md-md);
   }
 }
@@ -51,7 +51,7 @@
 .heroContent-author-responsive {
   font-size: var(--responsive-size-sm-sm);
 
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     font-size: var(--responsive-size-sm);
   }
 }

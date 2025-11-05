@@ -12,6 +12,10 @@ export const getGalleriesByAuthor = async (req: Request, res: Response) => {
     if (!authorId)
       return res.status(400).json({ message: "AuthorId is required" });
 
+    if (!mongoose.Types.ObjectId.isValid(authorId)) {
+      return res.status(400).json({ message: "Invalid gallery ID" });
+    }
+
     const galleries = await Gallery.find({ author: authorId });
     res.status(200).json({ galleries, message: "Galleries loaded" });
   } catch (error) {
@@ -71,6 +75,44 @@ export const deleteGallery = async (req: Request, res: Response) => {
     });
   } catch (error) {
     handleControllerError(error, res, "Gallery delete error");
+  }
+};
+
+// ---------------------------------🧩 get Gallery by id
+
+export const getGalleryById = async (req: Request, res: Response) => {
+  try {
+    const { galleryId } = req.params;
+
+    if (!galleryId)
+      return res.status(400).json({ message: "Gallery is required" });
+
+    if (!mongoose.Types.ObjectId.isValid(galleryId)) {
+      return res.status(400).json({ message: "Invalid gallery ID" });
+    }
+
+    const gallery = await Gallery.findById(galleryId).populate(
+      "author",
+      "userName userMail avatar "
+    );
+    if (!gallery) return res.status(404).json({ message: "Gallery not found" });
+
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 20;
+    const skip = (page - 1) * limit;
+    const nfts = await Nft.find({ gallery: galleryId }).skip(skip).limit(limit);
+    const total = await Nft.countDocuments({ gallery: galleryId });
+
+    return res.status(200).json({
+      message: "Galleries uploaded",
+      gallery,
+      nfts,
+      total,
+      page,
+      limit,
+    });
+  } catch (error) {
+    handleControllerError(error, res, "Galleries loading error");
   }
 };
 

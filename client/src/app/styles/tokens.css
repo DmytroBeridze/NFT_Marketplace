@@ -224,17 +224,17 @@
 }
 /* ---------------------adaptive */
 .navigation-responsive {
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     display: flex;
   }
 }
 .burger-button-responsive {
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     display: none;
   }
 }
 .burger-menue-responsive {
-  @media (min-width: 834px) {
+  @media (min-width: 835px) {
     display: none;
   }
 }
@@ -247,7 +247,7 @@
 }
 
 /* поведінка languageSwitcher в бургері є ховер в хедері немає */
-@media (min-width: 834px) {
+@media (min-width: 835px) {
   .bg-burger-hover-background-color {
     background-color: transparent !important;
     padding: 0 1rem;

@@ -18,6 +18,8 @@ export const StatisticItem = ({
   statistics,
   isLoading,
 }: StatisticItemProps) => {
+  console.log(statKey);
+
   return (
     <div
       className={` basis-1/3 heroContent-Statistics-elements-responsive `}

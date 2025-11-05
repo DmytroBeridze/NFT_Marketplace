@@ -5,6 +5,7 @@ import { Rankings } from '../../pages/Rankings';
 import { ConnectWallet } from '../../pages/ConnectWallet';
 import { Dashboard } from '../../pages/Dashboard';
 import { ProtectedRoute } from '../../shared/routes';
+import { AuthorCollection } from '../../pages/AuthorCollection';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [{ path: 'dashboard', Component: Dashboard }],
       },
+      { path: 'collection/:galleryId', Component: AuthorCollection },
     ],
   },
 ]);

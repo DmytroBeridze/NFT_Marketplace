@@ -1,0 +1,34 @@
+/* ---------------------adaptive */
+.trending-responsive {
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 375px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 835px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.trending-quantity-responsive {
+  font-size: clamp(1rem, -1.182rem + 10.91vw, 1.375rem);
+  /* font-size: 16px; */
+  @media (min-width: 375px) {
+    font-size: clamp(0.625rem, 0.014rem + 2.61vw, 1.375rem);
+    /* font-size: 20px; */
+  }
+  @media (min-width: 835px) {
+    font-size: clamp(0.938rem, 0.152rem + 1.51vw, 1.375rem);
+    /* font-size: 22px; */
+  }
+}
+.trending-preview-responsive {
+  border-radius: 20px;
+  @media (min-width: 375px) {
+    border-radius: clamp(0.625rem, 0.115rem + 2.17vw, 1.25rem);
+  }
+  @media (min-width: 835px) {
+    border-radius: clamp(0.875rem, 0.202rem + 1.29vw, 1.25rem);
+  }
+}

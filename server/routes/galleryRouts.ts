@@ -1,6 +1,7 @@
 import {
   deleteGallery,
   getGalleriesByAuthor,
+  getGalleryById,
   getGalleryByRating,
   setAuthorGalleries,
 } from "../controllers/galleryController";
@@ -9,6 +10,7 @@ const router = express.Router();
 
 router.get("/", getGalleriesByAuthor);
 router.get("/top", getGalleryByRating);
+router.get("/:galleryId", getGalleryById);
 router.post("/", setAuthorGalleries);
 router.delete("/", deleteGallery);
 
