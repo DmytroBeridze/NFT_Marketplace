@@ -26,7 +26,6 @@ const CollectionCardComponent = ({
 }: CollectionCardProps) => {
   const mainPreview = nfts[0]?.imageUrl ?? fallbackImage;
   const mainAltImg = nfts[0]?.name ?? 'main img';
-  console.log(galleryId);
 
   const previewImages = Array.from({ length: 2 }, (_, i) => {
     const nft = nfts[i + 1];

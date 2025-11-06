@@ -1,14 +1,19 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../../../shared/lib/i18n';
 
 import { ButtonWithIcon } from './ButtonWithIcon';
 import { StatystycsContent } from './StatisticsContent';
 import { Text } from '../../../../shared/ui/atoms';
+import { useNavigate } from 'react-router-dom';
+import { useGetMeQuery } from '../../../../entities/user/model';
+import { useAppSelector } from '../../../../app/store/reduxHooks';
 
 export const HeroContent = () => {
   const { t } = useTranslation('heroContent');
   const { t: tt } = useTranslation('translation');
+  const navigate = useNavigate();
+  const { data } = useAppSelector((state) => state.user);
 
   const statisticsName = useTranslate({
     document: 'heroContent',
@@ -40,10 +45,13 @@ export const HeroContent = () => {
       </Text>
 
       {/* --------------button */}
+
       <ButtonWithIcon
         className="py-5 px-12 max-w-[224px] flex marketplaceHero-button-smallSize-hidden"
         radius="xl"
-        onClick={() => console.log('Hero click')}
+        onClick={() =>
+          navigate(`${data?.userType === 'author' ? '/dashboard' : '/gallery'}`)
+        }
       >
         {tt('button.getStarted')}
       </ButtonWithIcon>

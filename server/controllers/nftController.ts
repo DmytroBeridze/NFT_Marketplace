@@ -382,3 +382,56 @@ export const setNftImage = async (req: ImageRequest, res: Response) => {
     // return res.status(500).json({ message: error.message || "Unknown error" });
   }
 };
+
+// --------------------------🧩 get top authors
+
+export const getAuthorsByRating = async (req: Request, res: Response) => {
+  try {
+    const topAuthors = await Nft.aggregate([
+      // Берём только проданные
+      { $match: { sold: true } },
+
+      // Сгруппировать по автору NFT
+      {
+        $group: {
+          _id: "$authorId", // Группируем все NFT по значению поля author (то есть ObjectId автора)
+          totalSales: { $sum: 1 }, // количество проданных NFT
+          totalRevenue: { $sum: "$price" }, // сумма продаж
+        },
+      },
+      // Присоединить информацию об авторе (из коллекции users)
+      {
+        $lookup: {
+          from: "users", // коллекция, из которой подтягиваем данные (User)
+          localField: "authorId", //поле в nft в котором указан id автора
+          foreignField: "_id", // поле в user по которому устанавливаем связь из nft
+          as: "authorData", //название нового объекта с данными
+        },
+      },
+      //  Разворачиваем массив
+      // { $unwind: "$authorData" },
+      { $unwind: { path: "$authorData", preserveNullAndEmptyArrays: true } }, // без preserveNullAndEmptyArrays Mongo просто удалит массив, если массив пустой(например удалили пользователя)
+
+      //  Можно выбрать нужные поля
+      {
+        $project: {
+          _id: 0,
+          authorId: "$_id",
+          userName: "$authorData.userName",
+          avatar: "$authorData.avatar",
+          totalSales: 1,
+          totalRevenue: 1,
+        },
+      },
+      // Сортировка по сумме или по количеству
+      {
+        $sort: { totalSales: -1 },
+      },
+      //  Лимитируем топ
+      { $limit: 12 },
+    ]);
+    res.status(200).json({ message: "Top authors loaded", topAuthors });
+  } catch (error) {
+    handleControllerError(error, res, "Top authors loading error");
+  }
+};

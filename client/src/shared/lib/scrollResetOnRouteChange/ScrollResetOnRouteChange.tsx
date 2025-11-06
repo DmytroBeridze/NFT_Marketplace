@@ -7,7 +7,6 @@ export const ScrollResetOnRouteChange = () => {
   let location = useLocation();
   const { isOpen } = useAppSelector((store) => store.burger);
   const { unlockScroll, lockScroll } = useScrollContext();
-  console.log(isOpen);
 
   // коли бургер відкритий, але екран >= 835 щоб розблокувався скрол
   // а коли екран <835 і бузгер відкритий- то блокувався
