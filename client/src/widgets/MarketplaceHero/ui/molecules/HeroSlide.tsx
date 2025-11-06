@@ -1,7 +1,7 @@
 import { Skeleton } from '../../../../shared/ui/atoms/Skeleton';
 import { NavLink } from 'react-router-dom';
 import { Image, Text } from '../../../../shared/ui/atoms';
-import type { INft } from '../../model/topNftApi';
+import type { INft } from '../../../../entities/nft/model';
 
 import PlugImage from '../../../../shared/assets/images/plugImage.webp';
 import UserPlug from '../../../../shared/assets/icons/user_plug.svg';
@@ -48,12 +48,14 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
           Component="div"
           background={'skeleton-adaptive-background rounded-md w-40 h-6'}
         />
-        <Text
-          font="font-work-sans-semibold"
-          className="heroContent-text-responsive relative"
-        >
-          {nft?.name}
-        </Text>
+        {!isLoading && (
+          <Text
+            font="font-work-sans-semibold"
+            className="heroContent-text-responsive relative"
+          >
+            {nft?.name}
+          </Text>
+        )}
 
         <div className="flex gap-3 align-middle justify-start">
           <div className="h-6 w-6 rounded-full overflow-hidden ">
@@ -64,7 +66,7 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
                 'skeleton-adaptive-background rounded-full w-full h-full'
               }
             />
-            {!isLoading ? (
+            {!isLoading && (
               <Image
                 alt="img"
                 src={avatar}
@@ -74,7 +76,18 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
                 objectPosition="object-center"
                 className="rounded-full "
               />
-            ) : null}
+            )}
+            {/* {!isLoading ? (
+              <Image
+                alt="img"
+                src={avatar}
+                height="h-full"
+                width="w-full"
+                objectFit="object-cover"
+                objectPosition="object-center"
+                className="rounded-full "
+              />
+            ) : null} */}
           </div>
 
           <NavLink to={'/rankings'} className="flex items-center">
@@ -82,9 +95,11 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
               isLoading={isLoading}
               background={'skeleton-adaptive-background rounded-md w-30 h-6'}
             />
-            <Text className="font-work-sans-regular heroContent-author-responsive relative ">
-              {nft?.authorId.userName}
-            </Text>
+            {!isLoading && (
+              <Text className="font-work-sans-regular heroContent-author-responsive relative ">
+                {nft?.authorId.userName}
+              </Text>
+            )}
           </NavLink>
         </div>
       </div>

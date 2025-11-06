@@ -12,7 +12,7 @@
  */
 
 interface SkeletonProps {
-  isLoading: boolean;
+  isLoading?: boolean;
   background: string;
   className?: string;
   Component?: React.ElementType;

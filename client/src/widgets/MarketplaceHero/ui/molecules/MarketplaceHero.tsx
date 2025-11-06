@@ -4,7 +4,7 @@ import { HeroPreview } from './HeroPreview';
 
 export const MarketplaceHero = () => {
   return (
-    <div className="flex flex-col gap-8 marketplaceHero-responsive">
+    <div className="flex flex-col gap-8 marketplaceHero-responsive main-padding-responsive">
       <HeroContent />
       <HeroPreview />
       <HeroActionBlock />

@@ -1,5 +1,6 @@
 import {
   deleteNFT,
+  getAuthorsByRating,
   getNft,
   getNftByRating,
   patchNft,
@@ -110,3 +111,7 @@ router.post(
 );
 
 export default router;
+
+// ------------------------get top authors
+
+router.get("/topAuthors", getAuthorsByRating);

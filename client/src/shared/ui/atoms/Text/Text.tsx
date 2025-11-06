@@ -7,7 +7,7 @@ export const Text = ({
   Element = 'div',
   size = 't-text-md',
   font = 'font-work-sans-regular',
-  color,
+  color = 'text-inherit',
   // color = 'text-primary-text-color',
 }: TextProps) => {
   return (
