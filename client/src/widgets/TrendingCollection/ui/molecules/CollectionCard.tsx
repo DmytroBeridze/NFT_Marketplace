@@ -3,7 +3,7 @@ import fallbackImage from '../../../../shared/assets/images/plugImage.webp';
 // import plugImg from '../../../../shared/assets/images/plugImage.png';
 import plugAvatar from '../../../../shared/assets/images/user_plug.png';
 import type { TrendingNft } from '../../../../entities/nft/model';
-import { memo, type ReactNode } from 'react';
+import { memo, useState, type ReactNode } from 'react';
 import { quantityFormatter } from '../../../../shared/lib/formatters';
 import { NavLink } from 'react-router-dom';
 
@@ -24,39 +24,35 @@ const CollectionCardComponent = ({
   nftsQuantity,
   nfts,
 }: CollectionCardProps) => {
-  const mainPreview = nfts[0]?.imageUrl ?? fallbackImage;
-  const mainAltImg = nfts[0]?.name ?? 'main img';
-
-  const previewImages = Array.from({ length: 2 }, (_, i) => {
-    const nft = nfts[i + 1];
+  const [gridIndex, setGridIndex] = useState<number>(0);
+  const previewImages = Array.from({ length: 3 }, (_, i) => {
+    // const nft = nfts[i];
     return {
-      alt: nft?.name ?? 'NFT',
-      img: nft?.imageUrl ?? fallbackImage,
-      id: nft?._id ?? `preview-${i}`,
+      alt: nfts[i]?.name ?? 'NFT',
+      img: nfts[i]?.imageUrl ?? fallbackImage,
+      id: nfts[i]?._id ?? `preview-${i}`,
     };
   });
 
-  // const previewImages = [
-  //   { alt: nfts[1]?.name, img: nfts[1]?.imageUrl, id: nfts[1]?._id },
-  //   { alt: nfts[2]?.name, img: nfts[2]?.imageUrl, id: nfts[2]?._id },
-  // ];
-
   return (
-    <article className="  grid grid-cols-3 gap-3.5">
-      {/* main img */}
-      <div className="aspect-square col-start-1 col-end-4 rounded-[20px] overflow-hidden shadow-primary">
-        <Image alt={mainAltImg} src={mainPreview} />
-      </div>
+    <article className=" grid grid-cols-3 gap-3.5  ">
       {/*------------------------ preview imgs */}
-      {previewImages.map(({ alt, img, id }) => (
-        <div
-          key={id}
-          className="aspect-square  overflow-hidden shadow-primary trending-preview-responsive"
-          // className="aspect-square rounded-[20px] overflow-hidden shadow-primary"
-        >
-          <Image alt={alt} src={img} />
-        </div>
-      ))}
+      {previewImages.map(({ alt, id, img }, i) => {
+        return (
+          <div
+            onClick={() => setGridIndex(i)}
+            key={id}
+            className={`aspect-square overflow-hidden shadow-primary trending-preview-responsive cursor-pointer  transition-all duration-500 ease-in-out 
+             ${
+               i === gridIndex
+                 ? ' scale-102 rounded-[20px] col-start-1 col-end-4 row-start-1 row-end-2 '
+                 : 'scale-99 opacity-80 '
+             }`}
+          >
+            <Image alt={alt} src={img} />
+          </div>
+        );
+      })}
 
       <NavLink
         to={`collection/${galleryId}`}
