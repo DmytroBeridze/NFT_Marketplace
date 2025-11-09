@@ -1,5 +1,6 @@
 import { InnerContainer } from '../../shared/ui/layout';
 import { MarketplaceHero } from '../../widgets/MarketplaceHero/ui';
+import { TopCreators } from '../../widgets/TopCreators/ui/molecules';
 import { TrendingCollection } from '../../widgets/TrendingCollection/ui';
 
 export const Marketplace = () => {
@@ -9,6 +10,7 @@ export const Marketplace = () => {
       <InnerContainer>
         <MarketplaceHero />
         <TrendingCollection />
+        <TopCreators />
       </InnerContainer>
     </div>
   );

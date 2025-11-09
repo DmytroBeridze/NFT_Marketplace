@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../../../shared/lib/i18n';
-import { ButtonWithIcon } from './ButtonWithIcon';
+import { ButtonWithIcon } from '../../../../shared/ui/molecules/ButtonWithIcon/ButtonWithIcon';
 import { StatystycsContent } from './StatisticsContent';
 
 export const HeroActionBlock = () => {

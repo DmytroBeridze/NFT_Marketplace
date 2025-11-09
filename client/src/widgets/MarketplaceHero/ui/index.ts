@@ -1,1 +1,1 @@
-export * from './molecules/MarketplaceHero';
+export * from './molecules/index';

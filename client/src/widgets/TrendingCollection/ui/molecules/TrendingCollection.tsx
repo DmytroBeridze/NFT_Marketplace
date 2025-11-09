@@ -52,21 +52,6 @@ export const TrendingCollection = () => {
                 />
               );
             })}
-
-        {/* {gallerits?.map((gallery) => {
-          const { _id, author, authorAvatar, name, nfts, nftsQuantity } =
-            gallery;
-          return (
-            <CollectionCard
-              key={_id}
-              author={author}
-              authorAvatar={authorAvatar}
-              name={name}
-              nfts={nfts}
-              nftsQuantity={nftsQuantity}
-            />
-          );
-        })} */}
       </div>
     </section>
   );

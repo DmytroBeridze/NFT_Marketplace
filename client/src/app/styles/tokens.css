@@ -141,6 +141,12 @@
 .shadow-secondary {
   box-shadow: var(--secondary-shadow);
 }
+
+.shadow-accent:hover {
+  /* border: 2px solid var(--primary-accent-color); */
+  box-shadow: var(--secondary-accent-shadow);
+}
+
 /* ---------------------focus */
 .input-focus:focus {
   border: 1px solid var(--primary-accent-color);
