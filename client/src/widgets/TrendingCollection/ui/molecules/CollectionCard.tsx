@@ -41,7 +41,7 @@ const CollectionCardComponent = ({
         return (
           <div
             style={{
-              transitionDuration: i === gridIndex ? '500ms' : '100ms',
+              transitionDuration: i === gridIndex ? '500ms' : '300ms',
             }}
             onClick={() => setGridIndex(i)}
             key={id}

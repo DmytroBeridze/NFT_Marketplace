@@ -47,7 +47,7 @@ export const HeroContent = () => {
       {/* --------------button */}
 
       <ButtonWithIcon
-        className="py-5 px-12 max-w-[224px] flex marketplaceHero-button-smallSize-hidden"
+        className="py-5 px-12 max-w-[224px] flex main-button-smallSize-hidden"
         radius="xl"
         onClick={() =>
           navigate(`${data?.userType === 'author' ? '/dashboard' : '/gallery'}`)
@@ -59,7 +59,7 @@ export const HeroContent = () => {
       {/*---------------Statistics */}
       <div
         className="flex gap-7  text-primary-text-color
-       marketplaceHero-button-smallSize-hidden "
+       main-button-smallSize-hidden "
       >
         {/* -------------Content*/}
         <StatystycsContent statisticsArr={statisticsArr} />

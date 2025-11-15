@@ -22,22 +22,35 @@
 
 /* ---------------------adaptive */
 .marketplaceHero-responsive {
-  @media (min-width: 835px) {
+  @media (min-width: 540px) {
     flex-direction: row;
   }
 }
-.heroPrewiew-responsive {
+/* .marketplaceHero-responsive {
   @media (min-width: 835px) {
+    flex-direction: row;
+  }
+} */
+.heroPrewiew-responsive {
+  @media (min-width: 540px) {
     transform: translateY(-120px);
   }
 }
+/* .heroPrewiew-responsive {
+  @media (min-width: 835px) {
+    transform: translateY(-120px);
+  }
+} */
 
 .padding-md-responsive {
   padding: var(--hero-image-text-padding-sm);
 
-  @media (min-width: 835px) {
+  @media (min-width: 540px) {
     padding: var(--hero-image-text-padding-md);
   }
+  /* @media (min-width: 835px) {
+    padding: var(--hero-image-text-padding-md);
+  } */
 }
 /* image name */
 .heroContent-text-responsive {
@@ -57,7 +70,7 @@
 }
 .heroContent-heroactionBlock-responsive {
   width: 100%;
-  @media (max-width: 380px) {
+  @media (max-width: 540px) {
     align-items: center;
   }
 }
@@ -79,8 +92,36 @@
     gap: 20px;
   }
 }
+/* @media (max-width: 540px) {
+    max-width: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+  }
+}
+.heroContent-Statistics-elements-responsive {
+  @media (max-width: 539px) {
+    max-width: 200px;
+    display: flex;
+    flex-direction: row-reverse;
 
-.marketplaceHero-button-smallSize-hidden {
+    gap: 20px;
+  }
+} */
+
+.main-button-smallSize-hidden {
+  /* .marketplaceHero-button-smallSize-hidden { */
+  @media (max-width: 539px) {
+    display: none;
+  }
+}
+.main-button-bigSize-hidden {
+  @media (min-width: 540px) {
+    display: none;
+  }
+}
+/* .marketplaceHero-button-smallSize-hidden {
   @media (max-width: 834px) {
     display: none;
   }
@@ -89,7 +130,7 @@
   @media (min-width: 834px) {
     display: none;
   }
-}
+} */
 
 /*--------------------------shine */
 .shine::before {
@@ -104,6 +145,7 @@
   transform: skewX(-30deg);
   left: -340px;
   animation: slide 0.4s linear;
+
   @media (min-width: 830px) {
     width: clamp(1rem, -8.271rem + 17.87vw, 6.25rem);
   }

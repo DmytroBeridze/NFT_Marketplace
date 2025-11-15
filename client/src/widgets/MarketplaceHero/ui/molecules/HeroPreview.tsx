@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, type SwiperRef } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
@@ -15,8 +15,11 @@ import { SwiperNavButton } from '../atoms';
 
 export const HeroPreview = () => {
   const { isError, isLoading, data } = useGetTopNftsQuery(10);
+
   const items = data?.items || [];
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<SwiperRef | null>(null);
+  // const swiperRef = useRef<HTMLDivElement | null>(null);
+  // const swiperRef = useRef(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
@@ -28,8 +31,11 @@ export const HeroPreview = () => {
 
   // ------🏷️-GSAP previw anination
   useEffect(() => {
-    gsap.set(swiperRef.current, { rotateY: -10 });
-    const anim = gsap.to(swiperRef.current, {
+    const element = swiperRef.current?.swiper?.el;
+    if (!element) return;
+
+    gsap.set(element, { rotateY: -10 });
+    const anim = gsap.to(element, {
       rotateY: 10,
       duration: 2.5,
       repeat: -1,
@@ -37,16 +43,14 @@ export const HeroPreview = () => {
       ease: 'sine.inOut',
       transformOrigin: 'center center',
       onRepeat: () => {
-        setTimeout(() => {
-          setShine((prev) => !prev);
-        }, 1500);
+        setTimeout(() => element?.classList.toggle('shine'), 1500);
       },
     });
 
     return () => {
       anim.kill();
     };
-  }, []);
+  }, [swiperRef.current?.swiper?.el]);
 
   // --------------Error
   if (isError) return <CenteredMessage message="Error loading..." />;
