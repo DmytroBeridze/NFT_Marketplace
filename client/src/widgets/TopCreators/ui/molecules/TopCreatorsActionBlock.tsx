@@ -5,11 +5,12 @@ export const TopCreatorsActionBlock = () => {
     <>
       <ButtonWithIcon
         variant="outline"
-        className=" py-5   px-12 max-h-16  w-full
+        className=" py-5   px-12 max-h-16 mt-10 w-full
           items-center justify-center
           main-button-bigSize-hidden"
         radius="xl"
         textClassName="text-base"
+        iconClassName="static-text-purple-color"
         onClick={() => console.log('Ranking')}
       >
         View Rankings

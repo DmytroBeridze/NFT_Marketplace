@@ -3,8 +3,13 @@ import { useTranslate } from '../../../../shared/lib/i18n';
 import { ButtonWithIcon } from '../../../../shared/ui/molecules/ButtonWithIcon/ButtonWithIcon';
 import { StatystycsContent } from './StatisticsContent';
 
+import { useAppSelector } from '../../../../app/store/reduxHooks';
+import { useNavigate } from 'react-router-dom';
+
 export const HeroActionBlock = () => {
   const { t: tt } = useTranslation('translation');
+  const { data } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const statisticsName = useTranslate({
     document: 'heroContent',
@@ -19,6 +24,10 @@ export const HeroActionBlock = () => {
       <ButtonWithIcon
         className="py-5 px-12  flex  justify-center w-full "
         radius="xl"
+        fill="white"
+        onClick={() =>
+          navigate(`${data?.userType === 'author' ? '/dashboard' : '/gallery'}`)
+        }
       >
         {tt('button.getStarted')}
       </ButtonWithIcon>

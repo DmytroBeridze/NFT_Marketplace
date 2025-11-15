@@ -21,6 +21,7 @@ import { ReactComponent as Spinner } from '../../assets/icons/spinner.svg';
 import { ReactComponent as Door } from '../../assets/icons/Door.svg';
 import { ReactComponent as Arrow } from '../../assets/icons/Arrow.svg';
 import { ReactComponent as UserPlug } from '../../assets/icons/user_plug.svg';
+import { ReactComponent as FallbackAvatar } from '../../assets/icons/FallbackAvatar.svg';
 
 export const iconsMap = {
   'logo-icon': LogoIcon,
@@ -45,6 +46,7 @@ export const iconsMap = {
   'door-icon': Door,
   'arrow-icon': Arrow,
   'userPlug-icon': UserPlug,
+  'fallbackAvatar-icon': FallbackAvatar,
   spinner: Spinner,
 } as const;
 

@@ -8,19 +8,11 @@ interface ButtonWithIconProps extends TextSecondaryProps {
   variant?: 'primary' | 'outline' | 'secondary' | 'loading';
   textSize?: TextSecondaryProps['size'];
   textClassName?: string;
+  iconClassName?: string;
+  fill?: string;
 
   onClick?: () => void;
 }
-// interface ButtonWithIconProps {
-//   className?: string;
-//   children?: string;
-//   radius?: 'sm' | 'md' | 'lg' | 'xl' | 'responsive';
-//   variant?: 'primary' | 'outline' | 'secondary' | 'loading';
-//   textSize?: TextSize;
-//   textClassName?: string;
-//   color?: string;
-//   onClick?: () => void;
-// }
 
 export const ButtonWithIcon = ({
   className,
@@ -28,26 +20,33 @@ export const ButtonWithIcon = ({
   children,
   onClick,
   variant,
-  textClassName,
+  textClassName = 'static-text-white-color',
+  iconClassName,
   textSize,
   color,
+  fill,
   // textSize = 't-text-sm',
 }: ButtonWithIconProps) => {
   return (
     <Button
-      className={`flex ${className} `}
+      className={`flex ${className ?? ''} `}
       radius={radius}
       onClick={onClick}
       variant={variant}
     >
-      <Icon name="rocket-icon" className="mr-3" size={20} />
+      <Icon
+        name="rocket-icon"
+        className={`mr-3 ${iconClassName ?? ''} `}
+        size={20}
+        fill={fill}
+      />
       <Text
         Element="span"
         size={textSize}
         color={color}
         // size="t-text-sm"
         font="font-work-sans-semibold"
-        className={`static-text-white-color ${textClassName} `}
+        className={` ${textClassName ?? ''} `}
       >
         {children}
       </Text>
