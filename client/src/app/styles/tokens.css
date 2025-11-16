@@ -192,11 +192,19 @@
   font-size: var(--font-size-3xl); /* 67px */
 }
 
+/*от 8 px до 16*/
+.responsive-size-xxs {
+  font-size: var(--responsive-size-xxs);
+}
 /*от 10 px до 16*/
 .responsive-size-sm {
   font-size: var(--responsive-size-sm);
 }
 
+/* от 8 px до 20 px*/
+.responsive-size-xs {
+  font-size: var(--responsive-size-xs);
+}
 /* от 10 px до 20 px*/
 .responsive-size-ms {
   font-size: var(--responsive-size-ms);

@@ -1,6 +1,6 @@
+import { TopCreatorsGallery } from '../../../../features/TopCreatorsGallery';
 import { TopCreatorsActionBlock } from './TopCreatorsActionBlock';
 import { TopCreatorsContent } from './TopCreatorsContent';
-import { TopCreatorsGallery } from './TopCreatorsGallery';
 
 export const TopCreators = () => {
   return (

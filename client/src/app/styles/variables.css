@@ -70,11 +70,23 @@
   --font-size-2xl: 3.188rem; /* 51px */
   --font-size-3xl: 4.188rem; /* 67px */
 
+  --responsive-size-xxs: clamp(
+    0.5rem,
+    0.337rem + 0.82vw,
+    1rem
+  ); /*от 8 px до 16 px*/
+
   --responsive-size-sm: clamp(
     0.625rem,
     0.5rem + 0.63vw,
     1rem
   ); /*от 10 px до 16*/
+
+  --responsive-size-xs: clamp(
+    0.5rem,
+    0.255rem + 1.22vw,
+    1.25rem
+  ); /* от 8 px до 20 px*/
 
   --responsive-size-ms: clamp(
     0.625rem,
@@ -93,6 +105,12 @@
     1.546rem + 1.02vw,
     2.375rem
   ); /*от 28 px до 38 px*/
+
+  --responsive-size-: clamp(
+    0.5rem,
+    0.337rem + 0.82vw,
+    1rem
+  ); /*от 8 px до 16 px*/
 
   /* spacings */
   --gap-nav-responsive: clamp(0.125rem, -0.667rem + 3.96vw, 2.5rem);

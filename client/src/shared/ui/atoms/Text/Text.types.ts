@@ -16,6 +16,8 @@ export interface TextProps {
     | 't-text-xl'
     | 't-text-2xl'
     | 't-text-3xl'
+    | 'responsive-size-xs'
+    | 'responsive-size-xxs'
     | 'responsive-size-sm'
     | 'responsive-size-ms'
     | 'responsive-size-md'

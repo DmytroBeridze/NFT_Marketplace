@@ -16,8 +16,7 @@ export const Avatar = ({ src, alt = 'avatar', className }: AvatarProps) => {
         'overflow-hidden',
         'max-w-[120px]',
         'max-h-[120px]',
-        'w-full',
-        'h-full',
+
         className,
       ]
         .filter(Boolean)
