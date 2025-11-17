@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../../../shared/lib/i18n';
 import { ButtonWithIcon } from '../../../../shared/ui/molecules/ButtonWithIcon/ButtonWithIcon';
-import { StatystycsContent } from './StatisticsContent';
+import { StatystycsContent } from '../../../../features/MarketplaceHero/ui/StatisticsContent';
 
 import { useAppSelector } from '../../../../app/store/reduxHooks';
 import { useNavigate } from 'react-router-dom';

@@ -17,8 +17,8 @@ export const TopCreatorsCard = ({ index }: { index?: number }) => {
       <Avatar
         className="w-[60%] h-[60%]"
         alt=""
-        // src=""
-        src="https://ichef.bbci.co.uk/news/480/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp"
+        src=""
+        // src="https://ichef.bbci.co.uk/news/480/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp"
       />
 
       <div className="flex flex-col items-center">

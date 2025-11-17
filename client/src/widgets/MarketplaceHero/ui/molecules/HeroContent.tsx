@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../../../shared/lib/i18n';
 
 import { ButtonWithIcon } from '../../../../shared/ui/molecules/ButtonWithIcon/ButtonWithIcon';
-import { StatystycsContent } from './StatisticsContent';
+import { StatystycsContent } from '../../../../features/MarketplaceHero/ui/StatisticsContent';
 import { Text } from '../../../../shared/ui/atoms';
 import { useNavigate } from 'react-router-dom';
 import { useGetMeQuery } from '../../../../entities/user/model';

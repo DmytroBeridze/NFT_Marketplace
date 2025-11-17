@@ -1,4 +1,4 @@
-import { TopCreatorsGallery } from '../../../../features/TopCreatorsGallery';
+import { TopCreatorsGallery } from '../../../../features/TopCreatorsGallery/ui';
 import { TopCreatorsActionBlock } from './TopCreatorsActionBlock';
 import { TopCreatorsContent } from './TopCreatorsContent';
 

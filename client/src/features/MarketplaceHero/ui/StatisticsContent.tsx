@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { t } from 'i18next';
 
-import { useGetStatisticsQuery } from '../../model';
-import { ErrorText } from '../../../../shared/ui/atoms';
-import { StatisticItem } from './StatisticItem';
+import { ErrorText } from '../../../shared/ui/atoms';
+import { StatisticItem } from '../../../widgets/MarketplaceHero/ui/molecules/StatisticItem';
+import { useGetStatisticsQuery } from '../model';
 
 interface StatystycsContentProps {
   statisticsArr: [string, string][];

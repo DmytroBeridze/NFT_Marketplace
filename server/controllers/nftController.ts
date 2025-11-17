@@ -403,7 +403,7 @@ export const getAuthorsByRating = async (req: Request, res: Response) => {
       {
         $lookup: {
           from: "users", // коллекция, из которой подтягиваем данные (User)
-          localField: "authorId", //поле в nft в котором указан id автора
+          localField: "_id", //це _id, створений у $group, що містить authorId (це не поле в nft а змінена структура за допомогою $group)
           foreignField: "_id", // поле в user по которому устанавливаем связь из nft
           as: "authorData", //название нового объекта с данными
         },
@@ -430,6 +430,8 @@ export const getAuthorsByRating = async (req: Request, res: Response) => {
       //  Лимитируем топ
       { $limit: 12 },
     ]);
+    console.log("----------------------------", topAuthors);
+
     res.status(200).json({ message: "Top authors loaded", topAuthors });
   } catch (error) {
     handleControllerError(error, res, "Top authors loading error");

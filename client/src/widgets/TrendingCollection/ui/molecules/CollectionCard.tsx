@@ -64,7 +64,7 @@ const CollectionCardComponent = ({
         to={`collection/${galleryId}`}
         className="aspect-square rounded-[20px] overflow-hidden 
       bg-primary-accent-color flex items-center justify-center shadow-primary
-       trending-preview-responsive"
+       trending-preview-responsive bg-hover-primary-accent-color duration-300"
       >
         <Text
           font="font-space-mono-bold"
