@@ -3,7 +3,7 @@ import PlugImg from '../../../assets/images/plugImage.webp';
 import { Icon } from '../../atoms/Icon';
 
 type AvatarProps = {
-  src: string;
+  src: string | null;
   alt: string;
   className?: string;
 };

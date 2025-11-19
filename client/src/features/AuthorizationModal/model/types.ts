@@ -1,3 +1,5 @@
+import type { UserData } from '../../../entities/user/model';
+
 // контракт для типізації  initialValues в SignUpForm
 export interface RegisterValues {
   userName: string;
@@ -15,17 +17,6 @@ export type LoginValues = Omit<
   RegisterValues,
   'userMail' | 'userconfirmPass' | 'userType'
 >;
-
-export type UserData = {
-  _id: string;
-  createdAt: string;
-  roles: string[];
-  updatedAt: string;
-  userMail: string;
-  userName: string;
-  userType: 'client' | 'author';
-  theme?: string;
-};
 
 export interface IRegisterResponse {
   message: string;

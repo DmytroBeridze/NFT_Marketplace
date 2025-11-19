@@ -418,7 +418,9 @@ export const getAuthorsByRating = async (req: Request, res: Response) => {
           _id: 0,
           authorId: "$_id",
           userName: "$authorData.userName",
-          avatar: "$authorData.avatar",
+          // якщо в юзера немає аватара, то встановлюємо в поле null (якщо не встановити, то в респонсі не буде поля avatar взагалі)
+          avatar: { $ifNull: ["$authorData.avatar", null] },
+          // avatar: "$authorData.avatar",
           totalSales: 1,
           totalRevenue: 1,
         },

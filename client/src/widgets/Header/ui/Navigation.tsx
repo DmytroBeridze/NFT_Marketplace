@@ -4,7 +4,7 @@ import {
 } from '../../../features/navigation';
 import { HeaderLogo } from '../../../shared/ui/molecules/HeaderLogo/ui/HeaderLogo';
 import { useTranslate } from '../../../shared/lib/i18n/useTranslate';
-import type { NavItems } from '../../../shared/types';
+import type { NavItems } from '../../../features/BurgerMenu/model';
 
 export const Navigation = () => {
   const { lang, translateVariables } = useTranslate<NavItems>({

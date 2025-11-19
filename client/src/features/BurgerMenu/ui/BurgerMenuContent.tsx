@@ -1,6 +1,6 @@
-import type { NavItems } from '../../../shared/types';
 import { NavigationPanel, type NavItemTuple } from '../../navigation';
 import { BurgerActions } from './BurgerActions';
+import type { NavItems } from '../model';
 import {
   HeaderLogo,
   LogoVariantContext,
