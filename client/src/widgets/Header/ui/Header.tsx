@@ -15,10 +15,11 @@ export const Header = () => {
         bg-primary-background-color
         text-primary-text-color
         py-5
-        px-5
+        px-12
         "
     >
-      <section className="  my-0 mx-auto flex items-center justify-between max-w-[1180px]">
+      <section className="  my-0 mx-auto flex items-center justify-between ">
+        {/* <section className="  my-0 mx-auto flex items-center justify-between max-w-[1180px]"> */}
         <Navigation />
         <HeaderActions />
 

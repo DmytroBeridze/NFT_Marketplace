@@ -20,7 +20,7 @@ export const TopCreatorsContent = () => {
       <ButtonWithIcon
         variant="outline"
         className=" py-5 px-6  md:px-12 sm:max-h-16  max-h-14 
-            shrink-0 items-center main-button-smallSize-hidden"
+            shrink-0 items-center main-button-smallSize-hidden  "
         radius="xl"
         iconClassName="static-text-purple-color"
         // fill={theme === 'light' ? 'black' : 'static-text-purple-color'}

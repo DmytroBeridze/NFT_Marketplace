@@ -57,7 +57,7 @@ export const BurgerActions = () => {
       </div>
       <div>
         {/* <div className="ease-in-out duration-300 flex items-center py-6 px-4 bg-burger-hover-background-color rounded-lg cursor-pointer w-full"> */}
-        <LangSwitcher className="w-18" />
+        <LangSwitcher className="w-18 " />
       </div>
     </section>
   );

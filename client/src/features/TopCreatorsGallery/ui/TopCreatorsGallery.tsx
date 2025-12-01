@@ -1,18 +1,46 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { TopCreatorsCard } from '../../../widgets/TopCreators/ui';
 import { useGetTopCreatorsQuery } from '../model';
 import { ErrorText } from '../../../shared/ui/atoms';
 
 export const TopCreatorsGallery = () => {
-  const skeletonItems = Array.from({ length: 12 });
+  const [gallerySize, setGallerySize] = useState<number>(12);
+  const { isError, isLoading, data } = useGetTopCreatorsQuery();
 
-  const { isLoading, data } = useGetTopCreatorsQuery();
-  const topAuthors = data?.topAuthors.slice(0, 13);
+  const skeletonItems = Array.from({ length: gallerySize });
+  const topAuthors = data?.topAuthors.slice(0, gallerySize);
 
-  let isError = true;
+  // let isError = true;
   // let isLoading = true;
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1200) setGallerySize(12);
+      else if (window.innerWidth > 834) setGallerySize(6);
+      else setGallerySize(5);
+    };
+    // const handleResize = () => {
+    //   if (window.innerWidth > 834) {
+    //     setGallerySize(12);
+    //   }
+    //   if (window.innerWidth <= 834) {
+    //     setGallerySize(6);
+    //   }
+    //   if (window.innerWidth <= 375) {
+    //     setGallerySize(5);
+    //   }
+    // };
+
+    handleResize();
+
+    window.addEventListener('resize', () => handleResize());
+
+    return () => window.removeEventListener('resize', () => handleResize());
+  }, []);
+
   return (
-    <div className="grid grid-cols-4 gap-7">
+    <div className=" topCreatorsGallery-responsive  ">
+      {/* <div className="grid grid-cols-1 gap-7 "> */}
       {isError && (
         <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
           Loading Error...

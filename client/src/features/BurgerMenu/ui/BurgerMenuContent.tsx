@@ -33,10 +33,10 @@ export const BurgerMenuContent = () => {
           onClick={closeBurgerMenu}
         />
         <NavigationPanel
-          classNameList="flex flex-col  justify-center gap-nav-responsive  navigation-responsive"
+          classNameList="flex flex-col  justify-center gap-nav-responsive  navigation-responsive "
           classNameItem="ease-in-out duration-300 flex items-center
          py-6 px-4 bg-burger-hover-background-color
-          rounded-lg   cursor-pointer"
+          rounded-lg   cursor-pointer border border-red-700"
           lang={lang}
           navItems={navItems}
           renderItem={(value, lang, isActive) => (
