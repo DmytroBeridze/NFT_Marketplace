@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import type { Creator } from '../../../../entities/user/model';
 import PlugImg from '../../../../shared/assets/images/plugImage.webp';
+import { useNavigate } from 'react-router-dom';
 
 interface TopCreatorsCardProps {
   author: Creator;
@@ -11,6 +12,7 @@ interface TopCreatorsCardProps {
 }
 
 export const TopCreatorsCard = ({ index, author }: TopCreatorsCardProps) => {
+  let navigate = useNavigate();
   const { authorId, totalRevenue, totalSales, userName, avatar } = author;
   console.log(author);
 
@@ -18,10 +20,16 @@ export const TopCreatorsCard = ({ index, author }: TopCreatorsCardProps) => {
 
   return (
     <article
-      className=" bg-secondary-background-color shadow-secondary rounded-2xl p-5 relative
-  
-  min-w-0 w-full
-  lg:aspect-square  topCreatorsCard-responsive "
+      onClick={() => navigate(`/authorPage/${authorId}`)}
+      className=" bg-secondary-background-color shadow-secondary
+      rounded-2xl p-5 relative
+      min-w-0 w-full
+      lg:aspect-square  topCreatorsCard-responsive 
+      cursor-pointer 
+      hover:scale-95
+      shadow-accent
+      transition  duration-300 ease-in-out 
+      "
     >
       {/* <article
       className="bg-secondary-background-color 

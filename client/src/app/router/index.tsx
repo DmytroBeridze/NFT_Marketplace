@@ -7,6 +7,7 @@ import { Dashboard } from '../../pages/Dashboard';
 import { ProtectedRoute } from '../../shared/routes';
 import { AuthorCollection } from '../../pages/AuthorCollection';
 import { Gallery } from '../../pages/Gallery';
+import AuthorPage from '../../pages/AuthorPage/AuthorPage';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       },
       { path: 'collection/:galleryId', Component: AuthorCollection },
       { path: 'gallery', Component: Gallery },
+      { path: 'authorPage/:authorId', Component: AuthorPage },
     ],
   },
 ]);

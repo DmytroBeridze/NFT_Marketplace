@@ -432,7 +432,6 @@ export const getAuthorsByRating = async (req: Request, res: Response) => {
       //  Лимитируем топ
       { $limit: 12 },
     ]);
-    console.log("----------------------------", topAuthors);
 
     res.status(200).json({ message: "Top authors loaded", topAuthors });
   } catch (error) {
