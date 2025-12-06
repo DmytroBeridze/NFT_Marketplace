@@ -10,12 +10,12 @@ interface IButtonProps {
 
 const variantClasses = {
   primary:
-    'bg-primary-accent-color text-primary-text-color bg-hover-primary-accent-color shadow-secondary',
+    'bg-primary-accent-color text-primary-text-color bg-hover-primary-accent-color shadow-secondary duration-300',
   outline:
-    'border-2  border-primary-accent-color border-hover-primary-accent-color text-primary-text-color shadow-secondary',
+    'border-2  border-primary-accent-color border-hover-primary-accent-color text-primary-text-color shadow-secondary duration-300',
   secondary:
-    'bg-adaptive-button-background-color text-inversive-text-color shadow-secondary',
-  loading: 'bg-tab-active-background-color',
+    'bg-adaptive-button-background-color text-inversive-text-color shadow-secondary duration-300',
+  loading: 'bg-tab-active-background-color duration-300',
 };
 
 const baseClass = 'cursor-pointer';

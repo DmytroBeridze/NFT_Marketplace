@@ -20,7 +20,7 @@ export const StatisticItem = ({
 }: StatisticItemProps) => {
   return (
     <div
-      className={` basis-1/3 heroContent-Statistics-elements-responsive `}
+      className={` basis-1/3 heroContent-Statistics-elements-responsive items-center`}
       key={statKey}
     >
       <Text
@@ -42,9 +42,9 @@ export const StatisticItem = ({
       </Text>
       <Text
         Element="span"
-        size="t-text-md"
+        // size="t-text-md"
         font="font-work-sans-regular"
-        className="relative"
+        className="relative   md:text-2xl"
       >
         <Skeleton
           isLoading={isLoading}

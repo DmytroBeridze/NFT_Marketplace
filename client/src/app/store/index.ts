@@ -4,9 +4,11 @@ import overlayReducer from '../../shared/ui/molecules/Overlay/model/OverlaySlice
 import userReducer from '../../entities/user/model/userSlice';
 import { authApi } from '../../features/AuthorizationModal/model';
 import { userApi } from '../../entities/user/model';
-import { statisticsApi } from '../../widgets/MarketplaceHero/model/statisticApi';
-import { topNftApi } from '../../widgets/MarketplaceHero/model/topNftApi';
-import { trendingCollectionApi } from '../../widgets/TrendingCollection/model/trendingCollectionApi';
+import { statisticsApi } from '../../features/MarketplaceHero/model/statisticApi';
+import { topNftApi } from '../../features/MarketplaceHero/model/topNftApi';
+import { trendingCollectionApi } from '../../features/TrendingCollection/model';
+import { topCreatorsGalleryApi } from '../../features/TopCreatorsGallery/model/index';
+
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
   console.log('[Test action]:', action.type);
@@ -24,6 +26,7 @@ export const store = configureStore({
     [statisticsApi.reducerPath]: statisticsApi.reducer,
     [topNftApi.reducerPath]: topNftApi.reducer,
     [trendingCollectionApi.reducerPath]: trendingCollectionApi.reducer,
+    [topCreatorsGalleryApi.reducerPath]: topCreatorsGalleryApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -32,6 +35,7 @@ export const store = configureStore({
       .concat(statisticsApi.middleware)
       .concat(topNftApi.middleware)
       .concat(trendingCollectionApi.middleware)
+      .concat(topCreatorsGalleryApi.middleware)
 
       .prepend(testMiddleware),
 });

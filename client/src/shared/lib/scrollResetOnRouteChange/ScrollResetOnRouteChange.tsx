@@ -12,7 +12,7 @@ export const ScrollResetOnRouteChange = () => {
   // а коли екран <835 і бузгер відкритий- то блокувався
   useEffect(() => {
     const resize = () => {
-      if (window.innerWidth >= 835) {
+      if (window.innerWidth >= 1200) {
         unlockScroll();
       } else {
         if (isOpen) lockScroll();

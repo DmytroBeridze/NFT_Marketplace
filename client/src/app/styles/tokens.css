@@ -141,6 +141,12 @@
 .shadow-secondary {
   box-shadow: var(--secondary-shadow);
 }
+
+.shadow-accent:hover {
+  /* border: 2px solid var(--primary-accent-color); */
+  box-shadow: var(--secondary-accent-shadow);
+}
+
 /* ---------------------focus */
 .input-focus:focus {
   border: 1px solid var(--primary-accent-color);
@@ -186,11 +192,19 @@
   font-size: var(--font-size-3xl); /* 67px */
 }
 
+/*от 8 px до 16*/
+.responsive-size-xxs {
+  font-size: var(--responsive-size-xxs);
+}
 /*от 10 px до 16*/
 .responsive-size-sm {
   font-size: var(--responsive-size-sm);
 }
 
+/* от 8 px до 20 px*/
+.responsive-size-xs {
+  font-size: var(--responsive-size-xs);
+}
 /* от 10 px до 20 px*/
 .responsive-size-ms {
   font-size: var(--responsive-size-ms);
@@ -224,22 +238,25 @@
 }
 /* ---------------------adaptive */
 .navigation-responsive {
-  @media (min-width: 835px) {
+  @media (min-width: 1200px) {
+    /* @media (min-width: 835px) { */
     display: flex;
   }
 }
 .burger-button-responsive {
-  @media (min-width: 835px) {
+  @media (min-width: 1200px) {
+    /* @media (min-width: 835px) { */
     display: none;
   }
 }
 .burger-menue-responsive {
-  @media (min-width: 835px) {
+  @media (min-width: 1200px) {
+    /* @media (min-width: 835px) { */
     display: none;
   }
 }
 
-/*поведінка themeSwither в бузгері є ховер на контейнері, в хедері немає */
+/*поведінка themeSwither в бургері є ховер на контейнері, в хедері немає */
 @media (max-width: 639px) {
   .only-mobile-hover:hover {
     background-color: var(--burger-hover-background-color) !important;
@@ -247,7 +264,8 @@
 }
 
 /* поведінка languageSwitcher в бургері є ховер в хедері немає */
-@media (min-width: 835px) {
+@media (min-width: 1200px) {
+  /* @media (min-width: 835px) { */
   .bg-burger-hover-background-color {
     background-color: transparent !important;
     padding: 0 1rem;

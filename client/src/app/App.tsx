@@ -4,7 +4,6 @@ import { AuthorizationContextProvider } from '../features/AuthorizationModal/con
 import { InnerContainer, OuterContainer } from '../shared/ui/layout';
 import { Overlay } from '../shared/ui/molecules/Overlay';
 import { Header } from '../widgets/Header';
-import { useGetStatisticsQuery } from '../widgets/MarketplaceHero/model';
 import { AppProviders } from './providers/AppProviders';
 import { useAppSelector } from './store/reduxHooks';
 import { Outlet } from 'react-router-dom';

@@ -1,0 +1,84 @@
+/* ---------------------adaptive */
+
+.topCreatorsGallery-responsive {
+  display: grid;
+  gap: 1.75rem;
+
+  grid-template-columns: 1fr;
+
+  @media (min-width: 834px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.topCreatorsCard-responsive {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-direction: row;
+  @media (min-width: 834px) {
+    flex-direction: row;
+    max-height: 100px;
+    gap: 14px;
+  }
+  @media (min-width: 1200px) {
+    flex-direction: column;
+    max-height: 100%;
+  }
+}
+.topCreatorsAvatar-responsive {
+  width: 60px;
+  height: 60px;
+
+  @media (min-width: 1200px) {
+    width: 60%;
+    height: 60%;
+  }
+}
+.topCreatorsInfo-responsive {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  gap: 3px;
+  /* @media (min-width: 834px) {
+  } */
+
+  @media (min-width: 1200px) {
+    gap: 10px;
+    align-items: center;
+  }
+}
+
+.topCreatorsSkeletonAvatar-responsive {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  @media (min-width: 834px) {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 120px;
+    height: 120px;
+  }
+}
+.topCreatorsSkeletonInfo-responsive {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 834px) {
+    align-items: flex-start;
+    flex-basis: 80%;
+  }
+
+  @media (min-width: 1200px) {
+    align-items: center;
+    width: 100%;
+    flex-basis: auto;
+  }
+}

@@ -1,6 +1,8 @@
+import { TrendingCollection } from '../../features/TrendingCollection/ui';
 import { InnerContainer } from '../../shared/ui/layout';
 import { MarketplaceHero } from '../../widgets/MarketplaceHero/ui';
-import { TrendingCollection } from '../../widgets/TrendingCollection/ui';
+import { TopCreators } from '../../widgets/TopCreators/ui/molecules';
+import BrowseCategories from '../../features/BrowseCategories/ui/BrowseCategories';
 
 export const Marketplace = () => {
   return (
@@ -9,6 +11,8 @@ export const Marketplace = () => {
       <InnerContainer>
         <MarketplaceHero />
         <TrendingCollection />
+        <TopCreators />
+        <BrowseCategories />
       </InnerContainer>
     </div>
   );

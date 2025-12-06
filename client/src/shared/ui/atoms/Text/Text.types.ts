@@ -16,9 +16,14 @@ export interface TextProps {
     | 't-text-xl'
     | 't-text-2xl'
     | 't-text-3xl'
+    | 'responsive-size-xs'
+    | 'responsive-size-xxs'
     | 'responsive-size-sm'
     | 'responsive-size-ms'
-    | 'responsive-size-md';
+    | 'responsive-size-md'
+    | 'md:text-sm'
+    | 'md:text-base'
+    | undefined;
   font?:
     | 'font-space-mono-regular'
     | 'font-space-mono-bold'
@@ -35,3 +40,8 @@ export interface TextProps {
     | 'text-success-color'
     | 'text-inherit';
 }
+// export type TextSize = TextProps['size'];
+export type TextSecondaryProps = Omit<
+  TextProps,
+  'className' | 'Element' | 'style'
+>;

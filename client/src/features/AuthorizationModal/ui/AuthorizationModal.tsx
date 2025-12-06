@@ -25,7 +25,7 @@ export const AuthorizationModal = () => {
 
   return (
     <section className="relative w-full max-w-150 overflow-y-auto max-h-[90vh] ">
-      <div className="flex justify-end sticky  -top-8">
+      <div className="flex justify-end sticky  -top-8 ">
         <Icon
           className="cursor-pointer"
           style={{ color: 'white' }}

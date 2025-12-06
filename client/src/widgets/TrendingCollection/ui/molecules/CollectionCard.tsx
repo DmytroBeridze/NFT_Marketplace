@@ -40,13 +40,19 @@ const CollectionCardComponent = ({
       {previewImages.map(({ alt, id, img }, i) => {
         return (
           <div
+            style={{
+              transitionDuration: i === gridIndex ? '500ms' : '300ms',
+            }}
             onClick={() => setGridIndex(i)}
             key={id}
-            className={`aspect-square overflow-hidden shadow-primary trending-preview-responsive cursor-pointer  transition-all duration-500 ease-in-out 
+            className={`aspect-square overflow-hidden 
+              trending-preview-responsive transition-all  shadow-primary
+              ease-in-out 
+              
              ${
                i === gridIndex
-                 ? ' scale-102 rounded-[20px] col-start-1 col-end-4 row-start-1 row-end-2 '
-                 : 'scale-99 opacity-80 '
+                 ? ' scale-102 rounded-[20px] col-start-1 col-end-4 row-start-1 row-end-2 cursor-auto'
+                 : 'scale-99 opacity-80 cursor-pointer shadow-accent'
              }`}
           >
             <Image alt={alt} src={img} />
@@ -58,7 +64,7 @@ const CollectionCardComponent = ({
         to={`collection/${galleryId}`}
         className="aspect-square rounded-[20px] overflow-hidden 
       bg-primary-accent-color flex items-center justify-center shadow-primary
-       trending-preview-responsive"
+       trending-preview-responsive bg-hover-primary-accent-color duration-300"
       >
         <Text
           font="font-space-mono-bold"
@@ -128,7 +134,7 @@ CollectionCard.Skeleton = () => {
       {[1, 2, 3].map((_, id) => (
         <div
           key={id}
-          className="aspect-square rounded-[20px] overflow-hidden   animate-pulse inset-0  opacity-100 skeleton-adaptive-background"
+          className="aspect-square rounded-[20px] overflow-hidden animate-pulse inset-0  opacity-100 skeleton-adaptive-background"
         ></div>
       ))}
 

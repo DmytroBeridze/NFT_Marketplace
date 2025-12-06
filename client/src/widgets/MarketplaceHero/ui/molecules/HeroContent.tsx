@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../../../shared/lib/i18n';
 
-import { ButtonWithIcon } from './ButtonWithIcon';
-import { StatystycsContent } from './StatisticsContent';
+import { ButtonWithIcon } from '../../../../shared/ui/molecules/ButtonWithIcon/ButtonWithIcon';
+import { StatystycsContent } from '../../../../features/MarketplaceHero/ui/StatisticsContent';
 import { Text } from '../../../../shared/ui/atoms';
 import { useNavigate } from 'react-router-dom';
 import { useGetMeQuery } from '../../../../entities/user/model';
@@ -47,8 +47,10 @@ export const HeroContent = () => {
       {/* --------------button */}
 
       <ButtonWithIcon
-        className="py-5 px-12 max-w-[224px] flex marketplaceHero-button-smallSize-hidden"
+        className="py-5 px-12 max-w-[224px] flex main-button-smallSize-hidden"
         radius="xl"
+        // textClassName="text-red-500"
+        fill="white"
         onClick={() =>
           navigate(`${data?.userType === 'author' ? '/dashboard' : '/gallery'}`)
         }
@@ -59,7 +61,7 @@ export const HeroContent = () => {
       {/*---------------Statistics */}
       <div
         className="flex gap-7  text-primary-text-color
-       marketplaceHero-button-smallSize-hidden "
+       main-button-smallSize-hidden "
       >
         {/* -------------Content*/}
         <StatystycsContent statisticsArr={statisticsArr} />

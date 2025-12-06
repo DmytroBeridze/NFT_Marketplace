@@ -14,7 +14,6 @@ interface HeroSlideProps {
 export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
   const avatar = nft.authorId.avatar ?? UserPlug;
   const image = nft.imageUrl ?? PlugImage;
-
   return (
     <div
       className={` w-full h-full

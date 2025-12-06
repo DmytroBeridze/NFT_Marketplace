@@ -1,3 +1,5 @@
+import type { ReactEventHandler } from 'react';
+
 type ObjectFit =
   | 'object-fill'
   | 'object-cover'
@@ -36,6 +38,7 @@ interface ImageProps {
   height?: Height;
   objectPosition?: ObjectPosition;
   objectFit?: ObjectFit;
+  onError?: ReactEventHandler<HTMLImageElement>;
 }
 
 export const Image = ({
@@ -46,6 +49,7 @@ export const Image = ({
   height = 'w-full',
   objectPosition = 'object-center',
   objectFit = 'object-cover',
+  onError,
 }: ImageProps) => {
   return (
     <img
@@ -54,6 +58,8 @@ export const Image = ({
       className={[width, height, objectFit, objectPosition, className || '']
         .filter(Boolean)
         .join(' ')}
+      // вбудований  захист від битих посиланнь
+      onError={onError}
     />
   );
 };
