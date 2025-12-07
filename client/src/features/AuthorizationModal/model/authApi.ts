@@ -4,7 +4,7 @@ import type {
   IRegisterResponse,
   LoginValues,
   RegisterRequest,
-} from '../../../shared/types';
+} from './types';
 
 export const authApi = createApi({
   reducerPath: 'authApi',

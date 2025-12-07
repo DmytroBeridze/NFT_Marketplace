@@ -7,14 +7,15 @@ const CategoryShema = new Schema<ICategory>({
     type: String,
     enum: [
       "Art",
-      "Photography",
+      "Collectibles",
       "Music",
+      "Photography",
       "Gaming",
       "Fantasy",
       "Sports",
-      "Collectibles",
       "Virtual Worlds",
     ],
   },
+  order: Number,
 });
 export default mongoose.model<ICategory>("Category", CategoryShema);

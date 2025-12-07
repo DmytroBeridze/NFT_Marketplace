@@ -4,7 +4,7 @@ import { handleControllerError } from "../utils/handleControllerError";
 
 export const getCategory = async (req: Request, res: Response) => {
   try {
-    const category = await Category.find();
+    const category = await Category.find().sort({ order: 1 });
     res.status(200).json(category);
   } catch (error: any) {
     const errorMessage = "categoryNotFound";

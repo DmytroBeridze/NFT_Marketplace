@@ -4,13 +4,14 @@ export type IRole = "USER" | "ADMIN" | "MODERATOR";
 export type ICategory = {
   name:
     | "Art"
-    | "Photography"
+    | "Collectibles"
     | "Music"
+    | "Photography"
     | "Gaming"
     | "Fantasy"
     | "Sports"
-    | "Collectibles"
     | "Virtual Worlds";
+  order: number;
 };
 
 // export interface IRole {

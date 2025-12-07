@@ -8,6 +8,7 @@ import { statisticsApi } from '../../features/MarketplaceHero/model/statisticApi
 import { topNftApi } from '../../features/MarketplaceHero/model/topNftApi';
 import { trendingCollectionApi } from '../../features/TrendingCollection/model';
 import { topCreatorsGalleryApi } from '../../features/TopCreatorsGallery/model/index';
+import { categoriesApi } from '../../features/BrowseCategories/model/index';
 
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
@@ -27,6 +28,7 @@ export const store = configureStore({
     [topNftApi.reducerPath]: topNftApi.reducer,
     [trendingCollectionApi.reducerPath]: trendingCollectionApi.reducer,
     [topCreatorsGalleryApi.reducerPath]: topCreatorsGalleryApi.reducer,
+    [categoriesApi.reducerPath]: categoriesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -36,6 +38,7 @@ export const store = configureStore({
       .concat(topNftApi.middleware)
       .concat(trendingCollectionApi.middleware)
       .concat(topCreatorsGalleryApi.middleware)
+      .concat(categoriesApi.middleware)
 
       .prepend(testMiddleware),
 });
