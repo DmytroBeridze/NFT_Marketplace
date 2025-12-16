@@ -14,7 +14,7 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
 
   return (
     <div
-      className="max-w-[240px] cursor-pointer overflow-hidden rounded-2xl shadow-secondary
+      className="  cursor-pointer overflow-hidden rounded-2xl shadow-secondary
     transition-all ease-in duration-200 hover:-translate-y-3 shadow-accent
     "
     >
@@ -23,18 +23,21 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
         <Image alt={name} src={categoriesImg[name]} className="blur-xs" />
         <Icon
           name={categoriesIcon[name]}
-          size={100}
-          className="fill-none absolute top-0 left-0 right-0 bottom-0 m-auto"
+          // size={100}
+          className="categoriesCardIconResponsive fill-none absolute top-0 left-0 right-0 bottom-0 m-auto"
         />
       </div>
       <img />
 
       {/* -----------name */}
-      <div className="max-h-[76px] bg-secondary-background-color py-5 px-7">
+      <div className="h-full bg-secondary-background-color py-5 px-7">
+        {/* <div className="max-h-[76px] bg-secondary-background-color py-5 px-7"> */}
         <Text
           font="font-work-sans-semibold"
           color="text-primary-text-color"
-          size="responsive-size-md"
+          // size="responsive-size-ms"
+          className="categoriesCardTextResponsive"
+          // size="responsive-size-md"
         >
           {name}
         </Text>

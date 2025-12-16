@@ -1,0 +1,29 @@
+.categoriesCardResponsive {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (min-width: 834px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.categoriesCardIconResponsive {
+  width: 80px;
+  height: 80px;
+
+  @media (min-width: 1300px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.categoriesCardTextResponsive {
+  font-size: clamp(0.625rem, -1.557rem + 10.91vw, 1rem);
+  @media (min-width: 834px) {
+    font-size: 16px;
+  }
+  @media (min-width: 1300px) {
+    font-size: 22px;
+  }
+}

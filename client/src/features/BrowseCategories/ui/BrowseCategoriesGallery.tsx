@@ -7,7 +7,8 @@ const BrowseCategoriesGallery = () => {
   console.log(data);
 
   return (
-    <section className="grid grid-cols-4 gap-7">
+    <section className=" categoriesCardResponsive">
+      {/* <section className="grid grid-cols-4 gap-7 categoriesCardResponsive"> */}
       {data?.map(({ _id, name }) => (
         <CategoriesCard id={_id} name={name} key={_id} />
       ))}
