@@ -46,7 +46,7 @@ export const Image = ({
   alt,
   className,
   width = 'w-full',
-  height = 'w-full',
+  height = 'h-full',
   objectPosition = 'object-center',
   objectFit = 'object-cover',
   onError,
