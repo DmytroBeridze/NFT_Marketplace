@@ -5,11 +5,11 @@ import { useGetCategoriesQuery } from '../model';
 import { ErrorText } from '../../../shared/ui/atoms';
 
 const BrowseCategoriesGallery = () => {
-  const { isError, data } = useGetCategoriesQuery();
+  const { isError, isLoading, data } = useGetCategoriesQuery();
   const skeletonElements = Array.from({ length: 8 });
 
   // const isError = true;
-  const isLoading = true;
+  // const isLoading = true;
   return (
     <section className="categoriesCardResponsive ">
       {isError && (

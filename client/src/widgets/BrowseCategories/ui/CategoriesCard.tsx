@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { categoriesIcon } from '../../../features/BrowseCategories/lib/icon';
 import { categoriesImg } from '../../../features/BrowseCategories/lib/img';
 import { Icon, Image, Text } from '../../../shared/ui/atoms';
-// import imagePlaceholder from '../../../shared/assets/images/plugImage.webp';
 
 type CategoriesCardType = {
   id: string;
@@ -11,7 +10,7 @@ type CategoriesCardType = {
 };
 
 const CategoriesCard = ({ id, name }: CategoriesCardType) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <div
@@ -30,7 +29,7 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
       {/* <img /> */}
 
       {/* -----------name */}
-      <div className="bg-secondary-background-color py-5 px-7">
+      <div className="bg-secondary-background-color py-5 px-7 h-full">
         {/* <div className="max-h-[76px] bg-secondary-background-color py-5 px-7"> */}
         <Text
           font="font-work-sans-semibold"
