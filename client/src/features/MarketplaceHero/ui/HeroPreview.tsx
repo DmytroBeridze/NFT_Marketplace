@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { HeroSlide } from '../../../widgets/MarketplaceHero/ui/molecules/HeroSlide';
 import { CenteredMessage } from '../../../shared/ui/helpers';
 import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
+import type { NavigationOptions } from 'swiper/types';
 // import { useShineEffect } from '../../../../shared/lib/hooks/useShineEffect';
 
 export const HeroPreview = () => {
@@ -82,6 +83,11 @@ export const HeroPreview = () => {
         // }}
         // loop={true}
 
+        onBeforeInit={(swiper) => {
+          const navigation = swiper.params.navigation as NavigationOptions;
+          navigation.prevEl = prevRef.current;
+          navigation.nextEl = nextRef.current;
+        }}
         navigation={{
           nextEl: nextRef.current,
           prevEl: prevRef.current,

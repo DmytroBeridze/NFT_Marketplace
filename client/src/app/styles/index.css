@@ -9,4 +9,5 @@
 /* components */
 @import './components/marketplaceHero/index.css';
 @import './components/trendingCollections/index.css';
-@import './components/topCreators/';
+@import './components/topCreators/index.css';
+@import './components/browseCategoriesGallery/index.css';
