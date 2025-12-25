@@ -14,7 +14,6 @@ interface TopCreatorsCardProps {
 export const TopCreatorsCard = ({ index, author }: TopCreatorsCardProps) => {
   let navigate = useNavigate();
   const { authorId, totalRevenue, totalSales, userName, avatar } = author;
-  console.log(author);
 
   const { t } = useTranslation('topCreators');
 

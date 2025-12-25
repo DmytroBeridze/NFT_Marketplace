@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { categoriesIcon } from '../../../features/BrowseCategories/lib/icon';
 import { categoriesImg } from '../../../features/BrowseCategories/lib/img';
 import { Icon, Image, Text } from '../../../shared/ui/atoms';
+import { useTranslation } from 'react-i18next';
 
 type CategoriesCardType = {
   id: string;
@@ -10,12 +11,13 @@ type CategoriesCardType = {
 };
 
 const CategoriesCard = ({ id, name }: CategoriesCardType) => {
+  const { t } = useTranslation('browseCategories');
   // const navigate = useNavigate();
 
   return (
     <div
       className="cursor-pointer overflow-hidden rounded-2xl shadow-secondary
-    transition-all ease-in duration-200 hover:-translate-y-3 shadow-accent"
+    transition-all ease-in duration-200 hover:-translate-y-3 shadow-accent bg-secondary-background-color"
     >
       {/* -------image */}
       <div className="max-h-[240px]  overflow-hidden relative">
@@ -29,7 +31,7 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
       {/* <img /> */}
 
       {/* -----------name */}
-      <div className="bg-secondary-background-color py-5 px-7 h-full">
+      <div className=" py-5 px-7 ">
         {/* <div className="max-h-[76px] bg-secondary-background-color py-5 px-7"> */}
         <Text
           font="font-work-sans-semibold"
@@ -38,7 +40,8 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
           className="categoriesCardTextResponsive"
           // size="responsive-size-md"
         >
-          {name}
+          {t(`browseCategoriesNames.${name}`)}
+          {/* {name} */}
         </Text>
       </div>
     </div>

@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import CategoriesCard from '../../../widgets/BrowseCategories/ui/CategoriesCard';
 import { useGetCategoriesQuery } from '../model';
 import { ErrorText } from '../../../shared/ui/atoms';

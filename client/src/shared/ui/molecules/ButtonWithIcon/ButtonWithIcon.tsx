@@ -1,3 +1,4 @@
+import type { IconName } from '../../../lib/icons';
 import { Button, Icon, Text } from '../../atoms';
 import type { TextSecondaryProps } from '../../atoms/Text/Text.types';
 
@@ -10,6 +11,7 @@ interface ButtonWithIconProps extends TextSecondaryProps {
   textClassName?: string;
   iconClassName?: string;
   fill?: string;
+  icon?: IconName;
 
   onClick?: () => void;
 }
@@ -25,6 +27,7 @@ export const ButtonWithIcon = ({
   textSize,
   color,
   fill,
+  icon = 'rocket-icon',
   // textSize = 't-text-sm',
 }: ButtonWithIconProps) => {
   return (
@@ -35,7 +38,7 @@ export const ButtonWithIcon = ({
       variant={variant}
     >
       <Icon
-        name="rocket-icon"
+        name={icon}
         className={`mr-3 ${iconClassName ?? ''} `}
         size={20}
         fill={fill}

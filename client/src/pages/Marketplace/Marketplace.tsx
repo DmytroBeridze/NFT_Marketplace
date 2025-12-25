@@ -3,6 +3,7 @@ import { InnerContainer } from '../../shared/ui/layout';
 import { MarketplaceHero } from '../../widgets/MarketplaceHero/ui';
 import { TopCreators } from '../../widgets/TopCreators/ui/molecules';
 import BrowseCategories from '../../features/BrowseCategories/ui/BrowseCategories';
+import DiscoverMoreNFTs from '../../features/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
 
 export const Marketplace = () => {
   return (
@@ -13,6 +14,7 @@ export const Marketplace = () => {
         <TrendingCollection />
         <TopCreators />
         <BrowseCategories />
+        <DiscoverMoreNFTs />
       </InnerContainer>
     </div>
   );
