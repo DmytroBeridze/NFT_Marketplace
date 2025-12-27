@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
-import { useLoginMutation } from '../model';
-import type { LoginValues } from '../../../shared/types';
+import { useLoginMutation, type LoginValues } from '../model';
+// import type { LoginValues } from '../../../shared/types';
 import { loginSchema } from '../config';
 import { useLocalStorage } from '../../../shared/lib/hooks';
 // import {

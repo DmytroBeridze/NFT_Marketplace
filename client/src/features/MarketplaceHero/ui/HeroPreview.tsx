@@ -98,11 +98,15 @@ export const HeroPreview = () => {
           direction="next"
           nawRef={nextRef}
           isLastSlide={isLastSlide}
+          top={40}
+          correctingTop={40}
         />
         <SwiperNavButton
           direction="prev"
           nawRef={prevRef}
           isFirstSlide={isFirstSlide}
+          top={40}
+          correctingTop={40}
         />
 
         {items.map((nft, index) => {

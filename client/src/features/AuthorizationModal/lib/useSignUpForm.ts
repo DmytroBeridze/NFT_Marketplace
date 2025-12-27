@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { signupSchema } from '../config';
-import { useRegisterMutation } from '../model';
-import type { RegisterValues } from '../../../shared/types';
+import { useRegisterMutation, type RegisterValues } from '../model';
+// import type { RegisterValues } from '../../../shared/types';
 
 export const useSignUpForm = () => {
   const [register, { isLoading, error, data }] = useRegisterMutation();
