@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useScrollContext } from '../../app/providers';
 
-export const Rankings = () => {
+const Rankings = () => {
   // const { unlockScroll } = useScrollContext();
 
   // useEffect(() => {
@@ -164,3 +164,4 @@ export const Rankings = () => {
     </div>
   );
 };
+export default Rankings;

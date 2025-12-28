@@ -10,7 +10,7 @@ export const ProtectedRoute = () => {
   const user = useAppSelector((state) => state.user.data);
   const { openHandler } = useToggleOverlay();
   const token = getLocal('token');
-  // const token = localStorage.getItem('token');
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -23,7 +23,7 @@ export const ProtectedRoute = () => {
   if (isLoading) return не дає спрацювати цій перевірці, доки стан юзера
   не буде точно завартажений
 */
-    if (isLoading) return;
+    // if (isLoading) return;
     if (!token || !user) {
       openHandler('authorization');
       removeLocal('token');

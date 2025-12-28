@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { IRegisterResponse } from '../../../shared/types';
 import type {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
 import { clearUser } from './userSlice';
+import type { IRegisterResponse } from '../../../features/AuthorizationModal/model';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3002/api/',

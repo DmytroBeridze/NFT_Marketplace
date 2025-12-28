@@ -1,13 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { lazy } from 'react';
 import App from '../App';
-import { Marketplace } from '../../pages/Marketplace';
-import { Rankings } from '../../pages/Rankings';
-import { ConnectWallet } from '../../pages/ConnectWallet';
-import { Dashboard } from '../../pages/Dashboard';
-import { ProtectedRoute } from '../../shared/routes';
-import { AuthorCollection } from '../../pages/AuthorCollection';
-import { Gallery } from '../../pages/Gallery';
+
+const Marketplace = lazy(() => import('../../pages/Marketplace'));
+const Rankings = lazy(() => import('../../pages/Rankings'));
+const ConnectWallet = lazy(() => import('../../pages/ConnectWallet'));
+const AuthorCollection = lazy(() => import('../../pages/AuthorCollection'));
+const Gallery = lazy(() => import('../../pages/Gallery'));
+const Dashboard = lazy(() => import('../../pages/Dashboard'));
+
+// import Dashboard from '../../pages/Dashboard';
 import AuthorPage from '../../pages/AuthorPage/AuthorPage';
+
+import { ProtectedRoute } from '../../shared/routes';
 
 const router = createBrowserRouter([
   {

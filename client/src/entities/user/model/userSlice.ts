@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { UserData } from '../../../shared/types';
 import { authApi } from '../../../features/AuthorizationModal/model';
 import { userApi } from './userApi';
+import type { UserData } from './types';
 
 interface UserState {
   data: UserData | null;

@@ -7,6 +7,8 @@ import { Header } from '../widgets/Header';
 import { AppProviders } from './providers/AppProviders';
 import { useAppSelector } from './store/reduxHooks';
 import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Spinner } from '../shared/ui/atoms';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
@@ -29,7 +31,22 @@ function App() {
           <main>
             {/* <div id="burger-root"></div> */}
             {/* <InnerContainer> */}
-            <Outlet />
+            {/* <div>
+              <Spinner wrapperClassName="flex justify-center items-center" />
+            </div> */}
+            <Suspense
+              fallback={
+                <div className="w-full h-screen bg-primary-background-color">
+                  <Spinner
+                    wrapperClassName="flex justify-center items-center"
+                    fill={`var(--hover-primary-accent-color)`}
+                  />
+                </div>
+              }
+            >
+              {/* <Suspense fallback={<div>Lading page...</div>}> */}
+              <Outlet />
+            </Suspense>
             {/* </InnerContainer> */}
           </main>
         </OuterContainer>

@@ -5,7 +5,7 @@ import { TopCreators } from '../../widgets/TopCreators/ui/molecules';
 import BrowseCategories from '../../features/BrowseCategories/ui/BrowseCategories';
 import DiscoverMoreNFTs from '../../features/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
 
-export const Marketplace = () => {
+const Marketplace = () => {
   return (
     <div className="bg-primary-background-color ">
       {/* <div className="bg-primary-background-color py-20 hero-padding-responsive"> */}
@@ -19,3 +19,5 @@ export const Marketplace = () => {
     </div>
   );
 };
+
+export default Marketplace;

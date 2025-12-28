@@ -1,3 +1,4 @@
-export const ConnectWallet = () => {
+const ConnectWallet = () => {
   return <div>"ConnectWallet"</div>;
 };
+export default ConnectWallet;
