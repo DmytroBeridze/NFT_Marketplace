@@ -84,17 +84,58 @@ export const getNft = async (req: Request, res: Response) => {
 
 export const getNftByRating = async (req: Request, res: Response) => {
   try {
-    const limit = Number(req.query.limit) || 10;
+    const limotParam = req.query.limit;
+    const limit = limotParam ? Number(limotParam) : undefined; // якщо limotParam передається з фронта, якщо ні, то повернуться всі карточки
 
-    const nfts = await Nft.find({ rating: { $ne: null } }) // виключаємо ті, в яких поля рейтинга немає
+    let query = Nft.find({ rating: { $ne: null } }) // виключаємо ті, в яких поля рейтинга немає
       .sort({ rating: -1 })
-      .limit(limit)
+
       .populate("authorId", "userName avatar")
       .populate("gallery", "name");
 
+    if (limit) {
+      query = query.limit(limit);
+    }
+    const nfts = await query;
     res.status(200).json({ items: nfts });
   } catch (error) {
     return handleControllerError(error, res, "FailedToGetTopNfts");
+  }
+};
+// export const getNftByRating = async (req: Request, res: Response) => {
+//   try {
+//     const limit = Number(req.query.limit) || 10;
+
+//     const nfts = await Nft.find({ rating: { $ne: null } }) // виключаємо ті, в яких поля рейтинга немає
+//       .sort({ rating: -1 })
+//       .limit(limit)
+//       .populate("authorId", "userName avatar")
+//       .populate("gallery", "name");
+
+//     res.status(200).json({ items: nfts });
+//   } catch (error) {
+//     return handleControllerError(error, res, "FailedToGetTopNfts");
+//   }
+// };
+// -------------------------------------🧩 get NFT by Date
+export const getNftByCreateDate = async (req: Request, res: Response) => {
+  try {
+    const limitParam = req.query.limit;
+    const limit = limitParam ? Number(limitParam) : undefined;
+
+    let query = Nft.find()
+      .sort({ createdAt: -1 })
+      .populate("authorId", "userName avatar")
+      .populate("gallery", "name");
+
+    if (limit) {
+      query = query.limit(limit);
+    }
+    const nfts = await query;
+
+    res.status(200).json({ items: nfts });
+  } catch (error) {
+    return handleControllerError(error, res, "FailedToGetNewestNfts");
   }
 };
 

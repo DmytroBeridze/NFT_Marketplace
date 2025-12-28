@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { useRef, useState } from 'react';
 import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
 import type { NavigationOptions } from 'swiper/types';
