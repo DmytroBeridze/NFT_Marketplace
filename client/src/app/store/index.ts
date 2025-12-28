@@ -5,11 +5,11 @@ import userReducer from '../../entities/user/model/userSlice';
 import { authApi } from '../../features/AuthorizationModal/model';
 import { userApi } from '../../entities/user/model';
 import { statisticsApi } from '../../features/MarketplaceHero/model/statisticApi';
-import { topNftApi } from '../../features/MarketplaceHero/model/topNftApi';
+import { topNftApi } from '../../entities/nft/model/api';
 import { trendingCollectionApi } from '../../features/TrendingCollection/model';
 import { topCreatorsGalleryApi } from '../../features/TopCreatorsGallery/model/index';
 import { categoriesApi } from '../../features/BrowseCategories/model/index';
-
+import { getNftsByCreateDateApi } from '../../entities/nft/model/api';
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
   console.log('[Test action]:', action.type);
@@ -29,6 +29,7 @@ export const store = configureStore({
     [trendingCollectionApi.reducerPath]: trendingCollectionApi.reducer,
     [topCreatorsGalleryApi.reducerPath]: topCreatorsGalleryApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
+    [getNftsByCreateDateApi.reducerPath]: getNftsByCreateDateApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -39,6 +40,7 @@ export const store = configureStore({
       .concat(trendingCollectionApi.middleware)
       .concat(topCreatorsGalleryApi.middleware)
       .concat(categoriesApi.middleware)
+      .concat(getNftsByCreateDateApi.middleware)
 
       .prepend(testMiddleware),
 });

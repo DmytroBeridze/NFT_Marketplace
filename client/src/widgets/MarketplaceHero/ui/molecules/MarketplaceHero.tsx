@@ -1,6 +1,6 @@
+import { HeroPreview } from '../../../../features/MarketplaceHero/ui';
 import { HeroActionBlock } from './HeroActionBlock';
 import { HeroContent } from './HeroContent';
-import { HeroPreview } from '../../../../features/MarketplaceHero/ui/HeroPreview';
 
 export const MarketplaceHero = () => {
   return (

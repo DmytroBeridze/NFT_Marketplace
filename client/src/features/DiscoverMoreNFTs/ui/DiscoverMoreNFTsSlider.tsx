@@ -10,17 +10,22 @@ import { NFTCard } from '../../../widgets/NFTCard';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useGetNftsByCreateDateQuery } from '../../../entities/nft/model';
+import { ErrorText } from '../../../shared/ui/atoms';
 
 export const DiscoverMoreNFTsSlider = () => {
+  const { isError, isLoading, data } = useGetNftsByCreateDateQuery(20);
+  // const isError = true;
+
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
 
-  const testArray = Array.from({ length: 9 }, (_, i) => ({
-    i,
-    placeholderImage,
-  }));
+  // const testArray = Array.from({ length: 9 }, (_, i) => ({
+  //   i,
+  //   placeholderImage,
+  // }));
 
   return (
     <div className="">
@@ -67,12 +72,31 @@ export const DiscoverMoreNFTsSlider = () => {
           direction="next"
           isLastSlide={isLastSlide}
         />
+        {isError && (
+          <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
+            Loading Error...
+          </ErrorText>
+        )}
+        {!isError &&
+          !isLoading &&
+          data?.items.map((nft) => {
+            const { _id, imageUrl, name, price, views, authorId } = nft;
+            const { userName, avatar } = authorId;
 
-        {testArray.map((slide) => (
-          <SwiperSlide className="overflow-visible">
-            <NFTCard src={slide.placeholderImage} />
-          </SwiperSlide>
-        ))}
+            return (
+              <SwiperSlide key={_id} className="overflow-visible">
+                <NFTCard
+                  id={_id}
+                  src={imageUrl}
+                  name={name}
+                  price={price}
+                  views={views}
+                  userName={userName}
+                  avatar={avatar}
+                />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </div>
   );

@@ -6,12 +6,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { useGetTopNftsQuery } from '../model/topNftApi';
 import { useEffect, useRef, useState } from 'react';
 import { HeroSlide } from '../../../widgets/MarketplaceHero/ui/molecules/HeroSlide';
 import { CenteredMessage } from '../../../shared/ui/helpers';
 import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
 import type { NavigationOptions } from 'swiper/types';
+import { useGetTopNftsQuery } from '../../../entities/nft/model';
 // import { useShineEffect } from '../../../../shared/lib/hooks/useShineEffect';
 
 export const HeroPreview = () => {

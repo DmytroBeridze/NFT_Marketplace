@@ -10,9 +10,6 @@ export const TopCreatorsGallery = () => {
   const skeletonItems = Array.from({ length: gallerySize });
   const topAuthors = data?.topAuthors.slice(0, gallerySize);
 
-  // let isError = true;
-  // let isLoading = true;
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1200) setGallerySize(12);
