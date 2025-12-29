@@ -99,3 +99,46 @@ export const NFTCard = ({
     </div>
   );
 };
+
+// --------------------skeleton
+NFTCard.Skeleton = () => {
+  return (
+    <div
+      className="  max-w-full rounded-2xl flex flex-col bg-secondary-background-color 
+      overflow-hidden  text-primary-text-color"
+    >
+      {/* ----------------------image */}
+      <div className="w-full max-h-[295px] aspect-[400/295] overflow-hidden"></div>
+
+      <div className=" py-5 px-7  flex flex-col gap-5 ">
+        <div>
+          {/* -------------------name */}
+
+          <div>Name</div>
+
+          {/* --------------------icon */}
+          <div className="flex gap-3 mt-1">
+            <div className="max-w-[24px] max-h-[24px] rounded-full overflow-hidden  ">
+              <Image alt="test" src={avatarPlaceholder} />
+            </div>
+
+            <div>Text</div>
+          </div>
+        </div>
+        {/* ------------------statistic */}
+        <div className=" flex items-center justify-between">
+          {/* price */}
+          <div className="flex flex-col">
+            <div>Stat1</div>
+            <div>Stat2</div>
+          </div>
+          {/* views */}
+          <div className="flex flex-col items-end">
+            <div>Views1</div>
+            <div>Views2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
 import type { NavigationOptions } from 'swiper/types';
 
@@ -21,14 +21,45 @@ export const DiscoverMoreNFTsSlider = () => {
   const nextRef = useRef(null);
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+  const [width, setWidth] = useState<number>(0);
 
-  // const testArray = Array.from({ length: 9 }, (_, i) => ({
-  //   i,
-  //   placeholderImage,
-  // }));
+  useEffect(() => {
+    const mq1300 = window.matchMedia('(min-width:1300px)');
+    const mq834 = window.matchMedia('(min-width:834px)');
+
+    const update = () => {
+      if (mq1300.matches) {
+        setWidth(3);
+      } else if (mq834.matches) {
+        setWidth(2);
+      } else setWidth(1);
+    };
+    update();
+
+    mq1300.addEventListener('change', update);
+    mq834.addEventListener('change', update);
+
+    return () => {
+      mq1300.removeEventListener('change', update);
+      mq834.removeEventListener('change', update);
+    };
+  }, []);
+
+  console.log('responsiveData', width);
+
+  const skeletonElements = Array.from({ length: 3 });
 
   return (
-    <div className="">
+    <section>
+      <div
+        className="grid grid-cols-1
+       md:grid-cols-2 lg:grid-cols-3 gap-7"
+      >
+        {skeletonElements.map((element, i) => (
+          <NFTCard.Skeleton />
+        ))}
+      </div>
+
       <Swiper
         className=" px-5 overflow-visible"
         slidesPerView={1}
@@ -98,6 +129,6 @@ export const DiscoverMoreNFTsSlider = () => {
             );
           })}
       </Swiper>
-    </div>
+    </section>
   );
 };

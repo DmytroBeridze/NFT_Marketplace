@@ -15,7 +15,7 @@ export const SectionHeader = ({
   children,
 }: SectionHeaderProps) => {
   return (
-    <div className={`block-title-padding-responsive ${className}`}>
+    <div className={`block-title-padding-responsive ${className || ''}`}>
       <div className="">
         <Text
           className="  responsive-size-lg text-primary-text-color mb-2.5"
