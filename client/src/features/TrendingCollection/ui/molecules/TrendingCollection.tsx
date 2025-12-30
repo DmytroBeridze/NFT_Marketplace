@@ -11,6 +11,9 @@ export const TrendingCollection = () => {
   const galleries = data?.galleries;
   const [index, setIndex] = useState<number>(3);
   const { t } = useTranslation('trendingCollection');
+  const skeletonElements = Array.from({ length: 3 });
+
+  // const isLoading = true;
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,9 +42,9 @@ export const TrendingCollection = () => {
             Loading Error...
           </ErrorText>
         ) : isLoading ? (
-          [1, 2, 3]
+          skeletonElements
             .slice(0, index)
-            .map((elem, i) => <CollectionCard.Skeleton key={i} />)
+            .map((_, i) => <CollectionCard.Skeleton key={i} />)
         ) : (
           galleries?.slice(0, index).map((gallery) => {
             const { _id, author, authorAvatar, name, nfts, nftsQuantity } =

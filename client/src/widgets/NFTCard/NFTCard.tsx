@@ -104,39 +104,32 @@ export const NFTCard = ({
 NFTCard.Skeleton = () => {
   return (
     <div
-      className="  max-w-full rounded-2xl flex flex-col bg-secondary-background-color 
-      overflow-hidden  text-primary-text-color"
+      className="  max-w-full rounded-2xl flex flex-col skeleton-adaptive-background  
+      overflow-hidden  text-primary-text-color animate-pulse shadow-secondary"
     >
       {/* ----------------------image */}
-      <div className="w-full max-h-[295px] aspect-[400/295] overflow-hidden"></div>
+      <div
+        className="w-full max-h-[295px] aspect-[400/295] 
+       skeleton-adaptive-background"
+      ></div>
 
-      <div className=" py-5 px-7  flex flex-col gap-5 ">
-        <div>
-          {/* -------------------name */}
+      <div className=" py-5 px-7  flex flex-col gap-5 bg-primary-background-color">
+        {/* -------------------name */}
 
-          <div>Name</div>
+        <div className="skeleton-adaptive-background w-[70%] h-5"></div>
+        {/* --------------------icon */}
 
-          {/* --------------------icon */}
-          <div className="flex gap-3 mt-1">
-            <div className="max-w-[24px] max-h-[24px] rounded-full overflow-hidden  ">
-              <Image alt="test" src={avatarPlaceholder} />
-            </div>
-
-            <div>Text</div>
-          </div>
+        <div className="flex gap-3 items-center">
+          <div className="w-[24px] h-[24px] rounded-full overflow-hidden  skeleton-adaptive-background"></div>
+          <div className="w-[40%] h-5 skeleton-adaptive-background"></div>
         </div>
+
         {/* ------------------statistic */}
-        <div className=" flex items-center justify-between">
+        <div className=" flex items-center justify-between ">
           {/* price */}
-          <div className="flex flex-col">
-            <div>Stat1</div>
-            <div>Stat2</div>
-          </div>
+          <div className="w-20 h-5 skeleton-adaptive-background"></div>
           {/* views */}
-          <div className="flex flex-col items-end">
-            <div>Views1</div>
-            <div>Views2</div>
-          </div>
+          <div className="w-10 h-5 skeleton-adaptive-background"></div>
         </div>
       </div>
     </div>

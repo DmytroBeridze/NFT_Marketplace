@@ -1,0 +1,11 @@
+.discoverMoreNFTsResponsiveSkeleton {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 834px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1300px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
