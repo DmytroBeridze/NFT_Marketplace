@@ -47,18 +47,18 @@ export const LoginForm = () => {
     <FormikProvider value={formik}>
       <form
         onSubmit={formik.handleSubmit}
-        className=" w-full flex  flex-col gap-6 items-center justify-between "
+        className=" w-full flex  flex-col gap-4 sm:gap-6 items-center justify-between responsive-size-sm"
       >
         <FormikInput
           id="name"
           name="userName"
           type="text"
           className={`w-full border-2 border-gray-300
-          rounded-sm h-12 p-2.5 pl-14
+          rounded-sm h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
           input-focus focus:ring-1 ${getFieldErrorClass(error, 'userName')}`}
           placeholder={t('modal.placeholders.userName')}
           wrapperClass="w-full flex flex-col"
-          leftIcon={<PiUser className=" text-gray-400" size={20} />}
+          leftIcon={<PiUser className=" text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />}
           autoComplete="user name"
         />
 
@@ -67,11 +67,11 @@ export const LoginForm = () => {
           name="userPass"
           type={`${passVisible.userPass ? 'text' : 'password'}`}
           className={`w-full border-2 border-gray-300
-          rounded-sm h-12 p-2.5 pl-14
+          rounded-sm h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
           input-focus focus:ring-1 ${getFieldErrorClass(error, 'userPass')}`}
           placeholder={t('modal.placeholders.password')}
           wrapperClass="w-full flex flex-col"
-          leftIcon={<GoKey className=" text-gray-400" size={20} />}
+          leftIcon={<GoKey className=" text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />}
           autoComplete="password"
           rightIcon={
             passVisible.userPass ? (
@@ -98,7 +98,7 @@ export const LoginForm = () => {
         >
           <Text
             color="static-text-white-color"
-            size="t-text-sm"
+            size="responsive-size-sm"
             font="font-work-sans-regular"
           >
             {t('modal.button.LogInNow')}
