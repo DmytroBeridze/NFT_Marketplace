@@ -1,10 +1,9 @@
-import { Image, Text } from '../../../../shared/ui/atoms';
-import fallbackImage from '../../../../shared/assets/images/plugImage.webp';
-// import plugImg from '../../../../shared/assets/images/plugImage.png';
-import plugAvatar from '../../../../shared/assets/images/user_plug.png';
-import type { TrendingNft } from '../../../../entities/nft/model';
+import { Image, Text } from '../../../shared/ui/atoms';
+import fallbackImage from '../../../shared/assets/images/plugImage.webp';
+import plugAvatar from '../../../shared/assets/images/user_plug.png';
+import type { TrendingNft } from '../../../entities/nft/model';
 import { memo, useState, type ReactNode } from 'react';
-import { quantityFormatter } from '../../../../shared/lib/formatters';
+import { quantityFormatter } from '../../../shared/lib/formatters';
 import { NavLink } from 'react-router-dom';
 
 interface CollectionCardProps {

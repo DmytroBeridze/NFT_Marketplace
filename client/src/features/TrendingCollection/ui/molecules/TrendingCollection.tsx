@@ -3,31 +3,48 @@ import { SectionHeader } from '../../../../shared/ui/molecules/SectionHeader';
 import { useGetTrendingCollectionQuery } from '../../model';
 
 import { useTranslation } from 'react-i18next';
-import { CollectionCard } from '../../../../widgets/TrendingCollection/ui/molecules';
 import { ErrorText } from '../../../../shared/ui/atoms';
+import { CollectionCard } from '../../../../widgets/TrendingCollection/ui/CollectionCard';
+import { useResponsiveValue } from '../../../../shared/lib/hooks';
 
 export const TrendingCollection = () => {
   const { isError, isLoading, data } = useGetTrendingCollectionQuery();
   const galleries = data?.galleries;
-  const [index, setIndex] = useState<number>(3);
+  // const [index, setIndex] = useState<number>(3);
   const { t } = useTranslation('trendingCollection');
   const skeletonElements = Array.from({ length: 3 });
 
   // const isLoading = true;
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 835) {
-        setIndex(3);
-      } else if (window.innerWidth >= 375) {
-        setIndex(2);
-      } else setIndex(1);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
+  const { responsiveValue } = useResponsiveValue(
+    [
+      {
+        minWidth: 834,
+        value: 3,
+      },
+      {
+        minWidth: 375,
+        value: 2,
+      },
+    ],
+    1,
+  );
 
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth >= 835) {
+  //       setIndex(3);
+  //     } else if (window.innerWidth >= 375) {
+  //       setIndex(2);
+  //     } else setIndex(1);
+  //   };
+  //   handleResize();
+  //   window.addEventListener('resize', handleResize);
+
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
+
+  console.log(responsiveValue);
 
   return (
     <section className="main-padding-responsive">
@@ -43,10 +60,10 @@ export const TrendingCollection = () => {
           </ErrorText>
         ) : isLoading ? (
           skeletonElements
-            .slice(0, index)
+            .slice(0, responsiveValue)
             .map((_, i) => <CollectionCard.Skeleton key={i} />)
         ) : (
-          galleries?.slice(0, index).map((gallery) => {
+          galleries?.slice(0, responsiveValue).map((gallery) => {
             const { _id, author, authorAvatar, name, nfts, nftsQuantity } =
               gallery;
             return (

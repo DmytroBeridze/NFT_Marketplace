@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
 import type { NavigationOptions } from 'swiper/types';
 
@@ -22,29 +22,6 @@ export const DiscoverMoreNFTsSlider = () => {
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
-
-  // !-------перенести этот кейс в Trending Collection
-  // useEffect(() => {
-  //   const mq1300 = window.matchMedia('(min-width:1300px)');
-  //   const mq834 = window.matchMedia('(min-width:834px)');
-
-  //   const update = () => {
-  //     if (mq1300.matches) {
-  //       setWidth(3);
-  //     } else if (mq834.matches) {
-  //       setWidth(2);
-  //     } else setWidth(1);
-  //   };
-  //   update();
-
-  //   mq1300.addEventListener('change', update);
-  //   mq834.addEventListener('change', update);
-
-  //   return () => {
-  //     mq1300.removeEventListener('change', update);
-  //     mq834.removeEventListener('change', update);
-  //   };
-  // }, []);
 
   const skeletonElements = Array.from({ length: width });
 
