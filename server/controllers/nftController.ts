@@ -15,6 +15,7 @@ import { ImageRequest, IRequest } from "../types/types";
 import axios from "axios";
 import FormData from "form-data";
 import { handleControllerError } from "../utils/handleControllerError";
+import { parseSales } from "../utils/parseSales";
 
 // ---------------------------------🧩 get NFT
 export const getNft = async (req: Request, res: Response) => {
@@ -138,6 +139,46 @@ export const getNftByCreateDate = async (req: Request, res: Response) => {
     return handleControllerError(error, res, "FailedToGetNewestNfts");
   }
 };
+// -------------------------------------🧩 get NFT by Sale
+export const getNftBysale = async (req: Request, res: Response) => {
+  try {
+    const limitParam = req.query.limit;
+    const limit = limitParam ? Number(limitParam) : undefined;
+    const now = new Date();
+
+    let query = Nft.find({
+      "sales.isActive": true,
+      $and: [
+        {
+          $or: [
+            { "sales.startAt": { $lte: now } },
+            { "sales.startAt": null },
+            { "sales.startAt": { $exists: false } },
+          ],
+        },
+        {
+          $or: [
+            { "sales.endAt": { $gte: now } },
+            { "sales.endAt": null },
+            { "sales.endAt": { $exists: false } },
+          ],
+        },
+      ],
+    })
+
+      .populate("authorId", "userName avatar")
+      .populate("gallery", "name");
+
+    if (limit) {
+      query = query.limit(limit);
+    }
+    const nfts = await query;
+
+    res.status(200).json({ items: nfts });
+  } catch (error) {
+    return handleControllerError(error, res, "FailedToGetNewestNfts");
+  }
+};
 
 // -------------------------------------🧩 set NFT
 export const setNft = async (req: IRequest, res: Response) => {
@@ -154,9 +195,13 @@ export const setNft = async (req: IRequest, res: Response) => {
     views,
     keywords,
     categoryId,
+    isActive,
+    percent,
+    startAt,
+    endAt,
   } = req.body;
 
-  // userId переданий міддлваром
+  // -------------------userId переданий міддлваром
   const userId = req.userId;
 
   // const categoryId = await Category.findOne({ _id: category });
@@ -195,14 +240,14 @@ export const setNft = async (req: IRequest, res: Response) => {
     // if (!description)
     //   return res.status(400).json({ message: "Description is required" });
 
-    //  Перевірка та конвертація galleryId
+    //  ----------------------Перевірка та конвертація galleryId
     if (galleryId === null) newItem.gallery = undefined;
 
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string)) {
       newItem.gallery = new mongoose.Types.ObjectId(galleryId as string);
     }
 
-    //  Приведення типів
+    // ---------------------- Приведення типів price sold
     if (price !== undefined) newItem.price = Number(price);
     if (sold !== undefined) {
       newItem.sold = sold === "true" || sold === true;
@@ -213,14 +258,19 @@ export const setNft = async (req: IRequest, res: Response) => {
     // if (likes !== undefined) newItem.likes = Number(likes);
     // if (views !== undefined) newItem.views = Number(views);
 
+    // -------------------Перевірка і запис sales
+    newItem.sales = parseSales({ isActive, percent, startAt, endAt });
+
+    // ------------------Перевірка і запис keywords
+    if (!keywords) return res.status(400).json({ message: "Need keywords" });
     newItem.keywords = Array.isArray(keywords)
       ? keywords.map((elem: string) => elem.trim())
       : keywords.split(",").map((elem: string) => elem.trim());
 
-    //  Створюємо новий документ
+    // ----------------Створюємо новий документ
     const nft = new Nft(newItem);
 
-    //  Зберігаємо у БД
+    //  ---------------Зберігаємо у БД
     await nft.save();
 
     res.status(201).json({ message: "nftAdded", item: nft });
@@ -246,6 +296,10 @@ export const patchNft = async (req: IRequest, res: Response) => {
       description,
       deleteImageUrl,
       categoryId,
+      isActive,
+      percent,
+      startAt,
+      endAt,
     } = req.body;
 
     const { id } = req.params; // id NFT з URL
@@ -277,6 +331,10 @@ export const patchNft = async (req: IRequest, res: Response) => {
       if (deleteImageUrl !== undefined)
         updateData.deleteImageUrl = deleteImageUrl;
       if (description !== undefined) updateData.description = description;
+
+      // -------------------Перевірка і запис sales
+      const parsedSales = parseSales({ isActive, percent, startAt, endAt });
+      if (parsedSales) updateData.sales = parsedSales;
     }
 
     if (keywords !== undefined) {
@@ -289,7 +347,7 @@ export const patchNft = async (req: IRequest, res: Response) => {
 
     if (price !== undefined) updateData.price = Number(price);
 
-    // скидаємо галерею
+    // ----------------скидаємо галерею
     if (galleryId === null) {
       updateData.gallery = undefined;
     }
@@ -298,7 +356,7 @@ export const patchNft = async (req: IRequest, res: Response) => {
       updateData.gallery = new mongoose.Types.ObjectId(galleryId as string);
     }
 
-    // скидаємо категорії
+    // ----------------скидаємо категорії
     if (categoryId === null) {
       updateData.category = undefined;
     }

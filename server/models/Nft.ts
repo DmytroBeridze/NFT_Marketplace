@@ -1,6 +1,13 @@
 import mongoose, { Mongoose } from "mongoose";
 const { Schema } = mongoose;
 
+export interface ISales {
+  isActive?: boolean;
+  percent?: number;
+  startAt?: Date;
+  endAt?: Date;
+}
+
 export interface INft {
   name?: string;
   description?: string;
@@ -9,6 +16,7 @@ export interface INft {
   category?: mongoose.Types.ObjectId;
   price?: number;
   sold?: boolean;
+
   imageUrl?: string;
   deleteImageUrl?: string;
   keywords?: string[];
@@ -16,7 +24,21 @@ export interface INft {
   likes?: mongoose.Types.ObjectId[];
   views?: number;
   rating?: number;
+
+  sales?: ISales;
 }
+
+const SalesSchema = new Schema<ISales>(
+  {
+    isActive: { type: Boolean, default: false },
+    percent: { type: Number, min: 1, max: 90 },
+    startAt: { type: Date },
+    endAt: { type: Date },
+  },
+  {
+    _id: false,
+  }
+);
 
 // ✅ Тип документа (дані + методи документа .save()  .populate()
 export type NftDocument = INft & Document;
@@ -56,6 +78,7 @@ export const NftSchema = new Schema<NftDocument>(
       type: Number,
       default: 0,
     },
+
     sold: {
       type: Boolean,
       default: false,
@@ -72,6 +95,10 @@ export const NftSchema = new Schema<NftDocument>(
     rating: {
       type: Number,
       default: 0,
+    },
+    sales: {
+      type: SalesSchema,
+      default: null,
     },
 
     keywords: {
@@ -98,6 +125,22 @@ NftSchema.pre("save", function (next) {
 
   next();
 });
+
+// ----------знижка
+NftSchema.virtual("isSaleActive").get(function () {
+  if (!this.sales) return false;
+
+  const now = new Date();
+  const { isActive, startAt, endAt } = this.sales;
+
+  if (!isActive) return false;
+  if (!startAt) return false;
+  if (endAt && now > endAt) return false;
+
+  return true;
+});
+NftSchema.set("toJSON", { virtuals: true });
+NftSchema.set("toObject", { virtuals: true });
 
 // NftSchema.index({ keywords: "text" });
 export default mongoose.model<NftDocument>("Nft", NftSchema);

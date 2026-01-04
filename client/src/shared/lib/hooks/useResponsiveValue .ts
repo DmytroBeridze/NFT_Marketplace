@@ -13,7 +13,6 @@ export const useResponsiveValue = (
 
   useEffect(() => {
     const handleResize = () => {
-      if (typeof window === 'undefined') return defaultValue;
       const sortedPoints = [...brackpoints].sort(
         (a, b) => b.minWidth - a.minWidth,
       );
