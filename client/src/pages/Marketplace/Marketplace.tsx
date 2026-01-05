@@ -4,6 +4,7 @@ import { MarketplaceHero } from '../../widgets/MarketplaceHero/ui';
 import { TopCreators } from '../../widgets/TopCreators/ui/molecules';
 import BrowseCategories from '../../features/BrowseCategories/ui/BrowseCategories';
 import DiscoverMoreNFTs from '../../features/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
+import DiscountedWork from '../../features/DiscountedWork/ui/DiscountedWork';
 
 const Marketplace = () => {
   return (
@@ -15,6 +16,7 @@ const Marketplace = () => {
         <TopCreators />
         <BrowseCategories />
         <DiscoverMoreNFTs />
+        <DiscountedWork />
       </InnerContainer>
     </div>
   );

@@ -139,6 +139,7 @@ export const getNftByCreateDate = async (req: Request, res: Response) => {
     return handleControllerError(error, res, "FailedToGetNewestNfts");
   }
 };
+
 // -------------------------------------🧩 get NFT by Sale
 export const getNftBysale = async (req: Request, res: Response) => {
   try {

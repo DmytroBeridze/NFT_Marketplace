@@ -4,6 +4,7 @@ import {
   getNft,
   getNftByCreateDate,
   getNftByRating,
+  getNftBysale,
   patchNft,
   setNft,
   setNftImage,
@@ -35,6 +36,9 @@ router.get("/byRating", getNftByRating);
 
 //-------------------------get NFT by Date
 router.get("/byDate", getNftByCreateDate);
+
+//-------------------------get NFT by Sale
+router.get("/bysale", getNftBysale);
 
 // ----------------------set Nft
 router.post(
