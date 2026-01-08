@@ -1,1 +1,1 @@
-export * from './NFTCard';
+export * from './ui/NFTCard';

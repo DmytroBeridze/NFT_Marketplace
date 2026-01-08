@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useGetNftsByCreateDateQuery } from '../../../entities/nft/model';
 import { ErrorText } from '../../../shared/ui/atoms';
+import { mapNftToCard } from '../../../entities/nft/lib/mapNftToCard';
 
 export const DiscoverMoreNFTsSlider = () => {
   const { isError, isLoading, data } = useGetNftsByCreateDateQuery(20);
@@ -89,12 +90,14 @@ export const DiscoverMoreNFTsSlider = () => {
           {!isError &&
             !isLoading &&
             data?.items.map((nft) => {
-              const { _id, imageUrl, name, price, views, authorId } = nft;
-              const { userName, avatar } = authorId;
+              // const { _id, imageUrl, name, price, views, authorId } = nft;
+              // const { userName, avatar } = authorId;
 
               return (
-                <SwiperSlide key={_id} className="overflow-visible">
-                  <NFTCard
+                <SwiperSlide key={nft._id} className="overflow-visible">
+                  {/*------------ маппер */}
+                  <NFTCard {...mapNftToCard(nft)} />
+                  {/* <NFTCard
                     id={_id}
                     src={imageUrl}
                     name={name}
@@ -102,7 +105,7 @@ export const DiscoverMoreNFTsSlider = () => {
                     views={views}
                     userName={userName}
                     avatar={avatar}
-                  />
+                  /> */}
                 </SwiperSlide>
               );
             })}

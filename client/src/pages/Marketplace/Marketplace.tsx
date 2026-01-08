@@ -16,8 +16,8 @@ const Marketplace = () => {
         <TopCreators />
         <BrowseCategories />
         <DiscoverMoreNFTs />
-        <DiscountedWork />
       </InnerContainer>
+      <DiscountedWork />
     </div>
   );
 };

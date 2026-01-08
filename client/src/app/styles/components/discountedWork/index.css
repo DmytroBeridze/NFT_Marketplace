@@ -1,0 +1,11 @@
+.nftPreview-responsive {
+  @media (min-width: 375px) {
+    height: 590px;
+  }
+  @media (min-width: 834px) {
+    height: 630px;
+  }
+  @media (min-width: 1300px) {
+    height: 640px;
+  }
+}

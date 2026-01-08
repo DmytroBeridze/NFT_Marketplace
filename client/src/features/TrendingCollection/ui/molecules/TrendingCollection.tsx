@@ -44,8 +44,6 @@ export const TrendingCollection = () => {
   //   return () => window.removeEventListener('resize', handleResize);
   // }, []);
 
-  console.log(responsiveValue);
-
   return (
     <section className="main-padding-responsive">
       <SectionHeader

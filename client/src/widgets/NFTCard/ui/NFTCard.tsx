@@ -1,17 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Image, Text } from '../../shared/ui/atoms';
-import avatarPlaceholder from '../../shared/assets/icons/User_plug.svg';
+import { Image, Text } from '../../../shared/ui/atoms';
+import avatarPlaceholder from '../../../shared/assets/icons/User_plug.svg';
+// import avatarPlaceholder from '../../shared/assets/icons/User_plug.svg';
 import { NavLink } from 'react-router-dom';
-
-type NFTCardType = {
-  id: string;
-  src: string;
-  name: string;
-  price: number;
-  views: number | undefined;
-  userName: string;
-  avatar: string | undefined;
-};
+import type { NFTCardType } from '../model/types';
 
 export const NFTCard = ({
   id,

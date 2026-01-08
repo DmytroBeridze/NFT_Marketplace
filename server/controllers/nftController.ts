@@ -143,11 +143,11 @@ export const getNftByCreateDate = async (req: Request, res: Response) => {
 // -------------------------------------🧩 get NFT by Sale
 export const getNftBysale = async (req: Request, res: Response) => {
   try {
-    const limitParam = req.query.limit;
-    const limit = limitParam ? Number(limitParam) : undefined;
+    // const limitParam = req.query.limit;
+    // const limit = limitParam ? Number(limitParam) : undefined;
     const now = new Date();
 
-    let query = Nft.find({
+    let query = Nft.findOne({
       "sales.isActive": true,
       $and: [
         {
@@ -170,12 +170,13 @@ export const getNftBysale = async (req: Request, res: Response) => {
       .populate("authorId", "userName avatar")
       .populate("gallery", "name");
 
-    if (limit) {
-      query = query.limit(limit);
-    }
-    const nfts = await query;
+    // if (limit) {
+    //   query = query.limit(limit);
+    // }
+    // const nfts = await query;
+    const nft = await query;
 
-    res.status(200).json({ items: nfts });
+    res.status(200).json({ items: nft });
   } catch (error) {
     return handleControllerError(error, res, "FailedToGetNewestNfts");
   }

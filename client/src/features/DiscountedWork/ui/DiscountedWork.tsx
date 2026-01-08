@@ -1,14 +1,15 @@
 import { useGetNFTBySaleQuery } from '../../../entities/DiscountedWork/model';
 import NFTPreview from '../../../widgets/NFTPreview/ui/NFTPreview';
+import { mapNftToDiscountedCard } from '../lib/mapNftToDiscountedCard';
 
 const DiscountedWork = () => {
   const { isError, isLoading, data } = useGetNFTBySaleQuery();
-  console.log(data);
+  if (!data?.items) return null;
+  console.log(data?.items);
 
   return (
     <section className="main-padding-responsive">
-      DiscountedWork
-      <NFTPreview />
+      <NFTPreview {...mapNftToDiscountedCard(data.items)} />
     </section>
   );
 };
