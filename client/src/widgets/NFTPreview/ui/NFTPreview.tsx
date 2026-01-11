@@ -1,37 +1,66 @@
 import AuthorBage from '../../../entities/DiscountedWork/ui/AuthorBage';
+import SalesCountdown from '../../../entities/DiscountedWork/ui/SalesCountdown';
+import type { ISales } from '../../../entities/nft/model';
 import { Text } from '../../../shared/ui/atoms';
 import { InnerContainer } from '../../../shared/ui/layout';
 import { ButtonWithIcon } from '../../../shared/ui/molecules/ButtonWithIcon';
+import Countdown from 'react-countdown';
 
 type NFTPreviewType = {
   imageUrl: string | undefined;
   userName: string | undefined;
   avatar: string | undefined;
   name: string | undefined;
+  sales: ISales | undefined;
 };
 
-const NFTPreview = ({ imageUrl, avatar, userName, name }: NFTPreviewType) => {
+const NFTPreview = ({
+  imageUrl,
+  avatar,
+  userName,
+  name,
+  sales,
+}: NFTPreviewType) => {
+  console.log(sales);
+
   return (
     <div
       className="bg-center bg-no-repeat bg-cover w-full nftPreview-responsive
-       text-primary-text-color "
+       text-primary-text-color pb-16"
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
       <InnerContainer className="flex flex-col h-full">
-        <div className=" mt-auto">
-          {/* ---------------content */}
-          <div>
-            <AuthorBage avatar={avatar} userName={userName} />
-            <Text children={name} />
-            <ButtonWithIcon
-              children="See NFT"
-              variant="secondary"
-              icon="eye-icon"
-              className="py-5 px-12 items-center cursor-pointer "
-              textClassName="text-inversive-text-color md:text-base text-xs"
+        <div className=" mt-auto ">
+          {/* -----------------author */}
+          <AuthorBage avatar={avatar} userName={userName} className="mb-8" />
+          <div className="flex justify-between items-center ">
+            {/* ---------------content */}
+            <div className="flex flex-col gap-7">
+              <Text
+                children={name}
+                font="font-work-sans-semibold"
+                size="t-text-2xl"
+              />
+              <ButtonWithIcon
+                children="See NFT"
+                variant="secondary"
+                icon="eye-icon"
+                className="py-5 px-12 items-center cursor-pointer max-w-[198px] "
+                textClassName="text-inversive-text-color md:text-base text-xs "
+              />
+            </div>
+            {/* ---------------countdown */}
+            <Countdown
+              date={sales?.endAt ? new Date(sales?.endAt) : undefined}
+              renderer={({ days, hours, minutes, seconds, completed }) => (
+                <SalesCountdown
+                  hours={days * 24 + hours}
+                  minutes={minutes}
+                  seconds={seconds}
+                />
+              )}
             />
           </div>
-          {/* ---------------countdown */}
         </div>
       </InnerContainer>
     </div>

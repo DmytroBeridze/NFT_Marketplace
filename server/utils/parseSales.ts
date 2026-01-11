@@ -1,6 +1,12 @@
 import { ISales } from "../models/Nft";
 
-export const parseSales = (salesData: ISales) => {
+type SalesInput = {
+  isActive?: boolean;
+  percent?: number;
+  durationHours?: number;
+};
+
+export const parseSales = (salesData: SalesInput) => {
   if (!salesData) return undefined;
   const sales: ISales = {};
 
@@ -17,13 +23,22 @@ export const parseSales = (salesData: ISales) => {
   }
 
   //   ----------time
-  if (salesData.startAt) {
-    sales.startAt = new Date(salesData.startAt);
+  // if (salesData.startAt) {
+  //   sales.startAt = new Date(salesData.startAt);
+  // }
+
+  if (salesData.durationHours !== undefined) {
+    const hours = Number(salesData.durationHours);
+    if ([8, 12, 24, 48].includes(hours)) {
+      const now = new Date();
+      sales.startAt = now;
+      sales.endAt = new Date(now.getTime() + hours * 60 * 60 * 1000);
+    }
   }
 
-  if (salesData.endAt) {
-    sales.endAt = new Date(salesData.endAt);
-  }
+  // if (salesData.endAt) {
+  //   sales.endAt = new Date(salesData.endAt);
+  // }
 
   if (Object.keys(sales).length > 0) return sales;
   return undefined;

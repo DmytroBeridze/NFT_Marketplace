@@ -85,8 +85,8 @@ export const getNft = async (req: Request, res: Response) => {
 
 export const getNftByRating = async (req: Request, res: Response) => {
   try {
-    const limotParam = req.query.limit;
-    const limit = limotParam ? Number(limotParam) : undefined; // якщо limotParam передається з фронта, якщо ні, то повернуться всі карточки
+    const limitParam = req.query.limit;
+    const limit = limitParam ? Number(limitParam) : undefined; // якщо limotParam передається з фронта, якщо ні, то повернуться всі карточки
 
     let query = Nft.find({ rating: { $ne: null } }) // виключаємо ті, в яких поля рейтинга немає
       .sort({ rating: -1 })
@@ -199,8 +199,7 @@ export const setNft = async (req: IRequest, res: Response) => {
     categoryId,
     isActive,
     percent,
-    startAt,
-    endAt,
+    durationHours,
   } = req.body;
 
   // -------------------userId переданий міддлваром
@@ -261,7 +260,7 @@ export const setNft = async (req: IRequest, res: Response) => {
     // if (views !== undefined) newItem.views = Number(views);
 
     // -------------------Перевірка і запис sales
-    newItem.sales = parseSales({ isActive, percent, startAt, endAt });
+    newItem.sales = parseSales({ isActive, percent, durationHours });
 
     // ------------------Перевірка і запис keywords
     if (!keywords) return res.status(400).json({ message: "Need keywords" });
@@ -300,8 +299,9 @@ export const patchNft = async (req: IRequest, res: Response) => {
       categoryId,
       isActive,
       percent,
-      startAt,
-      endAt,
+      // startAt,
+      // endAt,
+      durationHours,
     } = req.body;
 
     const { id } = req.params; // id NFT з URL
@@ -335,7 +335,12 @@ export const patchNft = async (req: IRequest, res: Response) => {
       if (description !== undefined) updateData.description = description;
 
       // -------------------Перевірка і запис sales
-      const parsedSales = parseSales({ isActive, percent, startAt, endAt });
+      const parsedSales = parseSales({
+        isActive,
+        percent,
+
+        durationHours,
+      });
       if (parsedSales) updateData.sales = parsedSales;
     }
 

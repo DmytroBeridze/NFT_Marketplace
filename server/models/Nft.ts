@@ -88,6 +88,7 @@ export const NftSchema = new Schema<NftDocument>(
       ref: "User",
       default: [],
     },
+
     views: {
       type: Number,
       default: 0,

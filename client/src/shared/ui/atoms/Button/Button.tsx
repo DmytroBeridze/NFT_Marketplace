@@ -14,7 +14,7 @@ const variantClasses = {
   outline:
     'border-2  border-primary-accent-color border-hover-primary-accent-color text-primary-text-color shadow-secondary duration-300',
   secondary:
-    'bg-adaptive-button-background-color text-inversive-text-color shadow-secondary duration-300',
+    'bg-adaptive-button-background-color text-inversive-text-color shadow-secondary duration-300 bg-white-button-hover-background-color',
   loading: 'bg-tab-active-background-color duration-300',
 };
 

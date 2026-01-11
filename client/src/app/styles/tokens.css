@@ -37,6 +37,10 @@
 .bg-burger-hover-background-color:hover {
   background-color: var(--burger-hover-background-color);
 }
+.bg-white-button-hover-background-color:hover {
+  background-color: var(--white-button-hover-background);
+}
+
 .bg-adaptive-button-background-color {
   background-color: var(--adaptive-button-background-color);
 }
@@ -57,6 +61,7 @@
 .skeleton-adaptive-background {
   background-color: var(--skeleton-adaptive-background);
 }
+
 /*-------------------- link-underline color  */
 .link-underline::after {
   background-color: var(--primary-accent-color);
