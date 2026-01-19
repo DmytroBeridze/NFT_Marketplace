@@ -54,7 +54,7 @@
     font-size: var(--responsive-size-lg);
   }
 }
-.discountCountDown-labe-responsive {
+.discountCountDown-label-responsive {
   font-size: 16px;
   @media (min-width: 300px) {
     font-size: var(--responsive-size-lg);

@@ -5,7 +5,6 @@ import { mapNftToDiscountedCard } from '../lib/mapNftToDiscountedCard';
 const DiscountedWork = () => {
   const { isError, isLoading, data } = useGetNFTBySaleQuery();
   if (!data?.items) return null;
-  console.log(data?.items);
 
   return (
     <section className="main-padding-responsive">
