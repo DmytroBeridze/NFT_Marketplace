@@ -147,7 +147,7 @@ export const getNftBysale = async (req: Request, res: Response) => {
     // const limit = limitParam ? Number(limitParam) : undefined;
     const now = new Date();
 
-    let query = Nft.findOne({
+    let query = Nft.find({
       "sales.isActive": true,
       $and: [
         {
@@ -174,9 +174,11 @@ export const getNftBysale = async (req: Request, res: Response) => {
     //   query = query.limit(limit);
     // }
     // const nfts = await query;
-    const nft = await query;
+    const nfts = await query;
+    const randomNft =
+      nfts.length > 0 ? nfts[Math.floor(Math.random() * nfts.length)] : null;
 
-    res.status(200).json({ items: nft });
+    res.status(200).json({ items: randomNft });
   } catch (error) {
     return handleControllerError(error, res, "FailedToGetNewestNfts");
   }
@@ -466,7 +468,7 @@ export const setNftImage = async (req: ImageRequest, res: Response) => {
       {
         headers: formData.getHeaders(),
         timeout: 20000,
-      }
+      },
     );
 
     const imageUrl = response.data.data.url;

@@ -1,4 +1,3 @@
-import { Fragment } from 'react/jsx-runtime';
 import AuthorBage from '../../../entities/DiscountedWork/ui/AuthorBage';
 import SalesCountdown from '../../../entities/DiscountedWork/ui/SalesCountdown';
 import type { ISales } from '../../../entities/nft/model';
@@ -32,16 +31,14 @@ const NFTPreview = ({
         <div className=" mt-auto ">
           {/* -----------------author */}
           <AuthorBage avatar={avatar} userName={userName} className="mb-8" />
-          {/* <div className="flex justify-between  flex-col"> */}
           <div className="nftPreview-content-responsive">
-            {/* <div className="flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-center"> */}
-
             {/* ---------------content */}
             <div className="flex flex-col gap-7 ">
               <Text
                 children={name}
                 font="font-work-sans-semibold"
                 size="t-text-2xl"
+                color="static-text-white-color"
               />
 
               {/* -------------smallSize -CountDown------- */}
@@ -65,7 +62,6 @@ const NFTPreview = ({
                 variant="secondary"
                 icon="eye-icon"
                 className="py-5 px-12 items-center cursor-pointer nftPreview-button-responsive "
-                // className="py-5 px-12 items-center cursor-pointer max-w-[198px] "
                 textClassName="text-inversive-text-color text-base  "
                 radius="xl"
               />
