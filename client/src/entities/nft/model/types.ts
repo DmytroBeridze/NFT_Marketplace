@@ -1,3 +1,10 @@
+export interface ISales {
+  isActive?: boolean;
+  percent?: number;
+  startAt?: Date;
+  endAt?: Date;
+}
+
 export interface INft {
   _id: string;
   name: string;
@@ -14,6 +21,8 @@ export interface INft {
   likes?: string[];
   views?: number;
   rating?: number;
+
+  sales?: ISales;
 }
 
 export interface TrendingNft extends Omit<INft, 'authorId' | 'gallery'> {

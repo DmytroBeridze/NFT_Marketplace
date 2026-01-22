@@ -40,6 +40,7 @@
   --primary-text: #2b2b2b; /* Основной текст */
   --secondary-text: #6a6a6a; /* Подписи, вторичный текст */
   --button-inversive-background: #2b2b2b; /* Тёмная кнопка на светлом фоне */
+  --button-inversive-background-hover: #3a3a3a;
   --inversive-text: #ffffff; /* Белый текст на тёмной кнопке */
   --burger-text: #ffffff;
 }
@@ -53,6 +54,7 @@
   --primary-text: #ffffff;
   --secondary-text: #858584;
   --button-inversive-background: #ffffff;
+  --button-inversive-background-hover: #adaaaa;
   --inversive-text: #2b2b2b;
   --burger-text: #a259ff;
 }

@@ -1,24 +1,23 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { useRef, useState } from 'react';
-import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
-import type { NavigationOptions } from 'swiper/types';
 
-import { NFTCard } from '../../../widgets/NFTCard';
+import type { NavigationOptions } from 'swiper/types';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { useGetNftsByCreateDateQuery } from '../../../entities/nft/model';
-import { ErrorText } from '../../../shared/ui/atoms';
-import { mapNftToCard } from '../../../entities/nft/lib/mapNftToCard';
-import { useResponsiveValue } from '../../../shared/lib/hooks';
-import { SLIDER_BREAKPOINTS } from '../constants/slider.constants';
 
-export const DiscoverMoreNFTsSlider = () => {
+import { SLIDER_BREAKPOINTS } from '../features/DiscoverMoreNFTs/constants/slider.constants';
+import { useGetNftsByCreateDateQuery } from '../entities/nft/model';
+import { useResponsiveValue } from '../shared/lib/hooks';
+import { ErrorText } from '../shared/ui/atoms';
+import { NFTCard } from '../widgets/NFTCard';
+import { SwiperNavButton } from '../widgets/MarketplaceHero/ui/atoms';
+import { mapNftToCard } from '../entities/nft/lib/mapNftToCard';
+
+const DiscoverMoreNFTsSlider = () => {
   const { isError, isLoading, data } = useGetNftsByCreateDateQuery(20);
-  // const isError = true;
-  // const isLoading = true;
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -26,7 +25,7 @@ export const DiscoverMoreNFTsSlider = () => {
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
 
   const { responsiveValue } = useResponsiveValue(SLIDER_BREAKPOINTS, 1);
-
+  const [width, setWidth] = useState<number>(0);
   const skeletonElements = Array.from({ length: responsiveValue });
 
   return (
@@ -56,10 +55,11 @@ export const DiscoverMoreNFTsSlider = () => {
               spaceBetween: 30,
             },
           }}
+          //   !-------------------------------------------------
           //Срабатывает один раз, когда слайдер создаётся.     swiper.params.slidesPerView содержит текущее количество слайдов, видимых одновременно (берётся из  breakpoints).
-          // onInit={(swiper) => setWidth(swiper.params.slidesPerView as number)}
+          onInit={(swiper) => setWidth(swiper.params.slidesPerView as number)}
           // Срабатывает каждый раз, когда меняется размер окна. Swiper автоматически пересчитывает slidesPerView по текущим breakpoints.
-          // onResize={(swiper) => setWidth(swiper.params.slidesPerView as number)}
+          onResize={(swiper) => setWidth(swiper.params.slidesPerView as number)}
           pagination={{
             type: 'fraction',
           }}

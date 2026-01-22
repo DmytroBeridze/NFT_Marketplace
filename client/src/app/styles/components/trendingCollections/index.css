@@ -6,7 +6,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 835px) {
+  @media (min-width: 834px) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -18,7 +18,7 @@
     font-size: clamp(0.625rem, 0.014rem + 2.61vw, 1.375rem);
     /* font-size: 20px; */
   }
-  @media (min-width: 835px) {
+  @media (min-width: 834px) {
     font-size: clamp(0.938rem, 0.152rem + 1.51vw, 1.375rem);
     /* font-size: 22px; */
   }
@@ -28,7 +28,7 @@
   @media (min-width: 375px) {
     border-radius: clamp(0.625rem, 0.115rem + 2.17vw, 1.25rem);
   }
-  @media (min-width: 835px) {
+  @media (min-width: 834px) {
     border-radius: clamp(0.875rem, 0.202rem + 1.29vw, 1.25rem);
   }
 }

@@ -33,6 +33,7 @@
   --static-surface-color: #f5f5f5;
   --tab-active-background-color: #b6b9cc;
   --skeleton-adaptive-background: var(--skeleton-background);
+  --white-button-hover-background: var(--button-inversive-background-hover);
 
   /* texts */
   --primary-text-color: var(--primary-text);

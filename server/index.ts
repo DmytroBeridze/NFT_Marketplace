@@ -14,6 +14,7 @@ import statisticsRout from "./routes/statisticsRouts";
 import updateNftLikes from "./routes/updateNftLikesRouts";
 import updateNftViews from "./routes/updateNftViewsRouts";
 import avatarRout from "./routes/avatarRout";
+import salesConfigRout from "./routes/salesConfigRouts";
 
 import cookieParser from "cookie-parser";
 
@@ -59,6 +60,7 @@ app.use("/api/updateLikes", updateNftLikes);
 app.use("/api/updateViews", updateNftViews);
 app.use("/api/statistics", statisticsRout);
 app.use("/api/avatar", avatarRout);
+app.use("/api/sales", salesConfigRout);
 
 const start = async () => {
   try {
