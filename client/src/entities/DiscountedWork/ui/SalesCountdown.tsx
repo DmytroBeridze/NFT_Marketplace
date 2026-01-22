@@ -69,3 +69,45 @@ const SalesCountdown = ({ hours, minutes, seconds }: SalesCountdownType) => {
 };
 
 export default SalesCountdown;
+
+// ---------------------------------Skeleton
+SalesCountdown.Skeleton = () => {
+  return (
+    <div
+      className=" p-8 bg bg-primary-background-color  
+             rounded-[20px]   "
+    >
+      <div className="w-24 max-w-[30%] h-3 mb-5 skeleton-adaptive-background"></div>
+
+      <ul className="grid grid-cols-[minmax(0,2fr)_1fr_minmax(0,2fr)_1fr_minmax(0,2fr)]  items-center justify-items-center">
+        {Array.from({ length: 3 })
+          .fill(0)
+          .map((_, i) => {
+            return (
+              <Fragment key={i}>
+                {/* ---------Numbers */}
+                <li className="flex w-24 max-w-full gap-1 items-center row-start-1">
+                  <div className="flex-1 h-10 min-w-0 skeleton-adaptive-background" />
+                  <div className="flex-1 h-10 min-w-0 skeleton-adaptive-background" />
+                </li>
+                {/* ---------Dots */}
+                {i < 2 && (
+                  <li className="row-start-1 flex flex-col items-center gap-1">
+                    <div className="skeleton-adaptive-background w-2.5 h-2.5"></div>
+                    <div className="skeleton-adaptive-background w-2.5 h-2.5"></div>
+                  </li>
+                )}
+                {/* ---------Labels */}
+                <li
+                  className="row-start-2 w-full"
+                  style={{ gridColumn: `${i * 2 + 1}` }} // <-- label под цифрой
+                >
+                  <div className=" w-full h-3 mt-5 skeleton-adaptive-background"></div>
+                </li>
+              </Fragment>
+            );
+          })}
+      </ul>
+    </div>
+  );
+};

@@ -16,9 +16,9 @@ import { useResponsiveValue } from '../../../shared/lib/hooks';
 import { SLIDER_BREAKPOINTS } from '../constants/slider.constants';
 
 export const DiscoverMoreNFTsSlider = () => {
-  const { isError, data } = useGetNftsByCreateDateQuery(20);
+  const { isError, isLoading, data } = useGetNftsByCreateDateQuery(20);
   // const isError = true;
-  const isLoading = true;
+  // const isLoading = true;
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
