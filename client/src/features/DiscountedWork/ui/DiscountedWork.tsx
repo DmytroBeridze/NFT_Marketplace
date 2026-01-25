@@ -8,9 +8,6 @@ const DiscountedWork = () => {
   const { isError, isLoading, data } = useGetNFTBySaleQuery();
   console.log(data);
 
-  // const isLoading = true;
-  // const isError = true;
-
   if (isError) {
     return (
       <section>

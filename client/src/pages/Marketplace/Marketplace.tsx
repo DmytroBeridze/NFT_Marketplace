@@ -4,7 +4,8 @@ import { MarketplaceHero } from '../../widgets/MarketplaceHero/ui';
 import { TopCreators } from '../../widgets/TopCreators/ui/molecules';
 import BrowseCategories from '../../features/BrowseCategories/ui/BrowseCategories';
 import DiscountedWork from '../../features/DiscountedWork/ui/DiscountedWork';
-import DiscoverMoreNFTs from '../../widgets/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
+import DiscoverMoreNFTs from '../../features/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
+import HowItWorks from '../../widgets/HowItWorks/ui/HowItWorks';
 
 const Marketplace = () => {
   return (
@@ -18,6 +19,9 @@ const Marketplace = () => {
         <DiscoverMoreNFTs />
       </InnerContainer>
       <DiscountedWork />
+      <InnerContainer>
+        <HowItWorks />
+      </InnerContainer>
     </div>
   );
 };

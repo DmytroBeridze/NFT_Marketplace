@@ -1,0 +1,18 @@
+{
+  "title": "How it works",
+  "description": "Find out how to get started",
+  "cards": {
+    "setup-wallet": {
+      "title": "Setup Your wallet",
+      "proposal": "Set up your wallet of choice. Connect it to the Animarket by clicking the wallet icon in the top right corner."
+    },
+    "create-collection": {
+      "title": "Create Collection",
+      "proposal": "Upload your work and setup your collection. Add a description, social links and floor price."
+    },
+    "start-buying": {
+      "title": "Start Buying",
+      "proposal": "Description: Explore the gallery and purchase your favorite NFTs with your connected wallet."
+    }
+  }
+}

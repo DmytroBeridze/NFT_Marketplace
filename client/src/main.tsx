@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <AppRouter />
-      {/* App в як кореневий компонент в app/router  React Router Dom */}
+      {/* App  як кореневий компонент в app/router  React Router Dom */}
       {/* <App /> */}
     </Provider>
   </StrictMode>,

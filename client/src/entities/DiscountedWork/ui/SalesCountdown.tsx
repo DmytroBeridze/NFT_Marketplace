@@ -1,5 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
 import { Text } from '../../../shared/ui/atoms';
+import { useTranslation } from 'react-i18next';
 
 type SalesCountdownType = {
   hours: number;
@@ -8,10 +9,12 @@ type SalesCountdownType = {
 };
 
 const SalesCountdown = ({ hours, minutes, seconds }: SalesCountdownType) => {
+  const { t } = useTranslation('discountedWork');
+
   const countdownUnits = [
-    { value: hours, label: 'Hours' },
-    { value: minutes, label: 'Minutes' },
-    { value: seconds, label: 'Seconds' },
+    { value: hours, label: t('timer.Hours') },
+    { value: minutes, label: t('timer.Minutes') },
+    { value: seconds, label: t('timer.Seconds') },
   ];
 
   return (
@@ -20,7 +23,7 @@ const SalesCountdown = ({ hours, minutes, seconds }: SalesCountdownType) => {
             opacity-75 rounded-[20px]   "
     >
       <Text font="font-space-mono-regular" size="t-text-xs">
-        Sale ends in:
+        {t('timer.timerTitle')}:
       </Text>
 
       <ul className="grid grid-cols-[2fr_1fr_2fr_1fr_2fr] grid-rows-[2fr_1fr]  items-center justify-items-center">
