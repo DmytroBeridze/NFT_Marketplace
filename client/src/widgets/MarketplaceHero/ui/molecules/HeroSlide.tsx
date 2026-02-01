@@ -5,6 +5,7 @@ import type { INft } from '../../../../entities/nft/model';
 
 import PlugImage from '../../../../shared/assets/images/plugImage.webp';
 import UserPlug from '../../../../shared/assets/icons/user_plug.svg';
+import { LazyImage } from '../../../../shared/ui/atoms/LazyImage';
 
 interface HeroSlideProps {
   nft: INft;
@@ -30,14 +31,16 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
         // onClick={updateRandom}
       >
         {!isLoading ? (
-          <Image
-            alt={nft?.name || 'img'}
-            src={image}
-            height="h-full"
-            width="w-full"
-            objectFit="object-cover"
-            objectPosition="object-center"
-          />
+          // <Image
+          //   alt={nft?.name || 'img'}
+          //   src={image}
+          //   height="h-full"
+          //   width="w-full"
+          //   objectFit="object-cover"
+          //   objectPosition="object-center"
+          // />
+
+          <LazyImage alt={nft?.name || 'img'} src={image} />
         ) : null}
       </div>
 

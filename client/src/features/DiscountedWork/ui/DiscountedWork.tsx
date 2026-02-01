@@ -8,11 +8,17 @@ const DiscountedWork = () => {
   const { isError, isLoading, data } = useGetNFTBySaleQuery();
   console.log(data);
 
+  console.log('NFTPreview:', NFTPreview);
+  console.log('NFTPreview.Skeleton:', NFTPreview.Skeleton);
+
   if (isError) {
     return (
       <section>
         <InnerContainer>
-          <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
+          <ErrorText
+            data-testid="discountWork-error"
+            className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+          >
             Loading Error...
           </ErrorText>
         </InnerContainer>
@@ -28,11 +34,11 @@ const DiscountedWork = () => {
     );
   }
 
-  if (!data?.items) return null;
+  if (!data?.item) return null;
 
   return (
     <section className="main-padding-responsive">
-      <NFTPreview {...mapNftToDiscountedCard(data.items)} />
+      <NFTPreview {...mapNftToDiscountedCard(data.item)} />
     </section>
   );
 };

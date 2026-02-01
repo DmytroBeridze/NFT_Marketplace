@@ -4,6 +4,7 @@ import avatarPlaceholder from '../../../shared/assets/icons/User_plug.svg';
 // import avatarPlaceholder from '../../shared/assets/icons/User_plug.svg';
 import { NavLink } from 'react-router-dom';
 import type { NFTCardType } from '../model/types';
+import { LazyImage } from '../../../shared/ui/atoms/LazyImage';
 
 export const NFTCard = ({
   id,
@@ -22,19 +23,21 @@ export const NFTCard = ({
     >
       {/* ----------------------image */}
       <div className="w-full max-h-[295px] aspect-[400/295] overflow-hidden">
-        <Image alt={name} src={src} />
+        <LazyImage alt={name} src={src} className=" max-h-[295px]" />
+        {/* <Image alt={name} src={src} /> */}
       </div>
 
       <div className=" py-5 px-7  flex flex-col gap-5 ">
         <div>
           {/* -------------------name */}
 
-          <NavLink to={`/rankings/${id}`}>
+          <NavLink to={`/rankings/${id}`} className="cursor-auto">
             <Text
               children={name}
               Element="h3"
               font="font-work-sans-semibold"
               size="t-text-md"
+              className="nft-name w-fit cursor-pointer duration-300"
             />
           </NavLink>
           {/* --------------------icon */}
@@ -96,6 +99,7 @@ export const NFTCard = ({
 NFTCard.Skeleton = () => {
   return (
     <div
+      data-testid="NFTCard-skeleton"
       className="  max-w-full rounded-2xl flex flex-col skeleton-adaptive-background  
       overflow-hidden  text-primary-text-color animate-pulse shadow-secondary"
     >

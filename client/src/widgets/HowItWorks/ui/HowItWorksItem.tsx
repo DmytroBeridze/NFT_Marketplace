@@ -20,14 +20,6 @@ const HowItWorksItem = ({ img, title, description, link }: WorksItemType) => {
       transition-all ease-in duration-200 hover:-translate-y-3 shadow-accent 
       "
     >
-      {/* <div
-      onClick={() => navigate(link)}
-      className=" flex flex-col  items-center gap-5 w-full p-6 rounded-2xl 
-      bg-secondary-background-color  text-primary-text-color
-       overflow-hidden  cursor-pointer
-      transition-all ease-in duration-200 hover:-translate-y-3 shadow-accent 
-      "
-    > */}
       <div className="max-w-[250px] aspect-square howItWorksImgResponse">
         <Image alt={title} src={howItWorksItemImg[img]} />
       </div>
@@ -37,14 +29,13 @@ const HowItWorksItem = ({ img, title, description, link }: WorksItemType) => {
           Element="h3"
           font="font-work-sans-semibold"
           size="responsive-size-md"
-          className="text-center mb-2.5"
+          className=" mb-2.5"
         />
         <Text
           children={description}
           Element="p"
           font="font-work-sans-regular"
           size="responsive-size-sm"
-          className="text-center"
         />
       </div>
     </div>

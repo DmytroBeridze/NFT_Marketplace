@@ -32,7 +32,10 @@ export const DiscoverMoreNFTsSlider = () => {
   return (
     <section>
       {isError ? (
-        <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
+        <ErrorText
+          data-testid="discover-error"
+          className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+        >
           Loading Error...
         </ErrorText>
       ) : isLoading ? (
@@ -97,7 +100,11 @@ export const DiscoverMoreNFTsSlider = () => {
               // const { userName, avatar } = authorId;
 
               return (
-                <SwiperSlide key={nft._id} className="overflow-visible">
+                <SwiperSlide
+                  data-testid="NFT-slide"
+                  key={nft._id}
+                  className="overflow-visible"
+                >
                   {/*------------ маппер */}
                   <NFTCard {...mapNftToCard(nft)} />
                   {/* <NFTCard

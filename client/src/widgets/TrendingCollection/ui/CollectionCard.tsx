@@ -5,6 +5,7 @@ import type { TrendingNft } from '../../../entities/nft/model';
 import { memo, useState, type ReactNode } from 'react';
 import { quantityFormatter } from '../../../shared/lib/formatters';
 import { NavLink } from 'react-router-dom';
+import { LazyImage } from '../../../shared/ui/atoms/LazyImage';
 
 interface CollectionCardProps {
   galleryId: string;
@@ -54,7 +55,8 @@ const CollectionCardComponent = ({
                  : 'scale-99 opacity-80 cursor-pointer shadow-accent'
              }`}
           >
-            <Image alt={alt} src={img} />
+            <LazyImage alt={alt} src={img} />
+            {/* <Image alt={alt} src={img} /> */}
           </div>
         );
       })}
