@@ -6,10 +6,6 @@ import { mapNftToDiscountedCard } from '../lib/mapNftToDiscountedCard';
 
 const DiscountedWork = () => {
   const { isError, isLoading, data } = useGetNFTBySaleQuery();
-  console.log(data);
-
-  console.log('NFTPreview:', NFTPreview);
-  console.log('NFTPreview.Skeleton:', NFTPreview.Skeleton);
 
   if (isError) {
     return (

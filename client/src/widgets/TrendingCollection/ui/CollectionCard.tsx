@@ -35,7 +35,10 @@ const CollectionCardComponent = ({
   });
 
   return (
-    <article className=" grid grid-cols-3 gap-3.5  ">
+    <article
+      data-testid={'CollectionCard'}
+      className=" grid grid-cols-3 gap-3.5  "
+    >
       {/*------------------------ preview imgs */}
       {previewImages.map(({ alt, id, img }, i) => {
         return (
@@ -128,7 +131,10 @@ export const CollectionCard = memo(
 // ----------skeleton
 CollectionCard.Skeleton = () => {
   return (
-    <article className="  grid grid-cols-3 gap-3.5">
+    <article
+      data-testid={'CollectionCard-skeleton'}
+      className="  grid grid-cols-3 gap-3.5"
+    >
       {/* main img */}
       <div className="aspect-square col-start-1 col-end-4 rounded-[20px] overflow-hidden  animate-pulse inset-0  opacity-100 skeleton-adaptive-background"></div>
       {/* preview imgs */}

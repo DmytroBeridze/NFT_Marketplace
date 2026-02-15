@@ -48,7 +48,10 @@ export const TopCreatorsGallery = () => {
     <div className=" topCreatorsGallery-responsive">
       {/* <div className="grid grid-cols-1 gap-7 "> */}
       {isError && (
-        <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
+        <ErrorText
+          data-testid="topCreator-error"
+          className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+        >
           Loading Error...
         </ErrorText>
       )}

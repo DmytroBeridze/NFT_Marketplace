@@ -11,7 +11,10 @@ const BrowseCategoriesGallery = () => {
   return (
     <section className="categoriesCardResponsive ">
       {isError && (
-        <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
+        <ErrorText
+          data-testid={'CategoriesCard-error'}
+          className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+        >
           Loading Error...
         </ErrorText>
       )}

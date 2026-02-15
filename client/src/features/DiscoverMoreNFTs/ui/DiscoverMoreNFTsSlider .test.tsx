@@ -16,11 +16,10 @@ vi.mock('../../../widgets/MarketplaceHero/ui/atoms', () => ({
   SwiperNavButton: () => <div data-testid="swiper-nav-button"></div>,
 }));
 
+vi.mock('../../../entities/nft/model', () => ({
+  useGetNftsByCreateDateQuery: vi.fn(),
+}));
 describe('DiscoverMoreNFTsSlider', () => {
-  vi.mock('../../../entities/nft/model', () => ({
-    useGetNftsByCreateDateQuery: vi.fn(),
-  }));
-
   const mockedHook = useGetNftsByCreateDateQuery as unknown as ReturnType<
     typeof vi.fn
   >;
