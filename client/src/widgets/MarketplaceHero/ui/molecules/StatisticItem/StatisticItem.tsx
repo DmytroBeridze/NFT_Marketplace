@@ -1,9 +1,9 @@
-import { numberFormatter } from '../../../../shared/lib/formatters';
+import { numberFormatter } from '../../../../../shared/lib/formatters';
 
-import { Text } from '../../../../shared/ui/atoms';
-import { Skeleton } from '../../../../shared/ui/atoms/Skeleton';
+import { Text } from '../../../../../shared/ui/atoms';
+import { Skeleton } from '../../../../../shared/ui/atoms/Skeleton';
 
-import { type Statistics } from '../../model';
+import { type Statistics } from '../../../model';
 
 interface StatisticItemProps {
   statKey: string;
@@ -18,6 +18,8 @@ export const StatisticItem = ({
   statistics,
   isLoading,
 }: StatisticItemProps) => {
+  console.log('statistics[statKe---', statistics);
+
   return (
     <div
       className={` basis-1/3 heroContent-Statistics-elements-responsive items-center`}
@@ -30,6 +32,7 @@ export const StatisticItem = ({
              `}
       >
         <Skeleton
+          data-testid="statisticItem-skeleton"
           isLoading={isLoading}
           background={'skeleton-adaptive-background rounded-md absolute'}
         />
@@ -47,6 +50,7 @@ export const StatisticItem = ({
         className="relative   md:text-2xl"
       >
         <Skeleton
+          data-testid="statisticItem-skeleton"
           isLoading={isLoading}
           background={'skeleton-adaptive-background absolute rounded-md'}
         />
