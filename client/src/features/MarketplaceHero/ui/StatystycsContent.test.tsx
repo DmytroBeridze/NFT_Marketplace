@@ -13,7 +13,7 @@ vi.mock('../../../widgets/MarketplaceHero/ui', () => ({
   StatisticItem: (props: any) => (
     <div
       data-testid="statisticItem"
-      data-isLoading={props.isLoading}
+      data-isloading={props.isLoading}
       data-statistics={JSON.stringify(props.statistics)}
     />
   ),
@@ -41,7 +41,7 @@ describe('StatystycsContent', () => {
     render(<StatystycsContent statisticsArr={[['test', 'test']]} />);
     const statisticItems = screen.getAllByTestId('statisticItem');
     statisticItems.forEach((item) => {
-      expect(item).toHaveAttribute('data-isLoading', 'true');
+      expect(item).toHaveAttribute('data-isloading', 'true');
     });
   });
 

@@ -7,7 +7,7 @@ vi.mock('../../../../../shared/ui/atoms/Skeleton', () => ({
   Skeleton: (props: any) => (
     <div
       data-testid="statisticItem-skeleton"
-      data-isLoading={props.isLoading}
+      data-isloading={props.isLoading}
     ></div>
   ),
 }));

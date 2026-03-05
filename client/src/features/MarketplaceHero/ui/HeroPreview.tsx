@@ -7,12 +7,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { useEffect, useRef, useState } from 'react';
-import { HeroSlide } from '../../../widgets/MarketplaceHero/ui/molecules/HeroSlide';
 import { CenteredMessage } from '../../../shared/ui/helpers';
 import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
 import type { NavigationOptions } from 'swiper/types';
 import { useGetTopNftsQuery } from '../../../entities/nft/model';
-// import { useShineEffect } from '../../../../shared/lib/hooks/useShineEffect';
+import { HeroSlide } from '../../../widgets/MarketplaceHero/ui';
 
 export const HeroPreview = () => {
   const { isError, isLoading, data } = useGetTopNftsQuery(10);
@@ -95,6 +94,7 @@ export const HeroPreview = () => {
       >
         {/*--------- buttons */}
         <SwiperNavButton
+          data-testid="SwiperNavButton"
           direction="next"
           nawRef={nextRef}
           isLastSlide={isLastSlide}
@@ -102,6 +102,7 @@ export const HeroPreview = () => {
           correctingTop={40}
         />
         <SwiperNavButton
+          data-testid="SwiperNavButton"
           direction="prev"
           nawRef={prevRef}
           isFirstSlide={isFirstSlide}
@@ -112,6 +113,7 @@ export const HeroPreview = () => {
         {items.map((nft, index) => {
           return (
             <SwiperSlide
+              data-testid="SwiperSlide"
               key={nft._id || index}
               className="w-full h-full flex justify-center"
             >
