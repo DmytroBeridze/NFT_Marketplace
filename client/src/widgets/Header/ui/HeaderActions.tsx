@@ -19,7 +19,9 @@ export const HeaderActions = () => {
     <section className="hidden navigation-responsive gap-0.5 items-center">
       <ThemeSwitcher />
       <LangSwitcher className="py-2 px-2" />
+
       <Button
+        data-testid="login-btn"
         onClick={loginLogoutHandler}
         // onClick={() => openHandler('authorization')}
         className="py-3 px-4  lg:py-5 lg:px-7 flex gap-3 items-center whitespace-nowrap "
