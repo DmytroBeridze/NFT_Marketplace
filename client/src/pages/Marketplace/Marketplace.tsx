@@ -6,6 +6,7 @@ import BrowseCategories from '../../features/BrowseCategories/ui/BrowseCategorie
 import DiscountedWork from '../../features/DiscountedWork/ui/DiscountedWork';
 import DiscoverMoreNFTs from '../../features/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
 import HowItWorks from '../../widgets/HowItWorks/ui/HowItWorks';
+import WeeklyDigest from '../../widgets/WeeklyDigest/ui/WeeklyDigest';
 
 const Marketplace = () => {
   return (
@@ -21,6 +22,7 @@ const Marketplace = () => {
       <DiscountedWork />
       <InnerContainer>
         <HowItWorks />
+        <WeeklyDigest />
       </InnerContainer>
     </div>
   );

@@ -6,6 +6,7 @@ interface SectionHeaderProps {
   description?: string;
   className?: string;
   children?: ReactNode;
+  responsive?: boolean;
 }
 
 export const SectionHeader = ({
@@ -13,9 +14,12 @@ export const SectionHeader = ({
   description,
   className,
   children,
+  responsive = true,
 }: SectionHeaderProps) => {
   return (
-    <div className={`block-title-padding-responsive ${className || ''}`}>
+    <div
+      className={`${responsive && 'block-title-padding-responsive'} ${className || ''}`}
+    >
       <div className="">
         <Text
           className="  responsive-size-lg text-primary-text-color mb-2.5"

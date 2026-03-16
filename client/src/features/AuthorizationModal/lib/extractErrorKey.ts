@@ -18,6 +18,8 @@ type Errors =
   | 'passwordIsRequired'
   | 'passwordLength'
   | 'unknownError'
+  | 'mailAdded'
+  | 'serverError'
   | string;
 
 export const extractErrorKey = (error: any) => {

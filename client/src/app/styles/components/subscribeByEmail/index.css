@@ -1,0 +1,14 @@
+.subscribeByEmailInput {
+  background-color: var(--button-inversive-background);
+  color: var(--inversive-text);
+}
+.subscribeByEmailButton {
+  position: static;
+  width: 100%;
+  margin-top: 10px;
+  @media (min-width: 1300px) {
+    position: absolute;
+    width: fit-content;
+    margin-top: 0px;
+  }
+}

@@ -27,7 +27,7 @@ export const Input = ({
       <div // для розтягування інпута на всю ширину
         className="basis-0 grow-1 shrink-1"
       >
-        {/* для вірівнювання іконок відносно інпута */}
+        {/* для вирівнювання іконок відносно інпута */}
         <div className="relative flex ">
           {leftIcon && (
             <span className="absolute top-1/2 -translate-y-1/2 left-[16px]">
@@ -39,7 +39,7 @@ export const Input = ({
             id={id}
             type={type}
             placeholder={placeholder}
-            className={`${className} ${meta.error && meta.touched ? '!border border-red-500' : ''}`}
+            className={`${className} ${meta.error && meta.touched ? '!border-red-500 !border' : ''}`}
             accept={accept}
             autoComplete={autoComplete}
           />
