@@ -178,7 +178,8 @@ export const getNftBysale = async (req: Request, res: Response) => {
     const randomNft =
       nfts.length > 0 ? nfts[Math.floor(Math.random() * nfts.length)] : null;
 
-    res.status(200).json({ items: randomNft });
+    res.status(200).json({ item: randomNft });
+    // res.status(200).json({ items: randomNft });
   } catch (error) {
     return handleControllerError(error, res, "FailedToGetNewestNfts");
   }

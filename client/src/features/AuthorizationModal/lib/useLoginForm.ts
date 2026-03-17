@@ -29,7 +29,7 @@ export const useLoginForm = () => {
         // dispatch(addUserData(result.userData));
         resetForm();
       } catch (error) {
-        //! Помилки обробляються в <QueryStatus />, тому тут нічого не робимо
+        //! Помилки обробляються в <QueryStatus />
         // if (isFetchBaseQueryError(error)) {
         //   console.log(
         //     t(

@@ -52,9 +52,11 @@ export const Input = ({
             </span>
           )}
         </div>
-        {meta.error && meta.touched && (
-          <div className="text-red-500">{meta.error}</div>
-        )}
+        <div className="h-5 ">
+          {meta.error && meta.touched && (
+            <div className="text-red-500">{meta.error}</div>
+          )}
+        </div>
       </div>
     </div>
   );

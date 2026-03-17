@@ -15,6 +15,7 @@ import updateNftLikes from "./routes/updateNftLikesRouts";
 import updateNftViews from "./routes/updateNftViewsRouts";
 import avatarRout from "./routes/avatarRout";
 import salesConfigRout from "./routes/salesConfigRouts";
+import subscribersRout from "./routes/subscribersRouts";
 
 import cookieParser from "cookie-parser";
 
@@ -44,7 +45,7 @@ app.use(
     // замінити на URL за яким розгорнутий фронт на сервері
     origin: "http://localhost:5173",
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(cookieParser());
@@ -61,11 +62,12 @@ app.use("/api/updateViews", updateNftViews);
 app.use("/api/statistics", statisticsRout);
 app.use("/api/avatar", avatarRout);
 app.use("/api/sales", salesConfigRout);
+app.use("/api/subscribe", subscribersRout);
 
 const start = async () => {
   try {
     await mongoose.connect(
-      `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster1.hwktn.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=Cluster1`
+      `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster1.hwktn.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=Cluster1`,
     );
     console.log("✅ MongoDB connected!");
 
