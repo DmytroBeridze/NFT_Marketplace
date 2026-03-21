@@ -9,6 +9,7 @@ import useSubscribeByEmail from '../model/useSubscribeByEmail';
 
 const SubscribeByEmail = () => {
   const { data, error, isLoading, formik } = useSubscribeByEmail();
+  console.log(formik);
 
   const [reparedData, setReparedData] = useState<string>('');
   const [reparedError, setReparedError] = useState<any>('');
@@ -31,7 +32,6 @@ const SubscribeByEmail = () => {
     setReparedError(error);
 
     const timeout = setTimeout(() => {
-      setReparedData('');
       setReparedError('');
     }, 4000);
 
@@ -47,12 +47,13 @@ const SubscribeByEmail = () => {
             name="userMail"
             type="email"
             className={`subscribeByEmailInput py-5 px-5 w-full rounded-3xl 
-          input-focus border border-transparent  placeholder:text-base ${getFieldErrorClass(error, 'userMail')}`}
+          input-focus border border-transparent  placeholder:text-base ${getFieldErrorClass(reparedError, 'userMail')}`}
             placeholder="Enter your email here"
             autoComplete="email"
           />
 
           <ButtonWithIcon
+            data-test="subscribe-button"
             className={` subscribeByEmailButton py-5 px-12 flex items-center justify-center  
             right-0 top-0 border border-transparent  `}
             icon="envelope-icon"

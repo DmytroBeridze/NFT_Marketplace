@@ -6,16 +6,15 @@ export const subscribeApi = createApi({
     baseUrl: 'http://localhost:3002/api/subscribe/',
   }),
   endpoints: (builder) => ({
-    setSubscribeEmail: builder.mutation<
-      { message: 'string' },
-      { email: string }
-    >({
-      query: (body) => ({
-        url: 'set/',
-        method: 'POST',
-        body,
-      }),
-    }),
+    setSubscribeEmail: builder.mutation<{ message: string }, { email: string }>(
+      {
+        query: (body) => ({
+          url: 'set/',
+          method: 'POST',
+          body,
+        }),
+      },
+    ),
   }),
 });
 
