@@ -53,7 +53,10 @@ export const TrendingCollection = () => {
 
       <div className="trending-responsive  grid gap-7 relative testDelete">
         {isError ? (
-          <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
+          <ErrorText
+            data-testid="TrendingCollection-error"
+            className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+          >
             Loading Error...
           </ErrorText>
         ) : isLoading ? (

@@ -19,6 +19,7 @@ export const TopCreatorsCard = ({ index, author }: TopCreatorsCardProps) => {
 
   return (
     <article
+      data-testid={'TopCreatorsCard'}
       onClick={() => navigate(`/authorPage/${authorId}`)}
       className=" bg-secondary-background-color shadow-secondary
       rounded-2xl p-5 relative
@@ -85,6 +86,7 @@ export const TopCreatorsCard = ({ index, author }: TopCreatorsCardProps) => {
 TopCreatorsCard.Skeleton = () => {
   return (
     <article
+      data-testid={'TopCreatorsCard-skeleton'}
       className=" skeleton-adaptive-background shadow-secondary rounded-2xl p-5
   flex flex-col items-center gap-5
   min-w-0 w-full relative

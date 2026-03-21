@@ -37,7 +37,7 @@ const SalesSchema = new Schema<ISales>(
   },
   {
     _id: false,
-  }
+  },
 );
 
 // ✅ Тип документа (дані + методи документа .save()  .populate()
@@ -111,7 +111,7 @@ export const NftSchema = new Schema<NftDocument>(
       },
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 NftSchema.index({ authorId: 1 });
 NftSchema.index({ keywords: 1 });

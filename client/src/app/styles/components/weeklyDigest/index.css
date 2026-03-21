@@ -1,0 +1,35 @@
+.weeklyDigestContainer {
+  flex-direction: column;
+  gap: 30px;
+  @media (min-width: 375px) {
+    align-items: normal;
+    padding: 0;
+  }
+  @media (min-width: 834px) {
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: var(--secondary-background);
+
+    padding: 30px;
+    gap: 60px;
+  }
+  @media (min-width: 1300px) {
+    padding: 60px;
+    gap: 80px;
+  }
+}
+.weeklyDigestText {
+  flex: 1 1 0;
+  /* max-width: 425px; */
+}
+.weeklyDigestImage {
+  flex: 0 0 46%;
+  aspect-ratio: auto;
+
+  @media (min-width: 834px) {
+    aspect-ratio: 1/1;
+  }
+  @media (min-width: 1300px) {
+    aspect-ratio: auto;
+  }
+}

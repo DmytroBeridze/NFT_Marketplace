@@ -47,7 +47,9 @@
         "nftDeleted": "NFT deleted",
         "nftChanged": "NFT changed",
         "nftAdded": "NFT added",
-        "NftUpdated": "NFT updated"
+        "NftUpdated": "NFT updated",
+
+        "mailAdded": "Email added"
       },
       "error": {
         "usernameExists": "Username already exists",
@@ -87,7 +89,9 @@
         "NeedAtLeastThreeKeywords": "Need at least three keywords",
 
         "UserNotRegistered": "User not registered",
-        "alreadyViewed": "Already viewed"
+        "alreadyViewed": "Already viewed",
+
+        "serverError": "Server Error"
       }
     }
   }

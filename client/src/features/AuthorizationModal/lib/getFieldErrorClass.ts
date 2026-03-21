@@ -3,7 +3,7 @@ import { extractErrorKey } from './extractErrorKey';
 export const getFieldErrorClass = (error: any, fieldName: string) => {
   const errorKey = extractErrorKey(error);
 
-  const ERROR_CLASS = '!border border-red-500';
+  const ERROR_CLASS = '!border-red-500 !border';
 
   const map: Record<string, string> = {
     userNotFound: 'userName',

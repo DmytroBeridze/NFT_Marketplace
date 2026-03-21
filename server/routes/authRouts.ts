@@ -6,7 +6,7 @@ import {
   deleteProfile,
 } from "../controllers/authController";
 import { checkAuth } from "../middleware/checkAuth";
-import { check } from "express-validator";
+import { body, check } from "express-validator";
 import { checkValidation } from "../middleware/checkValidation";
 const router = Router();
 
@@ -22,7 +22,7 @@ router.post(
     }),
     checkValidation,
   ],
-  register
+  register,
 );
 
 // Login
@@ -34,7 +34,7 @@ router.post(
     check("userPass", "passwordIsRequired").notEmpty(),
     checkValidation,
   ],
-  login
+  login,
 );
 
 // Get profile

@@ -12,6 +12,8 @@ interface ButtonWithIconProps extends TextSecondaryProps {
   iconClassName?: string;
   fill?: string;
   icon?: IconName;
+  type?: 'button' | 'submit';
+  disabled?: boolean;
 
   onClick?: () => void;
 }
@@ -27,6 +29,8 @@ export const ButtonWithIcon = ({
   textSize,
   color,
   fill,
+  type,
+  disabled,
   icon = 'rocket-icon',
   // textSize = 't-text-sm',
 }: ButtonWithIconProps) => {
@@ -36,6 +40,8 @@ export const ButtonWithIcon = ({
       radius={radius}
       onClick={onClick}
       variant={variant}
+      type={type}
+      disabled={disabled}
     >
       <Icon
         name={icon}

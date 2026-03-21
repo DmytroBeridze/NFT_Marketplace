@@ -1,10 +1,11 @@
-import { Skeleton } from '../../../../shared/ui/atoms/Skeleton';
 import { NavLink } from 'react-router-dom';
-import { Image, Text } from '../../../../shared/ui/atoms';
-import type { INft } from '../../../../entities/nft/model';
 
-import PlugImage from '../../../../shared/assets/images/plugImage.webp';
-import UserPlug from '../../../../shared/assets/icons/user_plug.svg';
+import PlugImage from '../../../../../shared/assets/images/plugImage.webp';
+import UserPlug from '../../../../../shared/assets/icons/user_plug.svg';
+import { Skeleton } from '../../../../../shared/ui/atoms/Skeleton';
+import { Image, Text } from '../../../../../shared/ui/atoms';
+import { LazyImage } from '../../../../../shared/ui/atoms/LazyImage';
+import type { INft } from '../../../../../entities/nft/model';
 
 interface HeroSlideProps {
   nft: INft;
@@ -22,6 +23,7 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
             `}
     >
       <Skeleton
+        data-testid="hero-slide-skeleton"
         isLoading={isLoading}
         background={'skeleton-adaptive-background rounded-md w-full h-full'}
       />
@@ -30,19 +32,26 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
         // onClick={updateRandom}
       >
         {!isLoading ? (
-          <Image
+          // <Image
+          //   alt={nft?.name || 'img'}
+          //   src={image}
+          //   height="h-full"
+          //   width="w-full"
+          //   objectFit="object-cover"
+          //   objectPosition="object-center"
+          // />
+
+          <LazyImage
+            data-testid="lazy-image"
             alt={nft?.name || 'img'}
             src={image}
-            height="h-full"
-            width="w-full"
-            objectFit="object-cover"
-            objectPosition="object-center"
           />
         ) : null}
       </div>
 
       <div className="padding-md-responsive   text-primary-text-color flex flex-col gap-2.5">
         <Skeleton
+          data-testid="hero-slide-skeleton"
           isLoading={isLoading}
           Component="div"
           background={'skeleton-adaptive-background rounded-md w-40 h-6'}
@@ -59,6 +68,7 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
         <div className="flex gap-3 align-middle justify-start">
           <div className="h-6 w-6 rounded-full overflow-hidden ">
             <Skeleton
+              data-testid="hero-slide-skeleton"
               isLoading={isLoading}
               Component="div"
               background={
@@ -67,6 +77,7 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
             />
             {!isLoading && (
               <Image
+                data-testid="hero-slide-avatar"
                 alt="img"
                 src={avatar}
                 height="h-full"
@@ -91,6 +102,7 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
 
           <NavLink to={'/rankings'} className="flex items-center">
             <Skeleton
+              data-testid="hero-slide-skeleton"
               isLoading={isLoading}
               background={'skeleton-adaptive-background rounded-md w-30 h-6'}
             />

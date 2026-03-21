@@ -3,8 +3,10 @@ import { InnerContainer } from '../../shared/ui/layout';
 import { MarketplaceHero } from '../../widgets/MarketplaceHero/ui';
 import { TopCreators } from '../../widgets/TopCreators/ui/molecules';
 import BrowseCategories from '../../features/BrowseCategories/ui/BrowseCategories';
-import DiscoverMoreNFTs from '../../features/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
 import DiscountedWork from '../../features/DiscountedWork/ui/DiscountedWork';
+import DiscoverMoreNFTs from '../../features/DiscoverMoreNFTs/ui/DiscoverMoreNFTs';
+import HowItWorks from '../../widgets/HowItWorks/ui/HowItWorks';
+import WeeklyDigest from '../../widgets/WeeklyDigest/ui/WeeklyDigest';
 
 const Marketplace = () => {
   return (
@@ -18,6 +20,10 @@ const Marketplace = () => {
         <DiscoverMoreNFTs />
       </InnerContainer>
       <DiscountedWork />
+      <InnerContainer>
+        <HowItWorks />
+        <WeeklyDigest />
+      </InnerContainer>
     </div>
   );
 };

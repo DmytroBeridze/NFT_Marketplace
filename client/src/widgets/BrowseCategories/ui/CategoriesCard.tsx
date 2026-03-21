@@ -16,6 +16,7 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
 
   return (
     <div
+      data-testid="CategoriesCard"
       className="cursor-pointer overflow-hidden rounded-2xl shadow-secondary
     transition-all ease-in duration-200 hover:-translate-y-3 shadow-accent bg-secondary-background-color"
     >
@@ -52,6 +53,7 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
 CategoriesCard.skeleton = () => {
   return (
     <div
+      data-testid="CategoriesCard-skeleton"
       className="rounded-2xl skeleton-adaptive-background aspect-[240/316]
        overflow-hidden flex flex-col animate-pulse inset-0 
    opacity-100 shadow-secondary"

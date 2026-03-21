@@ -47,7 +47,9 @@
         "nftDeleted": "NFT видалене",
         "nftChanged": "NFT змінене",
         "nftAdded": "NFT додана",
-        "NftUpdated": "NFT оновлено"
+        "NftUpdated": "NFT оновлено",
+
+        "mailAdded": "Електронна пошта додана"
       },
       "error": {
         "usernameExists": "Ім'я користувача вже існує",
@@ -87,7 +89,9 @@
         "NeedAtLeastThreeKeywords": "Потрібно щонайменше три ключові слова",
 
         "UserNotRegistered": "Користувач не зареєстрований",
-        "alreadyViewed": "Вже переглянуто"
+        "alreadyViewed": "Вже переглянуто",
+
+        "serverError": "Помилка сервера"
       }
     }
   }

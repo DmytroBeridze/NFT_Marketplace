@@ -5,6 +5,7 @@ import type { TrendingNft } from '../../../entities/nft/model';
 import { memo, useState, type ReactNode } from 'react';
 import { quantityFormatter } from '../../../shared/lib/formatters';
 import { NavLink } from 'react-router-dom';
+import { LazyImage } from '../../../shared/ui/atoms/LazyImage';
 
 interface CollectionCardProps {
   galleryId: string;
@@ -34,7 +35,10 @@ const CollectionCardComponent = ({
   });
 
   return (
-    <article className=" grid grid-cols-3 gap-3.5  ">
+    <article
+      data-testid={'CollectionCard'}
+      className=" grid grid-cols-3 gap-3.5  "
+    >
       {/*------------------------ preview imgs */}
       {previewImages.map(({ alt, id, img }, i) => {
         return (
@@ -54,7 +58,8 @@ const CollectionCardComponent = ({
                  : 'scale-99 opacity-80 cursor-pointer shadow-accent'
              }`}
           >
-            <Image alt={alt} src={img} />
+            <LazyImage alt={alt} src={img} />
+            {/* <Image alt={alt} src={img} /> */}
           </div>
         );
       })}
@@ -126,7 +131,10 @@ export const CollectionCard = memo(
 // ----------skeleton
 CollectionCard.Skeleton = () => {
   return (
-    <article className="  grid grid-cols-3 gap-3.5">
+    <article
+      data-testid={'CollectionCard-skeleton'}
+      className="  grid grid-cols-3 gap-3.5"
+    >
       {/* main img */}
       <div className="aspect-square col-start-1 col-end-4 rounded-[20px] overflow-hidden  animate-pulse inset-0  opacity-100 skeleton-adaptive-background"></div>
       {/* preview imgs */}

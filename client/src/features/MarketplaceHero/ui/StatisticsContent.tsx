@@ -2,8 +2,8 @@ import { memo } from 'react';
 import { t } from 'i18next';
 
 import { ErrorText } from '../../../shared/ui/atoms';
-import { StatisticItem } from '../../../widgets/MarketplaceHero/ui/molecules/StatisticItem';
 import { useGetStatisticsQuery } from '../model';
+import { StatisticItem } from '../../../widgets/MarketplaceHero/ui';
 
 interface StatystycsContentProps {
   statisticsArr: [string, string][];
@@ -17,7 +17,10 @@ export const StatystycsContent = memo(
     return (
       <>
         {isError && (
-          <ErrorText className="text-red-700 w-full  text-center responsive-size-sm animate-pulse">
+          <ErrorText
+            data-testid="statystycsContent-error"
+            className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+          >
             Loading Error...
           </ErrorText>
         )}
@@ -28,6 +31,7 @@ export const StatystycsContent = memo(
 
             return (
               <StatisticItem
+                data-testid="statisticItem"
                 key={key}
                 statKey={key}
                 value={value}

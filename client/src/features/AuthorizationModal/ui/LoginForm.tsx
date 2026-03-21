@@ -31,13 +31,14 @@ export const LoginForm = () => {
   useTimeoutAction<string | undefined>(
     data?.userData._id,
     () => {
-      closeHandler(), navigate('/dashboard');
+      closeHandler();
+      navigate('/dashboard');
     },
     1000,
   );
   return (
     /*
-     огортаємо в провайдер, бо в кастомному компоненті Input вікористовується 
+     огортаємо в провайдер, бо в кастомному компоненті Input використовується 
      хук useField, який бере дані (getFieldProps, errors, touched) з контексту Formik
      а при useFormik цей контекст не створюється автоматично
      Тому або використовуємо useFormik і огортаємо в FormikProvider 
@@ -59,7 +60,7 @@ export const LoginForm = () => {
           placeholder={t('modal.placeholders.userName')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<PiUser className=" text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />}
-          autoComplete="user name"
+          autoComplete="username"
         />
 
         <FormikInput

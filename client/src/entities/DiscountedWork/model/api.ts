@@ -7,7 +7,7 @@ export const discountedWorkApi = createApi({
     baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3002/api',
   }),
   endpoints: (build) => ({
-    getNFTBySale: build.query<{ items: INft }, void>({
+    getNFTBySale: build.query<{ item: INft }, void>({
       query: () => '/nfts/bysale',
     }),
   }),

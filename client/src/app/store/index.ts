@@ -11,6 +11,7 @@ import { topCreatorsGalleryApi } from '../../features/TopCreatorsGallery/model/i
 import { categoriesApi } from '../../features/BrowseCategories/model/index';
 import { getNftsByCreateDateApi } from '../../entities/nft/model/api';
 import { discountedWorkApi } from '../../entities/DiscountedWork/model/index';
+import { subscribeApi } from '../../features/SubscribeByEmail/model/index';
 
 // ------Testing middleware
 const testMiddleware: Middleware = (store) => (next) => (action: any) => {
@@ -33,6 +34,7 @@ export const store = configureStore({
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [getNftsByCreateDateApi.reducerPath]: getNftsByCreateDateApi.reducer,
     [discountedWorkApi.reducerPath]: discountedWorkApi.reducer,
+    [subscribeApi.reducerPath]: subscribeApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -45,6 +47,7 @@ export const store = configureStore({
       .concat(categoriesApi.middleware)
       .concat(getNftsByCreateDateApi.middleware)
       .concat(discountedWorkApi.middleware)
+      .concat(subscribeApi.middleware)
 
       .prepend(testMiddleware),
 });

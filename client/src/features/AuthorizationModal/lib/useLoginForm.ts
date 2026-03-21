@@ -11,6 +11,7 @@ import { useLocalStorage } from '../../../shared/lib/hooks';
 export const useLoginForm = () => {
   const [login, { error, isLoading, data }] = useLoginMutation();
   const { setLocal } = useLocalStorage();
+
   const formik = useFormik<LoginValues>({
     initialValues: {
       userName: '',
@@ -28,7 +29,7 @@ export const useLoginForm = () => {
         // dispatch(addUserData(result.userData));
         resetForm();
       } catch (error) {
-        //! Помилки обробляються в <QueryStatus />, тому еуе нічого не робимо
+        //! Помилки обробляються в <QueryStatus />
         // if (isFetchBaseQueryError(error)) {
         //   console.log(
         //     t(

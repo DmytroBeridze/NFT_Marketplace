@@ -9,6 +9,7 @@ import Countdown from 'react-countdown';
 type NFTPreviewType = {
   imageUrl: string | undefined;
   userName: string | undefined;
+  userId: string | undefined;
   avatar: string | undefined;
   name: string | undefined;
   sales: ISales | undefined;
@@ -20,9 +21,11 @@ const NFTPreview = ({
   userName,
   name,
   sales,
+  userId,
 }: NFTPreviewType) => {
   return (
     <div
+      data-testid="NFTPreview"
       className="bg-center bg-no-repeat bg-cover w-full nftPreview-responsive
        text-primary-text-color pb-16"
       style={{ backgroundImage: `url(${imageUrl})` }}
@@ -30,7 +33,12 @@ const NFTPreview = ({
       <InnerContainer className="flex flex-col h-full">
         <div className=" mt-auto ">
           {/* -----------------author */}
-          <AuthorBage avatar={avatar} userName={userName} className="mb-8" />
+          <AuthorBage
+            avatar={avatar}
+            userName={userName}
+            userId={userId}
+            className="mb-8 "
+          />
           <div className="nftPreview-content-responsive">
             {/* ---------------content */}
             <div className="flex flex-col gap-7 ">
@@ -93,6 +101,7 @@ export default NFTPreview;
 NFTPreview.Skeleton = () => {
   return (
     <div
+      data-testid="NFTPreview-skeleton"
       className=" w-full nftPreview-responsive
        pb-16 skeleton-adaptive-background animate-pulse "
     >
