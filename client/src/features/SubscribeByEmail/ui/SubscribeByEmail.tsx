@@ -6,10 +6,16 @@ import { getFieldErrorClass } from '../../AuthorizationModal/lib';
 import { QueryStatus } from '../../AuthorizationModal';
 import { useEffect, useState } from 'react';
 import useSubscribeByEmail from '../model/useSubscribeByEmail';
+import { useTranslation } from 'react-i18next';
 
-const SubscribeByEmail = () => {
+type SubscribeParams = {
+  responsiveValue?: '835' | '1300';
+};
+
+const SubscribeByEmail = ({ responsiveValue = '1300' }: SubscribeParams) => {
+  const { t } = useTranslation('weeklyDigest');
+
   const { data, error, isLoading, formik } = useSubscribeByEmail();
-  console.log(formik);
 
   const [reparedData, setReparedData] = useState<string>('');
   const [reparedError, setReparedError] = useState<any>('');
@@ -48,13 +54,13 @@ const SubscribeByEmail = () => {
             type="email"
             className={`subscribeByEmailInput py-5 px-5 w-full rounded-3xl 
           input-focus border border-transparent  placeholder:text-base ${getFieldErrorClass(reparedError, 'userMail')}`}
-            placeholder="Enter your email here"
+            placeholder={t('placeholder')}
             autoComplete="email"
           />
 
           <ButtonWithIcon
             data-test="subscribe-button"
-            className={` subscribeByEmailButton py-5 px-12 flex items-center justify-center  
+            className={`subscribeByEmailButton subscribeByEmailButton-${responsiveValue}  py-5 px-12  
             right-0 top-0 border border-transparent  `}
             icon="envelope-icon"
             radius="xl"
@@ -62,7 +68,7 @@ const SubscribeByEmail = () => {
             disabled={isLoading}
             variant={isLoading ? 'loading' : 'primary'}
           >
-            <Text>Subscribe</Text>
+            <Text>{t('button')}</Text>
           </ButtonWithIcon>
         </div>
         {/*-------- render  messages after request  */}

@@ -1,0 +1,15 @@
+.footerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+
+  @media (min-width: 1300px) {
+    flex-direction: row;
+  }
+}
+
+.link:hover {
+  color: var(--primary-text-color);
+  transition: color ease-in 0.3s;
+}

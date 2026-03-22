@@ -9,6 +9,7 @@ import { useAppSelector } from './store/reduxHooks';
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Spinner } from '../shared/ui/atoms';
+import { Footer } from '../widgets/Footer';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
@@ -49,6 +50,7 @@ function App() {
             </Suspense>
             {/* </InnerContainer> */}
           </main>
+          <Footer />
         </OuterContainer>
       </AppProviders>
     </div>

@@ -5,7 +5,6 @@ import {
 } from '../../../features/BurgerMenu';
 import { Navigation } from './Navigation';
 import { HeaderActions } from './HeaderActions';
-import { Overlay } from '../../../shared/ui/molecules/Overlay';
 
 export const Header = () => {
   return (
