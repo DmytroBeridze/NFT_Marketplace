@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { LogoVariantContext } from '../HeaderLogo/context/LogoVariantContext ';
 import { Icon, Text } from '../../atoms';
 
-export const Logo = () => {
+export const Logo = ({ responsive = true }: { responsive?: boolean }) => {
   const color = useContext(LogoVariantContext);
 
   {
@@ -14,7 +14,10 @@ export const Logo = () => {
   };
 
   return (
-    <div className="flex flex-col gap-1 items-start  lg:flex-row lg:items-center lg:gap-3">
+    <div
+      className={`flex  ${responsive ? 'flex-col' : ''}  gap-1 items-start  
+    lg:flex-row lg:items-center lg:gap-3`}
+    >
       <Icon
         name="logo-icon"
         size={24}
@@ -28,7 +31,8 @@ export const Logo = () => {
         color="text-primary-text-color"
       >
         NFT
-        <br className=" lg:hidden" />
+        {/* {responsive && <br className="lg:hidden" />} */}
+        <br className="lg:hidden" />
         <span>Marketplace</span>
       </Text>
     </div>

@@ -33,17 +33,17 @@ export const Footer = () => {
   const { t: tt } = useTranslation('weeklyDigest');
 
   return (
-    <div className="bg-primary-background-color">
+    <div className="bg-secondary-background-color">
       <InnerContainer>
         <section className="main-padding-responsive font-work-sans-regular text-secondary-text-color">
           {/* <div className="mx-7 flex align-middle justify-between "> */}
           <div className="mx-7 footerWrapper">
             {/* -----------marketplace */}
             <div className="flex flex-col grow basis-1/3 ">
-              <HeaderLogo className="mb-8" />
-              <p className="mb-8">{t('main.createdBy')}</p>
+              <HeaderLogo className="mb-8" responsive={false} />
+              <p className="mb-8 responsive-size-sm">{t('main.createdBy')}</p>
               <div>
-                <p>{t('main.social')}</p>
+                <p className="responsive-size-sm">{t('main.social')}</p>
               </div>
             </div>
             {/* ---------explore */}
@@ -52,7 +52,8 @@ export const Footer = () => {
                 Element="h3"
                 font="font-space-mono-bold"
                 color="text-primary-text-color"
-                size="responsive-size-ms"
+                size="t-text-ms"
+                // size="responsive-size-ms"
                 className="mb-8"
               >
                 {t('main.exploreTitle')}
@@ -62,7 +63,10 @@ export const Footer = () => {
                 {(Object.keys(translateVariables) as (keyof Links)[]).map(
                   (link) => (
                     <li key={link} className="link">
-                      <NavLink to={linkMapped(link)}>
+                      <NavLink
+                        to={linkMapped(link)}
+                        className="responsive-size-sm"
+                      >
                         {translateVariables[link]}
                       </NavLink>
                     </li>
@@ -76,12 +80,14 @@ export const Footer = () => {
               <Text
                 font="font-space-mono-bold"
                 color="text-primary-text-color"
-                size="responsive-size-ms"
+                size="t-text-ms"
                 className="mb-8"
               >
                 {tt('title')}
               </Text>
-              <Text className="mb-8">{tt('description')}</Text>
+              <Text className="mb-8 responsive-size-sm">
+                {tt('description')}
+              </Text>
 
               <div className="max-w-[420px] ">
                 <SubscribeByEmail responsiveValue="835" />
@@ -90,7 +96,7 @@ export const Footer = () => {
           </div>
           <div>
             <div className="w-full h-0.5 bg-secondary-background-color mb-5"></div>
-            <Text>{t('main.developed')}</Text>
+            <Text className="responsive-size-sm">{t('main.developed')}</Text>
           </div>
         </section>
       </InnerContainer>

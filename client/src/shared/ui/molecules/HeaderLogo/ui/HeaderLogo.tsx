@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 
 interface HeaderLogoProps {
   className?: string;
+  responsive?: boolean;
 }
 
-export const HeaderLogo = ({ className }: HeaderLogoProps) => {
+export const HeaderLogo = ({ className, responsive }: HeaderLogoProps) => {
   return (
     <Link to={'/'} className={`w-fit ${className}`} aria-label="Go to homepage">
-      <Logo />
+      <Logo responsive={responsive} />
     </Link>
   );
 };
