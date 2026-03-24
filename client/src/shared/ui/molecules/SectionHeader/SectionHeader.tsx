@@ -22,7 +22,7 @@ export const SectionHeader = ({
     >
       <div className="">
         <Text
-          className="  responsive-size-lg text-primary-text-color mb-2.5"
+          className="responsive-size-lg text-primary-text-color mb-2.5"
           Element="h2"
           font="font-work-sans-semibold"
         >
