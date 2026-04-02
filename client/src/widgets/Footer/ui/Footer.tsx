@@ -6,6 +6,11 @@ import { Icon, Image, Text } from '../../../shared/ui/atoms';
 import SubscribeByEmail from '../../../features/SubscribeByEmail/ui/SubscribeByEmail';
 import { Link, NavLink } from 'react-router-dom';
 import type { IconName } from '../../../shared/lib/icons';
+import { BurgerButton } from '../../../features/BurgerMenu';
+import { HeaderActions } from '../../Header';
+import AuthButton from '../../../features/AuthButton/AuthButton';
+import { LangSwitcher } from '../../../features/LangSwitcher';
+import { useAuthAction } from '../../../shared/lib/hooks';
 
 type Links = {
   marketplace: string;
@@ -50,6 +55,7 @@ export const Footer = () => {
   });
   const { t } = useTranslation('footer');
   const { t: tt } = useTranslation('weeklyDigest');
+  const { loginLogoutHandler } = useAuthAction();
 
   return (
     <div className="bg-secondary-background-color">
@@ -62,7 +68,7 @@ export const Footer = () => {
               <HeaderLogo
                 className="max-[834px]:mb-6 mb-8"
                 stacked={false}
-                size="t-text-ms"
+                size="responsive-size-md"
               />
               <p className="mb-8  responsive-size-sm">{t('main.createdBy')}</p>
               <div>
@@ -75,9 +81,9 @@ export const Footer = () => {
                       <Link to={icon.link}>
                         <Icon
                           name={icon.name}
-                          size={32}
-                          className="link"
-                          fill={undefined}
+                          // size={32}
+                          className="link  w-8 h-8 max-[834px]:w-6 max-[834px]:h-6"
+                          fill="none"
                         />
                       </Link>
                     </li>
@@ -91,8 +97,8 @@ export const Footer = () => {
                 Element="h3"
                 font="font-space-mono-bold"
                 color="text-primary-text-color"
-                size="t-text-ms"
-                // size="responsive-size-ms"
+                // size="t-text-ms"
+                size="responsive-size-md"
                 className="max-[834px]:mb-6 mb-8"
               >
                 {t('main.exploreTitle')}
@@ -119,7 +125,7 @@ export const Footer = () => {
               <Text
                 font="font-space-mono-bold"
                 color="text-primary-text-color"
-                size="t-text-ms"
+                size="responsive-size-md"
                 className="max-[834px]:mb-6 mb-8"
               >
                 {tt('title')}
@@ -130,6 +136,11 @@ export const Footer = () => {
 
               <div className="max-w-[420px] ">
                 <SubscribeByEmail responsiveValue="835" />
+              </div>
+
+              <div className="flex items-center">
+                <LangSwitcher className="py-2 px-2" />
+                <AuthButton handler={loginLogoutHandler} />
               </div>
             </div>
           </div>

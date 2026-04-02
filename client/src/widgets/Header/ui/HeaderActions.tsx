@@ -1,16 +1,18 @@
 import { LangSwitcher } from '../../../features/LangSwitcher';
-import { Icon } from '../../../shared/ui/atoms/Icon';
-import { Text } from '../../../shared/ui/atoms/Text';
+
 import { useTranslation } from 'react-i18next';
 import { useAuthAction, useLocalStorage } from '../../../shared/lib/hooks';
 import ThemeSwitcher from '../../../features/ThemeSwitcher/ui/ThemeSwitcher';
-import { Button } from '../../../shared/ui/atoms';
+
+import AuthButton from '../../../features/AuthButton/AuthButton';
+import { useNavigate } from 'react-router-dom';
 
 export const HeaderActions = () => {
   const { getLocal } = useLocalStorage();
   const { t } = useTranslation();
   const { loginLogoutHandler } = useAuthAction();
   const token = getLocal('token');
+  let navigate = useNavigate();
   // const token = localStorage.getItem('token');
   // const { openHandler } = useToggleOverlay();
 
@@ -19,8 +21,9 @@ export const HeaderActions = () => {
     <section className="hidden navigation-responsive gap-0.5 items-center">
       <ThemeSwitcher />
       <LangSwitcher className="py-2 px-2" />
-
-      <Button
+      {/* <AuthButton handler={loginLogoutHandler} /> */}
+      <AuthButton handler={() => navigate('/auth')} />
+      {/* <Button
         data-testid="login-btn"
         onClick={loginLogoutHandler}
         // onClick={() => openHandler('authorization')}
@@ -49,7 +52,7 @@ export const HeaderActions = () => {
         >
           {token ? t('button.signOut') : t('button.signIn')}
         </Text>
-      </Button>
+      </Button> */}
     </section>
   );
 };
