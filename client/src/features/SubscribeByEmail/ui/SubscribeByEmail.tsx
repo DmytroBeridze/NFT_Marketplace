@@ -53,7 +53,7 @@ const SubscribeByEmail = ({ responsiveValue = '1300' }: SubscribeParams) => {
             name="userMail"
             type="email"
             className={`subscribeByEmailInput py-5 px-5 w-full rounded-3xl 
-          input-focus border border-transparent  placeholder:text-base ${getFieldErrorClass(reparedError, 'userMail')}`}
+          input-focus border border-transparent  ${getFieldErrorClass(reparedError, 'userMail')}`}
             placeholder={t('placeholder')}
             autoComplete="email"
           />

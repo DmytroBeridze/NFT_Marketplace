@@ -9,8 +9,9 @@ const languages = [
 
 interface LangSwitcherProps {
   className?: string;
+  hover?: boolean;
 }
-export const LangSwitcher = ({ className }: LangSwitcherProps) => {
+export const LangSwitcher = ({ className, hover }: LangSwitcherProps) => {
   const { language, changeLang } = useLanguage();
 
   const initialLang =
@@ -39,6 +40,7 @@ export const LangSwitcher = ({ className }: LangSwitcherProps) => {
       selectedLang={selectedLang}
       setSelectedLang={setSelectedLang}
       className={className}
+      hoverEffect={hover}
     ></LangSelect>
   );
 };

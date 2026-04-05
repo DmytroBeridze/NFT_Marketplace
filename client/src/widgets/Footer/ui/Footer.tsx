@@ -134,13 +134,13 @@ export const Footer = () => {
                 {tt('description')}
               </Text>
 
-              <div className="max-w-[420px] ">
+              <div>
+                {/* <div className="w-[420px]  max-[835px]:w-full "> */}
                 <SubscribeByEmail responsiveValue="835" />
-              </div>
-
-              <div className="flex items-center">
-                <LangSwitcher className="py-2 px-2" />
-                <AuthButton handler={loginLogoutHandler} />
+                <div className="flex items-center">
+                  <LangSwitcher className="py-2 px-2" hover={false} />
+                  <AuthButton handler={loginLogoutHandler} />
+                </div>
               </div>
             </div>
           </div>

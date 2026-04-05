@@ -22,6 +22,7 @@ import { ReactComponent as Door } from '../../assets/icons/Door.svg';
 import { ReactComponent as Arrow } from '../../assets/icons/Arrow.svg';
 import { ReactComponent as UserPlug } from '../../assets/icons/user_plug.svg';
 import { ReactComponent as FallbackAvatar } from '../../assets/icons/FallbackAvatar.svg';
+import { ReactComponent as DoubleUpIcon } from '../../assets/icons/Double_up_icon.svg';
 
 export const iconsMap = {
   'logo-icon': LogoIcon,
@@ -48,6 +49,7 @@ export const iconsMap = {
   'userPlug-icon': UserPlug,
   'fallbackAvatar-icon': FallbackAvatar,
   spinner: Spinner,
+  'doubleUp-icon': DoubleUpIcon,
 } as const;
 
 export type IconName = keyof typeof iconsMap;

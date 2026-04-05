@@ -100,6 +100,10 @@
   color: var(--primary-accent-color);
 }
 
+.text-dark-purple-color {
+  color: var(--hover-primary-accent-color);
+}
+
 .text-burger-color {
   color: var(--text-burger-color);
 }
@@ -262,16 +266,16 @@
 }
 
 /*поведінка themeSwither в бургері є ховер на контейнері, в хедері немає */
-@media (max-width: 639px) {
-  .only-mobile-hover:hover {
+.only-mobile-hover:hover {
+  @media (max-width: 639px) {
     background-color: var(--burger-hover-background-color) !important;
   }
 }
 
 /* поведінка languageSwitcher в бургері є ховер в хедері немає */
-@media (min-width: 1200px) {
-  /* @media (min-width: 835px) { */
-  .bg-burger-hover-background-color {
+.bg-burger-hover-background-color {
+  @media (min-width: 1200px) {
+    /* @media (min-width: 835px) { */
     background-color: transparent !important;
     padding: 0 1rem;
   }
