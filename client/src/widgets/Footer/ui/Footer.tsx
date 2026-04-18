@@ -2,12 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../../shared/lib/i18n';
 import { InnerContainer } from '../../../shared/ui/layout';
 import { HeaderLogo } from '../../../shared/ui/molecules/HeaderLogo';
-import { Icon, Image, Text } from '../../../shared/ui/atoms';
+import { Icon, Text } from '../../../shared/ui/atoms';
 import SubscribeByEmail from '../../../features/SubscribeByEmail/ui/SubscribeByEmail';
 import { Link, NavLink } from 'react-router-dom';
 import type { IconName } from '../../../shared/lib/icons';
-import { BurgerButton } from '../../../features/BurgerMenu';
-import { HeaderActions } from '../../Header';
+
 import AuthButton from '../../../features/AuthButton/AuthButton';
 import { LangSwitcher } from '../../../features/LangSwitcher';
 import { useAuthAction } from '../../../shared/lib/hooks';
@@ -77,7 +76,7 @@ export const Footer = () => {
                 {/* !-----Icons--------*/}
                 <ul className="flex gap-3.5">
                   {icons.map((icon) => (
-                    <li>
+                    <li key={icon.name}>
                       <Link to={icon.link}>
                         <Icon
                           name={icon.name}

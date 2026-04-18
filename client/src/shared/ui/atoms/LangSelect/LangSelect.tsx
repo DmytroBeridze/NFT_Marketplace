@@ -32,8 +32,6 @@ export const LangSelect = ({
   className,
   hoverEffect = true,
 }: LangSelectProps) => {
-  console.log(hoverEffect);
-
   return (
     <Listbox value={selectedLang} onChange={setSelectedLang}>
       {({ open }) => (

@@ -29,4 +29,6 @@ export interface InputProps {
 // --------------------------reusable input wrapper
 export type InputWrapper = Omit<InputProps, 'field' | 'meta'> & {
   name: string;
+  variant: 'page' | 'modal' | 'subscribe';
+  size?: 'default' | 'custom';
 };

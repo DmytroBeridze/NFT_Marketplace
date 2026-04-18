@@ -52,6 +52,8 @@ const SubscribeByEmail = ({ responsiveValue = '1300' }: SubscribeParams) => {
             id="userMail"
             name="userMail"
             type="email"
+            variant="subscribe"
+            size="custom"
             className={`subscribeByEmailInput py-5 px-5 w-full rounded-3xl 
           input-focus border border-transparent  ${getFieldErrorClass(reparedError, 'userMail')}`}
             placeholder={t('placeholder')}

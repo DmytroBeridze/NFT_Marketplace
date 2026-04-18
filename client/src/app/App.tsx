@@ -47,7 +47,9 @@ function App() {
               }
             >
               {/* <Suspense fallback={<div>Lading page...</div>}> */}
-              <Outlet />
+              <AuthorizationContextProvider>
+                <Outlet />
+              </AuthorizationContextProvider>
             </Suspense>
             {/* </InnerContainer> */}
           </main>
