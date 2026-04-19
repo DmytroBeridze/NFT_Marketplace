@@ -11,8 +11,8 @@ const AuthorizationPage = () => {
   // const { setTab, tab } = useAuthorizationContext();
   return (
     <section
-      className="flex h-[690px] gap-12 bg-primary-background-color 
-     max-[834px]:flex-col  max-[834px]:h-auto max-[834px]:items-center"
+      className="flex h-[800px] gap-12 bg-primary-background-color 
+     max-[834px]:flex-col  max-[834px]:h-auto max-[834px]:items-center "
     >
       <Image
         alt="authorizationPlaceholder"
@@ -20,7 +20,8 @@ const AuthorizationPage = () => {
         className="flex-1 basis-[50%] min-w-0"
         height="100%"
       />
-      <div className="flex-1 basis-[50%]">
+
+      <div className=" flex-1 basis-[50%]  flex flex-col justify-center">
         {/* <AuthorizationModal /> */}
 
         <SectionHeader

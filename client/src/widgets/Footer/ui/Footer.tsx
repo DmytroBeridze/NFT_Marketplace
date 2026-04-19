@@ -61,7 +61,7 @@ export const Footer = () => {
       <InnerContainer>
         <section className="main-padding-responsive font-work-sans-regular text-secondary-text-color">
           {/* <div className="mx-7 flex align-middle justify-between "> */}
-          <div className="mx-7 footerWrapper">
+          <div className="mx-7 footerWrapper pb-8">
             {/* -----------marketplace */}
             <div className="flex flex-col grow basis-1/3 ">
               <HeaderLogo
@@ -138,13 +138,16 @@ export const Footer = () => {
                 <SubscribeByEmail responsiveValue="835" />
                 <div className="flex items-center">
                   <LangSwitcher className="py-2 px-2" hover={false} />
-                  <AuthButton handler={loginLogoutHandler} />
+                  <AuthButton
+                    handler={loginLogoutHandler}
+                    font="font-work-sans-regular"
+                  />
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <div className="w-full h-0.5 bg-secondary-background-color mb-5"></div>
+            <div className="w-full h-[1px] bg-adaptive-button-background-color mb-5 opacity-30"></div>
             <Text className="responsive-size-sm">{t('main.developed')}</Text>
           </div>
         </section>

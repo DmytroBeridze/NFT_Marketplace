@@ -21,7 +21,7 @@ import { useTimeoutAction } from '../../../shared/lib/hooks';
 import { Button } from '../../../shared/ui/atoms';
 
 const formStyles = {
-  page: 'gap-4',
+  page: 'gap-3',
   modal: 'gap-4 sm:gap-6',
 } as const;
 

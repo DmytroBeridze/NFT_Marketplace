@@ -43,6 +43,7 @@
   --button-inversive-background-hover: #3a3a3a;
   --inversive-text: #ffffff; /* Белый текст на тёмной кнопке */
   --burger-text: #ffffff;
+  --divider-bacground: #763fbf;
 }
 
 .dark {
@@ -57,4 +58,5 @@
   --button-inversive-background-hover: #adaaaa;
   --inversive-text: #2b2b2b;
   --burger-text: #a259ff;
+  --divider-bacground: #858584;
 }

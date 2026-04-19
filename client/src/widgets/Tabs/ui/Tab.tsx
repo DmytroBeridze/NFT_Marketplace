@@ -9,18 +9,34 @@ type TabProps = {
 export const Tab = ({ name, children }: TabProps) => {
   const { setTab, tab } = useAuthorizationContext();
   const active = name === tab;
+
+  const base =
+    ' relative  inline-flex items-center justify-center px-6 h-[60px] min-w-[140px] cursor-pointer';
+  const overlap = 'max-[500px]:mr-[-50px]';
+
+  const state = active ? 'z-20 mr-[-20px] ' : 'z-0 mr-[-20px] ';
+
   return (
     <div
-      className={`relative cursor-pointer   ${active ? ' z-20 mr-[-20px] ' : ' z-0 mr-[-20px]  '}`}
+      className={`${overlap} ${base} ${state} `}
       onClick={() => setTab(name as 'login' | 'signUp')}
     >
       <svg
-        viewBox="0 0 93.85 24.26"
-        className={`-my-[11px] w-[140px] h-[60px]  block  ${active ? 'text-secondary-text-color' : 'static-text-purple-color'}  `}
-        // className={`w-[140px] h-[60px] block  ${active ? 'text-secondary-text-color' : 'static-text-purple-color'}  `}
+        viewBox="0 -6 93.85 36"
+        preserveAspectRatio="none"
+        className={`absolute inset-0 w-full h-full block
+      ${active ? 'text-secondary-text-color' : 'static-text-purple-color'}
+    `}
       >
         <defs>
-          <filter id="tabShadow" x="-50%" y="-50%" width="200%" height="200%">
+          <filter
+            filterUnits="userSpaceOnUse"
+            id="tabShadow"
+            x="-50%"
+            y="-50%"
+            width="200%"
+            height="200%"
+          >
             <feDropShadow
               dx="0"
               dy="-2"
@@ -28,7 +44,6 @@ export const Tab = ({ name, children }: TabProps) => {
               floodColor="black"
               floodOpacity="0.18"
             />
-
             <feDropShadow
               dx="-2"
               dy="-1"
@@ -36,7 +51,6 @@ export const Tab = ({ name, children }: TabProps) => {
               floodColor="black"
               floodOpacity="0.12"
             />
-
             <feDropShadow
               dx="2"
               dy="-1"
@@ -54,9 +68,7 @@ export const Tab = ({ name, children }: TabProps) => {
         />
       </svg>
 
-      <div className="absolute inset-0 flex items-center justify-center">
-        {children}
-      </div>
+      <span className="relative z-10 whitespace-nowrap pr-4 ">{children}</span>
     </div>
   );
 };

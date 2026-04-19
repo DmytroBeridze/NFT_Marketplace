@@ -2,10 +2,17 @@ import type { MouseEventHandler } from 'react';
 import { useLocalStorage } from '../../shared/lib/hooks';
 import { Button, Icon, Text } from '../../shared/ui/atoms';
 import { useTranslation } from 'react-i18next';
+import type { TextFont } from '../../shared/ui/atoms/Text/Text.types';
 
-type Handler = { handler: MouseEventHandler<HTMLButtonElement> };
+type AuthButtonProps = {
+  handler: MouseEventHandler<HTMLButtonElement>;
+  font?: TextFont;
+};
 
-const AuthButton = ({ handler }: Handler) => {
+const AuthButton = ({
+  handler,
+  font = 'font-work-sans-semibold',
+}: AuthButtonProps) => {
   const { t } = useTranslation();
   const { getLocal } = useLocalStorage();
   const token = getLocal('token');
@@ -32,7 +39,8 @@ const AuthButton = ({ handler }: Handler) => {
 
       <Text
         Element="p"
-        font="font-work-sans-semibold"
+        font={font}
+        // font="font-work-sans-semibold"
         size="responsive-size-sm"
         color="static-text-white-color"
       >
