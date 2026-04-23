@@ -20,7 +20,6 @@ const AuthorizationPage = () => {
         className="flex-1 basis-[50%] min-w-0"
         height="100%"
       />
-
       <div className=" flex-1 basis-[50%]  flex flex-col justify-center">
         {/* <AuthorizationModal /> */}
 
