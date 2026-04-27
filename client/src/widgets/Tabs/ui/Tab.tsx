@@ -68,7 +68,9 @@ export const Tab = ({ name, children }: TabProps) => {
         />
       </svg>
 
-      <span className="relative z-10 whitespace-nowrap pr-4 ">{children}</span>
+      <span className="relative z-10 whitespace-nowrap pr-4  font-work-sans-regular static-text-white-color responsive-size-sm  ">
+        {children}
+      </span>
     </div>
   );
 };

@@ -63,14 +63,19 @@ export const LangSelect = ({
           </ListboxButton>
           <ListboxOptions
             anchor="bottom start"
-            className="lg:w-(--button-width) py-1 px-1 mt-1  bg-white  focus-visible:outline-none focus-visible:ring-0  cursor-pointer rounded-lg shadow-secondary z-[999]  "
+            className="w-[88px] py-1 px-1 mt-1  bg-white 
+             focus-visible:outline-none focus-visible:ring-0  cursor-pointer
+              rounded-lg shadow-secondary z-[999]  "
+            // className="lg:w-(--button-width) py-1 px-1 mt-1  bg-white
+            //  focus-visible:outline-none focus-visible:ring-0  cursor-pointer
+            //   rounded-lg shadow-secondary z-[999]  "
           >
             {languages.map((lang) => (
               <ListboxOption
                 key={lang.id}
                 value={lang}
                 className={
-                  ' h-10 px-3   data-focus:bg-blue-100 flex gap-2 items-center outline-0 bg-white rounded-lg  '
+                  ' h-10 px-3  data-focus:bg-blue-100 flex gap-2 items-center outline-0 bg-white rounded-lg  '
                 }
               >
                 {lang.name}

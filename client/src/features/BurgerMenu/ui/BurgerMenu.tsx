@@ -19,7 +19,7 @@ interface burgerMenuProps {
 export const BurgerMenu = ({ children }: burgerMenuProps) => {
   const [mounted, setMounted] = useState(false);
   const behavior = useAppSelector((state) => state.burger.isOpen);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   // ---- закриття бургера і включення скрола
   const { closeBurgerMenu } = useBurgerToggle();

@@ -137,7 +137,10 @@ export const Footer = () => {
                 {/* <div className="w-[420px]  max-[835px]:w-full "> */}
                 <SubscribeByEmail responsiveValue="835" />
                 <div className="flex items-center">
-                  <LangSwitcher className="py-2 px-2" hover={false} />
+                  <LangSwitcher
+                    className="py-2 px-2 max-w-[88px]"
+                    hover={false}
+                  />
                   <AuthButton
                     handler={loginLogoutHandler}
                     font="font-work-sans-regular"
