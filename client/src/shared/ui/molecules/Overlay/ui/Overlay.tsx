@@ -46,7 +46,8 @@ export const Overlay = ({ children, modalType }: OverlayProps) => {
         <div
           ref={ref}
           style={style}
-          className="fixed inset-0 flex items-center justify-center  bg-overlay-background-color z-[999] p-5"
+          className="fixed inset-0 flex items-center justify-center 
+           bg-overlay-background-color z-[999] p-5"
           onClick={() => closeHandler()}
         >
           {children}

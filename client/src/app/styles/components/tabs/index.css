@@ -1,0 +1,8 @@
+.divider::before {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, var(--divider-bacground), transparent);
+}

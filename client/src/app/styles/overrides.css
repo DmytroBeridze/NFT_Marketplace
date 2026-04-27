@@ -1,0 +1,29 @@
+/*
+  ┌────────────────────────────────────────────────────────────┐
+  │                Browser Override: Autofill Fix              │
+  └────────────────────────────────────────────────────────────┘
+
+  Chrome (and WebKit browsers) applies its own default styling
+  to autofilled inputs (yellow/blue background + text color).
+
+  This override:
+  - Removes browser default autofill background
+  - Forces theme-consistent background via box-shadow inset
+  - Fixes text color for autofilled values
+  - Prevents unwanted autofill transition flash
+
+  ⚠️ Important:
+  This is a browser-level hack, not a design token or component style.
+  Keep it in global overrides, NOT in component styles.
+
+  Affects:
+  input:-webkit-autofill states only (Chrome/Safari)
+*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px var(--button-inversive-background) inset;
+  -webkit-text-fill-color: var(--inversive-text);
+  transition: background-color 9999s ease-in-out 0s;
+}

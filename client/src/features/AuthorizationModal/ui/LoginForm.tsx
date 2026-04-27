@@ -20,7 +20,19 @@ import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import { useTimeoutAction } from '../../../shared/lib/hooks';
 import { Button } from '../../../shared/ui/atoms';
 
-export const LoginForm = () => {
+const formStyles = {
+  page: 'gap-3',
+  modal: 'gap-4 sm:gap-6',
+} as const;
+
+const buttonStyles = {
+  page: 'xl',
+  modal: 'sm',
+} as const;
+
+type LoginFormProps = { variant?: 'page' | 'modal' };
+
+export const LoginForm = ({ variant = 'modal' }: LoginFormProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { closeHandler } = useToggleOverlay();
@@ -48,15 +60,18 @@ export const LoginForm = () => {
     <FormikProvider value={formik}>
       <form
         onSubmit={formik.handleSubmit}
-        className=" w-full flex  flex-col gap-4 sm:gap-6 items-center justify-between responsive-size-sm"
+        className={`w-full flex  flex-col  items-center justify-between responsive-size-sm
+          ${formStyles[variant]}
+          `}
       >
         <FormikInput
           id="name"
           name="userName"
           type="text"
-          className={`w-full border-2 border-gray-300
-          rounded-sm h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
-          input-focus focus:ring-1 ${getFieldErrorClass(error, 'userName')}`}
+          variant={variant}
+          className={`
+           ${getFieldErrorClass(error, 'userName')} 
+         `}
           placeholder={t('modal.placeholders.userName')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<PiUser className=" text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />}
@@ -67,9 +82,8 @@ export const LoginForm = () => {
           id="pass"
           name="userPass"
           type={`${passVisible.userPass ? 'text' : 'password'}`}
-          className={`w-full border-2 border-gray-300
-          rounded-sm h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
-          input-focus focus:ring-1 ${getFieldErrorClass(error, 'userPass')}`}
+          variant={variant}
+          className={` ${getFieldErrorClass(error, 'userPass')}  `}
           placeholder={t('modal.placeholders.password')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<GoKey className=" text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />}
@@ -94,7 +108,7 @@ export const LoginForm = () => {
           type="submit"
           variant={isLoading ? 'loading' : 'primary'}
           className={`w-full p-3 `}
-          radius="sm"
+          radius={buttonStyles[variant]}
           disabled={isLoading}
         >
           <Text

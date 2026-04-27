@@ -9,6 +9,8 @@ import { useAppSelector } from './store/reduxHooks';
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Spinner } from '../shared/ui/atoms';
+import { Footer } from '../widgets/Footer';
+import ScrollToTopButton from '../shared/ui/atoms/ScrollToTopButton/ScrollToTopButton';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
@@ -45,11 +47,15 @@ function App() {
               }
             >
               {/* <Suspense fallback={<div>Lading page...</div>}> */}
-              <Outlet />
+              <AuthorizationContextProvider>
+                <Outlet />
+              </AuthorizationContextProvider>
             </Suspense>
             {/* </InnerContainer> */}
           </main>
+          <Footer />
         </OuterContainer>
+        <ScrollToTopButton />
       </AppProviders>
     </div>
   );

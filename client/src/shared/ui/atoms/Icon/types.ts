@@ -5,7 +5,7 @@ export interface IconProps {
   size?: number;
   className?: string;
   style?: React.CSSProperties;
-  fill?: string;
+  fill?: string | undefined;
   onClick?: () => void;
   height?: number;
 }

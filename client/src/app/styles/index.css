@@ -4,6 +4,9 @@
 @import './tokens.css';
 @import './media.css';
 
+/* Browser  Autofill Fix */
+@import './overrides.css';
+
 @import 'tailwindcss';
 
 /* components */
@@ -17,3 +20,5 @@
 @import './components/NFTCard/index.css';
 @import './components/weeklyDigest/index.css';
 @import './components/subscribeByEmail/index.css';
+@import './components/footer/index.css';
+@import './components/tabs/index.css';

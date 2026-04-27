@@ -2,13 +2,40 @@
   background-color: var(--button-inversive-background);
   color: var(--inversive-text);
 }
+/* ----    основні стилі */
 .subscribeByEmailButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------адаптація */
+.subscribeByEmailButton-1300 {
   position: static;
   width: 100%;
   margin-top: 10px;
+
   @media (min-width: 1300px) {
     position: absolute;
     width: fit-content;
+    max-width: 750px;
+    margin-top: 0px;
+  }
+}
+
+.subscribeByEmailButton-835 {
+  position: static;
+  width: 100%;
+
+  margin-top: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (min-width: 835px) {
+    position: absolute;
+    width: fit-content;
+    max-width: 750px;
     margin-top: 0px;
   }
 }

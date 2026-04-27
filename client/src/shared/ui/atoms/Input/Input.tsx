@@ -36,10 +36,11 @@ export const Input = ({
           )}
           <input
             {...field}
+            // style={{ fontSize: '16px', fontFamily: 'system-ui' }}
             id={id}
             type={type}
             placeholder={placeholder}
-            className={`${className} ${meta.error && meta.touched ? '!border-red-500 !border' : ''}`}
+            className={`placeholder:text-base font-sans  ${className}  ${meta.error && meta.touched ? '!border-red-500 !border' : ''} `}
             accept={accept}
             autoComplete={autoComplete}
           />

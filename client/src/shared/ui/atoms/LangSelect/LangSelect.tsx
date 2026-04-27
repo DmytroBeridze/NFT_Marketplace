@@ -21,6 +21,7 @@ interface LangSelectProps {
   languages: Language[];
   language: string;
   className?: string;
+  hoverEffect?: boolean;
 }
 
 export const LangSelect = ({
@@ -29,6 +30,7 @@ export const LangSelect = ({
   languages,
   language,
   className,
+  hoverEffect = true,
 }: LangSelectProps) => {
   return (
     <Listbox value={selectedLang} onChange={setSelectedLang}>
@@ -36,8 +38,8 @@ export const LangSelect = ({
         <div className="relative w-full">
           <ListboxButton
             className={`${className} relative  focus-visible:outline-none focus-visible:ring-0 
-             cursor-pointer ease-in-out duration-300 bg-burger-hover-background-color
-              bg-burger-hover-background-color-desktop py-6 px-4    rounded-lg  w-full `}
+             cursor-pointer ease-in-out duration-300 ${hoverEffect ? 'bg-burger-hover-background-color' : ''} 
+              py-6 px-4    rounded-lg  w-full `}
             // className={`${className}  sm:rounded-lg md:rounded-2xl lg:rounded-3xl focus-visible:outline-none focus-visible:ring-0  cursor-pointer ease-in-out duration-300 bg-burger-hover-background-color py-6 px-4  rounded-lg  w-full`}
           >
             {/* <ListboxButton className="rounded-md sm:rounded-lg md:rounded-2xl lg:rounded-3xl   cursor-pointer py-2 px-5  bg-adaptive-button-background-color"> */}
@@ -61,14 +63,19 @@ export const LangSelect = ({
           </ListboxButton>
           <ListboxOptions
             anchor="bottom start"
-            className="lg:w-(--button-width) py-1 px-1 mt-1  bg-white  focus-visible:outline-none focus-visible:ring-0  cursor-pointer rounded-lg shadow-secondary z-[999]  "
+            className="w-[88px] py-1 px-1 mt-1  bg-white 
+             focus-visible:outline-none focus-visible:ring-0  cursor-pointer
+              rounded-lg shadow-secondary z-[999]  "
+            // className="lg:w-(--button-width) py-1 px-1 mt-1  bg-white
+            //  focus-visible:outline-none focus-visible:ring-0  cursor-pointer
+            //   rounded-lg shadow-secondary z-[999]  "
           >
             {languages.map((lang) => (
               <ListboxOption
                 key={lang.id}
                 value={lang}
                 className={
-                  ' h-10 px-3   data-focus:bg-blue-100 flex gap-2 items-center outline-0 bg-white rounded-lg  '
+                  ' h-10 px-3  data-focus:bg-blue-100 flex gap-2 items-center outline-0 bg-white rounded-lg  '
                 }
               >
                 {lang.name}

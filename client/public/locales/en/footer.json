@@ -1,0 +1,13 @@
+{
+  "main": {
+    "createdBy": "Built with React, TypeScript, RTK Query, SCSS, Tailwind, Node.js, Express, MongoDB",
+    "social": "Join our community",
+    "developed": "Ⓒ NFT Marketplace. Developed by Dmytro Beridze",
+    "exploreTitle": "Explore"
+  },
+  "explore": {
+    "marketplace": "Marketplace",
+    "rankings": "Rankings",
+    "connectWallet": "Connect a wallet"
+  }
+}

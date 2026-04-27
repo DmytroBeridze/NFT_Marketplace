@@ -23,7 +23,18 @@ import { useAuthorizationContext } from '../context';
 import { useTimeoutAction } from '../../../shared/lib/hooks';
 import { Button, Text } from '../../../shared/ui/atoms';
 
-export const SignUpForm = () => {
+const formStyles = {
+  page: 'gap-4',
+  modal: 'gap-4 sm:gap-6',
+} as const;
+
+const buttonStyles = {
+  page: 'xl',
+  modal: 'sm',
+} as const;
+
+type LoginFormProps = { variant?: 'page' | 'modal' };
+export const SignUpForm = ({ variant = 'modal' }: LoginFormProps) => {
   const { t } = useTranslation();
   const { passVisible, togglePasswordVisibility } = usePasswordVisibility();
   const { setTab } = useAuthorizationContext();
@@ -40,15 +51,16 @@ export const SignUpForm = () => {
     <FormikProvider value={formik}>
       <form
         onSubmit={formik.handleSubmit}
-        className=" w-full flex  flex-col gap-4 sm:gap-6 items-center justify-between responsive-size-sm"
+        className={`w-full flex  flex-col  items-center justify-between responsive-size-sm
+          ${formStyles[variant]}
+          `}
       >
         <FormikInput
           id="name"
           name="userName"
           type="text"
-          className={`w-full border-2 border-gray-300
-          rounded-sm  h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
-          input-focus focus:ring-1 ${getFieldErrorClass(error, 'userName')}`}
+          variant={variant}
+          className={` ${getFieldErrorClass(error, 'userName')}`}
           placeholder={t('modal.placeholders.userName')}
           wrapperClass="w-full flex flex-col"
           leftIcon={
@@ -61,9 +73,8 @@ export const SignUpForm = () => {
           id="email"
           name="userMail"
           type="email"
-          className={`w-full border-2 border-gray-300
-          rounded-sm h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
-          input-focus focus:ring-1  ${getFieldErrorClass(error, 'userMail')}`}
+          variant={variant}
+          className={` ${getFieldErrorClass(error, 'userMail')}`}
           placeholder={t('modal.placeholders.mail')}
           wrapperClass="w-full flex flex-col"
           leftIcon={
@@ -76,9 +87,7 @@ export const SignUpForm = () => {
           id="pass"
           name="userPass"
           type={`${passVisible.userPass ? 'text' : 'password'}`}
-          className="w-full border-2 border-gray-300
-          rounded-sm h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
-          input-focus focus:ring-1"
+          variant={variant}
           placeholder={t('modal.placeholders.password')}
           wrapperClass="w-full flex flex-col"
           leftIcon={<GoKey className=" text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />}
@@ -103,9 +112,7 @@ export const SignUpForm = () => {
           id="confirmPass"
           name="userconfirmPass"
           type={`${passVisible.userconfirmPass ? 'text' : 'password'}`}
-          className="w-full border-2 border-gray-300
-          rounded-sm h-10 lg:h-12 p-2.5 pl-10 sm:pl-14
-          input-focus focus:ring-1"
+          variant={variant}
           placeholder={t('modal.placeholders.confirmPassword')}
           wrapperClass="w-full flex flex-col"
           leftIcon={
@@ -155,7 +162,8 @@ export const SignUpForm = () => {
           type="submit"
           variant="primary"
           className="w-full p-3"
-          radius="sm"
+          radius={buttonStyles[variant]}
+          // radius="sm"
         >
           <Text
             color="static-text-white-color"

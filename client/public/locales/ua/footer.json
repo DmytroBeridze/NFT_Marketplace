@@ -1,0 +1,13 @@
+{
+  "main": {
+    "createdBy": "Створено з використанням React, TypeScript, RTK Query, SCSS, Tailwind, Node.js, Express, MongoDB",
+    "social": "Приєднуйся до нашої спільноти",
+    "developed": "Ⓒ NFT Marketplace. Розроблено Дмитром Берідзе",
+    "exploreTitle": "Огляд"
+  },
+  "explore": {
+    "marketplace": "Маркетплейс",
+    "rankings": "Рейтинги",
+    "connectWallet": "Підключити гаманець"
+  }
+}

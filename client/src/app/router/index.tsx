@@ -13,6 +13,7 @@ const Dashboard = lazy(() => import('../../pages/Dashboard'));
 import AuthorPage from '../../pages/AuthorPage/AuthorPage';
 
 import { ProtectedRoute } from '../../shared/routes';
+import AuthorizationPage from '../../pages/AuthorizationPage/AuthorizationPage';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: 'collection/:galleryId', Component: AuthorCollection },
       { path: 'gallery', Component: Gallery },
       { path: 'authorPage/:authorId', Component: AuthorPage },
+      { path: 'auth', Component: AuthorizationPage },
     ],
   },
 ]);

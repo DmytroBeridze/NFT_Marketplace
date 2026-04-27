@@ -2,8 +2,10 @@ import { Image } from '../../../shared/ui/atoms';
 import Astronaut from '../../../shared/assets/images/weeklyDigest/astronaut.png';
 import { SectionHeader } from '../../../shared/ui/molecules/SectionHeader';
 import SubscribeByEmail from '../../../features/SubscribeByEmail/ui/SubscribeByEmail';
+import { useTranslation } from 'react-i18next';
 
 const WeeklyDigest = () => {
+  const { t } = useTranslation('weeklyDigest');
   return (
     <section className="main-padding-responsive">
       <div
@@ -17,8 +19,8 @@ const WeeklyDigest = () => {
         <div className="weeklyDigestText flex flex-col justify-center ">
           <SectionHeader
             responsive={false}
-            title="Join Our Weekly Digest"
-            description="Get exclusive promotions & updates straight to your inbox."
+            title={t('title')}
+            description={t('description')}
             className="mb-10"
           />
           <SubscribeByEmail />
