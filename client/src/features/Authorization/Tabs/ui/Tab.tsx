@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useAuthorizationContext } from '../../../features/AuthorizationModal/context';
+import { useAuthorizationContext } from '../../../AuthorizationModal/context';
 
 type TabProps = {
   name: string;
