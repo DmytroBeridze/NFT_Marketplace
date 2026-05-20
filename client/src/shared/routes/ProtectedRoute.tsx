@@ -1,3 +1,46 @@
+// import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks';
+// import { Navigate, Outlet, useNavigate } from 'react-router';
+// import { useToggleOverlay } from '../ui/molecules/Overlay';
+// import { clearUser, useGetMeQuery } from '../../entities/user/model';
+// import { useEffect } from 'react';
+// import { useLocalStorage } from '../lib/hooks';
+// import { Spinner } from '../ui/atoms';
+
+// export const ProtectedRoute = () => {
+//   const { getLocal, removeLocal } = useLocalStorage();
+//   const user = useAppSelector((state) => state.user.data);
+
+//   const token = getLocal('token');
+//   const dispatch = useAppDispatch();
+
+//   const navigate = useNavigate();
+
+//   const { isLoading } = useGetMeQuery(undefined, { skip: !token });
+
+//   if (isLoading) return <Spinner />;
+//   console.log(token, user);
+
+//   if (!token || !user) {
+//     removeLocal('token');
+//     dispatch(clearUser());
+//     <Navigate to="/auth" />;
+//     // navigate('/auth', { replace: true });
+//   }
+
+//   useEffect(() => {
+//     const handler = (event: StorageEvent) => {
+//       if (event.key === 'token') {
+//         dispatch(clearUser());
+//         <Navigate to="/auth" />;
+//       }
+//     };
+//     window.addEventListener('storage', handler);
+//     return () => window.removeEventListener('storage', handler);
+//   }, [dispatch, navigate]);
+
+//   return <Outlet />;
+// };
+
 import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks';
 import { Outlet, useNavigate } from 'react-router';
 import { useToggleOverlay } from '../ui/molecules/Overlay';
@@ -23,7 +66,7 @@ export const ProtectedRoute = () => {
   if (isLoading) return не дає спрацювати цій перевірці, доки стан юзера
   не буде точно завартажений
 */
-    // if (isLoading) return;
+    if (isLoading) return;
     if (!token || !user) {
       openHandler('authorization');
       removeLocal('token');
