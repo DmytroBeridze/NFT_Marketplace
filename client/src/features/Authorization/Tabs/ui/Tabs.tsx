@@ -11,7 +11,7 @@ const Tabs = () => {
   const buttonsNames = Object.entries(translateVariables);
 
   return (
-    <section className="  flex flex-col  max-[834px]:self-start max-[834px]:pb-16  px-4   w-full">
+    <section className=" flex flex-col  max-[834px]:self-start max-[834px]:pb-16  px-4   w-full">
       {/* ---------tabs */}
 
       <div className="flex relative divider ">

@@ -23,6 +23,9 @@ import { ReactComponent as Arrow } from '../../assets/icons/Arrow.svg';
 import { ReactComponent as UserPlug } from '../../assets/icons/user_plug.svg';
 import { ReactComponent as FallbackAvatar } from '../../assets/icons/FallbackAvatar.svg';
 import { ReactComponent as DoubleUpIcon } from '../../assets/icons/Double_up_icon.svg';
+import CoinbaseIcon from '../../assets/icons/Coinbase.png';
+import MetamaskIcon from '../../assets/icons/Metamask.png';
+import WalletConnect from '../../assets/icons/WalletConnect.png';
 
 export const iconsMap = {
   'logo-icon': LogoIcon,
@@ -42,7 +45,7 @@ export const iconsMap = {
   'videoCamera-icon': VideoCameraIcon,
   'youtube-icon': YoutubeIcon,
   'user-icon': UserIcon,
-  'BurgerMenu-icon': BurgerMenu,
+  'burgerMenu-icon': BurgerMenu,
   'close-icon': Close,
   'door-icon': Door,
   'arrow-icon': Arrow,
@@ -52,4 +55,11 @@ export const iconsMap = {
   'doubleUp-icon': DoubleUpIcon,
 } as const;
 
+export const pngIconsMap = {
+  'coinbase-icon': CoinbaseIcon,
+  'metamaskIcon-icon': MetamaskIcon,
+  'walletConnect-icon': WalletConnect,
+} as const;
+
 export type IconName = keyof typeof iconsMap;
+export type PngIconName = keyof typeof pngIconsMap;

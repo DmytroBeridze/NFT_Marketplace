@@ -19,6 +19,7 @@ const CategoriesCard = ({ id, name }: CategoriesCardType) => {
       data-testid="CategoriesCard"
       className="cursor-pointer overflow-hidden rounded-2xl shadow-secondary
     transition-all ease-in duration-200 hover:-translate-y-3 shadow-accent bg-secondary-background-color"
+      // onClick={() => console.log(name)}
     >
       {/* -------image */}
       <div className="max-h-[240px]  overflow-hidden relative">

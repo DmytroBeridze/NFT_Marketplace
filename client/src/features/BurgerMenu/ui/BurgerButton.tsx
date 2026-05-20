@@ -8,7 +8,7 @@ interface BurgerButtonProps {
 }
 
 export const BurgerButton = ({
-  iconName = 'BurgerMenu-icon',
+  iconName = 'burgerMenu-icon',
 }: BurgerButtonProps) => {
   const { theme } = useTheme();
 

@@ -19,7 +19,7 @@ export const DiscoverMoreNFTsContent = () => {
         shrink-0 items-center main-button-smallSize-hidden  "
         radius="xl"
         iconClassName="static-text-purple-color"
-        icon="eye-icon"
+        iconName="eye-icon"
         textClassName="md:text-base text-xs text-primary-text-color"
         onClick={() => navigate('/gallery')}
       >

@@ -8,6 +8,7 @@ export const TopCreatorsActionBlock = () => {
         className=" py-5   px-12 max-h-16 mt-10 w-full
           items-center justify-center
           main-button-bigSize-hidden"
+        iconName="rocket-icon"
         radius="xl"
         textClassName="text-base"
         iconClassName="static-text-purple-color"

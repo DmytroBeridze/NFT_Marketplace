@@ -1,7 +1,7 @@
 import { useGetMeQuery } from '../entities/user/model';
 import { AuthorizationModal } from '../features/AuthorizationModal';
 import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';
-import { InnerContainer, OuterContainer } from '../shared/ui/layout';
+import { OuterContainer } from '../shared/ui/layout';
 import { Overlay } from '../shared/ui/molecules/Overlay';
 import { Header } from '../widgets/Header';
 import { AppProviders } from './providers/AppProviders';
@@ -11,6 +11,9 @@ import { Suspense } from 'react';
 import { Spinner } from '../shared/ui/atoms';
 import { Footer } from '../widgets/Footer';
 import ScrollToTopButton from '../shared/ui/atoms/ScrollToTopButton/ScrollToTopButton';
+import { ScrollToTop } from './providers/ScrollToTop';
+import { WalletInstallModal } from '../widgets/WalletInstall';
+import { WalletContextProvider } from '../pages/ConnectWallet/context/connectWalletContext';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
@@ -19,42 +22,46 @@ function App() {
   return (
     <div className="App">
       <AppProviders>
-        <Overlay modalType={'authorization'}>
-          {modalType === 'authorization' && (
-            <AuthorizationContextProvider>
-              <AuthorizationModal />
-            </AuthorizationContextProvider>
-          )}
-        </Overlay>
+        <ScrollToTop />
+        <WalletContextProvider>
+          <AuthorizationContextProvider>
+            <Overlay modalType={'authorization'}>
+              {modalType === 'authorization' && <AuthorizationModal />}
+            </Overlay>
 
-        {/* {isOpen && <Overlay />} */}
-        <OuterContainer>
-          <Header />
-          <main>
-            {/* <div id="burger-root"></div> */}
-            {/* <InnerContainer> */}
-            {/* <div>
+            <Overlay modalType={'wallet'}>
+              {modalType === 'wallet' && <WalletInstallModal />}
+            </Overlay>
+
+            {/* {isOpen && <Overlay />} */}
+            <OuterContainer>
+              <Header />
+              <main>
+                {/* <div id="burger-root"></div> */}
+                {/* <InnerContainer> */}
+                {/* <div>
               <Spinner wrapperClassName="flex justify-center items-center" />
             </div> */}
-            <Suspense
-              fallback={
-                <div className="w-full h-screen bg-primary-background-color">
-                  <Spinner
-                    wrapperClassName="flex justify-center items-center"
-                    fill={`var(--hover-primary-accent-color)`}
-                  />
-                </div>
-              }
-            >
-              {/* <Suspense fallback={<div>Lading page...</div>}> */}
-              <AuthorizationContextProvider>
-                <Outlet />
-              </AuthorizationContextProvider>
-            </Suspense>
-            {/* </InnerContainer> */}
-          </main>
-          <Footer />
-        </OuterContainer>
+                <Suspense
+                  fallback={
+                    <div className="w-full h-screen bg-primary-background-color">
+                      <Spinner
+                        wrapperClassName="flex justify-center items-center"
+                        fill={`var(--hover-primary-accent-color)`}
+                      />
+                    </div>
+                  }
+                >
+                  {/* <Suspense fallback={<div>Lading page...</div>}> */}
+
+                  <Outlet />
+                </Suspense>
+                {/* </InnerContainer> */}
+              </main>
+              <Footer />
+            </OuterContainer>
+          </AuthorizationContextProvider>
+        </WalletContextProvider>
         <ScrollToTopButton />
       </AppProviders>
     </div>

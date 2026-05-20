@@ -1,1 +1,1 @@
-export * from '../CollectionCard';
+export * from '../ui/CollectionCard';

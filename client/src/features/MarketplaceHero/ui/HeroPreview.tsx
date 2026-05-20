@@ -7,11 +7,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { useEffect, useRef, useState } from 'react';
-import { CenteredMessage } from '../../../shared/ui/helpers';
+
 import { SwiperNavButton } from '../../../widgets/MarketplaceHero/ui/atoms';
 import type { NavigationOptions } from 'swiper/types';
 import { useGetTopNftsQuery } from '../../../entities/nft/model';
 import { HeroSlide } from '../../../widgets/MarketplaceHero/ui';
+import { CenteredMessage } from '../../../shared/ui/molecules/CenteredMessage';
 
 export const HeroPreview = () => {
   const { isError, isLoading, data } = useGetTopNftsQuery(10);

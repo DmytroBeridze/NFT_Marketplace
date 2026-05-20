@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { AuthLayout } from '../../widgets/AuthLayout';
-import Tabs from '../../features/Authorization/Tabs/ui/Tabs';
 import AuthorizationPlaceholder from '../../shared/assets/images/authorization_Placeholder.png';
+import { AuthLayout } from '../../widgets/AuthLayout';
+import Tabs from '../Authorization/Tabs/ui/Tabs';
+const { t } = useTranslation('weeklyDigest');
 
-const ConnectWallet = () => {
-  const { t } = useTranslation('weeklyDigest');
+export const ConnectWallet = () => {
   return (
     <AuthLayout
       description={t('description')}
@@ -16,5 +16,3 @@ const ConnectWallet = () => {
     </AuthLayout>
   );
 };
-
-export default ConnectWallet;

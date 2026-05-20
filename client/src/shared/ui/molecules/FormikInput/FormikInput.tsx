@@ -7,7 +7,8 @@ import type { InputWrapper } from '../../atoms/Input/types';
 const inputStyles = {
   page: 'subscribeByEmailInput rounded-3xl',
   modal: 'border-2 border-gray-300 rounded-sm ',
-  subscribe: 'subscribeByEmailInput py-5 px-5 w-full rounded-3xl ',
+  subscribe: 'subscribeByEmailInput  px-5 w-full rounded-3xl ',
+  // subscribe: 'subscribeByEmailInput py-5 px-5 w-full rounded-3xl ',
 } as const;
 
 // base styles

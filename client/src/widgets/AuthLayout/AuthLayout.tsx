@@ -19,16 +19,16 @@ export const AuthLayout = ({
 }: AuthLayoutProps) => {
   return (
     <section
-      className="flex h-[800px] gap-12 bg-primary-background-color 
+      className="flex h-[800px] gap-12 bg-primary-background-color  
      max-[834px]:flex-col  max-[834px]:h-auto max-[834px]:items-center "
     >
       <Image
         alt={alt}
         src={image}
-        className="flex-1 basis-[50%] min-w-0"
+        className="flex-1 basis-[50%] min-w-0 max-[834px]:flex-auto max-[834px]:basis-0 max-[834px]:h-[232px]"
         height="100%"
       />
-      <div className=" flex-1 basis-[50%]  flex flex-col justify-center">
+      <div className=" flex-1 basis-[50%]  flex flex-col justify-center max-[834px]:w-[360px] ">
         {/* <AuthorizationModal /> */}
 
         <SectionHeader

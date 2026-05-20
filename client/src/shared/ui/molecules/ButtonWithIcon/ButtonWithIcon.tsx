@@ -1,5 +1,10 @@
-import type { IconName } from '../../../lib/icons';
-import { Button, Icon, Text } from '../../atoms';
+import type { ReactNode } from 'react';
+import {
+  pngIconsMap,
+  type IconName,
+  type PngIconName,
+} from '../../../lib/icons';
+import { Button, Icon, Image, Text } from '../../atoms';
 import type { TextSecondaryProps } from '../../atoms/Text/Text.types';
 
 interface ButtonWithIconProps extends TextSecondaryProps {
@@ -11,7 +16,8 @@ interface ButtonWithIconProps extends TextSecondaryProps {
   textClassName?: string;
   iconClassName?: string;
   fill?: string;
-  icon?: IconName;
+  iconName?: IconName;
+  icon?: ReactNode;
   type?: 'button' | 'submit';
   disabled?: boolean;
 
@@ -31,24 +37,38 @@ export const ButtonWithIcon = ({
   fill,
   type,
   disabled,
-  icon = 'rocket-icon',
+  iconName,
+  // icon = 'rocket-icon',
+  icon,
   // textSize = 't-text-sm',
 }: ButtonWithIconProps) => {
+  const renderIcon = () => {
+    if (icon) return icon;
+    if (iconName) {
+      return (
+        <Icon
+          name={iconName}
+          className={` ${iconClassName ?? ''} `}
+          size={20}
+          fill={fill}
+        />
+      );
+    }
+  };
+
+  const renderedIcon = renderIcon();
+
   return (
     <Button
-      className={`flex ${className ?? ''} `}
+      className={`flex  ${className ?? ''} `}
       radius={radius}
       onClick={onClick}
       variant={variant}
       type={type}
       disabled={disabled}
     >
-      <Icon
-        name={icon}
-        className={`mr-3 ${iconClassName ?? ''} `}
-        size={20}
-        fill={fill}
-      />
+      {renderedIcon && <span className="mr-3">{renderedIcon}</span>}
+
       <Text
         Element="span"
         size={textSize}

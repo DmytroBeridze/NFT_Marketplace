@@ -14,7 +14,7 @@ import { ErrorText } from '../shared/ui/atoms';
 import { NFTCard } from '../widgets/NFTCard';
 import { SwiperNavButton } from '../widgets/MarketplaceHero/ui/atoms';
 import { mapNftToCard } from '../entities/nft/lib/mapNftToCard';
-import { SLIDER_BREAKPOINTS } from '../widgets/DiscoverMoreNFTs/constants/slider.constants';
+import { SLIDER_BREAKPOINTS } from '../features/DiscoverMoreNFTs/constants/slider.constants';
 
 const DiscoverMoreNFTsSlider = () => {
   const { isError, isLoading, data } = useGetNftsByCreateDateQuery(20);
