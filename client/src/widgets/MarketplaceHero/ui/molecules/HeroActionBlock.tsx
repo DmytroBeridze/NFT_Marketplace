@@ -20,11 +20,15 @@ export const HeroActionBlock = () => {
   const statisticsArr = Object.entries(statisticsName.translateVariables);
 
   return (
-    <div className="main-button-bigSize-hidden flex flex-col gap-5 heroContent-heroactionBlock-responsive">
+    <div
+      className="main-button-bigSize-hidden flex flex-col 
+    gap-5 heroContent-heroactionBlock-responsive"
+    >
       <ButtonWithIcon
         className="py-5 px-12  flex  justify-center w-full "
         radius="xl"
         fill="white"
+        iconName="rocket-icon"
         onClick={() =>
           navigate(`${data?.userType === 'author' ? '/dashboard' : '/gallery'}`)
         }

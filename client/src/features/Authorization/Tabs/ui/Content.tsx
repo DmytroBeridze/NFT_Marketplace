@@ -1,5 +1,5 @@
-import { LoginForm, SignUpForm } from '../../../features/AuthorizationModal';
-import { useAuthorizationContext } from '../../../features/AuthorizationModal/context';
+import { LoginForm, SignUpForm } from '../../../AuthorizationModal';
+import { useAuthorizationContext } from '../../../AuthorizationModal/context';
 
 export const Content = () => {
   const { tab } = useAuthorizationContext();

@@ -54,7 +54,7 @@ const SubscribeByEmail = ({ responsiveValue = '1300' }: SubscribeParams) => {
             type="email"
             variant="subscribe"
             size="custom"
-            className={`subscribeByEmailInput py-5 px-5 w-full rounded-3xl 
+            className={`subscribeByEmailInput max-[834px]:py-2 py-5 px-5 w-full rounded-3xl  
           input-focus border border-transparent  ${getFieldErrorClass(reparedError, 'userMail')}`}
             placeholder={t('placeholder')}
             autoComplete="email"
@@ -62,9 +62,9 @@ const SubscribeByEmail = ({ responsiveValue = '1300' }: SubscribeParams) => {
 
           <ButtonWithIcon
             data-test="subscribe-button"
-            className={`subscribeByEmailButton subscribeByEmailButton-${responsiveValue}  py-5 px-12  
+            className={`subscribeByEmailButton subscribeByEmailButton-${responsiveValue} max-[834px]:py-2  py-5 px-12  
             right-0 top-0 border border-transparent  `}
-            icon="envelope-icon"
+            iconName="envelope-icon"
             radius="xl"
             type="submit"
             disabled={isLoading}

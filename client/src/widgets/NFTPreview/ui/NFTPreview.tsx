@@ -68,7 +68,7 @@ const NFTPreview = ({
               <ButtonWithIcon
                 children="See NFT"
                 variant="secondary"
-                icon="eye-icon"
+                iconName="eye-icon"
                 className="py-5 px-12 items-center cursor-pointer nftPreview-button-responsive "
                 textClassName="text-inversive-text-color text-base  "
                 radius="xl"

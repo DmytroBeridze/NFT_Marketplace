@@ -51,6 +51,7 @@ export const HeroContent = () => {
         radius="xl"
         // textClassName="text-red-500"
         fill="white"
+        iconName="rocket-icon"
         onClick={() =>
           navigate(`${data?.userType === 'author' ? '/dashboard' : '/gallery'}`)
         }

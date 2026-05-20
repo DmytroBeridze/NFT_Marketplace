@@ -7,7 +7,7 @@ import {
 } from '../config/transitionStyles.ts.ts';
 import { useToggleOverlay } from '../hooks/useToggleOverlay.ts';
 import type { OpenModalType } from '../model/OverlaySlice.ts';
-import { TransitionWrapper } from '../../../atoms/index.ts';
+import { Icon, TransitionWrapper } from '../../../atoms/index.ts';
 
 interface OverlayProps {
   children?: React.ReactNode;
@@ -43,15 +43,27 @@ export const Overlay = ({ children, modalType }: OverlayProps) => {
       defaultStyle={modalDefaultStyle}
     >
       {({ style, ref }) => (
-        <div
+        <section
           ref={ref}
           style={style}
           className="fixed inset-0 flex items-center justify-center 
-           bg-overlay-background-color z-[999] p-5"
+          bg-overlay-background-color z-[999] p-5"
           onClick={() => closeHandler()}
         >
-          {children}
-        </div>
+          <div className="relative w-full max-w-150 overflow-y-auto max-h-[90vh] ">
+            {/* ----------- button close */}
+            <div className="flex justify-end sticky  -top-8 ">
+              <Icon
+                className="cursor-pointer"
+                style={{ color: 'white' }}
+                onClick={() => closeHandler()}
+                name="close-icon"
+                // fill="black"
+              />
+            </div>
+            {children}
+          </div>
+        </section>
       )}
     </TransitionWrapper>,
 

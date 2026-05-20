@@ -11,7 +11,6 @@ const Dashboard = lazy(() => import('../../pages/Dashboard'));
 
 // import Dashboard from '../../pages/Dashboard';
 import AuthorPage from '../../pages/AuthorPage/AuthorPage';
-
 import { ProtectedRoute } from '../../shared/routes';
 import AuthorizationPage from '../../pages/AuthorizationPage/AuthorizationPage';
 
@@ -23,7 +22,6 @@ const router = createBrowserRouter([
       { index: true, Component: Marketplace },
       // { path: 'marketplace', Component: Marketplace },
       { path: 'rankings', Component: Rankings },
-      { path: 'connectWallet', Component: ConnectWallet },
       {
         element: <ProtectedRoute />,
         children: [{ path: 'dashboard', Component: Dashboard }],
@@ -32,6 +30,7 @@ const router = createBrowserRouter([
       { path: 'gallery', Component: Gallery },
       { path: 'authorPage/:authorId', Component: AuthorPage },
       { path: 'auth', Component: AuthorizationPage },
+      { path: 'connectWallet', Component: ConnectWallet },
     ],
   },
 ]);
