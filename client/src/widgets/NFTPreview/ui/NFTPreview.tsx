@@ -23,6 +23,20 @@ const NFTPreview = ({
   sales,
   userId,
 }: NFTPreviewType) => {
+  const renderCountdown = sales?.endAt ? (
+    <Countdown
+      date={new Date(sales?.endAt)}
+      renderer={({ days, hours, minutes, seconds, completed }) => (
+        <SalesCountdown
+          // hours={24}
+          hours={days * 24 + hours}
+          minutes={minutes}
+          seconds={seconds}
+        />
+      )}
+    />
+  ) : null;
+
   return (
     <div
       data-testid="NFTPreview"
@@ -51,7 +65,8 @@ const NFTPreview = ({
 
               {/* -------------smallSize -CountDown------- */}
               <div className="discountCountDown-bigSize-hidden ">
-                <Countdown
+                {renderCountdown}
+                {/* <Countdown
                   date={sales?.endAt ? new Date(sales?.endAt) : undefined}
                   renderer={({ days, hours, minutes, seconds, completed }) => (
                     <SalesCountdown
@@ -61,7 +76,7 @@ const NFTPreview = ({
                       seconds={seconds}
                     />
                   )}
-                />
+                /> */}
               </div>
 
               {/* --------------------- */}
@@ -76,16 +91,18 @@ const NFTPreview = ({
             </div>
             {/* ---------------countdown */}
             <div className="discountCountDown-smallSize-hidden">
-              <Countdown
+              {renderCountdown}
+              {/* <Countdown
                 date={sales?.endAt ? new Date(sales?.endAt) : undefined}
                 renderer={({ days, hours, minutes, seconds, completed }) => (
+                
                   <SalesCountdown
                     hours={days * 24 + hours}
                     minutes={minutes}
                     seconds={seconds}
                   />
                 )}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -95,6 +112,89 @@ const NFTPreview = ({
 };
 
 export default NFTPreview;
+
+// const NFTPreview = ({
+//   imageUrl,
+//   avatar,
+//   userName,
+//   name,
+//   sales,
+//   userId,
+// }: NFTPreviewType) => {
+//   return (
+//     <div
+//       data-testid="NFTPreview"
+//       className="bg-center bg-no-repeat bg-cover w-full nftPreview-responsive
+//        text-primary-text-color pb-16"
+//       style={{ backgroundImage: `url(${imageUrl})` }}
+//     >
+//       <InnerContainer className="flex flex-col h-full">
+//         <div className=" mt-auto ">
+//           {/* -----------------author */}
+//           <AuthorBage
+//             avatar={avatar}
+//             userName={userName}
+//             userId={userId}
+//             className="mb-8 "
+//           />
+//           <div className="nftPreview-content-responsive">
+//             {/* ---------------content */}
+//             <div className="flex flex-col gap-7 ">
+//               <Text
+//                 children={name}
+//                 font="font-work-sans-semibold"
+//                 size="t-text-2xl"
+//                 color="static-text-white-color"
+//               />
+
+//               {/* -------------smallSize -CountDown------- */}
+//               <div className="discountCountDown-bigSize-hidden ">
+//                 <Countdown
+//                   date={sales?.endAt ? new Date(sales?.endAt) : undefined}
+//                   renderer={({ days, hours, minutes, seconds, completed }) => (
+//                     <></>
+//                     // <SalesCountdown
+//                     //   // hours={24}
+//                     //   hours={days * 24 + hours}
+//                     //   minutes={minutes}
+//                     //   seconds={seconds}
+//                     // />
+//                   )}
+//                 />
+//               </div>
+
+//               {/* --------------------- */}
+//               <ButtonWithIcon
+//                 children="See NFT"
+//                 variant="secondary"
+//                 iconName="eye-icon"
+//                 className="py-5 px-12 items-center cursor-pointer nftPreview-button-responsive "
+//                 textClassName="text-inversive-text-color text-base  "
+//                 radius="xl"
+//               />
+//             </div>
+//             {/* ---------------countdown */}
+//             <div className="discountCountDown-smallSize-hidden">
+//               <Countdown
+//                 date={sales?.endAt ? new Date(sales?.endAt) : undefined}
+//                 renderer={({ days, hours, minutes, seconds, completed }) => (
+//                   <></>
+//                   // <SalesCountdown
+//                   //   hours={days * 24 + hours}
+//                   //   minutes={minutes}
+//                   //   seconds={seconds}
+//                   // />
+//                 )}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </InnerContainer>
+//     </div>
+//   );
+// };
+
+// export default NFTPreview;
 
 // ----------skeleton
 

@@ -1,92 +1,33 @@
-// import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks';
-// import { Navigate, Outlet, useNavigate } from 'react-router';
-// import { useToggleOverlay } from '../ui/molecules/Overlay';
-// import { clearUser, useGetMeQuery } from '../../entities/user/model';
-// import { useEffect } from 'react';
-// import { useLocalStorage } from '../lib/hooks';
-// import { Spinner } from '../ui/atoms';
-
-// export const ProtectedRoute = () => {
-//   const { getLocal, removeLocal } = useLocalStorage();
-//   const user = useAppSelector((state) => state.user.data);
-
-//   const token = getLocal('token');
-//   const dispatch = useAppDispatch();
-
-//   const navigate = useNavigate();
-
-//   const { isLoading } = useGetMeQuery(undefined, { skip: !token });
-
-//   if (isLoading) return <Spinner />;
-//   console.log(token, user);
-
-//   if (!token || !user) {
-//     removeLocal('token');
-//     dispatch(clearUser());
-//     <Navigate to="/auth" />;
-//     // navigate('/auth', { replace: true });
-//   }
-
-//   useEffect(() => {
-//     const handler = (event: StorageEvent) => {
-//       if (event.key === 'token') {
-//         dispatch(clearUser());
-//         <Navigate to="/auth" />;
-//       }
-//     };
-//     window.addEventListener('storage', handler);
-//     return () => window.removeEventListener('storage', handler);
-//   }, [dispatch, navigate]);
-
-//   return <Outlet />;
-// };
-
-import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks';
+import { useAppSelector } from '../../app/store/reduxHooks';
 import { Outlet, useNavigate } from 'react-router';
-import { useToggleOverlay } from '../ui/molecules/Overlay';
-import { clearUser, useGetMeQuery } from '../../entities/user/model';
-import { useEffect } from 'react';
+
+import { useGetMeQuery } from '../../entities/user/model';
+
 import { useLocalStorage } from '../lib/hooks';
+import { Spinner } from '../ui/atoms';
+import { useEffect } from 'react';
 
 export const ProtectedRoute = () => {
-  const { getLocal, removeLocal } = useLocalStorage();
-  const user = useAppSelector((state) => state.user.data);
-  const { openHandler } = useToggleOverlay();
-  const token = getLocal('token');
-
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  const { isLoading } = useGetMeQuery(undefined, { skip: !token });
+  const { getLocal } = useLocalStorage();
+  const user = useAppSelector((state) => state.user.data);
+  const token = getLocal('token');
+  const { isLoading, isFetching, isError } = useGetMeQuery(undefined, {
+    skip: !token,
+  });
 
   useEffect(() => {
-    /*
-  ✅ при перезавантаженні з dashbord доки стан юзера в userSlice тільки завантажується
-  спрацює перевірка !user і відкриє модалку реєстрації.
-  if (isLoading) return не дає спрацювати цій перевірці, доки стан юзера
-  не буде точно завартажений
-*/
-    if (isLoading) return;
-    if (!token || !user) {
-      openHandler('authorization');
-      removeLocal('token');
-      // localStorage.removeItem('token');
-      dispatch(clearUser());
-      navigate('/', { replace: true });
+    if (!token || isError || (!isLoading && !isFetching && !user)) {
+      navigate('/auth', { replace: true });
     }
-  }, [token, user, dispatch, openHandler, isLoading]);
+  }, [token, isError, user, isLoading, isFetching, navigate]);
 
-  useEffect(() => {
-    const handler = (event: StorageEvent) => {
-      if (event.key === 'token') {
-        openHandler('authorization');
-        dispatch(clearUser());
-        navigate('/', { replace: true });
-      }
-    };
-    window.addEventListener('storage', handler);
-    return () => window.removeEventListener('storage', handler);
-  }, [openHandler, dispatch, navigate]);
+  if (isLoading || isFetching || isError || !user)
+    return (
+      <div className="h-screen flex items-center justify-center bg-primary-background-color">
+        <Spinner fill={`var(--hover-primary-accent-color)`} />
+      </div>
+    );
 
   return <Outlet />;
 };
