@@ -24,7 +24,7 @@ const DiscountedWork = () => {
 
   if (isLoading) {
     return (
-      <section>
+      <section className="main-padding-responsive">
         <NFTPreview.Skeleton />
       </section>
     );

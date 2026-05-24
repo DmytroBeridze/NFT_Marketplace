@@ -9,7 +9,8 @@ type SalesCountdownType = {
 };
 
 const SalesCountdown = ({ hours, minutes, seconds }: SalesCountdownType) => {
-  const { t } = useTranslation('discountedWork');
+  // властивість useSuspense тригерить suspens який знаходиться аж в App і він показує скролл- візуально блимає вся головна сторінка
+  const { t } = useTranslation('discountedWork', { useSuspense: false });
 
   const countdownUnits = [
     { value: hours, label: t('timer.Hours') },

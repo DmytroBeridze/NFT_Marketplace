@@ -17,10 +17,13 @@ import { WalletContextProvider } from '../pages/ConnectWallet/context/connectWal
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
-  const {} = useGetMeQuery();
+  // const {} = useGetMeQuery();
+  // const token = localStorage.getItem('token');
+  // useGetMeQuery(undefined, { skip: !token });
 
   return (
-    <div className="App">
+    <div className="App ">
+      {/* <div className="App h-screen flex flex-col overflow-hidden"> */}
       <AppProviders>
         <ScrollToTop />
         <WalletContextProvider>
@@ -36,7 +39,8 @@ function App() {
             {/* {isOpen && <Overlay />} */}
             <OuterContainer>
               <Header />
-              <main>
+
+              <main className="">
                 {/* <div id="burger-root"></div> */}
                 {/* <InnerContainer> */}
                 {/* <div>
@@ -44,6 +48,8 @@ function App() {
             </div> */}
                 <Suspense
                   fallback={
+                    // <div className="absolute inset-0 flex items-center justify-center">
+                    // <div className="flex-1 flex items-center justify-center min-h-[60vh] bg-primary-background-color">
                     <div className="w-full h-screen bg-primary-background-color">
                       <Spinner
                         wrapperClassName="flex justify-center items-center"
@@ -52,8 +58,6 @@ function App() {
                     </div>
                   }
                 >
-                  {/* <Suspense fallback={<div>Lading page...</div>}> */}
-
                   <Outlet />
                 </Suspense>
                 {/* </InnerContainer> */}
