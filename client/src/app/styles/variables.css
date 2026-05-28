@@ -23,6 +23,7 @@
 */
 @theme {
   /* backgrounds */
+
   --primary-background-color: var(--primary-background);
   --static-primary-background-color: #2b2b2b;
   --secondary-background-color: var(--secondary-background);
@@ -72,6 +73,8 @@
   --font-size-2xl: 3.188rem; /* 51px */
   --font-size-3xl: 4.188rem; /* 67px */
 
+  --font-size-5xl: 300px; /* 67px */
+
   --responsive-size-xxs: clamp(
     0.5rem,
     0.337rem + 0.82vw,
@@ -114,9 +117,10 @@
     1rem
   ); /*от 8 px до 16 px*/
 
-  /* spacings */
+  --responsive-size-xxL: clamp(6.25rem, 2.546rem + 18.52vw, 18.75rem);
+  /* --responsive-size-xxL: clamp(3.75rem, -0.694rem + 22.22vw, 18.75rem); */
   --gap-nav-responsive: clamp(0.125rem, -0.667rem + 3.96vw, 2.5rem);
-  /* --gap-nav-responsive: clamp(0.313rem, -0.417rem + 3.65vw, 2.5rem); */
+  /*от 8 px до 16 px*/ /* spacings */
 
   /* padding */
   --padding-10-20-responsive: clamp(0.625rem, 0.421rem + 1.02vw, 1.25rem)

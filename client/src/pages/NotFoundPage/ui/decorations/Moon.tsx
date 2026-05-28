@@ -1,0 +1,182 @@
+const Moon = () => {
+  return (
+    <div
+      className=" absolute right-0 bottom-0 w-[738px] 
+          aspect-[738px/753px]
+         max-[1200px]:w-[500px]  
+          max-[834px]:w-[300px] "
+    >
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 738 753"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g clipPath="url(#clip0_7_18)">
+          <path
+            d="M955.789 656.69C958.723 726.388 981.252 790.004 981.813 855.717C982.072 921.016 960.363 988.411 913.302 1019.69C865.939 1050.55 793.883 1045.45 726.545 1040.07C659.207 1034.7 595.927 1028.89 546.829 996.176C497.375 963.718 461.8 903.931 406.734 848.878C351.668 793.825 276.453 743.352 243.988 678.11C211.523 612.867 221.149 532.701 270.266 492.289C319.33 452.55 407.582 452.151 466.173 414.974C524.409 378.058 553.34 304.103 604.603 274.834C655.867 245.566 729.82 260.722 796.919 294.885C864.018 329.047 924.618 381.955 946.739 446.506C969.163 511.471 952.5 587.252 955.789 656.69Z"
+            fill="var(--moon-body)"
+
+            // fill="#323232"
+          />
+          <g clipPath="url(#clip1_7_18)">
+            <rect
+              x="490"
+              y="667"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="var(--moon-shadow)"
+            />
+            <circle
+              cx="513.5"
+              cy="688.5"
+              r="18.5"
+              fill="var(--moon-crater)"
+              //  fill="#404040"
+            />
+            <g clipPath="url(#clip2_7_18)">
+              <rect
+                x="490"
+                y="667"
+                width="37"
+                height="37"
+                rx="18.5"
+                fill="var(--moon-shadow)"
+              />
+              <circle
+                cx="513.5"
+                cy="688.5"
+                r="18.5"
+                fill="var(--moon-crater)"
+              />
+            </g>
+          </g>
+          <g clipPath="url(#clip3_7_18)">
+            <rect
+              x="522"
+              y="453"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="var(--moon-shadow)"
+            />
+            <circle cx="545.5" cy="474.5" r="18.5" fill="var(--moon-crater)" />
+          </g>
+          <g clipPath="url(#clip4_7_18)">
+            <rect
+              x="683"
+              y="353"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="var(--moon-shadow)"
+            />
+            <circle cx="706.5" cy="374.5" r="18.5" fill="var(--moon-crater)" />
+            <g clipPath="url(#clip5_7_18)">
+              <rect
+                x="683"
+                y="353"
+                width="37"
+                height="37"
+                rx="18.5"
+                fill="var(--moon-shadow)"
+                // fill="#858585"
+              />
+              <circle
+                cx="706.5"
+                cy="374.5"
+                r="18.5"
+                fill="var(--moon-crater)"
+              />
+            </g>
+          </g>
+          <g clipPath="url(#clip6_7_18)">
+            <rect
+              x="313"
+              y="575"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="var(--moon-shadow)"
+            />
+            <circle cx="336.5" cy="596.5" r="18.5" fill="var(--moon-crater)" />
+          </g>
+        </g>
+        <defs>
+          <clipPath id="clip0_7_18">
+            <rect
+              width="1026"
+              height="882"
+              fill="white"
+              transform="translate(711.642) rotate(53.7893)"
+            />
+          </clipPath>
+          <clipPath id="clip1_7_18">
+            <rect
+              x="490"
+              y="667"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="white"
+            />
+          </clipPath>
+          <clipPath id="clip2_7_18">
+            <rect
+              x="490"
+              y="667"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="white"
+            />
+          </clipPath>
+          <clipPath id="clip3_7_18">
+            <rect
+              x="522"
+              y="453"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="white"
+            />
+          </clipPath>
+          <clipPath id="clip4_7_18">
+            <rect
+              x="683"
+              y="353"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="white"
+            />
+          </clipPath>
+          <clipPath id="clip5_7_18">
+            <rect
+              x="683"
+              y="353"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="white"
+            />
+          </clipPath>
+          <clipPath id="clip6_7_18">
+            <rect
+              x="313"
+              y="575"
+              width="37"
+              height="37"
+              rx="18.5"
+              fill="white"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+  );
+};
+
+export default Moon;

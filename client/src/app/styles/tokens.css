@@ -200,6 +200,9 @@
 .t-text-3xl {
   font-size: var(--font-size-3xl); /* 67px */
 }
+.t-text-5xl {
+  font-size: var(--font-size-5xl); /* 67px */
+}
 
 /*от 8 px до 16*/
 .responsive-size-xxs {
@@ -227,6 +230,11 @@
 .responsive-size-lg {
   font-size: var(--responsive-size-lg);
 }
+.responsive-size-xxl {
+  /* font-size: var(--responsive-size-lg); */
+  font-size: var(--responsive-size-xxL);
+}
+/*от 50px до 300px */
 
 /*-----------------------spacings  */
 .gap-nav-responsive {
