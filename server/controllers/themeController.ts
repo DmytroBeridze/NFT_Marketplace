@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import User from "../models/User";
-import { log } from "console";
-import { IRequest } from "../types/types";
-import { handleControllerError } from "../utils/handleControllerError";
+import User from "../models/User.js";
+
+import { IRequest } from "../types/types.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
 
 // interface IRequest extends Request {
 //   userId?: string;

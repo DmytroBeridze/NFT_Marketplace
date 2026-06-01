@@ -12,6 +12,7 @@ export interface INft {
   name?: string;
   description?: string;
   authorId?: mongoose.Types.ObjectId;
+  ownerId?: mongoose.Types.ObjectId;
   gallery?: mongoose.Types.ObjectId;
   category?: mongoose.Types.ObjectId;
   price?: number;
@@ -62,6 +63,11 @@ export const NftSchema = new Schema<NftDocument>(
       required: true,
     },
     authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,

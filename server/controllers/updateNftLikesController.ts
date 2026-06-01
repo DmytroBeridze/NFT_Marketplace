@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { IRequest } from "../types/types";
-import { handleControllerError } from "../utils/handleControllerError";
-import Nft, { INft } from "../models/Nft";
-import User from "../models/User";
+import { IRequest } from "../types/types.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
+import Nft, { INft } from "../models/Nft.js";
+
 import mongoose from "mongoose";
 
 type StatsRequest = Omit<IRequest, "categoryId">;
@@ -38,7 +38,7 @@ export const updateLikes = async (req: StatsRequest, res: Response) => {
       nft.likes.push(userIdObj);
     } else {
       nft.likes = nft.likes?.filter(
-        (id) => id._id.toString() !== userIdObj.toString()
+        (id) => id._id.toString() !== userIdObj.toString(),
       );
     }
 

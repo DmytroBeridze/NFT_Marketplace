@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
-import User from "../models/User";
-import { handleControllerError } from "../utils/handleControllerError";
-import Nft from "../models/Nft";
+import User from "../models/User.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
+import Nft from "../models/Nft.js";
 
 interface Istatistics {
   artists: number;

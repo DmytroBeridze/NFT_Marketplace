@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { handleControllerError } from "../utils/handleControllerError";
+import { handleControllerError } from "../utils/handleControllerError.js";
 
 type ConfigType = {
   message: string;

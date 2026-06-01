@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { setMail } from "../controllers/subscribersController";
+import { setMail } from "../controllers/subscribersController.js";
 import { check } from "express-validator";
-import { checkValidation } from "../middleware/checkValidation";
+import { checkValidation } from "../middleware/checkValidation.js";
 
 const router = Router();
 

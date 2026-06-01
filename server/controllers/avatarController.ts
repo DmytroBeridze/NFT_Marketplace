@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { ImageRequest } from "../types/types";
+import { ImageRequest } from "../types/types.js";
 import FormData from "form-data";
-import { handleControllerError } from "../utils/handleControllerError";
+import { handleControllerError } from "../utils/handleControllerError.js";
 import axios from "axios";
 
 export const sendAvatar = async (req: ImageRequest, res: Response) => {
@@ -25,7 +25,7 @@ export const sendAvatar = async (req: ImageRequest, res: Response) => {
       {
         headers: formData.getHeaders(),
         timeout: 20000,
-      }
+      },
     );
 
     const deleteUrl = resp.data.data.delete_url;

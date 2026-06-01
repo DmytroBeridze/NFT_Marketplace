@@ -2,9 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Text } from '../../../shared/ui/atoms';
 import Moon from './decorations/Moon';
 import Stars from './decorations/Stars';
+import { useTranslation } from 'react-i18next';
 
 export const NotFoundPage = () => {
   let navigate = useNavigate();
+  const { t } = useTranslation('notFoundPage');
 
   return (
     <section
@@ -36,7 +38,7 @@ export const NotFoundPage = () => {
           size="responsive-size-lg"
           // style={{ textAlign: 'center' }}
         >
-          Oops, you’ve lost in space
+          {t('header')}
         </Text>
         <Text
           Element="p"
@@ -45,16 +47,16 @@ export const NotFoundPage = () => {
           size="responsive-size-md"
           style={{ textAlign: 'center' }}
         >
-          We can’t find the page that you’re looking for
+          {t('desc')}
         </Text>
       </div>
 
       <Button
-        className="py-5 px-[78px] z-10"
+        className="py-5 px-[78px] z-10 font-work-sans-semibold    static-text-white-color"
         radius="xl"
         onClick={() => navigate('/')}
       >
-        Go Home
+        {t('button')}
       </Button>
     </section>
   );

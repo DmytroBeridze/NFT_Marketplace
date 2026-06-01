@@ -4,18 +4,18 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import authRouter from "./routes/authRouts";
-import themeRouter from "./routes/themeRouts";
-import nftRouter from "./routes/nftRouts";
-import categoriesRout from "./routes/categoriesRouts";
-import rolesRout from "./routes/roleRouts";
-import galleriesRout from "./routes/galleryRouts";
-import statisticsRout from "./routes/statisticsRouts";
-import updateNftLikes from "./routes/updateNftLikesRouts";
-import updateNftViews from "./routes/updateNftViewsRouts";
-import avatarRout from "./routes/avatarRout";
-import salesConfigRout from "./routes/salesConfigRouts";
-import subscribersRout from "./routes/subscribersRouts";
+import authRouter from "./routes/authRouts.js";
+import themeRouter from "./routes/themeRouts.js";
+import nftRouter from "./routes/nftRouts.js";
+import categoriesRout from "./routes/categoriesRouts.js";
+import rolesRout from "./routes/roleRouts.js";
+import galleriesRout from "./routes/galleryRouts.js";
+import statisticsRout from "./routes/statisticsRouts.js";
+import updateNftLikes from "./routes/updateNftLikesRouts.js";
+import updateNftViews from "./routes/updateNftViewsRouts.js";
+import avatarRout from "./routes/avatarRout.js";
+import salesConfigRout from "./routes/salesConfigRouts.js";
+import subscribersRout from "./routes/subscribersRouts.js";
 
 import cookieParser from "cookie-parser";
 

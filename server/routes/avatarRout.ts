@@ -1,7 +1,7 @@
 import express from "express";
-import { checkAuth } from "../middleware/checkAuth";
+import { checkAuth } from "../middleware/checkAuth.js";
 import multer from "multer";
-import { sendAvatar } from "../controllers/avatarController";
+import { sendAvatar } from "../controllers/avatarController.js";
 
 const storage = multer.memoryStorage();
 const upload = multer({

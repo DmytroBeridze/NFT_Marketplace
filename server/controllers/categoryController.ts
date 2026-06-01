@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Category from "../models/Categories";
-import { handleControllerError } from "../utils/handleControllerError";
+import Category from "../models/Categories.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
 
 export const getCategory = async (req: Request, res: Response) => {
   try {

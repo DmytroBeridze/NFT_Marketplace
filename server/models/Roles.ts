@@ -1,5 +1,5 @@
 import mongoose, { Document } from "mongoose";
-import { IRole } from "../types/types";
+import { IRole } from "../types/types.js";
 
 const { Schema } = mongoose;
 

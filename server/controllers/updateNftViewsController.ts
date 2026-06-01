@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { IRequest } from "../types/types";
-import Nft from "../models/Nft";
-import { handleControllerError } from "../utils/handleControllerError";
+import { IRequest } from "../types/types.js";
+import Nft from "../models/Nft.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
 import mongoose from "mongoose";
-import NftView from "../models/NftView";
+import NftView from "../models/NftView.js";
 
 type StatsRequest = Omit<IRequest, "categoryId">;
 
@@ -48,7 +48,7 @@ export const updateNftViews = async (req: StatsRequest, res: Response) => {
       { $inc: { views: 1 }, rating },
       {
         new: true,
-      }
+      },
     );
 
     res.status(200).json({ message: "NftUpdated", updatedNft });

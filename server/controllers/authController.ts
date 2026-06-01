@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import User from "../models/User";
+import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { getEnvVar } from "../utils/getEnvVar";
-import Roles from "../models/Roles";
+import { getEnvVar } from "../utils/getEnvVar.js";
+import Roles from "../models/Roles.js";
 import { validationResult } from "express-validator";
-import { IRequest } from "../types/types";
-import { handleControllerError } from "../utils/handleControllerError";
+import { IRequest } from "../types/types.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
 import mongoose from "mongoose";
-import Nft from "../models/Nft";
+import Nft from "../models/Nft.js";
 
 // interface IRequest extends Request {
 //   userId?: string;
@@ -106,7 +106,7 @@ export const login = async (req: Request, res: Response) => {
         roles: user.roles.map((role: any) => role.value),
       },
       JWT_SECRET,
-      { expiresIn: "30d" }
+      { expiresIn: "30d" },
     );
 
     //💡 Щоб пароль не потрапив в респонс деструктуризуємо user

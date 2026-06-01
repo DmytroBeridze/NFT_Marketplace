@@ -1,4 +1,4 @@
-import { ISales } from "../models/Nft";
+import { ISales } from "../models/Nft.js";
 
 type SalesInput = {
   isActive?: boolean;

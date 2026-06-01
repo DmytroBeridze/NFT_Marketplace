@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IRoleDocument } from "./Roles";
+import { IRoleDocument } from "./Roles.js";
 const { Schema } = mongoose;
 
 // interface
@@ -56,7 +56,7 @@ const UserSchema = new Schema<IUser>(
     // ],
     roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Roles" }],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model<IUser>("User", UserSchema);

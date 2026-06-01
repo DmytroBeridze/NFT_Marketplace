@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Roles from "../models/Roles";
-import { handleControllerError } from "../utils/handleControllerError";
+import Roles from "../models/Roles.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
 
 export const getRoles = async (req: Request, res: Response) => {
   try {

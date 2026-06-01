@@ -4,10 +4,10 @@ import {
   login,
   getMe,
   deleteProfile,
-} from "../controllers/authController";
-import { checkAuth } from "../middleware/checkAuth";
+} from "../controllers/authController.js";
+import { checkAuth } from "../middleware/checkAuth.js";
 import { body, check } from "express-validator";
-import { checkValidation } from "../middleware/checkValidation";
+import { checkValidation } from "../middleware/checkValidation.js";
 const router = Router();
 
 //Registration

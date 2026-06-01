@@ -10,12 +10,12 @@
 
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import Nft, { INft } from "../models/Nft";
-import { ImageRequest, IRequest } from "../types/types";
+import Nft, { INft } from "../models/Nft.js";
+import { ImageRequest, IRequest } from "../types/types.js";
 import axios from "axios";
 import FormData from "form-data";
-import { handleControllerError } from "../utils/handleControllerError";
-import { parseSales } from "../utils/parseSales";
+import { handleControllerError } from "../utils/handleControllerError.js";
+import { parseSales } from "../utils/parseSales.js";
 
 // ---------------------------------🧩 get NFT
 export const getNft = async (req: Request, res: Response) => {
@@ -546,4 +546,29 @@ export const getAuthorsByRating = async (req: Request, res: Response) => {
   } catch (error) {
     handleControllerError(error, res, "Top authors loading error");
   }
+};
+
+// --------------------------🧩 buy Nft
+
+export const buyNFT = async (req: IRequest, res: Response) => {
+  const nft = await Nft.findById(req.params.id);
+
+  if (!nft) {
+    return res.status(404).json({ message: "nftNotFound" });
+  }
+
+  if (nft.sold) {
+    return res.status(400).json({ message: "nftAlreadySold" });
+  }
+
+  if (nft.ownerId?.toString() === req.userId) {
+    return res.status(400).json({ message: "alreadyOwner" });
+  }
+
+  nft.ownerId = new mongoose.Types.ObjectId(req.userId);
+  nft.sold = true;
+
+  await nft.save();
+
+  return res.status(200).json({ message: "purchaseSuccess" });
 };

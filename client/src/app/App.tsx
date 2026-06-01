@@ -17,9 +17,10 @@ import { WalletContextProvider } from '../pages/ConnectWallet/context/connectWal
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
-  // const {} = useGetMeQuery();
+  // const { data } = useGetMeQuery();
+
   const token = localStorage.getItem('token');
-  useGetMeQuery(undefined, { skip: !token });
+  const { data } = useGetMeQuery(undefined, { skip: !token });
 
   return (
     <div className="App bg-primary-background-color min-h-screen">

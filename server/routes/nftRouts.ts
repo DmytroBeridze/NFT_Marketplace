@@ -1,4 +1,5 @@
 import {
+  buyNFT,
   deleteNFT,
   getAuthorsByRating,
   getNft,
@@ -8,12 +9,12 @@ import {
   patchNft,
   setNft,
   setNftImage,
-} from "../controllers/nftController";
+} from "../controllers/nftController.js";
 import { check } from "express-validator";
 import express from "express";
-import { checkAuth } from "../middleware/checkAuth";
+import { checkAuth } from "../middleware/checkAuth.js";
 import multer from "multer";
-import checkNftValidation from "../middleware/checkNftValidation";
+import checkNftValidation from "../middleware/checkNftValidation.js";
 
 const router = express.Router();
 
@@ -39,6 +40,10 @@ router.get("/byDate", getNftByCreateDate);
 
 //-------------------------get NFT by Sale
 router.get("/bysale", getNftBysale);
+
+//-------------------------buy NFT
+router.post("/:id/buy", checkAuth, buyNFT);
+// router.patch("/buyNFT", checkAuth, buyNFT);
 
 // ----------------------set Nft
 router.post(
@@ -66,7 +71,7 @@ router.post(
 
     checkNftValidation,
   ],
-  setNft
+  setNft,
 );
 
 //------------------ patch Nft
@@ -102,7 +107,7 @@ router.patch(
 
     checkNftValidation,
   ],
-  patchNft
+  patchNft,
 );
 
 // ------------------------------delete Nft
@@ -115,11 +120,11 @@ router.post(
 
   checkAuth,
   upload.single("image"),
-  setNftImage
+  setNftImage,
 );
-
-export default router;
 
 // ------------------------get top authors
 
 router.get("/topAuthors", getAuthorsByRating);
+
+export default router;

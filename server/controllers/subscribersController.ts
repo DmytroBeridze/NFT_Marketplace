@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Subscriber from "../models/Subscribers";
+import Subscriber from "../models/Subscribers.js";
 
 export const setMail = async (req: Request, res: Response) => {
   try {

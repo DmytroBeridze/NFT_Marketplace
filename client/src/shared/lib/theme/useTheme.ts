@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext } from 'react';
 import { ThemeContext } from './ThemeContext';
 import { useLocalStorage } from '../hooks';
 

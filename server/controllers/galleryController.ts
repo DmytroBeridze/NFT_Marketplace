@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Gallery from "../models/Gallery";
-import Nft from "../models/Nft";
-import { handleControllerError } from "../utils/handleControllerError";
+import Gallery from "../models/Gallery.js";
+import Nft from "../models/Nft.js";
+import { handleControllerError } from "../utils/handleControllerError.js";
 import mongoose from "mongoose";
 
 // ---------------------------------🧩 get Gallery by author id
@@ -65,7 +65,7 @@ export const deleteGallery = async (req: Request, res: Response) => {
     // видаляємо галерею з Nft
     const updateResult = await Nft.updateMany(
       { galleryId },
-      { $unset: { galleryId: "" } }
+      { $unset: { galleryId: "" } },
     );
 
     res.status(200).json({
@@ -93,7 +93,7 @@ export const getGalleryById = async (req: Request, res: Response) => {
 
     const gallery = await Gallery.findById(galleryId).populate(
       "author",
-      "userName userMail avatar "
+      "userName userMail avatar ",
     );
     if (!gallery) return res.status(404).json({ message: "Gallery not found" });
 
