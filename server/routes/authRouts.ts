@@ -44,4 +44,5 @@ router.get("/me", checkAuth, getMe);
 // http://localhost:3002/api/auth/profile
 // Delete profile
 router.delete("/profile/:id", checkAuth, deleteProfile);
+
 export default router;

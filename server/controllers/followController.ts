@@ -2,15 +2,23 @@ import { Request, Response } from "express";
 import { IRequest } from "../types/types.js";
 import Follow from "../models/Follow.js";
 import User from "../models/User.js";
+import mongoose from "mongoose";
 
-//! ------ Поставить проверку юзера миддлваром в каждый роут
 export const follow = async (req: IRequest, res: Response) => {
-  const authorId = req.params.id;
   const followerId = req.userId;
+  const authorId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(authorId)) {
+    return res.status(400).json({ message: "invalidAuthorId" });
+  }
 
   const author = await User.findById(authorId);
   if (!author) {
     return res.status(404).json({ message: "authorNotFound" });
+  }
+
+  if (author.userType !== "author") {
+    return res.status(400).json({ message: "userIsNotAuthor" });
   }
 
   if (authorId === followerId) {
@@ -29,13 +37,15 @@ export const follow = async (req: IRequest, res: Response) => {
 
 // ---------delete follow
 export const deleteFollow = async (req: IRequest, res: Response) => {
-  //   if (!req.userId) {
-  //     return res.status(401).json({ message: "accessDenied" });
-  //   }
+  const authorId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(authorId)) {
+    return res.status(400).json({ message: "invalidAuthorId" });
+  }
 
   const deletedFollow = await Follow.findOneAndDelete({
     followerId: req.userId,
-    authorId: req.params.id,
+    authorId,
   });
 
   if (!deletedFollow) {
@@ -47,9 +57,15 @@ export const deleteFollow = async (req: IRequest, res: Response) => {
 
 // --------check following
 export const isFollowing = async (req: IRequest, res: Response) => {
+  const authorId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(authorId)) {
+    return res.status(400).json({ message: "invalidAuthorId" });
+  }
+
   const follow = await Follow.findOne({
     followerId: req.userId,
-    authorId: req.params.id,
+    authorId,
   });
 
   return res.status(200).json({ isFollowing: Boolean(follow) });
@@ -68,8 +84,14 @@ export const getFollowing = async (req: IRequest, res: Response) => {
 
 // --------get followers
 export const getFollowers = async (req: IRequest, res: Response) => {
+  const authorId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(authorId)) {
+    return res.status(400).json({ message: "invalidAuthorId" });
+  }
+
   const followersCount = await Follow.countDocuments({
-    authorId: req.params.id,
+    authorId,
   });
 
   return res.status(200).json({ followersCount });
