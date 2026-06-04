@@ -22,6 +22,7 @@ export const getNft = async (req: Request, res: Response) => {
   try {
     const {
       authorId,
+      ownerId,
       galleryId,
       categoryId,
       sold,
@@ -36,6 +37,10 @@ export const getNft = async (req: Request, res: Response) => {
     // перевірка
     if (authorId && mongoose.Types.ObjectId.isValid(authorId as string))
       filter.authorId = new mongoose.Types.ObjectId(authorId as string);
+    if (ownerId && mongoose.Types.ObjectId.isValid(ownerId as string)) {
+      filter.ownerId = new mongoose.Types.ObjectId(ownerId as string);
+    }
+
     if (galleryId && mongoose.Types.ObjectId.isValid(galleryId as string))
       filter.galleryId = new mongoose.Types.ObjectId(galleryId as string);
     if (categoryId && mongoose.Types.ObjectId.isValid(categoryId as string))

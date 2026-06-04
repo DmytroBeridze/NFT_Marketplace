@@ -197,6 +197,37 @@ export const deleteProfile = async (req: IRequest, res: Response) => {
   }
 };
 
+// --------------------------------🧩-become author
+
+export const becomeAuthor = async (req: IRequest, res: Response) => {
+  try {
+    const userId = req.userId;
+
+    if (!userId) {
+      return res.status(401).json({ message: "accessDenied" });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "userNotFound" });
+    }
+
+    if (user.userType === "author") {
+      return res.status(400).json({ message: "alreadyAuthor" });
+    }
+
+    user.userType = "author";
+    await user.save();
+
+    return res.status(200).json({ message: "authorActivated" });
+  } catch (error) {
+    return res.status(500).json({
+      message: "serverError",
+    });
+  }
+};
+
 // admin token
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjY5MWUxMjFkMDI2NjVkZThjMmFiNiIsInVzZXJUeXBlIjoiYXV0aG9yIiwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNzYwOTk1MTQzLCJleHAiOjE3NjM1ODcxNDN9.AmG_xyAnVkmMyU3uVnm7GgpT5i20ewZpeBvKFSucMe8
 

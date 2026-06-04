@@ -4,6 +4,7 @@ import {
   login,
   getMe,
   deleteProfile,
+  becomeAuthor,
 } from "../controllers/authController.js";
 import { checkAuth } from "../middleware/checkAuth.js";
 import { body, check } from "express-validator";
@@ -44,5 +45,8 @@ router.get("/me", checkAuth, getMe);
 // http://localhost:3002/api/auth/profile
 // Delete profile
 router.delete("/profile/:id", checkAuth, deleteProfile);
+
+// -become author
+router.patch("/become-author", checkAuth, becomeAuthor);
 
 export default router;
