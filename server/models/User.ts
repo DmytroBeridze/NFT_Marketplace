@@ -8,6 +8,7 @@ export interface IUser {
   userMail: string;
   password: string;
   avatar: string;
+  coverImage: string;
   userType: "author" | "client";
   theme: "light" | "dark";
   roles: (mongoose.Types.ObjectId | IRoleDocument)[];
@@ -34,6 +35,9 @@ const UserSchema = new Schema<IUser>(
       required: true,
     },
     avatar: {
+      type: String,
+    },
+    coverImage: {
       type: String,
     },
     userType: {

@@ -13,7 +13,7 @@ import galleriesRout from "./routes/galleryRouts.js";
 import statisticsRout from "./routes/statisticsRouts.js";
 import updateNftLikes from "./routes/updateNftLikesRouts.js";
 import updateNftViews from "./routes/updateNftViewsRouts.js";
-import avatarRout from "./routes/avatarRout.js";
+import profileMediaRouter from "./routes/profileMediaRout.js";
 import salesConfigRout from "./routes/salesConfigRouts.js";
 import subscribersRout from "./routes/subscribersRouts.js";
 import followRout from "./routes/followRouts.js";
@@ -61,7 +61,7 @@ app.use("/api/galleries", galleriesRout);
 app.use("/api/updateLikes", updateNftLikes);
 app.use("/api/updateViews", updateNftViews);
 app.use("/api/statistics", statisticsRout);
-app.use("/api/avatar", avatarRout);
+app.use("/api/profile-media", profileMediaRouter); // pавантаження аватара і баннера
 app.use("/api/sales", salesConfigRout);
 app.use("/api/subscribe", subscribersRout);
 app.use("/api/follow", followRout);
