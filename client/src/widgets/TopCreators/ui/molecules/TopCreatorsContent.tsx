@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../../../shared/lib/theme/ThemeContext';
 import { ButtonWithIcon } from '../../../../shared/ui/molecules/ButtonWithIcon';
 import { SectionHeader } from '../../../../shared/ui/molecules/SectionHeader';
 import { useTranslation } from 'react-i18next';

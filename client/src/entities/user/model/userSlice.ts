@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { authApi } from '../../../features/AuthorizationModal/model';
 import { userApi } from './userApi';
 import type { UserData } from './types';

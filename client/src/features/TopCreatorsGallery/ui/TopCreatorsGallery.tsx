@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { TopCreatorsCard } from '../../../widgets/TopCreators/ui';
 import { useGetTopCreatorsQuery } from '../model';
 import { ErrorText } from '../../../shared/ui/atoms';

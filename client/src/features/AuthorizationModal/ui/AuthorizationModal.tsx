@@ -1,5 +1,3 @@
-import { Icon } from '../../../shared/ui/atoms/Icon';
-import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import { useTranslate } from '../../../shared/lib/i18n';
 import { type MouseEvent } from 'react';
 import { AuthorizationForms } from './AuthorizationForms';
@@ -11,7 +9,6 @@ type FormsName = 'login' | 'signUp';
 export const AuthorizationModal = () => {
   const { setTab, tab } = useAuthorizationContext();
 
-  const { closeHandler } = useToggleOverlay();
   const { translateVariables } = useTranslate({
     translateKey: 'modal.tabs',
     returnObjects: true,

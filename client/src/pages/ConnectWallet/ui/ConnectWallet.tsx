@@ -18,8 +18,7 @@ type WalletItems = {
 const ConnectWallet = () => {
   const { t } = useTranslation('connectionWallet');
   const { openHandler } = useToggleOverlay();
-  const { wallet, connect, loading, disconnect, hasMetaMask } =
-    useConnecMetaMask();
+  const { connect, loading, hasMetaMask } = useConnecMetaMask();
 
   const { setWalletData } = useWalletContext();
 

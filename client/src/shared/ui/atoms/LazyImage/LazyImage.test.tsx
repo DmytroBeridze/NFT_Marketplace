@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { LazyImage } from './LazyImage';
 
 describe('LazyImage', () => {
-  const alt = 'LazyImage';
+  // const alt = 'LazyImage';
   const src = 'LazyImage.jpg';
 
   it('shows skeleton while image is loading', () => {

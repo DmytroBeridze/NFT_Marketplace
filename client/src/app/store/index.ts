@@ -14,7 +14,7 @@ import { discountedWorkApi } from '../../entities/DiscountedWork/model/index';
 import { subscribeApi } from '../../features/SubscribeByEmail/model/index';
 
 // ------Testing middleware
-const testMiddleware: Middleware = (store) => (next) => (action: any) => {
+const testMiddleware: Middleware = () => (next) => (action: any) => {
   console.log('[Test action]:', action.type);
   return next(action);
 };

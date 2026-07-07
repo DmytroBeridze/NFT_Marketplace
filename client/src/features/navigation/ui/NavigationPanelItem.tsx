@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import type { NavigationPanelItemProps } from '../types/navigation';
-import type { Dispatch } from '@reduxjs/toolkit';
-import { useContext, type SetStateAction } from 'react';
+
+import { useContext } from 'react';
 import { LogoVariantContext } from '../../../shared/ui/molecules/HeaderLogo';
 import { useAppDispatch } from '../../../app/store/reduxHooks';
 import { closed } from '../../BurgerMenu/model/burgerSlice';

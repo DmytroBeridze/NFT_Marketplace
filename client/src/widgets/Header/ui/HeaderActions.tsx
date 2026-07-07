@@ -4,13 +4,13 @@ import ThemeSwitcher from '../../../features/ThemeSwitcher/ui/ThemeSwitcher';
 
 import AuthButton from '../../../features/AuthButton/AuthButton';
 import { useNavigate } from 'react-router-dom';
-import { useAuthAction, useLocalStorage } from '../../../shared/lib/hooks';
+import { useLocalStorage } from '../../../shared/lib/hooks';
 import { useAppDispatch, useAppSelector } from '../../../app/store/reduxHooks';
 import { clearUser } from '../../../entities/user/model';
 
 export const HeaderActions = () => {
   const { removeLocal } = useLocalStorage();
-  const { loginLogoutHandler } = useAuthAction();
+
   const user = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
   let navigate = useNavigate();

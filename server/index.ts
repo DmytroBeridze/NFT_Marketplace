@@ -44,7 +44,7 @@ process.on("unhandledRejection", (reason, promise) => {
 app.use(
   cors({
     // замінити на URL за яким розгорнутий фронт на сервері
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:4173"],
     credentials: true,
   }),
 );

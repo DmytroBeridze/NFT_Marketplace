@@ -1,12 +1,17 @@
 export type UserData = {
   _id: string;
   createdAt: string;
-  roles: string[];
   updatedAt: string;
-  userMail: string;
+
   userName: string;
+  userMail: string;
+  avatar?: string;
+  avatarDeleteUrl?: string;
+  coverImage?: string;
+  coverImageDeleteUrl?: string;
   userType: 'client' | 'author';
   theme?: string;
+  roles: string[];
 };
 
 export type Creator = {

@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useScrollContext } from '../../app/providers';
-
 const Rankings = () => {
   // const { unlockScroll } = useScrollContext();
 

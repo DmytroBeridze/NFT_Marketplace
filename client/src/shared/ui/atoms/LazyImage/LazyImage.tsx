@@ -6,6 +6,7 @@ type LazyImageProps = {
   alt: string;
   className?: string;
   containerClassName?: string;
+  loading?: 'lazy' | 'eager';
 };
 
 export const LazyImage = ({
@@ -13,12 +14,15 @@ export const LazyImage = ({
   alt,
   className,
   containerClassName,
+  loading,
 }: LazyImageProps) => {
   const [loaded, setLoaded] = useState<boolean>(false);
 
   // const loaded = false;
   return (
-    <div className={`w-full h-full ${containerClassName || ''}`}>
+    <div
+      className={`w-full h-full ${containerClassName || ''} ${className || null}`}
+    >
       {!loaded && (
         // <div className="w-full h-full bg-amber-400 animate-pulse"></div>
         <div
@@ -31,8 +35,8 @@ export const LazyImage = ({
           src={src}
           alt={alt}
           onLoad={() => setLoaded(true)}
-          // onLoad={() => setLoaded(true)}
-          className={`transition-opacity duration-500  ${loaded ? 'opacity-100' : 'opacity-0'} ${className || ''}`}
+          // className={`transition-opacity duration-500  ${loaded ? 'opacity-100' : 'opacity-0'} ${className || ''}`}
+          loading={loading}
         />
       }
     </div>

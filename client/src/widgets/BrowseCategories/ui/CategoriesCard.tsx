@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { categoriesIcon } from '../../../features/BrowseCategories/lib/icon';
 import { categoriesImg } from '../../../features/BrowseCategories/lib/img';
 import { Icon, Image, Text } from '../../../shared/ui/atoms';
@@ -10,7 +9,7 @@ type CategoriesCardType = {
   // order?: number;
 };
 
-const CategoriesCard = ({ id, name }: CategoriesCardType) => {
+const CategoriesCard = ({ name }: CategoriesCardType) => {
   const { t } = useTranslation('browseCategories');
   // const navigate = useNavigate();
 

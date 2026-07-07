@@ -38,8 +38,8 @@ export const handleProfileImage = async (
 
     const update =
       type === "avatar"
-        ? { avatarUrl: url, avatarDeleteUrl: deleteUrl }
-        : { bannerUrl: url, bannerDeleteUrl: deleteUrl };
+        ? { avatar: url, avatarDeleteUrl: deleteUrl }
+        : { coverImage: url, coverImageDeleteUrl: deleteUrl };
 
     const updatedUser = await User.findByIdAndUpdate(id, update, {
       new: true,

@@ -1,4 +1,4 @@
-import { getByText, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, vi, expect } from 'vitest';
 import { HeroSlide } from './HeroSlide';
 import { MemoryRouter } from 'react-router-dom';

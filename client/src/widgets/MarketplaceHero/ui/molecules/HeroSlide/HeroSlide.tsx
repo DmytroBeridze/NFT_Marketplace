@@ -45,6 +45,7 @@ export const HeroSlide = ({ nft, isLoading }: HeroSlideProps) => {
             data-testid="lazy-image"
             alt={nft?.name || 'img'}
             src={image}
+            loading="eager"
           />
         ) : null}
       </div>

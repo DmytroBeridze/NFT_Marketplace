@@ -4,10 +4,7 @@ import ConnectWallet from './ConnectWallet';
 import { Provider } from 'react-redux';
 import { store } from '../../../app/store';
 import { MemoryRouter } from 'react-router-dom';
-import {
-  useWalletContext,
-  WalletContextProvider,
-} from '../context/connectWalletContext';
+import { useWalletContext } from '../context/connectWalletContext';
 import { useConnecMetaMask } from '../model/connectWallet';
 import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 

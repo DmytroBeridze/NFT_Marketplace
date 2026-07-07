@@ -26,7 +26,7 @@ const NFTPreview = ({
   const renderCountdown = sales?.endAt ? (
     <Countdown
       date={new Date(sales?.endAt)}
-      renderer={({ days, hours, minutes, seconds, completed }) => (
+      renderer={({ days, hours, minutes, seconds }) => (
         <SalesCountdown
           // hours={24}
           hours={days * 24 + hours}

@@ -1,4 +1,4 @@
-import type { Dispatch, ReactEventHandler, SetStateAction } from 'react';
+import type { ReactEventHandler } from 'react';
 
 type ObjectFit =
   | 'object-fill'
@@ -40,6 +40,7 @@ interface ImageProps {
   objectFit?: ObjectFit;
   onError?: ReactEventHandler<HTMLImageElement>;
   onLoad?: ReactEventHandler<HTMLImageElement>;
+  loading?: 'lazy' | 'eager';
 }
 
 export const Image = ({
@@ -52,6 +53,7 @@ export const Image = ({
   objectFit = 'object-cover',
   onError,
   onLoad,
+  loading = 'lazy',
 }: ImageProps) => {
   return (
     <img
@@ -62,7 +64,8 @@ export const Image = ({
         .join(' ')}
       // вбудований  захист від битих посиланнь
       onError={onError}
-      loading="lazy"
+      loading={loading}
+      // loading="lazy"
       onLoad={onLoad}
     />
   );

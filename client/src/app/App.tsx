@@ -1,4 +1,3 @@
-import { useGetMeQuery } from '../entities/user/model';
 import { AuthorizationModal } from '../features/AuthorizationModal';
 import { AuthorizationContextProvider } from '../features/AuthorizationModal/context';
 import { OuterContainer } from '../shared/ui/layout';
@@ -18,9 +17,6 @@ import { WalletContextProvider } from '../pages/ConnectWallet/context/connectWal
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
   // const { data } = useGetMeQuery();
-
-  const token = localStorage.getItem('token');
-  const { data } = useGetMeQuery(undefined, { skip: !token });
 
   return (
     <div className="App bg-primary-background-color min-h-screen">

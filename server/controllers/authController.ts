@@ -222,9 +222,26 @@ export const becomeAuthor = async (req: IRequest, res: Response) => {
 
     return res.status(200).json({ message: "authorActivated" });
   } catch (error) {
-    return res.status(500).json({
-      message: "serverError",
-    });
+    return handleControllerError(error, res, "serverError");
+  }
+};
+// --------------------------------🧩-get info by id
+
+export const getProfileById = async (req: IRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    // if (!id) return res.status(401).json({ message: "accessDenied" });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "invalidUserId" });
+    }
+
+    const user = await User.findById(id).select("-password");
+
+    if (!user) return res.status(404).json({ message: "userNotFound" });
+
+    return res.status(200).json({ message: "userLoaded", user });
+  } catch (error) {
+    return handleControllerError(error, res, "serverError");
   }
 };
 

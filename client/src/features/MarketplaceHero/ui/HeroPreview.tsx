@@ -26,7 +26,7 @@ export const HeroPreview = () => {
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
   // const { shine, setShine } = useShineEffect();
-  const [shine, setShine] = useState<boolean>(false);
+  const [shine] = useState<boolean>(false);
 
   // const { randomElement, updateRandom } = useRandomItem(items);
 

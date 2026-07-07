@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useAppDispatch, useAppSelector } from '../../../app/store/reduxHooks';
+import { useAppSelector } from '../../../app/store/reduxHooks';
 
 import {
   burgerOverlayDefaultStyle,

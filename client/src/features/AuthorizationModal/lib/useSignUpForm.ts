@@ -20,7 +20,7 @@ export const useSignUpForm = () => {
       const { userconfirmPass, ...body } = values;
 
       try {
-        const result = await register(body).unwrap(); // Якщо помилка- кидає виключення
+        await register(body).unwrap(); // Якщо помилка- кидає виключення
 
         resetForm();
       } catch (error) {

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { SectionHeader } from '../../../../shared/ui/molecules/SectionHeader';
 import { useGetTrendingCollectionQuery } from '../../model';
 

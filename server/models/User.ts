@@ -7,8 +7,10 @@ export interface IUser {
   userName: string;
   userMail: string;
   password: string;
-  avatar: string;
-  coverImage: string;
+  avatar?: string;
+  avatarDeleteUrl?: string;
+  coverImage?: string;
+  coverImageDeleteUrl?: string;
   userType: "author" | "client";
   theme: "light" | "dark";
   roles: (mongoose.Types.ObjectId | IRoleDocument)[];
@@ -37,7 +39,13 @@ const UserSchema = new Schema<IUser>(
     avatar: {
       type: String,
     },
+    avatarDeleteUrl: {
+      type: String,
+    },
     coverImage: {
+      type: String,
+    },
+    coverImageDeleteUrl: {
       type: String,
     },
     userType: {
@@ -52,6 +60,7 @@ const UserSchema = new Schema<IUser>(
 
       enum: ["light", "dark"],
     },
+
     // gallery: [
     //   {
     //     type: mongoose.Schema.Types.ObjectId,

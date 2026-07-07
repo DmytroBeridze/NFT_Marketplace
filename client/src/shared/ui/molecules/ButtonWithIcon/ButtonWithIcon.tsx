@@ -1,10 +1,6 @@
 import type { ReactNode } from 'react';
-import {
-  pngIconsMap,
-  type IconName,
-  type PngIconName,
-} from '../../../lib/icons';
-import { Button, Icon, Image, Text } from '../../atoms';
+import { type IconName } from '../../../lib/icons';
+import { Button, Icon, Text } from '../../atoms';
 import type { TextSecondaryProps } from '../../atoms/Text/Text.types';
 
 interface ButtonWithIconProps extends TextSecondaryProps {

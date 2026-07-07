@@ -6,7 +6,6 @@ import { ButtonWithIcon } from '../../../../shared/ui/molecules/ButtonWithIcon/B
 import { StatystycsContent } from '../../../../features/MarketplaceHero/ui/StatisticsContent';
 import { Text } from '../../../../shared/ui/atoms';
 import { useNavigate } from 'react-router-dom';
-import { useGetMeQuery } from '../../../../entities/user/model';
 import { useAppSelector } from '../../../../app/store/reduxHooks';
 
 export const HeroContent = () => {

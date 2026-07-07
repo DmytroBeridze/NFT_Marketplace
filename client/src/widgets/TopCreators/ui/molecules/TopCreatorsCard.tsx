@@ -3,7 +3,6 @@ import { CardNumber } from '../atoms';
 import { useTranslation } from 'react-i18next';
 
 import type { Creator } from '../../../../entities/user/model';
-import PlugImg from '../../../../shared/assets/images/plugImage.webp';
 import { useNavigate } from 'react-router-dom';
 
 interface TopCreatorsCardProps {
@@ -13,7 +12,7 @@ interface TopCreatorsCardProps {
 
 export const TopCreatorsCard = ({ index, author }: TopCreatorsCardProps) => {
   let navigate = useNavigate();
-  const { authorId, totalRevenue, totalSales, userName, avatar } = author;
+  const { authorId, totalSales, userName, avatar } = author;
 
   const { t } = useTranslation('topCreators');
 
