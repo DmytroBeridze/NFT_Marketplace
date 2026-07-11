@@ -17,10 +17,23 @@ export const ProtectedRoute = () => {
   });
 
   useEffect(() => {
-    if (!token || isError || (!isLoading && !isFetching && !user)) {
+    // Немає токена - вхід неможливий.
+    if (!token) {
+      navigate('/auth', { replace: true });
+      return;
+    }
+    // Чекаємо на закінчення запиту.
+    if (isLoading || isFetching) return;
+    // Запит закінчився.
+    if (isError || !user) {
       navigate('/auth', { replace: true });
     }
   }, [token, isError, user, isLoading, isFetching, navigate]);
+  // useEffect(() => {
+  //   if (!token || isError || (!isLoading && !isFetching && !user)) {
+  //     navigate('/auth', { replace: true });
+  //   }
+  // }, [token, isError, user, isLoading, isFetching, navigate]);
 
   if (isLoading || isFetching || isError || !user)
     return (

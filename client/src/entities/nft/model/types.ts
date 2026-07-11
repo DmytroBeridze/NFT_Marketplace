@@ -31,3 +31,14 @@ export interface TrendingNft extends Omit<INft, 'authorId' | 'gallery'> {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface getNftsByUserIdParams {
+  authorId?: string;
+  ownerId?: string;
+  galleryId?: string;
+  categoryId?: string;
+  sold?: boolean;
+  page?: number;
+  limit?: number;
+  keywords?: string[];
+}

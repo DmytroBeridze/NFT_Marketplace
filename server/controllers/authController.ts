@@ -245,6 +245,35 @@ export const getProfileById = async (req: IRequest, res: Response) => {
   }
 };
 
+// --------------------------------🧩-change profile
+
+export const changeProfile = async (req: IRequest, res: Response) => {
+  try {
+    const { bio } = req.body;
+    // const { userId } = req.params;
+
+    if (typeof bio !== "string") {
+      return res.status(400).json({ message: "invalodBio" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      {
+        bio,
+      },
+      // -----поверне оновлений документ після змін.
+      { new: true },
+    );
+    if (!user) {
+      return res.status(404).json({ message: "userNotFound" });
+    }
+
+    return res.status(200).json({ message: "updateSuccessfully" });
+  } catch (error) {
+    return handleControllerError(error, res, "serverError");
+  }
+};
+
 // admin token
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjY5MWUxMjFkMDI2NjVkZThjMmFiNiIsInVzZXJUeXBlIjoiYXV0aG9yIiwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNzYwOTk1MTQzLCJleHAiOjE3NjM1ODcxNDN9.AmG_xyAnVkmMyU3uVnm7GgpT5i20ewZpeBvKFSucMe8
 

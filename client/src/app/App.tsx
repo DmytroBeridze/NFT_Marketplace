@@ -13,10 +13,12 @@ import ScrollToTopButton from '../shared/ui/atoms/ScrollToTopButton/ScrollToTopB
 import { ScrollToTop } from './providers/ScrollToTop';
 import { WalletInstallModal } from '../widgets/WalletInstall';
 import { WalletContextProvider } from '../pages/ConnectWallet/context/connectWalletContext';
+import { useGetMeQuery } from '../entities/user/model';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
-  // const { data } = useGetMeQuery();
+  const token = localStorage.getItem('token');
+  useGetMeQuery(undefined, { skip: !token });
 
   return (
     <div className="App bg-primary-background-color min-h-screen">

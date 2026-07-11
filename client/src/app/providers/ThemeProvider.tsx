@@ -16,6 +16,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     () => (Cookies.get('theme') as Theme) || 'dark',
   );
 
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     Cookies.set('theme', theme, { expires: 30 });
   }, [theme]);
@@ -32,14 +34,24 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   коли ще не завантажився юзер, або користувач- гість 
  */
   useEffect(() => {
-    if (!userTheme) return;
+    if (!token) return;
 
     if (!mounted.current) {
       mounted.current = true;
       return;
     }
     setThemeInBase();
-  }, [theme, userTheme]);
+  }, [theme, token]);
+
+  // useEffect(() => {
+  //   if (!userTheme) return;
+
+  //   if (!mounted.current) {
+  //     mounted.current = true;
+  //     return;
+  //   }
+  //   setThemeInBase();
+  // }, [theme, userTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

@@ -57,7 +57,12 @@ export const userApi = createApi({
         credentials: 'include',
       }),
     }),
+    //  get profile by id
+    getProfileById: builder.query<IRegisterResponse, string>({
+      query: (name) => `auth/profile/${name}`,
+    }),
   }),
 });
 
-export const { useGetMeQuery, useSetThemeMutation } = userApi;
+export const { useGetMeQuery, useSetThemeMutation, useGetProfileByIdQuery } =
+  userApi;

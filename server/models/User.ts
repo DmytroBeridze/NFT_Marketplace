@@ -11,6 +11,7 @@ export interface IUser {
   avatarDeleteUrl?: string;
   coverImage?: string;
   coverImageDeleteUrl?: string;
+  bio?: string;
   userType: "author" | "client";
   theme: "light" | "dark";
   roles: (mongoose.Types.ObjectId | IRoleDocument)[];
@@ -53,6 +54,9 @@ const UserSchema = new Schema<IUser>(
       required: true,
 
       enum: ["author", "client"],
+    },
+    bio: {
+      type: String,
     },
     theme: {
       type: String,

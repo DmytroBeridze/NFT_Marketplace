@@ -5,11 +5,11 @@ import userReducer from '../../entities/user/model/userSlice';
 import { authApi } from '../../features/AuthorizationModal/model';
 import { userApi } from '../../entities/user/model';
 import { statisticsApi } from '../../features/MarketplaceHero/model/statisticApi';
-import { topNftApi } from '../../entities/nft/model/api';
+import { nftApi } from '../../entities/nft/model/api';
 import { trendingCollectionApi } from '../../features/TrendingCollection/model';
 import { topCreatorsGalleryApi } from '../../features/TopCreatorsGallery/model/index';
 import { categoriesApi } from '../../features/BrowseCategories/model/index';
-import { getNftsByCreateDateApi } from '../../entities/nft/model/api';
+// import { getNftsByCreateDateApi } from '../../entities/nft/model/api';
 import { discountedWorkApi } from '../../entities/DiscountedWork/model/index';
 import { subscribeApi } from '../../features/SubscribeByEmail/model/index';
 
@@ -28,11 +28,11 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [statisticsApi.reducerPath]: statisticsApi.reducer,
-    [topNftApi.reducerPath]: topNftApi.reducer,
+    [nftApi.reducerPath]: nftApi.reducer,
     [trendingCollectionApi.reducerPath]: trendingCollectionApi.reducer,
     [topCreatorsGalleryApi.reducerPath]: topCreatorsGalleryApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
-    [getNftsByCreateDateApi.reducerPath]: getNftsByCreateDateApi.reducer,
+    // [getNftsByCreateDateApi.reducerPath]: getNftsByCreateDateApi.reducer,
     [discountedWorkApi.reducerPath]: discountedWorkApi.reducer,
     [subscribeApi.reducerPath]: subscribeApi.reducer,
   },
@@ -41,11 +41,11 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(userApi.middleware)
       .concat(statisticsApi.middleware)
-      .concat(topNftApi.middleware)
+      .concat(nftApi.middleware)
       .concat(trendingCollectionApi.middleware)
       .concat(topCreatorsGalleryApi.middleware)
       .concat(categoriesApi.middleware)
-      .concat(getNftsByCreateDateApi.middleware)
+      // .concat(getNftsByCreateDateApi.middleware)
       .concat(discountedWorkApi.middleware)
       .concat(subscribeApi.middleware)
 
