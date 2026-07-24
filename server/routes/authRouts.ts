@@ -1,12 +1,5 @@
 import { Router } from "express";
-import {
-  register,
-  login,
-  getMe,
-  deleteProfile,
-  becomeAuthor,
-  getProfileById,
-} from "../controllers/authController.js";
+import { register, login, getMe } from "../controllers/authController.js";
 import { checkAuth } from "../middleware/checkAuth.js";
 import { body, check } from "express-validator";
 import { checkValidation } from "../middleware/checkValidation.js";
@@ -43,14 +36,14 @@ router.post(
 // http://localhost:3002/api/auth/me
 router.get("/me", checkAuth, getMe);
 
-// http://localhost:3002/api/auth/profile
-// Delete profile
-router.delete("/profile/:id", checkAuth, deleteProfile);
+// // http://localhost:3002/api/auth/profile
+// // Delete profile
+// router.delete("/profile/:id", checkAuth, deleteProfile);
 
-// -become author
-router.patch("/become-author", checkAuth, becomeAuthor);
+// // -become author
+// router.patch("/become-author", checkAuth, becomeAuthor);
 
-// ---get info by id
-router.get("/profile/:id", getProfileById);
+// // ---get info by id
+// router.get("/profile/:id", getProfileById);
 
 export default router;

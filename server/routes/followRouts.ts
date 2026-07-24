@@ -8,7 +8,7 @@ import {
   isFollowing,
 } from "../controllers/followController.js";
 
-// http://localhost:3002/api/
+// http://localhost:3002/api/follow
 const router = Router();
 
 // ---------------follow

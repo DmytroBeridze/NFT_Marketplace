@@ -17,6 +17,7 @@ import profileMediaRouter from "./routes/profileMediaRout.js";
 import salesConfigRout from "./routes/salesConfigRouts.js";
 import subscribersRout from "./routes/subscribersRouts.js";
 import followRout from "./routes/followRouts.js";
+import profileRout from "./routes/profileRouts.js";
 
 import cookieParser from "cookie-parser";
 
@@ -65,6 +66,7 @@ app.use("/api/profile-media", profileMediaRouter); // pавантаження а
 app.use("/api/sales", salesConfigRout);
 app.use("/api/subscribe", subscribersRout);
 app.use("/api/follow", followRout);
+app.use("/api/profile", profileRout);
 
 const start = async () => {
   try {

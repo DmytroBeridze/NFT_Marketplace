@@ -1,24 +1,52 @@
-import { useEffect } from 'react';
 import { useAppSelector } from '../../app/store/reduxHooks';
 import { InnerContainer } from '../../shared/ui/layout';
 import { ProfileHeader } from '../../widgets/ProfileHeader';
 import { ProfileStatistics } from '../../widgets/ProfileStatistics';
 import { useGetNftsQuery } from '../../entities/nft/model';
+import {
+  useFollowAuthorMutation,
+  useGetFollowersByIdQuery,
+} from '../../entities/subscribe/model';
 
 const Dashboard = () => {
+  // -------------------user
   const user = useAppSelector((state) => state.user.data);
-  const { data, isLoading, isError } = useGetNftsQuery(
-    { authorId: user?._id },
-    { skip: !user },
-  );
-  console.log('vvvvvvvvvvv---', data?.items);
+
+  // -------------------nft
+  const {
+    data,
+    isError: isNftError,
+    isLoading: isNftLoading,
+  } = useGetNftsQuery({ authorId: user?._id }, { skip: !user });
+
+  // ------------------followers
+  const {
+    isError: isFollowersError,
+    isLoading: isFollowersLoading,
+    data: followers,
+  } = useGetFollowersByIdQuery(user?._id ?? '', { skip: !user });
+
+  if (!user) return null;
+
+  console.log('user---------', user);
+
+  const {} = useFollowAuthorMutation();
 
   return (
-    <section className="bg-primary-background-color ">
+    <section className="bg-primary-background-color">
       <ProfileHeader coverImage={user?.coverImage} avatar={user?.avatar} />
 
       <InnerContainer>
-        <ProfileStatistics />
+        <ProfileStatistics
+          bio={user?.bio}
+          userId={user._id}
+          name={user.userName}
+          socialLinks={user?.socialLinks}
+          nfts={data?.items}
+          followers={followers?.followersCount}
+          isError={isFollowersError}
+          isLoading={isFollowersLoading}
+        />
       </InnerContainer>
     </section>
   );

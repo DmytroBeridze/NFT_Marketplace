@@ -1,3 +1,12 @@
+export type SocialLinks = {
+  instagram?: string;
+  facebook?: string;
+  telegram?: string;
+  twitter?: string;
+  youtube?: string;
+  website?: string;
+};
+
 export type UserData = {
   _id: string;
   createdAt: string;
@@ -12,6 +21,8 @@ export type UserData = {
   userType: 'client' | 'author';
   theme?: string;
   roles: string[];
+  bio?: string;
+  socialLinks?: SocialLinks;
 };
 
 export type Creator = {

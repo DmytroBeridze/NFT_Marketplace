@@ -5,6 +5,7 @@ import User from "../models/User.js";
 import mongoose from "mongoose";
 import { handleControllerError } from "../utils/handleControllerError.js";
 
+// ----------------follow
 export const follow = async (req: IRequest, res: Response) => {
   try {
     const followerId = req.userId;

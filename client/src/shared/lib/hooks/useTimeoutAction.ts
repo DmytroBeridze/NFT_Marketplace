@@ -18,6 +18,8 @@ export const useTimeoutAction = <T>(
       action();
     }, time);
 
-    return () => clearTimeout(timer);
-  }, [dependence, action, time]);
+    return () => {
+      clearTimeout(timer), console.log('cleanup');
+    };
+  }, [dependence, time]);
 };

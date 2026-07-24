@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../app/store/reduxHooks';
 import { Outlet, useNavigate } from 'react-router';
 
-import { useGetMeQuery } from '../../entities/user/model';
+import { useGetMeQuery, userApi } from '../../entities/user/model';
 
 import { useLocalStorage } from '../lib/hooks';
 import { Spinner } from '../ui/atoms';
@@ -15,6 +15,9 @@ export const ProtectedRoute = () => {
   const { isLoading, isFetching, isError } = useGetMeQuery(undefined, {
     skip: !token,
   });
+
+  // const { isLoading, isFetching, isError } =
+  //   userApi.endpoints.getMe.useQueryState();
 
   useEffect(() => {
     // Немає токена - вхід неможливий.

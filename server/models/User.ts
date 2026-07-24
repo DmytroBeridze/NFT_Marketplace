@@ -3,6 +3,16 @@ import { IRoleDocument } from "./Roles.js";
 const { Schema } = mongoose;
 
 // interface
+
+interface SocialLinks {
+  instagram?: string;
+  facebook?: string;
+  telegram?: string;
+  twitter?: string;
+  youtube?: string;
+  website?: string;
+}
+
 export interface IUser {
   userName: string;
   userMail: string;
@@ -15,6 +25,7 @@ export interface IUser {
   userType: "author" | "client";
   theme: "light" | "dark";
   roles: (mongoose.Types.ObjectId | IRoleDocument)[];
+  socialLinks?: SocialLinks;
   // gallery: mongoose.Types.ObjectId[];
 
   // posts: mongoose.Schema.Types.ObjectId[];
@@ -63,6 +74,17 @@ const UserSchema = new Schema<IUser>(
       default: "light",
 
       enum: ["light", "dark"],
+    },
+    socialLinks: {
+      type: {
+        instagram: { type: String },
+        facebook: { type: String },
+        telegram: { type: String },
+        twitter: { type: String },
+        youtube: { type: String },
+        website: { type: String },
+      },
+      default: {},
     },
 
     // gallery: [

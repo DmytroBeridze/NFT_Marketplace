@@ -19,6 +19,8 @@ import { useNavigate } from 'react-router-dom';
 import { useToggleOverlay } from '../../../shared/ui/molecules/Overlay';
 import { useTimeoutAction } from '../../../shared/lib/hooks';
 import { Button } from '../../../shared/ui/atoms';
+import { useCallback } from 'react';
+import { useGetMeQuery } from '../../../entities/user/model';
 
 const formStyles = {
   page: 'gap-3',
@@ -40,14 +42,14 @@ export const LoginForm = ({ variant = 'modal' }: LoginFormProps) => {
   const { formik, isLoading, error, data } = useLoginForm();
 
   // move to userpage
-  useTimeoutAction<string | undefined>(
-    data?.userData._id,
-    () => {
-      closeHandler();
-      navigate('/dashboard');
-    },
-    1000,
-  );
+  const handler = useCallback(() => {
+    console.log('navigate');
+    closeHandler();
+    navigate('/dashboard');
+  }, [closeHandler, navigate]);
+
+  useTimeoutAction<string | undefined>(data?.userData._id, handler, 1000);
+
   return (
     /*
      огортаємо в провайдер, бо в кастомному компоненті Input використовується 
