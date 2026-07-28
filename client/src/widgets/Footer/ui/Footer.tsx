@@ -42,7 +42,7 @@ const icons: Icons[] = [
   },
   {
     link: 'https://www.instagram.com/?hl=en',
-    name: 'instagram-Icon',
+    name: 'instagram-icon',
   },
 ];
 

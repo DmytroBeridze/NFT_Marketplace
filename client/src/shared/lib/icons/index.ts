@@ -23,18 +23,28 @@ import { ReactComponent as Arrow } from '../../assets/icons/Arrow.svg';
 import { ReactComponent as UserPlug } from '../../assets/icons/user_plug.svg';
 import { ReactComponent as FallbackAvatar } from '../../assets/icons/FallbackAvatar.svg';
 import { ReactComponent as DoubleUpIcon } from '../../assets/icons/Double_up_icon.svg';
+import { ReactComponent as Facebook } from '../../assets/icons/facebook.svg';
+import { ReactComponent as Telegram } from '../../assets/icons/telegram.svg';
+import { ReactComponent as ImgPlus } from '../../assets/icons/imagePlus.svg';
+import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
+import { ReactComponent as Gallery } from '../../assets/icons/gallery.svg';
 import CoinbaseIcon from '../../assets/icons/Coinbase.png';
 import MetamaskIcon from '../../assets/icons/Metamask.png';
 import WalletConnect from '../../assets/icons/WalletConnect.png';
 
 export const iconsMap = {
+  'edit-icon': Edit,
+  'gallery-icon': Gallery,
+  'imgPlus-icon': ImgPlus,
+  'facebook-icon': Facebook,
+  'telegram-icon': Telegram,
   'logo-icon': LogoIcon,
   'camera-icon': CameraIcon,
   'discord-icon': DiscordIcon,
   'ball-icon': BallIcon,
   'envelope-icon': EnvelopeIcon,
   'eye-icon': EyeIcon,
-  'instagram-Icon': InstagramIcon,
+  'instagram-icon': InstagramIcon,
   'magicWand-icon': MagicWandIcon,
   'musicNotes-icon': MusicNotesIcon,
   'paintBrush-icon': PaintBrushIcon,

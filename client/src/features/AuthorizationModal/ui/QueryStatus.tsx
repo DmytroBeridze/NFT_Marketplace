@@ -20,7 +20,7 @@ export const QueryStatus = ({
   if (isLoading) {
     return (
       <Spinner
-        fill={`var(--hover-primary-accent-color)`}
+        className=" static-text-purple-color"
         wrapperClassName="bg-transparent"
         size={50}
         height={30}
@@ -46,45 +46,3 @@ export const QueryStatus = ({
     );
   }
 };
-// if (errorKey) {
-//   return (
-//     <Text color="text-error-color" size="t-text-sm">
-//       {t(`modal.serverMessages.error.${errorKey}`, {
-//         defaultValue: errorKey,
-//       })}
-//     </Text>
-//   );
-// }
-
-// return (
-//   <section>
-//     {message && (
-//       <Text color="text-success-color" size="t-text-sm">
-//         {t(`modal.serverMessages.data.${message}`)}
-//       </Text>
-//     )}
-//     {/* ------------------ */}
-
-//     {isFetchBaseQueryError(error) && isFetchErrorWithMessage(error) && (
-//       <Text color="text-error-color" size="t-text-sm">
-//         {t(`modal.serverMessages.error.${error.data.message}`)}
-//       </Text>
-//     )}
-
-//     {isErrorWithMessage(error) && (
-//       <Text color="text-error-color" size="t-text-sm">
-//         {t(`modal.serverMessages.error.${error.message}`)}
-//       </Text>
-//     )}
-
-//     {/* ------------------ */}
-//     {isLoading && (
-//       <Spinner
-//         fill={`var(--hover-primary-accent-color)`}
-//         wrapperClassName="bg-transparent"
-//         size={50}
-//         height={30}
-//       />
-//     )}
-//   </section>
-// );

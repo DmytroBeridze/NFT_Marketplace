@@ -25,6 +25,7 @@ export const TopCreatorsContent = () => {
         // fill={theme === 'light' ? 'black' : 'static-text-purple-color'}
         textClassName="md:text-base text-xs text-primary-text-color"
         onClick={() => console.log('Ranking')}
+        fill="currentColor"
       >
         {t('viewRankings')}
       </ButtonWithIcon>

@@ -15,7 +15,6 @@ export const ProtectedRoute = () => {
   const { isLoading, isFetching, isError } = useGetMeQuery(undefined, {
     skip: !token,
   });
-
   // const { isLoading, isFetching, isError } =
   //   userApi.endpoints.getMe.useQueryState();
 
@@ -40,8 +39,9 @@ export const ProtectedRoute = () => {
 
   if (isLoading || isFetching || isError || !user)
     return (
-      <div className="h-screen flex items-center justify-center bg-primary-background-color">
-        <Spinner fill={`var(--hover-primary-accent-color)`} />
+      <div className=" flex items-center justify-center bg-primary-background-color ">
+        {/* <div className="h-screen flex items-center justify-center bg-primary-background-color "> */}
+        <Spinner className=" static-text-purple-color" />
       </div>
     );
 

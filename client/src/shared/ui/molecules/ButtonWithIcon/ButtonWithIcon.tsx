@@ -56,7 +56,7 @@ export const ButtonWithIcon = ({
 
   return (
     <Button
-      className={`flex  ${className ?? ''} `}
+      className={`flex  ${className ?? ''}`}
       radius={radius}
       onClick={onClick}
       variant={variant}

@@ -34,7 +34,7 @@ export const Avatar = ({ src, alt = 'avatar', className }: AvatarProps) => {
         />
       ) : (
         <div className="bg-primary-background-color overflow-hidden static-text-purple-color">
-          <Icon name="fallbackAvatar-icon" className=" w-full h-full" />
+          <Icon name="fallbackAvatar-icon" className=" w-full h-full " />
         </div>
       )}
     </div>

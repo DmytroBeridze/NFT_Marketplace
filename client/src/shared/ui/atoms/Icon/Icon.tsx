@@ -8,14 +8,15 @@ export const Icon: FC<IconProps> = ({
   height,
   className,
   style,
-  fill = 'currentColor',
+  // fill = 'none',
+
   onClick,
 }) => {
   const IconComponent = iconsMap[name];
 
   return (
     <IconComponent
-      fill={fill}
+      // fill={fill}
       width={size}
       height={height || size}
       className={className}

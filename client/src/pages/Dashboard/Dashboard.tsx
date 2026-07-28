@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   if (!user) return null;
 
-  console.log('user---------', user);
+  // console.log('user---------', user);
 
   const {} = useFollowAuthorMutation();
 

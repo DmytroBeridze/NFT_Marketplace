@@ -46,10 +46,11 @@ export const HeroContent = () => {
       {/* --------------button */}
 
       <ButtonWithIcon
-        className="py-5 px-12 max-w-[224px] flex main-button-smallSize-hidden"
+        className="py-5 px-12 w-full  max-w-[224px]  flex main-button-smallSize-hidden  "
         radius="xl"
+        iconClassName="static-text-white-color"
         // textClassName="text-red-500"
-        fill="white"
+        // fill="currentColor"
         iconName="rocket-icon"
         onClick={() =>
           navigate(`${data?.userType === 'author' ? '/dashboard' : '/gallery'}`)

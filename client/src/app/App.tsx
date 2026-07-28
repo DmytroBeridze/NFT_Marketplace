@@ -41,8 +41,9 @@ function App() {
               <main className="">
                 <Suspense
                   fallback={
-                    <div className="w-full h-screen bg-primary-background-color">
+                    <div className="w-full h-screen bg-primary-background-color ">
                       <Spinner
+                        className=" static-text-purple-color"
                         wrapperClassName="flex justify-center items-center"
                         fill={`var(--hover-primary-accent-color)`}
                       />

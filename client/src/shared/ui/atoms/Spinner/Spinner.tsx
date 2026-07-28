@@ -13,17 +13,10 @@ export const Spinner = ({
   name = 'spinner',
   size,
   height,
-  fill,
 }: SpinnerProps) => {
   return (
     <div className={wrapperClassName}>
-      <Icon
-        className={className}
-        name={name}
-        size={size}
-        fill={fill}
-        height={height}
-      />
+      <Icon className={className} name={name} size={size} height={height} />
     </div>
   );
 };
