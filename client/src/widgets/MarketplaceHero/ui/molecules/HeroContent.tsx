@@ -35,7 +35,7 @@ export const HeroContent = () => {
         {t('heroTitle')}
       </Text>
       <Text
-        className="text-primary-text-color px-2.5 leading-[160%] responsive-size-md-md"
+        className="text-primary-text-color px-2.5 leading-[160%] responsive-size-md"
         font="font-work-sans-regular"
         size="t-text-md"
         Element="p"

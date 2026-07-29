@@ -104,6 +104,7 @@ export const DiscoverMoreNFTsSlider = () => {
                   data-testid="NFT-slide"
                   key={nft._id}
                   className="overflow-visible"
+                  style={{ display: 'flex', justifyContent: 'center' }}
                 >
                   {/*------------ маппер */}
                   <NFTCard {...mapNftToCard(nft)} />

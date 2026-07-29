@@ -6,24 +6,18 @@ import { ButtonWithIcon } from '../../shared/ui/molecules/ButtonWithIcon';
 import { linksMap } from './socialIconMap';
 
 type ProfileStatisticsProps = {
-  userId: string;
   bio?: string;
   nfts?: INft[];
   followers?: number;
   name: string;
-  isError: boolean;
-  isLoading: boolean;
   socialLinks?: SocialLinks;
 };
 
 export const ProfileStatistics = ({
   bio,
-  userId,
   nfts,
   name,
   followers,
-  isError,
-  isLoading,
   socialLinks,
 }: ProfileStatisticsProps) => {
   const nftSold = nfts?.filter((elem) => elem.sold);
@@ -43,9 +37,31 @@ export const ProfileStatistics = ({
     : [];
 
   return (
-    <section className="flex justify-between mt-[90px] text-primary-text-color mb-10 ">
-      <div className="basis-[50%] grow shrink flex flex-col gap-7">
+    <section
+      className="flex justify-between mt-[90px] text-primary-text-color mb-10
+    max-[1300px]:flex-col gap-7
+    "
+    >
+      {/* ------responsive-hidden block------ */}
+
+      <Text
+        className="hidden  max-[1300px]:block"
+        Element="h2"
+        font="font-work-sans-semibold"
+        size="responsive-size-lg"
+      >
+        {name}
+      </Text>
+
+      {/* ------------------------- */}
+
+      <div
+        className="basis-[50%] grow shrink flex flex-col gap-8 max-w-[800px] 
+      max-[1300px]:order-2
+      "
+      >
         <Text
+          className="max-[1300px]:hidden"
           Element="h2"
           font="font-work-sans-semibold"
           size="responsive-size-lg"
@@ -55,13 +71,17 @@ export const ProfileStatistics = ({
           {name}
         </Text>
         {/* -------statistics */}
-        <ul className="grid grid-cols-3 gap-4">
+        <ul className="grid grid-cols-3 gap-4 max-w-[600px]">
           {statistics.map((elem) => (
             <li key={elem.itemName}>
-              <Text font="font-space-mono-bold" size="t-text-lg">
+              <Text font="font-space-mono-bold" size="responsive-size-mdl">
                 {elem.value}
               </Text>
-              <Text font="font-work-sans-regular" size="t-text-md">
+              <Text
+                font="font-work-sans-regular"
+                size="responsive-size-md"
+                className="hyphens-auto break-words"
+              >
                 {elem.itemName}
               </Text>
             </li>
@@ -76,7 +96,7 @@ export const ProfileStatistics = ({
           >
             Bio
           </Text>
-          <Text font="font-work-sans-regular" size="t-text-md">
+          <Text font="font-work-sans-regular" size="responsive-size-md">
             {bio}
           </Text>
         </div>
@@ -110,29 +130,34 @@ export const ProfileStatistics = ({
         </div>
       </div>
       {/* <div className="basis-[50%] grow shrink flex justify-end items-start "> */}
-      <div className="basis-[50%] grow shrink self-start flex justify-end">
-        <div className="grid  grid-cols-2 gap-2.5 w-[400px] justify-end  ">
+      <div className="basis-[50%]  self-start max-[834px]:self-auto flex justify-end  max-[834px]:justify-normal  max-[1300px]:order-1">
+        <div className="grid  grid-cols-2 gap-4 w-full max-w-[400px] justify-end   max-[834px]:grid-cols-1">
           <ButtonWithIcon
+            radius="xl"
             iconName="imgPlus-icon"
-            className="py-5 px-12  col-start-1 col-end-3 items-center"
+            className="py-5 px-12  col-start-1 col-end-3 items-center
+            max-[834px]:col-end-1
+            "
             fill="none"
             iconClassName="static-text-white-color "
           >
             Create NFT
           </ButtonWithIcon>
           <ButtonWithIcon
+            radius="xl"
             variant="outline"
             iconName="edit-icon"
-            className="py-[18px] px-10 items-center"
+            className="py-[18px]  max-[834px]:py-[20px] px-10 items-center"
             textClassName="text-primary-text-color leading-[normal]"
             iconClassName="text-primary-text-color"
           >
             Edit Profile
           </ButtonWithIcon>
           <ButtonWithIcon
+            radius="xl"
             variant="secondary"
             iconName="gallery-icon"
-            className="py-[18px] px-10 items-center"
+            className="py-[18px] max-[834px]:py-[20px] px-10 items-center "
             textClassName="text-inversive-text-color text-base leading-[normal] "
           >
             Create Gallery

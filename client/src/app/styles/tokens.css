@@ -226,6 +226,11 @@
 .responsive-size-md {
   font-size: var(--responsive-size-md);
 }
+/*от 22 px до 28 px*/
+.responsive-size-mdl {
+  font-size: var(--responsive-size-mdl);
+}
+
 /*от 28 px до 38 px*/
 .responsive-size-lg {
   font-size: var(--responsive-size-lg);

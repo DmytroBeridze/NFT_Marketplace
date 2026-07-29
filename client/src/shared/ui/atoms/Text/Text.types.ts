@@ -15,6 +15,7 @@ export type TextSize =
   | 'responsive-size-sm'
   | 'responsive-size-ms'
   | 'responsive-size-md'
+  | 'responsive-size-mdl'
   | 'responsive-size-xxl'
   | 'responsive-size-lg'
   | 'md:text-sm'

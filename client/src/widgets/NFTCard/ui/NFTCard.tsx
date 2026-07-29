@@ -18,9 +18,13 @@ export const NFTCard = ({
   const { t } = useTranslation('discoverMoreNFTs');
   return (
     <div
-      className="  max-w-full rounded-2xl flex flex-col bg-secondary-background-color 
+      className="  w-full max-w-[336px] rounded-2xl flex flex-col bg-secondary-background-color
       overflow-hidden  text-primary-text-color"
     >
+      {/* <div
+     className="  max-w-full rounded-2xl flex flex-col bg-secondary-background-color 
+      overflow-hidden  text-primary-text-color"
+     > */}
       {/* ----------------------image */}
       <div className="w-full max-h-[295px] aspect-[400/295] overflow-hidden">
         <LazyImage alt={name} src={src} className=" max-h-[295px]" />

@@ -26,7 +26,8 @@ const CategoriesCard = ({ name }: CategoriesCardType) => {
         <Icon
           name={categoriesIcon[name]}
           // size={100}
-          className="categoriesCardIconResponsive fill-none absolute top-0 left-0 right-0 bottom-0 m-auto"
+          className="categoriesCardIconResponsive fill-none absolute top-0 
+          left-0 right-0 bottom-0 m-auto text-primary-text-color"
         />
       </div>
       {/* <img /> */}

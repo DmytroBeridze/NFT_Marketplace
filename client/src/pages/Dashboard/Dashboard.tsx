@@ -39,13 +39,10 @@ const Dashboard = () => {
       <InnerContainer>
         <ProfileStatistics
           bio={user?.bio}
-          userId={user._id}
           name={user.userName}
           socialLinks={user?.socialLinks}
           nfts={data?.items}
           followers={followers?.followersCount}
-          isError={isFollowersError}
-          isLoading={isFollowersLoading}
         />
       </InnerContainer>
     </section>
