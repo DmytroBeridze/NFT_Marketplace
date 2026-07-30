@@ -22,28 +22,32 @@ const Dashboard = () => {
   // ------------------followers
   const {
     isError: isFollowersError,
-    isLoading: isFollowersLoading,
+    // isLoading: isFollowersLoading,
     data: followers,
   } = useGetFollowersByIdQuery(user?._id ?? '', { skip: !user });
 
   if (!user) return null;
 
-  // console.log('user---------', user);
+  const isFollowersLoading = true;
 
-  const {} = useFollowAuthorMutation();
+  // const {} = useFollowAuthorMutation();
 
   return (
     <section className="bg-primary-background-color">
       <ProfileHeader coverImage={user?.coverImage} avatar={user?.avatar} />
 
       <InnerContainer>
-        <ProfileStatistics
-          bio={user?.bio}
-          name={user.userName}
-          socialLinks={user?.socialLinks}
-          nfts={data?.items}
-          followers={followers?.followersCount}
-        />
+        {!isFollowersLoading ? (
+          <ProfileStatistics
+            bio={user?.bio}
+            name={user.userName}
+            socialLinks={user?.socialLinks}
+            nfts={data?.items}
+            followers={followers?.followersCount}
+          />
+        ) : (
+          <ProfileStatistics.skeleton />
+        )}
       </InnerContainer>
     </section>
   );

@@ -1,0 +1,16 @@
+{
+  "statistics": {
+    "works": "Works",
+    "NFTsSold": "NFTs Sold",
+    "followers": "Followers"
+  },
+  "buttons": {
+    "createNFT": "Create NFT",
+    "editProfile": "Edit Profile",
+    "createGallery": "Create Gallery"
+  },
+  "titles": {
+    "bio": "Bio",
+    "links": "Links"
+  }
+}

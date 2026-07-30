@@ -1,0 +1,16 @@
+{
+  "statistics": {
+    "works": "Роботи",
+    "NFTsSold": "Продано NFT",
+    "followers": "Підписники"
+  },
+  "buttons": {
+    "createNFT": "Створити NFT",
+    "editProfile": "Редагувати профіль",
+    "createGallery": "Створити галерею"
+  },
+  "titles": {
+    "bio": "Біографія",
+    "links": "Посилання"
+  }
+}

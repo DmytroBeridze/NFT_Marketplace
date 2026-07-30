@@ -4,6 +4,8 @@ import type { SocialLinks } from '../../entities/user/model';
 import { Icon, Text } from '../../shared/ui/atoms';
 import { ButtonWithIcon } from '../../shared/ui/molecules/ButtonWithIcon';
 import { linksMap } from './socialIconMap';
+import { useTranslation } from 'react-i18next';
+import { useTranslate } from '../../shared/lib/i18n';
 
 type ProfileStatisticsProps = {
   bio?: string;
@@ -11,6 +13,11 @@ type ProfileStatisticsProps = {
   followers?: number;
   name: string;
   socialLinks?: SocialLinks;
+};
+type Statistics = {
+  works: string;
+  NFTsSold: string;
+  followers: string;
 };
 
 export const ProfileStatistics = ({
@@ -22,11 +29,19 @@ export const ProfileStatistics = ({
 }: ProfileStatisticsProps) => {
   const nftSold = nfts?.filter((elem) => elem.sold);
 
+  const { t } = useTranslation('dashboard');
+
+  const { translateVariables } = useTranslate<Statistics>({
+    translateKey: 'statistics',
+    document: 'dashboard',
+    returnObjects: true,
+  });
+
   // -----------------------statistics
   const statistics = [
-    { itemName: 'Volume', value: nfts?.length },
-    { itemName: 'NFTs Sold', value: nftSold?.length },
-    { itemName: 'Followers', value: followers },
+    { itemName: translateVariables.works, value: nfts?.length },
+    { itemName: translateVariables.NFTsSold, value: nftSold?.length },
+    { itemName: translateVariables.followers, value: followers },
   ];
 
   // -------------------------socialLinks
@@ -94,7 +109,7 @@ export const ProfileStatistics = ({
             size="t-text-md"
             color="text-secondary-text-color"
           >
-            Bio
+            {t('titles.bio')}
           </Text>
           <Text font="font-work-sans-regular" size="responsive-size-md">
             {bio}
@@ -108,7 +123,7 @@ export const ProfileStatistics = ({
             size="t-text-md"
             color="text-secondary-text-color"
           >
-            Links
+            {t('titles.links')}
           </Text>
 
           <ul className="flex gap-3.5  mt-4  static-text-purple-color ">
@@ -129,7 +144,6 @@ export const ProfileStatistics = ({
           </ul>
         </div>
       </div>
-      {/* <div className="basis-[50%] grow shrink flex justify-end items-start "> */}
       <div className="basis-[50%]  self-start max-[834px]:self-auto flex justify-end  max-[834px]:justify-normal  max-[1300px]:order-1">
         <div className="grid  grid-cols-2 gap-4 w-full max-w-[400px] justify-end   max-[834px]:grid-cols-1">
           <ButtonWithIcon
@@ -141,7 +155,7 @@ export const ProfileStatistics = ({
             fill="none"
             iconClassName="static-text-white-color "
           >
-            Create NFT
+            {t('buttons.createNFT')}
           </ButtonWithIcon>
           <ButtonWithIcon
             radius="xl"
@@ -151,7 +165,7 @@ export const ProfileStatistics = ({
             textClassName="text-primary-text-color leading-[normal]"
             iconClassName="text-primary-text-color"
           >
-            Edit Profile
+            {t('buttons.editProfile')}
           </ButtonWithIcon>
           <ButtonWithIcon
             radius="xl"
@@ -160,8 +174,88 @@ export const ProfileStatistics = ({
             className="py-[18px] max-[834px]:py-[20px] px-10 items-center "
             textClassName="text-inversive-text-color text-base leading-[normal] "
           >
-            Create Gallery
+            {t('buttons.createGallery')}
           </ButtonWithIcon>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// -------------------------Skeleton
+
+ProfileStatistics.skeleton = () => {
+  return (
+    <section
+      className="flex justify-between mt-[90px] text-primary-text-color mb-10
+    max-[1300px]:flex-col gap-7  animate-pulse
+    "
+    >
+      {/* ------responsive-hidden block------ */}
+
+      <div
+        className="hidden  max-[1300px]:block skeleton-adaptive-background
+       w-[200px] h-[40px] "
+      ></div>
+
+      <div
+        className="basis-[50%] grow shrink flex flex-col gap-8 max-w-[800px] 
+      max-[1300px]:order-2 
+      "
+      >
+        {/* --------name */}
+        <div
+          className="max-[1300px]:hidden 
+        skeleton-adaptive-background w-[200px] h-[40px] "
+        ></div>
+        {/* -------statistics */}
+        <ul className="grid grid-cols-3 gap-4 max-w-[500px]">
+          {Array(3)
+            .fill(0)
+            .map((_, i) => (
+              <li key={i}>
+                <div className=" w-full  h-[74px] skeleton-adaptive-background"></div>
+              </li>
+            ))}
+        </ul>
+        {/* -------bio */}
+        <div>
+          <div className=" w-full max-w-[500px] h-[150px] skeleton-adaptive-background"></div>
+        </div>
+
+        {/* -------links */}
+        <div>
+          <ul className="flex gap-3.5    static-text-purple-color ">
+            {Array(4)
+              .fill(0)
+              .map((_, i) => {
+                return (
+                  <li
+                    key={i}
+                    className="w-[30px] h-[30px] skeleton-adaptive-background"
+                  ></li>
+                );
+              })}
+          </ul>
+        </div>
+      </div>
+      <div
+        className="basis-[50%]   self-start max-[834px]:self-auto flex justify-end    max-[1300px]:order-1
+      max-[1300px]:w-full max-[1300px]:justify-normal
+      "
+      >
+        <div className="grid  grid-cols-2 gap-4 w-full max-w-[400px] justify-end   max-[834px]:grid-cols-1">
+          {/* b1 */}
+          <div
+            className="skeleton-adaptive-background col-start-1 col-end-3 items-center
+            max-[834px]:col-end-1 h-[64px]"
+          ></div>
+
+          {/* b2 */}
+
+          <div className="skeleton-adaptive-background  h-[64px] w-full"></div>
+          {/* b3 */}
+          <div className="skeleton-adaptive-background h-[64px] w-full"></div>
         </div>
       </div>
     </section>
