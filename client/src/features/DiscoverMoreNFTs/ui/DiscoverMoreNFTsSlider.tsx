@@ -33,6 +33,7 @@ export const DiscoverMoreNFTsSlider = () => {
     <section>
       {isError ? (
         <ErrorText
+          Element="div"
           data-testid="discover-error"
           className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
         >

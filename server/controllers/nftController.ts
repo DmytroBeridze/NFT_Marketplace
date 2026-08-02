@@ -233,7 +233,10 @@ export const setNft = async (req: IRequest, res: Response) => {
     if (categoryId && mongoose.Types.ObjectId.isValid(categoryId)) {
       newItem.category = new mongoose.Types.ObjectId(categoryId as string);
     }
-    newItem.authorId = new mongoose.Types.ObjectId(userId);
+    // -------------author and owner
+    const objectUserId = new mongoose.Types.ObjectId(userId);
+    newItem.authorId = objectUserId;
+    newItem.ownerId = objectUserId;
 
     // if (!name) return res.status(400).json({ message: "Name is required" });
     // if (!imageUrl)
@@ -284,6 +287,9 @@ export const setNft = async (req: IRequest, res: Response) => {
 
     res.status(201).json({ message: "nftAdded", item: nft });
   } catch (error: any) {
+    console.log(error.message);
+    console.log(error.errors);
+
     const errorMessage = "failedToCreateNft";
     return handleControllerError(error, res, errorMessage);
     // if (error.response) {

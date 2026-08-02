@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { INft } from '../../entities/nft/model';
 import type { SocialLinks } from '../../entities/user/model';
-import { Icon, Text } from '../../shared/ui/atoms';
+import { ErrorText, Icon, Text } from '../../shared/ui/atoms';
 import { ButtonWithIcon } from '../../shared/ui/molecules/ButtonWithIcon';
 import { linksMap } from './socialIconMap';
 import { useTranslation } from 'react-i18next';
@@ -37,6 +37,7 @@ export const ProfileStatistics = ({
     returnObjects: true,
   });
 
+  let navigate = useNavigate();
   // -----------------------statistics
   const statistics = [
     { itemName: translateVariables.works, value: nfts?.length },
@@ -154,6 +155,7 @@ export const ProfileStatistics = ({
             "
             fill="none"
             iconClassName="static-text-white-color "
+            onClick={() => navigate('/createNftPage')}
           >
             {t('buttons.createNFT')}
           </ButtonWithIcon>
@@ -261,24 +263,24 @@ ProfileStatistics.skeleton = () => {
     </section>
   );
 };
+// --------------------------Error
 
-/*
-
-entities
-│
-├── user
-│   ├── model
-│   │     userApi.ts
-│   │     userSlice.ts
-│   │     types.ts
-│   └── index.ts
-│
-├── nft
-│
-├── subscribe
-│   ├── model
-│   │     subscribeApi.ts
-│   │     types.ts
-│   └── index.ts
-
-*/
+ProfileStatistics.error = () => {
+  return (
+    <section
+      className="flex justify-center mt-[90px]  mb-10
+     min-h-[10vh]
+    min-[834px]:min-h-[20vh]
+    min-[1300px]:min-h-[30vh]
+    "
+    >
+      <ErrorText
+        Element="div"
+        className="text-red-700 w-full  text-center 
+            responsive-size-sm animate-pulse my-20 "
+      >
+        Loading Error...
+      </ErrorText>
+    </section>
+  );
+};

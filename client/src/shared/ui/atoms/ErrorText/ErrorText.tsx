@@ -1,4 +1,5 @@
 interface ErrorTextProps {
+  Element?: keyof HTMLElementTagNameMap;
   children: string;
   className?: string;
   'data-testid'?: string;
@@ -7,11 +8,12 @@ interface ErrorTextProps {
 export const ErrorText = ({
   children,
   className,
+  Element = 'span',
   'data-testid': dataTestId,
 }: ErrorTextProps) => {
   return (
-    <span className={className} data-testid={dataTestId}>
-      {children}{' '}
-    </span>
+    <Element className={className} data-testid={dataTestId}>
+      {children}
+    </Element>
   );
 };

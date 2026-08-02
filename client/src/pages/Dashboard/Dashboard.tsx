@@ -7,6 +7,8 @@ import {
   useFollowAuthorMutation,
   useGetFollowersByIdQuery,
 } from '../../entities/subscribe/model';
+import { ErrorText } from '../../shared/ui/atoms';
+import { ProfileTabs } from '../../widgets/ProfileTabs';
 
 const Dashboard = () => {
   // -------------------user
@@ -22,32 +24,41 @@ const Dashboard = () => {
   // ------------------followers
   const {
     isError: isFollowersError,
-    // isLoading: isFollowersLoading,
+    isLoading: isFollowersLoading,
     data: followers,
   } = useGetFollowersByIdQuery(user?._id ?? '', { skip: !user });
 
   if (!user) return null;
 
-  const isFollowersLoading = true;
-
   // const {} = useFollowAuthorMutation();
 
   return (
     <section className="bg-primary-background-color">
+      {/* ----------------------------Header */}
       <ProfileHeader coverImage={user?.coverImage} avatar={user?.avatar} />
 
       <InnerContainer>
-        {!isFollowersLoading ? (
-          <ProfileStatistics
-            bio={user?.bio}
-            name={user.userName}
-            socialLinks={user?.socialLinks}
-            nfts={data?.items}
-            followers={followers?.followersCount}
-          />
-        ) : (
-          <ProfileStatistics.skeleton />
+        {/* --------------------------Statistics */}
+        {isFollowersError && (
+          <div>
+            <ProfileStatistics.error />
+          </div>
         )}
+
+        {!isFollowersError &&
+          (!isFollowersLoading ? (
+            <ProfileStatistics
+              bio={user?.bio}
+              name={user.userName}
+              socialLinks={user?.socialLinks}
+              nfts={data?.items}
+              followers={followers?.followersCount}
+            />
+          ) : (
+            <ProfileStatistics.skeleton />
+          ))}
+        {/* --------------------------Tabs */}
+        <ProfileTabs />
       </InnerContainer>
     </section>
   );

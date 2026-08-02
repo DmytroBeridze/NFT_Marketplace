@@ -12,6 +12,7 @@ const DiscountedWork = () => {
       <section>
         <InnerContainer>
           <ErrorText
+            Element="div"
             data-testid="discountWork-error"
             className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
           >

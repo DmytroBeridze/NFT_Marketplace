@@ -11,13 +11,14 @@ interface StatystycsContentProps {
 
 export const StatystycsContent = memo(
   ({ statisticsArr }: StatystycsContentProps) => {
-    const { isLoading, isError, data } = useGetStatisticsQuery();
+    const { isError, isLoading, data } = useGetStatisticsQuery();
     const statistics = data?.statistics;
 
     return (
       <>
         {isError && (
           <ErrorText
+            Element="div"
             data-testid="statystycsContent-error"
             className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
           >

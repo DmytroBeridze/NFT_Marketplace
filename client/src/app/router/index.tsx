@@ -14,6 +14,7 @@ import AuthorPage from '../../pages/AuthorPage/AuthorPage';
 import { ProtectedRoute } from '../../shared/routes';
 import AuthorizationPage from '../../pages/AuthorizationPage/AuthorizationPage';
 import { NotFoundPage } from '../../pages/NotFoundPage';
+import { CreateNftPage } from '../../pages/CreateNftPage';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: 'authorPage/:authorId', Component: AuthorPage },
       { path: 'auth', Component: AuthorizationPage },
       { path: 'connectWallet', Component: ConnectWallet },
+      { path: 'createNftPage', Component: CreateNftPage },
       { path: '*', Component: NotFoundPage },
     ],
   },

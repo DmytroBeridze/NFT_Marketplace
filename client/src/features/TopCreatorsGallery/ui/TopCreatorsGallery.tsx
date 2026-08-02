@@ -7,8 +7,6 @@ export const TopCreatorsGallery = () => {
   // const [gallerySize, setGallerySize] = useState<number>(12);
   const { isError, isLoading, data } = useGetTopCreatorsQuery();
 
-  // const isLoading = true;
-
   // const skeletonItems = Array.from({ length: gallerySize });
   // const topAuthors = data?.topAuthors.slice(0, gallerySize);
 
@@ -48,8 +46,10 @@ export const TopCreatorsGallery = () => {
       {/* <div className="grid grid-cols-1 gap-7 "> */}
       {isError && (
         <ErrorText
+          Element="div"
           data-testid="topCreator-error"
-          className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+          className="text-red-700 w-full  text-center responsive-size-sm 
+          animate-pulse  col-start-1 col-end-5"
         >
           Loading Error...
         </ErrorText>

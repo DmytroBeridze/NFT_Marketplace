@@ -13,8 +13,6 @@ export const TrendingCollection = () => {
   const { t } = useTranslation('trendingCollection');
   const skeletonElements = Array.from({ length: 3 });
 
-  // const isLoading = true;
-
   const { responsiveValue } = useResponsiveValue(
     [
       {
@@ -53,8 +51,10 @@ export const TrendingCollection = () => {
       <div className="trending-responsive  grid gap-7 relative testDelete">
         {isError ? (
           <ErrorText
+            Element="div"
             data-testid="TrendingCollection-error"
-            className="text-red-700 w-full  text-center responsive-size-sm animate-pulse"
+            className="text-red-700 w-full  text-center responsive-size-sm 
+            animate-pulse  col-start-1 col-end-5 "
           >
             Loading Error...
           </ErrorText>

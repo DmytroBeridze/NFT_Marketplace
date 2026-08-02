@@ -25,6 +25,21 @@ export interface INft {
   sales?: ISales;
 }
 
+export interface CreateNftDto {
+  name: string;
+  description: string;
+  imageUrl: string;
+  deleteImageUrl: string;
+
+  galleryId?: string;
+  categoryId?: string;
+  price: number;
+
+  keywords: string[];
+
+  sales?: ISales;
+}
+
 export interface TrendingNft extends Omit<INft, 'authorId' | 'gallery'> {
   authorId: string;
   gallery: string;
