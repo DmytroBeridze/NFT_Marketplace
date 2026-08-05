@@ -50,9 +50,9 @@ export const store = configureStore({
       // .concat(getNftsByCreateDateApi.middleware)
       .concat(discountedWorkApi.middleware)
       .concat(subscribeApi.middleware)
-      .concat(subscribeFollowersApi.middleware)
+      .concat(subscribeFollowersApi.middleware),
 
-      .prepend(testMiddleware),
+  // .prepend(testMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

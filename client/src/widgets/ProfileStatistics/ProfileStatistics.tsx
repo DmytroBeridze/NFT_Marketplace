@@ -38,6 +38,7 @@ export const ProfileStatistics = ({
   });
 
   let navigate = useNavigate();
+
   // -----------------------statistics
   const statistics = [
     { itemName: translateVariables.works, value: nfts?.length },

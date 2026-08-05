@@ -8,15 +8,18 @@ import { Spinner } from '../ui/atoms';
 import { useEffect } from 'react';
 
 export const ProtectedRoute = () => {
+  const user = useAppSelector((state) => state.user.data);
+
   const navigate = useNavigate();
   const { getLocal } = useLocalStorage();
-  const user = useAppSelector((state) => state.user.data);
   const token = getLocal('token');
+
+  // const { isError, isLoading, isFetching } =
+  //   userApi.endpoints.getMe.useQueryState();
+
   const { isLoading, isFetching, isError } = useGetMeQuery(undefined, {
     skip: !token,
   });
-  // const { isLoading, isFetching, isError } =
-  //   userApi.endpoints.getMe.useQueryState();
 
   useEffect(() => {
     // Немає токена - вхід неможливий.
@@ -31,17 +34,12 @@ export const ProtectedRoute = () => {
       navigate('/auth', { replace: true });
     }
   }, [token, isError, user, isLoading, isFetching, navigate]);
-  // useEffect(() => {
-  //   if (!token || isError || (!isLoading && !isFetching && !user)) {
-  //     navigate('/auth', { replace: true });
-  //   }
-  // }, [token, isError, user, isLoading, isFetching, navigate]);
 
   if (isLoading || isFetching || isError || !user)
     return (
-      <div className=" flex items-center justify-center bg-primary-background-color ">
-        {/* <div className="h-screen flex items-center justify-center bg-primary-background-color "> */}
-        <Spinner className=" static-text-purple-color" />
+      // <div className=" flex items-center justify-center bg-primary-background-color ">
+      <div className="h-screen flex items-center justify-center bg-primary-background-color ">
+        {/* <Spinner className=" static-text-purple-color" /> */}
       </div>
     );
 

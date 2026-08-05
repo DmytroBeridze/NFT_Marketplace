@@ -3,12 +3,10 @@ import { InnerContainer } from '../../shared/ui/layout';
 import { ProfileHeader } from '../../widgets/ProfileHeader';
 import { ProfileStatistics } from '../../widgets/ProfileStatistics';
 import { useGetNftsQuery } from '../../entities/nft/model';
-import {
-  useFollowAuthorMutation,
-  useGetFollowersByIdQuery,
-} from '../../entities/subscribe/model';
-import { ErrorText } from '../../shared/ui/atoms';
+import { useGetFollowersByIdQuery } from '../../entities/subscribe/model';
+
 import { ProfileTabs } from '../../widgets/ProfileTabs';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
   // -------------------user
@@ -22,9 +20,11 @@ const Dashboard = () => {
   } = useGetNftsQuery({ authorId: user?._id }, { skip: !user });
 
   // ------------------followers
+
   const {
     isError: isFollowersError,
     isLoading: isFollowersLoading,
+    isFetching: isFollowersFetching,
     data: followers,
   } = useGetFollowersByIdQuery(user?._id ?? '', { skip: !user });
 

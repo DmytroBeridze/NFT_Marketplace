@@ -43,7 +43,6 @@ export const LoginForm = ({ variant = 'modal' }: LoginFormProps) => {
 
   // move to userpage
   const handler = useCallback(() => {
-    console.log('navigate');
     closeHandler();
     navigate('/dashboard');
   }, [closeHandler, navigate]);
