@@ -1,17 +1,19 @@
 import { type FieldInputProps, type FieldMetaProps } from 'formik';
+import type { InputHTMLAttributes } from 'react';
 
 //  ---------------------------base input
-export type InputType =
-  | 'text'
-  | 'email'
-  | 'password'
-  | 'number'
-  | 'file'
-  | 'image';
+
+// export type InputType =
+//   | 'text'
+//   | 'email'
+//   | 'password'
+//   | 'number'
+//   | 'file'
+//   | 'image';
 
 export interface InputProps {
   id: string;
-  type: InputType;
+  type: React.HTMLInputTypeAttribute;
   field: FieldInputProps<any>;
   meta: FieldMetaProps<any>;
   placeholder?: string;
@@ -29,6 +31,6 @@ export interface InputProps {
 // --------------------------reusable input wrapper
 export type InputWrapper = Omit<InputProps, 'field' | 'meta'> & {
   name: string;
-  variant: 'page' | 'modal' | 'subscribe';
-  size?: 'default' | 'custom';
+  variant: 'page' | 'modal' | 'subscribe' | 'custom' | 'createForm';
+  size?: 'default' | 'custom' | 'createForm';
 };

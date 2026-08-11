@@ -25,15 +25,21 @@ const router = createBrowserRouter([
       // { path: 'marketplace', Component: Marketplace },
       { path: 'rankings', Component: Rankings },
       {
+        path: 'dashboard',
         element: <ProtectedRoute />,
-        children: [{ path: 'dashboard', Component: Dashboard }],
+        children: [
+          { index: true, Component: Dashboard },
+          { path: 'createNftPage', Component: CreateNftPage },
+          // { path: 'dashboard/createNftPage', Component: CreateNftPage },
+        ],
       },
+
       { path: 'collection/:galleryId', Component: AuthorCollection },
       { path: 'gallery', Component: Gallery },
       { path: 'authorPage/:authorId', Component: AuthorPage },
       { path: 'auth', Component: AuthorizationPage },
       { path: 'connectWallet', Component: ConnectWallet },
-      { path: 'createNftPage', Component: CreateNftPage },
+      // { path: 'dashboard/createNftPage', Component: CreateNftPage },
       { path: '*', Component: NotFoundPage },
     ],
   },

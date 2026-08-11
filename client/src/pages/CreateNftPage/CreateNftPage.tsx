@@ -42,6 +42,15 @@ export const CreateNftPage = () => {
         >
           Create NFT
         </Text>
+        <Text
+          Element="p"
+          font="font-work-sans-regular"
+          size="responsive-size-md"
+          color="text-primary-text-color"
+          className="mb-[60px] "
+        >
+          Mint your unique digital item on the blockchain
+        </Text>
 
         <CreateNftForm />
       </InnerContainer>

@@ -37,7 +37,8 @@ export type TextColor =
   | 'text-burger-color'
   | 'text-error-color'
   | 'text-success-color'
-  | 'text-inherit';
+  | 'text-inherit'
+  | 'static-text-purple-color';
 
 export interface TextProps {
   children: React.ReactNode;

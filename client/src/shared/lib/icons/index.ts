@@ -28,6 +28,8 @@ import { ReactComponent as Telegram } from '../../assets/icons/telegram.svg';
 import { ReactComponent as ImgPlus } from '../../assets/icons/imagePlus.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Gallery } from '../../assets/icons/gallery.svg';
+import { ReactComponent as Upload } from '../../assets/icons/upload-cloud.svg';
+
 import CoinbaseIcon from '../../assets/icons/Coinbase.png';
 import MetamaskIcon from '../../assets/icons/Metamask.png';
 import WalletConnect from '../../assets/icons/WalletConnect.png';
@@ -61,8 +63,9 @@ export const iconsMap = {
   'arrow-icon': Arrow,
   'userPlug-icon': UserPlug,
   'fallbackAvatar-icon': FallbackAvatar,
-  spinner: Spinner,
   'doubleUp-icon': DoubleUpIcon,
+  'upload-cloud': Upload,
+  spinner: Spinner,
 } as const;
 
 export const pngIconsMap = {

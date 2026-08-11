@@ -8,12 +8,16 @@ const inputStyles = {
   page: 'subscribeByEmailInput rounded-3xl',
   modal: 'border-2 border-gray-300 rounded-sm ',
   subscribe: 'subscribeByEmailInput  px-5 w-full rounded-3xl ',
+  createForm: 'rounded-md',
+  custom: '',
   // subscribe: 'subscribeByEmailInput py-5 px-5 w-full rounded-3xl ',
 } as const;
 
 // base styles
 const baseInput = {
   default: 'w-full h-10 lg:h-12 p-2.5 pl-10 sm:pl-14 input-focus focus:ring-1',
+  createForm:
+    'w-full h-10 lg:h-12 p-2.5  input-focus  border-secondary-color bg-secondary-background-color',
   custom: '',
 };
 

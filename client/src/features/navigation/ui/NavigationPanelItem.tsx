@@ -22,8 +22,7 @@ export const NavigationPanelItem = ({
     <li>
       <NavLink
         to={isRoot ? '/' : `${routeKey}`}
-        // to={`/${routeKey}`}
-        end
+        end={isRoot}
         // className={({ isActive }) => {
         // рамка тільки для бургера
         //   const borderClass =

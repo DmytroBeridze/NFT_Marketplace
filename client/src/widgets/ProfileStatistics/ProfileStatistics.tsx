@@ -156,7 +156,8 @@ export const ProfileStatistics = ({
             "
             fill="none"
             iconClassName="static-text-white-color "
-            onClick={() => navigate('/createNftPage')}
+            onClick={() => navigate('createNftPage')}
+            // onClick={() => navigate('/dashboard/createNftPage')}
           >
             {t('buttons.createNFT')}
           </ButtonWithIcon>

@@ -44,6 +44,7 @@
   --inversive-text: #ffffff; /* Белый текст на тёмной кнопке */
   --burger-text: #ffffff;
   --divider-bacground: #763fbf;
+  --border-secondary-color: #c8c8c8;
 
   --moon-body: #e1e0e0;
   --moon-crater: #c8c8c8;
@@ -64,6 +65,7 @@
   --inversive-text: #2b2b2b;
   --burger-text: #a259ff;
   --divider-bacground: #858584;
+  --border-secondary-color: #606060;
 
   --moon-body: #3b3b3b;
   --moon-crater: #4a4949;
