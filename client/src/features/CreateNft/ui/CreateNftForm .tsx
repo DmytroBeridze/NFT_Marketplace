@@ -1,95 +1,131 @@
 import {
-  useEffect,
-  useRef,
-  useState,
-  type ChangeEvent,
-  type MouseEvent,
-  type RefObject,
-} from 'react';
-import { useUploadImageMutation } from '../../../entities/nft/model';
-import { Formik, useFormik } from 'formik';
+  useSetNFTMutation,
+  useUploadImageMutation,
+} from '../../../entities/nft/model';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
-import { Button, Icon, Image, Text } from '../../../shared/ui/atoms';
+import { Icon, Image, Text } from '../../../shared/ui/atoms';
 import { Textarea } from '@headlessui/react';
 import { ButtonWithIcon } from '../../../shared/ui/molecules/ButtonWithIcon';
 import { Select } from '../../../shared/ui/molecules/Select';
+import { NftMediaUpload } from './NftMediaUpload';
+import { useState } from 'react';
+import { SwitchButton } from '../../../shared/ui/molecules/Switch';
+
+// !=-------------Fake  data-------------------
+export const mockCategories = [
+  { id: '1', name: 'Art' },
+  { id: '2', name: 'Photography' },
+  { id: '3', name: 'Gaming' },
+  { id: '4', name: 'Music' },
+];
+
+export const mockCollections = [
+  { id: '101', name: 'Cyber Samurai' },
+  { id: '102', name: 'Digital Dreams' },
+  { id: '103', name: 'Pixel Animals' },
+];
+
+const currentServerSource = {
+  ETH: 0.0002325,
+  BTC: 0.00000893,
+  USDT: 1.001,
+  USDC: 1.0,
+  EUR: 0.85,
+  UAH: 41.2,
+};
+
+const currentSource = Object.keys(currentServerSource).map((currency) => ({
+  id: currency,
+  name: currency,
+}));
+
+const royaltyPercent = [
+  { id: '1', name: '3' },
+  { id: '2', name: '7' },
+  { id: '3', name: '10' },
+];
+// !=--------------------------------
+export const afterRequiredStyle =
+  " relative after:inline-block after:w-2 after:h-2 after:bg-[var(--primary-accent-color) ] after:bg-[var(--primary-accent-color)] after:ml-2 after:rounded-full after:content-[''] after:absolute after:top-1";
 
 export const CreateNftForm = () => {
   const [uploadFile, { isLoading, isError, data }] = useUploadImageMutation();
+
+  // { message: "nftAdded", item: nft }
+  const [
+    uploadNFT,
+    { isError: nftError, isLoading: nftLoading, data: nftResponse },
+  ] = useSetNFTMutation();
+
   const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const [isFocused, setIsFocused] = useState<boolean | null>(null);
-  const [name, setName] = useState<string>('');
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const imgContainerRef = useRef<HTMLDivElement | null>(null);
-  const afterRequiredStyle =
-    " relative after:inline-block after:w-2 after:h-2 after:bg-[var(--primary-accent-color) ] after:bg-[var(--primary-accent-color)] after:ml-2 after:rounded-full after:content-[''] after:absolute after:top-1";
+  // const [preview, setPreview] = useState<string | null>(null);
+  // const [isFocused, setIsFocused] = useState<boolean | null>(null);
+  // const imgContainerRef = useRef<HTMLDivElement | null>(null);
+  // const [name, setName] = useState<string>('');
+  // const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // const [img, setImg] = useState<{
-  //   imageUrl: string;
-  //   deleteImageUrl: string;
-  // } | null>(null);
+  // --------------------------added default option
+  const optionCategories = [{ id: null, name: 'None' }, ...mockCategories];
+  const optionCollections = [{ id: null, name: 'None' }, ...mockCollections];
+  const currentSourceCollections = [
+    { id: 'USD', name: 'USD' },
+    ...currentSource,
+  ];
 
-  const uploadHandler = (target: RefObject<HTMLInputElement | null>) => {
-    target.current?.click();
-  };
+  // ----------------------save Img ToDb
 
-  // ------get file
-  const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const saveImgToDb = async (file: File, name: string) => {
     if (!file) return;
-    const url = URL.createObjectURL(file);
-    setFile(file);
-    setPreview(url);
-    setIsFocused(true);
+    const formdata = new FormData();
+
+    formdata.append('image', file);
+    formdata.append('name', name);
+
+    return await uploadFile(formdata).unwrap();
   };
-
-  // ------remove previev
-  const handleRemovePreviev = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    preview && URL.revokeObjectURL(preview);
-    setPreview(null);
-  };
-
-  // ----get name
-  // const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const name = e.target.value;
-  //   setName(name);
-  // };
-
-  const saveImgToDb = (file: File | null) => {
-    if (!file) return;
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('name', name);
-
-    uploadFile(formData);
-  };
-
-  // ---------------Скидання виділення з контейнера для прев'ю при кліці не на цьому контейнері
-  useEffect(() => {
-    const focusedHandler = (e: globalThis.MouseEvent) => {
-      if (
-        imgContainerRef.current &&
-        !imgContainerRef.current.contains(e.target as Node)
-      ) {
-        setIsFocused(false);
-      }
-    };
-
-    document.addEventListener('click', focusedHandler);
-
-    return () => document.removeEventListener('click', focusedHandler);
-  }, []);
 
   return (
     <section className="  font-work-sans-regular text-secondary-text-color mb-8 responsive-size-sm ">
       <Formik
-        initialValues={{ name: '', description: '', keywords: '' }}
+        initialValues={{
+          name: '',
+          description: '',
+          keywords: '',
+          category: { id: 'None', name: 'None' },
+          collection: { id: 'None', name: 'None' },
+          price: '',
+          currency: { id: 'USD', name: 'USD' },
+        }}
         // validate={} // сюда подключаем Yup
-        onSubmit={(values, { setSubmitting, resetForm }) => {
-          console.log('SUbmitting');
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
+          // console.log(values);
+
+          try {
+            if (!file) return;
+            const imgResp = await saveImgToDb(file, file.name);
+
+            if (!imgResp) return;
+
+            // ---------------- upload NFT
+            uploadNFT({
+              name: values.name,
+              description: values.description,
+
+              galleryId: '100',
+              categoryId: '50',
+              price: Number(values.price),
+
+              keywords: values.keywords,
+
+              imageUrl: imgResp.imageUrl,
+              deleteImageUrl: imgResp.deleteImageUrl,
+            });
+            // resetForm();
+          } catch (error) {
+            console.error(error);
+          }
         }}
       >
         {({
@@ -101,130 +137,51 @@ export const CreateNftForm = () => {
           handleSubmit,
           isSubmitting,
         }) => (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
             {/* ---------name, description, upload img  block */}
-            <div className="w-full  flex  gap-5 justify-between  items-stretch">
-              <div className=" flex flex-col basis-[50%]">
-                {/* -------------------------name */}
-                <FormikInput
-                  name="name"
-                  id="NFTname"
-                  type="text"
-                  variant="createForm"
-                  label="Name"
-                  size="createForm"
-                  placeholder="Enter NFT name"
-                  className="text-primary-text-color "
-                  labelClass={`text-primary-text-color ${afterRequiredStyle}`}
-                />
 
-                {/* -------------------------description */}
-                <label
-                  htmlFor="NFTdescription"
-                  className={`text-primary-text-color ${afterRequiredStyle}`}
-                >
-                  Description
-                </label>
-                <Textarea
-                  name="description"
-                  id="NFTdescription"
-                  // aria-label="Description"
-                  placeholder="Tell the story behind your NFT"
-                  className="w-full h-80 p-[10px]  input-focus  border-secondary-color 
+            <div className=" flex flex-col basis-[50%]">
+              {/* -------------------------name */}
+              <FormikInput
+                name="name"
+                id="NFTname"
+                type="text"
+                variant="createForm"
+                label="Name"
+                size="createForm"
+                placeholder="Enter NFT name"
+                className="text-primary-text-color "
+                labelClass={`text-primary-text-color ${afterRequiredStyle}`}
+              />
+
+              {/* -------------------------description */}
+              <label
+                htmlFor="NFTdescription"
+                className={`text-primary-text-color ${afterRequiredStyle}`}
+              >
+                Description
+              </label>
+              <Textarea
+                name="description"
+                value={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id="NFTdescription"
+                placeholder="Tell the story behind your NFT"
+                className="w-full h-80 p-[10px]  input-focus  border-secondary-color 
                   bg-secondary-background-color rounded-md text-primary-text-color"
-                  // rows={10}
-                ></Textarea>
-              </div>
-              {/* ------------upload img */}
-              <div className="basis-[50%]  w-full   flex flex-col  flex-1 min-w-0 ">
-                <label
-                  htmlFor="uploadImg"
-                  className={`text-primary-text-color ${afterRequiredStyle}`}
-                >
-                  Upload Image/Video/Gif
-                </label>
-
-                <div
-                  id="uploadImg"
-                  className={`h-full   border-dashed-secondary-color 
-                  bg-secondary-background-color rounded-md input-focus relative`}
-                  onClick={() => uploadHandler(inputRef)}
-                >
-                  {preview ? (
-                    <div
-                      ref={imgContainerRef}
-                      className={`max-h-[412px] h-full w-full border-dashed-secondary-color 
-                  bg-secondary-background-color rounded-md overflow-hidden relative ${isFocused ? 'container-focus' : ''}`}
-                    >
-                      <Button
-                        onClick={(e) => handleRemovePreviev(e)}
-                        className="absolute bottom-3 right-3 px-4 py-1 "
-                        type="button"
-                        variant="primary"
-                        radius="xl"
-                      >
-                        <Text
-                          Element="span"
-                          color="static-text-white-color"
-                          size="t-text-xs"
-                        >
-                          Remove
-                        </Text>
-                      </Button>
-
-                      <Image
-                        alt="preview"
-                        src={preview}
-                        objectFit="object-cover"
-                      />
-                    </div>
-                  ) : (
-                    <>
-                      <div
-                        className="absolute top-[50%] left-[50%] -translate-[50%] 
-                      flex flex-col gap-2 items-center justify-center static-text-purple-color"
-                      >
-                        <Icon name="upload-cloud" size={100} />
-
-                        <Text
-                          Element="h3"
-                          font="font-work-sans-regular"
-                          size="responsive-size-md"
-                        >
-                          Click to upload
-                        </Text>
-                        <Text
-                          Element="p"
-                          color="text-primary-text-color"
-                          font="font-work-sans-regular"
-                          className="opacity-40"
-                          size="responsive-size-sm"
-                        >
-                          PNG, JPG, GIF, MP4, WEBM
-                        </Text>
-                        <Text
-                          Element="p"
-                          color="text-primary-text-color"
-                          font="font-work-sans-regular"
-                          className="opacity-40"
-                          size="responsive-size-sm"
-                        >
-                          Max size: 50 MB
-                        </Text>
-                      </div>
-                      <input
-                        type="file"
-                        hidden={true}
-                        ref={inputRef}
-                        onChange={(e) => handleChangeFile(e)}
-                      />
-                    </>
-                  )}
-                </div>
-              </div>
+                // rows={10}
+              />
             </div>
-            {/* ------------- keywords---------------- */}
-            <div>
+            {/* -----------------------upload img */}
+            <NftMediaUpload
+              setFile={setFile}
+              isLoading={isLoading}
+              isError={isError}
+            />
+
+            {/* ------------- -----------keywords*/}
+            <div className="col-span-2 ">
               <label
                 htmlFor="NFTkeywords"
                 className={`text-primary-text-color ${afterRequiredStyle}`}
@@ -232,61 +189,142 @@ export const CreateNftForm = () => {
                 Keywords
               </label>
               <Textarea
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.keywords}
                 name="keywords"
                 id="NFTkeywords"
                 placeholder="e.g. art, landscape, digital, abstract"
                 className="w-full h-18 p-[10px]  input-focus  border-secondary-color 
               bg-secondary-background-color rounded-md text-primary-text-color"
                 // rows={10}
-              ></Textarea>
+              />
             </div>
 
-            {/* ------------- category, collection ---------------- */}
-            <div className=" flex justify-between gap-5">
-              <div className="flex flex-col w-full ">
-                <label
-                  htmlFor="NFTcategory"
-                  className={`text-primary-text-color `}
-                >
-                  Category
-                </label>
-                <Select />
-                {/* <select
-                  name="category"
-                  id="NFTcategory"
-                  className={`text-primary-text-color ${afterRequiredStyle}`}
-                >
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select> */}
-              </div>
-              <div className="flex flex-col w-full ">
-                <label
-                  htmlFor="NFTcategory"
-                  className={`text-primary-text-color `}
-                >
-                  Category
-                </label>
-                <Select />
-                {/* <select
-                  name="category"
-                  id="NFTcategory"
-                  className={`text-primary-text-color ${afterRequiredStyle}`}
-                >
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select> */}
-              </div>
+            {/* ----------------------- category, collection*/}
+
+            <div className="flex flex-col w-full ">
+              <label
+                htmlFor="NFTcategory"
+                className={`text-primary-text-color `}
+              >
+                Category
+              </label>
+              <Select
+                data={optionCategories}
+                className="text-primary-text-color pr-8 py-[10px] pl-9"
+                name="category"
+                id="NFTcategory"
+                icon="category-icon"
+              />
+            </div>
+            <div className="flex flex-col w-full ">
+              <label
+                htmlFor="NFTcategory"
+                className={`text-primary-text-color `}
+              >
+                Collection
+              </label>
+              <Select
+                data={optionCollections}
+                className="text-primary-text-color pr-8 py-[10px] pl-9 "
+                name="collection"
+                id="NFTcollection"
+                icon="galleryPhoto-icon"
+              />
             </div>
 
-            {/* ------------- upload---------------- */}
-            <div>
+            {/* ------------- ---------------------price*/}
+
+            <div
+              className="col-span-1 border-secondary-color 
+                  bg-secondary-background-color rounded-md text-primary-text-color p-[10px]"
+            >
+              <Text className={`${afterRequiredStyle}`}> Price</Text>
+
+              <div className="flex flex-row gap-1">
+                {/* ------currency */}
+                <Select
+                  data={currentSourceCollections}
+                  className="text-primary-text-color  py-[10px] pl-8.5 "
+                  name="currency"
+                  id="NFTcurrency"
+                  wrapperClassName="basis-[40%]"
+                  icon="ball-icon"
+                  iconSize={20}
+                />
+                {/* -----------input currency*/}
+
+                <FormikInput
+                  name="price"
+                  id="NFTprice"
+                  type="text"
+                  variant="createForm"
+                  size="createForm"
+                  placeholder="0.00"
+                  className="text-primary-text-color "
+                  labelClass={`text-primary-text-color  ${afterRequiredStyle}`}
+                  wrapperClass="w-full "
+                />
+              </div>
+            </div>
+            {/* -----------sales*/}
+            <div
+              className="col-span-2 border-secondary-color 
+                  bg-secondary-background-color rounded-md text-primary-text-color p-[10px]"
+            >
+              <Text> Sales</Text>
+
+              <div className="flex justify-between gap-10">
+                {/* --switch */}
+                <div className="w-full">
+                  <SwitchButton />
+                </div>
+
+                {/* --royalty */}
+                <div className="w-full">
+                  <label
+                    htmlFor="NFTroyalty"
+                    className="text-primary-text-color "
+                  >
+                    Royalty(%)
+                  </label>
+                  <Select
+                    data={royaltyPercent}
+                    className="text-primary-text-color  py-[10px] pl-2.5 "
+                    name="royalty"
+                    id="NFTroyalty"
+                    wrapperClassName="basis-[40%]"
+                  />
+                  <Text>You`ll receive this % on secondary sales</Text>
+                </div>
+                {/* --duration */}
+                <div className="w-full">
+                  <label
+                    htmlFor="NFSduration"
+                    className="text-primary-text-color "
+                  >
+                    Duration
+                  </label>
+                  <Select
+                    data={royaltyPercent}
+                    className="text-primary-text-color  py-[10px] pl-2.5 "
+                    name="duration"
+                    id="NFSduration"
+                    wrapperClassName="basis-[40%]"
+                  />
+                  <Text>Set how long the term will be listed</Text>
+                </div>
+              </div>
+            </div>
+            {/* ------------- ----------------------upload*/}
+            <div className="col-span-2">
               <ButtonWithIcon
                 type="submit"
-                className="px-12 py-5 w-full flex items-center justify-center static-text-white-color"
+                className={`px-12 py-5 w-full flex items-center justify-center static-text-white-color
+                  ${isSubmitting ? 'opacity-40' : 'opacity-100'}`}
                 iconName="upload-cloud"
+                disabled={isSubmitting}
               >
                 <Text
                   Element="span"
@@ -297,30 +335,197 @@ export const CreateNftForm = () => {
                 </Text>
               </ButtonWithIcon>
             </div>
+            <div className="static-text-purple-color flex items-center justify-center">
+              {isSubmitting && <Icon name="spinner" />}
+            </div>
           </form>
         )}
       </Formik>
     </section>
   );
 };
+//   return (
+//     <section className="  font-work-sans-regular text-secondary-text-color mb-8 responsive-size-sm ">
+//       <Formik
+//         initialValues={{
+//           name: '',
+//           description: '',
+//           keywords: '',
+//           category: null,
+//           collection: null,
+//         }}
+//         // validate={} // сюда подключаем Yup
+//         onSubmit={async (values, { setSubmitting, resetForm }) => {
+//           try {
+//             if (!file) return;
+//             const ingResp = await saveImgToDb(file, file.name);
 
-//   const [updatePost, { isLoading, isError, data }] = useSetNFTMutation();
-//   const fakeNft = {
-//     name: 'Cyber Samurai',
-//     description: 'Unique cyberpunk NFT with animated neon effects.',
-//     imageUrl: 'https://i.ibb.co/example/cyber-samurai.webp',
-//     deleteImageUrl: 'https://api.imgbb.com/1/delete/example',
+//             if (!ingResp) return;
 
-//     galleryId: '686e6dfe1d35a61dfd222222',
-//     categoryId: '686e6dfe1d35a61dfd333333',
+//             console.log(ingResp);
 
-//     price: 0.85,
+//             // ----------------fake upload
+//             uploadNFT({
+//               name: values.name,
+//               description: values.description,
 
-//     keywords: ['cyberpunk', 'samurai', 'neon', 'future'],
+//               galleryId: '100',
+//               categoryId: '50',
+//               price: 120,
 
-//     isActive: true,
-//     percent: 20,
-//     durationHours: 72,
-//   };
+//               keywords: values.keywords,
 
-//   console.log(data);
+//               imageUrl: ingResp.imageUrl,
+//               deleteImageUrl: ingResp.deleteImageUrl,
+//             });
+//             // resetForm();
+//           } catch (error) {
+//             console.error(error);
+//           }
+//         }}
+//       >
+//         {({
+//           values,
+//           errors,
+//           touched,
+//           handleChange,
+//           handleBlur,
+//           handleSubmit,
+//           isSubmitting,
+//         }) => (
+//           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+//             {/* ---------name, description, upload img  block */}
+//             <div className="w-full  flex  gap-5 justify-between  items-stretch">
+//               <div className=" flex flex-col basis-[50%]">
+//                 {/* -------------------------name */}
+//                 <FormikInput
+//                   name="name"
+//                   id="NFTname"
+//                   type="text"
+//                   variant="createForm"
+//                   label="Name"
+//                   size="createForm"
+//                   placeholder="Enter NFT name"
+//                   className="text-primary-text-color "
+//                   labelClass={`text-primary-text-color ${afterRequiredStyle}`}
+//                 />
+
+//                 {/* -------------------------description */}
+//                 <label
+//                   htmlFor="NFTdescription"
+//                   className={`text-primary-text-color ${afterRequiredStyle}`}
+//                 >
+//                   Description
+//                 </label>
+//                 <Textarea
+//                   name="description"
+//                   value={values.description}
+//                   onChange={handleChange}
+//                   onBlur={handleBlur}
+//                   id="NFTdescription"
+//                   placeholder="Tell the story behind your NFT"
+//                   className="w-full h-80 p-[10px]  input-focus  border-secondary-color
+//                   bg-secondary-background-color rounded-md text-primary-text-color"
+//                   // rows={10}
+//                 />
+//               </div>
+//               {/* -----------------------upload img */}
+//               <NftMediaUpload
+//                 setFile={setFile}
+//                 isLoading={isLoading}
+//                 isError={isError}
+//               />
+//             </div>
+//             {/* ------------- -----------keywords*/}
+//             <div>
+//               <label
+//                 htmlFor="NFTkeywords"
+//                 className={`text-primary-text-color ${afterRequiredStyle}`}
+//               >
+//                 Keywords
+//               </label>
+//               <Textarea
+//                 onChange={handleChange}
+//                 onBlur={handleBlur}
+//                 value={values.keywords}
+//                 name="keywords"
+//                 id="NFTkeywords"
+//                 placeholder="e.g. art, landscape, digital, abstract"
+//                 className="w-full h-18 p-[10px]  input-focus  border-secondary-color
+//               bg-secondary-background-color rounded-md text-primary-text-color"
+//                 // rows={10}
+//               />
+//             </div>
+
+//             {/* ----------------------- category, collection*/}
+//             <div className=" flex justify-between gap-5">
+//               <div className="flex flex-col w-full ">
+//                 <label
+//                   htmlFor="NFTcategory"
+//                   className={`text-primary-text-color `}
+//                 >
+//                   Category
+//                 </label>
+//                 <Select
+//                   data={optionCategories}
+//                   className="text-primary-text-color"
+//                   name="category"
+//                   id="NFTcategory"
+//                 />
+//               </div>
+//               <div className="flex flex-col w-full ">
+//                 <label
+//                   htmlFor="NFTcategory"
+//                   className={`text-primary-text-color `}
+//                 >
+//                   Collection
+//                 </label>
+//                 <Select
+//                   data={optionCollections}
+//                   className="text-primary-text-color"
+//                   name="collection"
+//                   id="NFTcollection"
+//                 />
+//               </div>
+//             </div>
+
+//             {/* ------------- ----------------------upload*/}
+
+//             <div className="flex gap-5">
+//               <div
+//                 className="  basis-[50%]   border-secondary-color
+//                   bg-secondary-background-color rounded-md text-primary-text-color"
+//               >
+//                 sdfghh
+//               </div>
+//               <div className="basis-[50%]"></div>
+//             </div>
+
+//             {/* ------------- ----------------------upload*/}
+//             <div>
+//               <ButtonWithIcon
+//                 type="submit"
+//                 className={`px-12 py-5 w-full flex items-center justify-center static-text-white-color
+//                   ${isSubmitting ? 'opacity-40' : 'opacity-100'}
+//                   `}
+//                 iconName="upload-cloud"
+//                 disabled={isSubmitting}
+//               >
+//                 <Text
+//                   Element="span"
+//                   color="static-text-white-color"
+//                   font="font-work-sans-regular"
+//                 >
+//                   Upload & Create NFT
+//                 </Text>
+//               </ButtonWithIcon>
+//             </div>
+//             <div className="static-text-purple-color flex items-center justify-center">
+//               {isSubmitting && <Icon name="spinner" />}
+//             </div>
+//           </form>
+//         )}
+//       </Formik>
+//     </section>
+//   );
+// };

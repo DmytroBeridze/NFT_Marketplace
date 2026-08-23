@@ -29,12 +29,16 @@ import { ReactComponent as ImgPlus } from '../../assets/icons/imagePlus.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Gallery } from '../../assets/icons/gallery.svg';
 import { ReactComponent as Upload } from '../../assets/icons/upload-cloud.svg';
+import { ReactComponent as Category } from '../../assets/icons/Category_icon.svg';
+import { ReactComponent as GalleryPhoto } from '../../assets/icons/gallery_photo.svg';
 
 import CoinbaseIcon from '../../assets/icons/Coinbase.png';
 import MetamaskIcon from '../../assets/icons/Metamask.png';
 import WalletConnect from '../../assets/icons/WalletConnect.png';
 
 export const iconsMap = {
+  'galleryPhoto-icon': GalleryPhoto,
+  'category-icon': Category,
   'edit-icon': Edit,
   'gallery-icon': Gallery,
   'imgPlus-icon': ImgPlus,
@@ -65,6 +69,7 @@ export const iconsMap = {
   'fallbackAvatar-icon': FallbackAvatar,
   'doubleUp-icon': DoubleUpIcon,
   'upload-cloud': Upload,
+
   spinner: Spinner,
 } as const;
 

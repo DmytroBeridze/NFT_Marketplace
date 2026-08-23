@@ -25,7 +25,7 @@ export const Input = ({
       )}
 
       <div // для розтягування інпута на всю ширину
-        className="basis-0 grow-1 shrink-1"
+        className="basis-0 grow shrink"
       >
         {/* для вирівнювання іконок відносно інпута */}
         <div className="relative flex ">

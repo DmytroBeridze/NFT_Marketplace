@@ -5,70 +5,110 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from '@headlessui/react';
-import { useState } from 'react';
+import { useRef, useState, type InputHTMLAttributes } from 'react';
 import { IoChevronDownCircleOutline } from 'react-icons/io5';
+import { Icon, responsiveRadius } from '../../atoms';
+import { useField } from 'formik';
+import type { IconName } from '../../../lib/icons';
 
-const people: any = [
-  { id: 1, name: 'Durward Reynolds' },
-  { id: 2, name: 'Kenton Towne' },
-  { id: 3, name: 'Therese Wunsch' },
-  { id: 4, name: 'Benedict Kessler' },
-  { id: 5, name: 'Katelyn Rohan' },
-];
+type SelectData = { id: string | null; name: string } | null;
 
-export const Select = () => {
+type SelectProps = {
+  data: SelectData[];
+  width?: string;
+  hight?: string;
+  border?: string;
+  background?: string;
+  radius?: 'sm' | 'md' | 'lg' | 'xl' | 'responsive';
+  wrapperClassName?: string;
+  icon?: IconName;
+  iconSize?: number;
+} & InputHTMLAttributes<HTMLInputElement>;
+
+export const Select = ({
+  data,
+  width = 'w-full',
+  hight,
+  border = 'border-secondary-color',
+  background = 'bg-secondary-background-color',
+  radius = 'sm',
+  name,
+  id,
+  className,
+  wrapperClassName,
+  icon,
+  iconSize,
+}: SelectProps) => {
   const [query, setQuery] = useState('');
-  const [selected, setSelected] = useState(people[1]);
 
-  const filteredPeople =
+  const [field, meta, helpers] = useField(name);
+
+  console.log(field);
+
+  // -----------------------------------------filtered Data
+  const filteredData =
     query === ''
-      ? people
-      : people.filter((person: any) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
+      ? data
+      : data.filter((element: SelectData) => {
+          return element?.name.toLowerCase().includes(query.toLowerCase());
         });
 
   return (
-    <div className="relative  w-full ">
-      {/* <div className="mx-auto h-screen w-full "> */}
+    <div className={`relative  ${width} ${hight} ${wrapperClassName}`}>
       <Combobox
-        value={selected}
-        onChange={(value) => setSelected(value)}
-        onClose={() => setQuery('')}
+        value={field.value}
+        onChange={(value) => helpers.setValue(value)}
+        onClose={() => {
+          setQuery('');
+        }}
       >
         <div className="relative">
+          {/* ------------------icon */}
+          {icon && (
+            <div className="absolute  top-[50%] translate-y-[-50%] px-2.5">
+              <Icon name={icon} size={iconSize} />
+            </div>
+          )}
+
           <ComboboxInput
-            className="w-full 
-            border-secondary-color 
-            bg-secondary-background-color rounded-md text-primary-text-color
-            input-focus 
-            py-1.5 pr-8 pl-3 text-sm/6 text-primary-text-color focus:not-data-focus:outline-none"
-            // className="w-full rounded-lg border-none bg-white/5 py-1.5 pr-8 pl-3 text-sm/6 text-white focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-white/25"
-            displayValue={(person) => person?.name}
+            autoComplete="off"
+            id={id}
+            name={name}
+            displayValue={(selected: SelectData) => selected?.name ?? ''}
             onChange={(event) => setQuery(event.target.value)}
+            className={`
+             ${border}
+             ${background}
+             ${responsiveRadius[radius]}
+            ${className}
+            w-full 
+            input-focus 
+             text-sm/6 text-primary-text-color focus:not-data-focus:outline-none pr-8`}
           />
           <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
             <IoChevronDownCircleOutline className="size-4 fill-white/60 group-data-hover:fill-white" />
           </ComboboxButton>
         </div>
-
+        {/* ------------------------------------options */}
         <ComboboxOptions
           anchor="bottom"
           transition
           className="w-(--input-width) rounded-xl border border-white/5 bg-[var(--button-inversive-background)] 
           p-1 [--anchor-gap:--spacing(1)] empty:invisible transition duration-100 ease-in data-leave:data-closed:opacity-0"
         >
-          {filteredPeople.map((person) => (
-            <ComboboxOption
-              key={person.id}
-              value={person}
-              className="group flex cursor-default items-center gap-2 rounded-lg px-3 py-1.5 select-none data-focus:bg-[var(--primary-background-color)]/10"
-            >
-              {/* <CheckIcon className="invisible size-4 fill-white group-data-selected:visible" /> */}
-              <div className="text-sm/6 text-inversive-text-color">
-                {person.name}
-              </div>
-            </ComboboxOption>
-          ))}
+          {filteredData.map((item: SelectData) => {
+            return (
+              <ComboboxOption
+                key={item?.id ?? item?.name}
+                value={item}
+                className="group flex cursor-default items-center gap-2 rounded-lg px-3 py-1.5 select-none data-focus:bg-[var(--primary-background-color)]/10"
+              >
+                <div className="text-sm/6 text-inversive-text-color">
+                  {item?.name}
+                </div>
+              </ComboboxOption>
+            );
+          })}
         </ComboboxOptions>
       </Combobox>
     </div>

@@ -35,7 +35,7 @@ export interface CreateNftDto {
   categoryId?: string;
   price: number;
 
-  keywords: string[];
+  keywords: string[] | string;
 
   sales?: ISales;
 }

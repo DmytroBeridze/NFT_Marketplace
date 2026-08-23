@@ -16,6 +16,7 @@ export const setNftValidation = [
             .split(",") //якщо строка робимо масив по комам
             .map((v: string) => v.trim()) // обрізаєм пробіли
             .filter((v: string) => Boolean(v)); // позбуваємось пустих строк в середені
+
       return arr.length >= 3;
     })
     .withMessage("NeedAtLeastThreeKeywords"),

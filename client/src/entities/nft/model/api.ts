@@ -49,7 +49,7 @@ export const nftApi = createApi({
         body,
       }),
     }),
-    // ---------------------------set NFT
+    // ---------------------------upload Image
 
     uploadImage: builder.mutation<fileResponse, FormData>({
       query: (body) => ({

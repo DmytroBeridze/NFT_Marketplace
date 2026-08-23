@@ -1,3 +1,5 @@
+import { responsiveRadius } from './types';
+
 interface IButtonProps {
   type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
@@ -19,14 +21,6 @@ const variantClasses = {
 };
 
 const baseClass = 'cursor-pointer';
-
-const responsiveRadius = {
-  sm: 'rounded-sm',
-  md: 'rounded-md',
-  lg: 'rounded-lg',
-  xl: 'rounded-3xl',
-  responsive: 'rounded-md sm:rounded-lg lg:rounded-3xl',
-};
 
 export const Button = ({
   type = 'button',
