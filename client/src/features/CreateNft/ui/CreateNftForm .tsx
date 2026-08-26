@@ -11,7 +11,7 @@ import { ButtonWithIcon } from '../../../shared/ui/molecules/ButtonWithIcon';
 import { Select } from '../../../shared/ui/molecules/Select';
 import { NftMediaUpload } from './NftMediaUpload';
 import { useState } from 'react';
-import { SwitchButton } from '../../../shared/ui/molecules/Switch';
+import { SwitchButton } from '../../../shared/ui/molecules/SwitchButton';
 
 // !=-------------Fake  data-------------------
 export const mockCategories = [
@@ -97,6 +97,8 @@ export const CreateNftForm = () => {
           collection: { id: 'None', name: 'None' },
           price: '',
           currency: { id: 'USD', name: 'USD' },
+          royalty: '',
+          duration: '',
         }}
         // validate={} // сюда подключаем Yup
         onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -212,10 +214,12 @@ export const CreateNftForm = () => {
               </label>
               <Select
                 data={optionCategories}
-                className="text-primary-text-color pr-8 py-[10px] pl-9"
+                className="text-primary-text-color pr-8 py-[10px] pl-10 "
                 name="category"
                 id="NFTcategory"
                 icon="category-icon"
+                iconColor="text-primary-text-color"
+                iconSize={20}
               />
             </div>
             <div className="flex flex-col w-full ">
@@ -227,10 +231,12 @@ export const CreateNftForm = () => {
               </label>
               <Select
                 data={optionCollections}
-                className="text-primary-text-color pr-8 py-[10px] pl-9 "
+                className="text-primary-text-color pr-8 py-[10px] pl-10 "
                 name="collection"
                 id="NFTcollection"
                 icon="galleryPhoto-icon"
+                iconColor="text-primary-text-color"
+                iconSize={20}
               />
             </div>
 
@@ -238,11 +244,15 @@ export const CreateNftForm = () => {
 
             <div
               className="col-span-1 border-secondary-color 
-                  bg-secondary-background-color rounded-md text-primary-text-color p-[10px]"
+                  bg-secondary-background-color rounded-md  p-[10px]"
             >
-              <Text className={`${afterRequiredStyle}`}> Price</Text>
+              <Text
+                className={`${afterRequiredStyle} static-text-purple-color mb-5`}
+              >
+                Price
+              </Text>
 
-              <div className="flex flex-row gap-1">
+              <div className="flex flex-row gap-1 ">
                 {/* ------currency */}
                 <Select
                   data={currentSourceCollections}
@@ -250,8 +260,9 @@ export const CreateNftForm = () => {
                   name="currency"
                   id="NFTcurrency"
                   wrapperClassName="basis-[40%]"
-                  icon="ball-icon"
+                  icon="discord-icon"
                   iconSize={20}
+                  iconColor="text-primary-text-color"
                 />
                 {/* -----------input currency*/}
 
@@ -271,14 +282,23 @@ export const CreateNftForm = () => {
             {/* -----------sales*/}
             <div
               className="col-span-2 border-secondary-color 
-                  bg-secondary-background-color rounded-md text-primary-text-color p-[10px]"
+                  bg-secondary-background-color rounded-md  p-[10px]"
             >
-              <Text> Sales</Text>
+              <Text color="static-text-purple-color" className="mb-5">
+                {' '}
+                Sales
+              </Text>
 
               <div className="flex justify-between gap-10">
                 {/* --switch */}
-                <div className="w-full">
-                  <SwitchButton />
+                <div className="w-full  flex flex-col">
+                  <div className="flex gap-2.5">
+                    <SwitchButton variant="primary" />
+                    <label>
+                      <Text>Item for sale</Text>
+                    </label>
+                  </div>
+                  <Text>Make this NFT available for purchase</Text>
                 </div>
 
                 {/* --royalty */}
@@ -296,7 +316,9 @@ export const CreateNftForm = () => {
                     id="NFTroyalty"
                     wrapperClassName="basis-[40%]"
                   />
-                  <Text>You`ll receive this % on secondary sales</Text>
+                  <Text color="text-secondary-text-color">
+                    You`ll receive this % on secondary sales
+                  </Text>
                 </div>
                 {/* --duration */}
                 <div className="w-full">
@@ -313,7 +335,9 @@ export const CreateNftForm = () => {
                     id="NFSduration"
                     wrapperClassName="basis-[40%]"
                   />
-                  <Text>Set how long the term will be listed</Text>
+                  <Text color="text-secondary-text-color">
+                    Set how long the term will be listed
+                  </Text>
                 </div>
               </div>
             </div>
@@ -344,188 +368,3 @@ export const CreateNftForm = () => {
     </section>
   );
 };
-//   return (
-//     <section className="  font-work-sans-regular text-secondary-text-color mb-8 responsive-size-sm ">
-//       <Formik
-//         initialValues={{
-//           name: '',
-//           description: '',
-//           keywords: '',
-//           category: null,
-//           collection: null,
-//         }}
-//         // validate={} // сюда подключаем Yup
-//         onSubmit={async (values, { setSubmitting, resetForm }) => {
-//           try {
-//             if (!file) return;
-//             const ingResp = await saveImgToDb(file, file.name);
-
-//             if (!ingResp) return;
-
-//             console.log(ingResp);
-
-//             // ----------------fake upload
-//             uploadNFT({
-//               name: values.name,
-//               description: values.description,
-
-//               galleryId: '100',
-//               categoryId: '50',
-//               price: 120,
-
-//               keywords: values.keywords,
-
-//               imageUrl: ingResp.imageUrl,
-//               deleteImageUrl: ingResp.deleteImageUrl,
-//             });
-//             // resetForm();
-//           } catch (error) {
-//             console.error(error);
-//           }
-//         }}
-//       >
-//         {({
-//           values,
-//           errors,
-//           touched,
-//           handleChange,
-//           handleBlur,
-//           handleSubmit,
-//           isSubmitting,
-//         }) => (
-//           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-//             {/* ---------name, description, upload img  block */}
-//             <div className="w-full  flex  gap-5 justify-between  items-stretch">
-//               <div className=" flex flex-col basis-[50%]">
-//                 {/* -------------------------name */}
-//                 <FormikInput
-//                   name="name"
-//                   id="NFTname"
-//                   type="text"
-//                   variant="createForm"
-//                   label="Name"
-//                   size="createForm"
-//                   placeholder="Enter NFT name"
-//                   className="text-primary-text-color "
-//                   labelClass={`text-primary-text-color ${afterRequiredStyle}`}
-//                 />
-
-//                 {/* -------------------------description */}
-//                 <label
-//                   htmlFor="NFTdescription"
-//                   className={`text-primary-text-color ${afterRequiredStyle}`}
-//                 >
-//                   Description
-//                 </label>
-//                 <Textarea
-//                   name="description"
-//                   value={values.description}
-//                   onChange={handleChange}
-//                   onBlur={handleBlur}
-//                   id="NFTdescription"
-//                   placeholder="Tell the story behind your NFT"
-//                   className="w-full h-80 p-[10px]  input-focus  border-secondary-color
-//                   bg-secondary-background-color rounded-md text-primary-text-color"
-//                   // rows={10}
-//                 />
-//               </div>
-//               {/* -----------------------upload img */}
-//               <NftMediaUpload
-//                 setFile={setFile}
-//                 isLoading={isLoading}
-//                 isError={isError}
-//               />
-//             </div>
-//             {/* ------------- -----------keywords*/}
-//             <div>
-//               <label
-//                 htmlFor="NFTkeywords"
-//                 className={`text-primary-text-color ${afterRequiredStyle}`}
-//               >
-//                 Keywords
-//               </label>
-//               <Textarea
-//                 onChange={handleChange}
-//                 onBlur={handleBlur}
-//                 value={values.keywords}
-//                 name="keywords"
-//                 id="NFTkeywords"
-//                 placeholder="e.g. art, landscape, digital, abstract"
-//                 className="w-full h-18 p-[10px]  input-focus  border-secondary-color
-//               bg-secondary-background-color rounded-md text-primary-text-color"
-//                 // rows={10}
-//               />
-//             </div>
-
-//             {/* ----------------------- category, collection*/}
-//             <div className=" flex justify-between gap-5">
-//               <div className="flex flex-col w-full ">
-//                 <label
-//                   htmlFor="NFTcategory"
-//                   className={`text-primary-text-color `}
-//                 >
-//                   Category
-//                 </label>
-//                 <Select
-//                   data={optionCategories}
-//                   className="text-primary-text-color"
-//                   name="category"
-//                   id="NFTcategory"
-//                 />
-//               </div>
-//               <div className="flex flex-col w-full ">
-//                 <label
-//                   htmlFor="NFTcategory"
-//                   className={`text-primary-text-color `}
-//                 >
-//                   Collection
-//                 </label>
-//                 <Select
-//                   data={optionCollections}
-//                   className="text-primary-text-color"
-//                   name="collection"
-//                   id="NFTcollection"
-//                 />
-//               </div>
-//             </div>
-
-//             {/* ------------- ----------------------upload*/}
-
-//             <div className="flex gap-5">
-//               <div
-//                 className="  basis-[50%]   border-secondary-color
-//                   bg-secondary-background-color rounded-md text-primary-text-color"
-//               >
-//                 sdfghh
-//               </div>
-//               <div className="basis-[50%]"></div>
-//             </div>
-
-//             {/* ------------- ----------------------upload*/}
-//             <div>
-//               <ButtonWithIcon
-//                 type="submit"
-//                 className={`px-12 py-5 w-full flex items-center justify-center static-text-white-color
-//                   ${isSubmitting ? 'opacity-40' : 'opacity-100'}
-//                   `}
-//                 iconName="upload-cloud"
-//                 disabled={isSubmitting}
-//               >
-//                 <Text
-//                   Element="span"
-//                   color="static-text-white-color"
-//                   font="font-work-sans-regular"
-//                 >
-//                   Upload & Create NFT
-//                 </Text>
-//               </ButtonWithIcon>
-//             </div>
-//             <div className="static-text-purple-color flex items-center justify-center">
-//               {isSubmitting && <Icon name="spinner" />}
-//             </div>
-//           </form>
-//         )}
-//       </Formik>
-//     </section>
-//   );
-// };

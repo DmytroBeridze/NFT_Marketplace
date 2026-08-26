@@ -37,6 +37,8 @@
   --skeleton-adaptive-background: var(--skeleton-background);
   --white-button-hover-background: var(--button-inversive-background-hover);
 
+  --switch-active-background-color: var(--switch-background-color);
+
   /* texts */
   --primary-text-color: var(--primary-text);
   --secondary-text-color: var(--secondary-text);

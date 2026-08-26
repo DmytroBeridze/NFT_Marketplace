@@ -23,6 +23,7 @@ type SelectProps = {
   wrapperClassName?: string;
   icon?: IconName;
   iconSize?: number;
+  iconColor?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const Select = ({
@@ -38,12 +39,13 @@ export const Select = ({
   wrapperClassName,
   icon,
   iconSize,
+  iconColor = '',
 }: SelectProps) => {
   const [query, setQuery] = useState('');
 
   const [field, meta, helpers] = useField(name);
 
-  console.log(field);
+  console.log(field.value);
 
   // -----------------------------------------filtered Data
   const filteredData =
@@ -65,7 +67,9 @@ export const Select = ({
         <div className="relative">
           {/* ------------------icon */}
           {icon && (
-            <div className="absolute  top-[50%] translate-y-[-50%] px-2.5">
+            <div
+              className={`absolute  top-1/2 -translate-y-1/2 px-2.5 ${iconColor}`}
+            >
               <Icon name={icon} size={iconSize} />
             </div>
           )}

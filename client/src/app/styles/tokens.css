@@ -62,6 +62,9 @@
   background-color: var(--skeleton-adaptive-background);
 }
 
+.switch-active-background-color {
+  background-color: var(--switch-active-background-color);
+}
 /*-------------------- link-underline color  */
 .link-underline::after {
   background-color: var(--primary-accent-color);
