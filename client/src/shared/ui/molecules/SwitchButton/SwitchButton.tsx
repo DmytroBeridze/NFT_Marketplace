@@ -10,7 +10,6 @@ type SwitchButtonProps = {
 const styleBg = {
   primary: `
     switch-active-background-color
-    // bg-adaptive-button-background-color
     data-checked:!bg-[var(--primary-accent-color)]
   `,
   secondary: `

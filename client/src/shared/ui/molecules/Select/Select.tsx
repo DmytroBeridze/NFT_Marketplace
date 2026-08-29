@@ -5,7 +5,7 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from '@headlessui/react';
-import { useRef, useState, type InputHTMLAttributes } from 'react';
+import { useState, type InputHTMLAttributes } from 'react';
 import { IoChevronDownCircleOutline } from 'react-icons/io5';
 import { Icon, responsiveRadius } from '../../atoms';
 import { useField } from 'formik';
@@ -22,6 +22,7 @@ type SelectProps = {
   radius?: 'sm' | 'md' | 'lg' | 'xl' | 'responsive';
   wrapperClassName?: string;
   icon?: IconName;
+  iconsMap?: Record<string, IconName>; // map for dynamic icon selection
   iconSize?: number;
   iconColor?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
@@ -38,14 +39,14 @@ export const Select = ({
   className,
   wrapperClassName,
   icon,
+  iconsMap,
   iconSize,
   iconColor = '',
+  disabled = false,
 }: SelectProps) => {
   const [query, setQuery] = useState('');
 
   const [field, meta, helpers] = useField(name);
-
-  console.log(field.value);
 
   // -----------------------------------------filtered Data
   const filteredData =
@@ -63,6 +64,7 @@ export const Select = ({
         onClose={() => {
           setQuery('');
         }}
+        disabled={disabled}
       >
         <div className="relative">
           {/* ------------------icon */}
@@ -71,6 +73,14 @@ export const Select = ({
               className={`absolute  top-1/2 -translate-y-1/2 px-2.5 ${iconColor}`}
             >
               <Icon name={icon} size={iconSize} />
+            </div>
+          )}
+
+          {iconsMap && iconsMap[field.value.name] && (
+            <div
+              className={`absolute  top-1/2 -translate-y-1/2 px-2.5 ${iconColor} `}
+            >
+              <Icon name={iconsMap[field.value.name]} size={iconSize} />
             </div>
           )}
 
@@ -89,7 +99,10 @@ export const Select = ({
             input-focus 
              text-sm/6 text-primary-text-color focus:not-data-focus:outline-none pr-8`}
           />
-          <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
+          <ComboboxButton
+            className="group absolute inset-y-0 right-0 px-2.5"
+            disabled={disabled}
+          >
             <IoChevronDownCircleOutline className="size-4 fill-white/60 group-data-hover:fill-white" />
           </ComboboxButton>
         </div>
@@ -107,7 +120,10 @@ export const Select = ({
                 value={item}
                 className="group flex cursor-default items-center gap-2 rounded-lg px-3 py-1.5 select-none data-focus:bg-[var(--primary-background-color)]/10"
               >
-                <div className="text-sm/6 text-inversive-text-color">
+                <div className="text-sm/6 text-inversive-text-color flex gap-1 justify-between items-center">
+                  {iconsMap && item?.name && (
+                    <Icon name={iconsMap[item?.name]} size={16} />
+                  )}
                   {item?.name}
                 </div>
               </ComboboxOption>

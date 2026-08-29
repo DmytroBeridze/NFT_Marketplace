@@ -2,7 +2,7 @@ import {
   useSetNFTMutation,
   useUploadImageMutation,
 } from '../../../entities/nft/model';
-import { Formik } from 'formik';
+import { Formik, useField } from 'formik';
 import * as Yup from 'yup';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Icon, Image, Text } from '../../../shared/ui/atoms';
@@ -12,6 +12,8 @@ import { Select } from '../../../shared/ui/molecules/Select';
 import { NftMediaUpload } from './NftMediaUpload';
 import { useState } from 'react';
 import { SwitchButton } from '../../../shared/ui/molecules/SwitchButton';
+import type { IconName } from '../../../shared/lib/icons';
+import { currencyIconsMap } from '../maps/iconsMap';
 
 // !=-------------Fake  data-------------------
 export const mockCategories = [
@@ -36,10 +38,12 @@ const currentServerSource = {
   UAH: 41.2,
 };
 
-const currentSource = Object.keys(currentServerSource).map((currency) => ({
-  id: currency,
-  name: currency,
-}));
+export const currentSource = Object.keys(currentServerSource).map(
+  (currency) => ({
+    id: currency,
+    name: currency,
+  }),
+);
 
 const royaltyPercent = [
   { id: '1', name: '3' },
@@ -60,11 +64,6 @@ export const CreateNftForm = () => {
   ] = useSetNFTMutation();
 
   const [file, setFile] = useState<File | null>(null);
-  // const [preview, setPreview] = useState<string | null>(null);
-  // const [isFocused, setIsFocused] = useState<boolean | null>(null);
-  // const imgContainerRef = useRef<HTMLDivElement | null>(null);
-  // const [name, setName] = useState<string>('');
-  // const inputRef = useRef<HTMLInputElement | null>(null);
 
   // --------------------------added default option
   const optionCategories = [{ id: null, name: 'None' }, ...mockCategories];
@@ -87,7 +86,7 @@ export const CreateNftForm = () => {
   };
 
   return (
-    <section className="  font-work-sans-regular text-secondary-text-color mb-8 responsive-size-sm ">
+    <section className="font-work-sans-regular text-secondary-text-color mb-8 responsive-size-sm ">
       <Formik
         initialValues={{
           name: '',
@@ -99,11 +98,10 @@ export const CreateNftForm = () => {
           currency: { id: 'USD', name: 'USD' },
           royalty: '',
           duration: '',
+          isForSale: false,
         }}
         // validate={} // сюда подключаем Yup
         onSubmit={async (values, { setSubmitting, resetForm }) => {
-          // console.log(values);
-
           try {
             if (!file) return;
             const imgResp = await saveImgToDb(file, file.name);
@@ -132,6 +130,7 @@ export const CreateNftForm = () => {
       >
         {({
           values,
+          setFieldValue,
           errors,
           touched,
           handleChange,
@@ -260,9 +259,9 @@ export const CreateNftForm = () => {
                   name="currency"
                   id="NFTcurrency"
                   wrapperClassName="basis-[40%]"
-                  icon="discord-icon"
-                  iconSize={20}
+                  iconSize={14}
                   iconColor="text-primary-text-color"
+                  iconsMap={currencyIconsMap}
                 />
                 {/* -----------input currency*/}
 
@@ -285,24 +284,29 @@ export const CreateNftForm = () => {
                   bg-secondary-background-color rounded-md  p-[10px]"
             >
               <Text color="static-text-purple-color" className="mb-5">
-                {' '}
                 Sales
               </Text>
 
               <div className="flex justify-between gap-10">
-                {/* --switch */}
+                {/* -------switch */}
                 <div className="w-full  flex flex-col">
                   <div className="flex gap-2.5">
-                    <SwitchButton variant="primary" />
+                    <SwitchButton
+                      variant="primary"
+                      checked={values.isForSale}
+                      onChange={(value) => setFieldValue('isForSale', value)}
+                    />
                     <label>
-                      <Text>Item for sale</Text>
+                      <Text color="text-primary-text-color">Item for sale</Text>
                     </label>
                   </div>
                   <Text>Make this NFT available for purchase</Text>
                 </div>
 
                 {/* --royalty */}
-                <div className="w-full">
+                <div
+                  className={`w-full ${values.isForSale ? 'opacity-100' : 'opacity-40'} transition  duration-300 ease-in-out`}
+                >
                   <label
                     htmlFor="NFTroyalty"
                     className="text-primary-text-color "
@@ -315,13 +319,16 @@ export const CreateNftForm = () => {
                     name="royalty"
                     id="NFTroyalty"
                     wrapperClassName="basis-[40%]"
+                    disabled={!values.isForSale}
                   />
                   <Text color="text-secondary-text-color">
                     You`ll receive this % on secondary sales
                   </Text>
                 </div>
                 {/* --duration */}
-                <div className="w-full">
+                <div
+                  className={`w-full ${values.isForSale ? 'opacity-100' : 'opacity-40'} transition  duration-300 ease-in-out`}
+                >
                   <label
                     htmlFor="NFSduration"
                     className="text-primary-text-color "
@@ -330,10 +337,11 @@ export const CreateNftForm = () => {
                   </label>
                   <Select
                     data={royaltyPercent}
-                    className="text-primary-text-color  py-[10px] pl-2.5 "
+                    className={`text-primary-text-color  py-[10px] pl-2.5  `}
                     name="duration"
                     id="NFSduration"
                     wrapperClassName="basis-[40%]"
+                    disabled={!values.isForSale}
                   />
                   <Text color="text-secondary-text-color">
                     Set how long the term will be listed

@@ -31,12 +31,26 @@ import { ReactComponent as Gallery } from '../../assets/icons/gallery.svg';
 import { ReactComponent as Upload } from '../../assets/icons/upload-cloud.svg';
 import { ReactComponent as Category } from '../../assets/icons/Category_icon.svg';
 import { ReactComponent as GalleryPhoto } from '../../assets/icons/gallery_photo.svg';
+import { ReactComponent as Bitcoin } from '../../assets/icons/currency/bitcoin-btc.svg';
+import { ReactComponent as Dollar } from '../../assets/icons/currency/currency_dollar.svg';
+import { ReactComponent as Etherium } from '../../assets/icons/currency/ethereum-crypto.svg';
+import { ReactComponent as Euro } from '../../assets/icons/currency/euro.svg';
+import { ReactComponent as Usdt } from '../../assets/icons/currency/tether.svg';
+import { ReactComponent as Hryvna } from '../../assets/icons/currency/ukraine-hryvna.svg';
+import { ReactComponent as Usdc } from '../../assets/icons/currency/usdc.svg';
 
 import CoinbaseIcon from '../../assets/icons/Coinbase.png';
 import MetamaskIcon from '../../assets/icons/Metamask.png';
 import WalletConnect from '../../assets/icons/WalletConnect.png';
 
 export const iconsMap = {
+  'bitcoin-icon': Bitcoin,
+  'dollar-icon': Dollar,
+  'etherium-icon': Etherium,
+  'euro-icon': Euro,
+  'usdt-icon': Usdt,
+  'hryvna-icon': Hryvna,
+  'usdc-icon': Usdc,
   'galleryPhoto-icon': GalleryPhoto,
   'category-icon': Category,
   'edit-icon': Edit,

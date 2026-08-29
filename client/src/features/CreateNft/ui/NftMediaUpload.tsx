@@ -10,7 +10,6 @@ import {
 } from 'react';
 import { Button, ErrorText, Icon, Image, Text } from '../../../shared/ui/atoms';
 import { afterRequiredStyle } from './CreateNftForm ';
-import roundSpinner from '../../../shared/assets/icons/roundSpinner.gif';
 
 type NftMediaUploadProps = {
   setFile: Dispatch<SetStateAction<File | null>>;
