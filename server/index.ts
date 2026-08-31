@@ -18,6 +18,7 @@ import salesConfigRout from "./routes/salesConfigRouts.js";
 import subscribersRout from "./routes/subscribersRouts.js";
 import followRout from "./routes/followRouts.js";
 import profileRout from "./routes/profileRouts.js";
+import currencyRouter from "./routes/currencyRout.js";
 
 import cookieParser from "cookie-parser";
 
@@ -67,6 +68,7 @@ app.use("/api/sales", salesConfigRout);
 app.use("/api/subscribe", subscribersRout);
 app.use("/api/follow", followRout);
 app.use("/api/profile", profileRout);
+app.use("/api/currency", currencyRouter);
 
 const start = async () => {
   try {

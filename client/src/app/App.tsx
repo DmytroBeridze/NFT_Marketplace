@@ -14,11 +14,15 @@ import { ScrollToTop } from './providers/ScrollToTop';
 import { WalletInstallModal } from '../widgets/WalletInstall';
 import { WalletContextProvider } from '../pages/ConnectWallet/context/connectWalletContext';
 import { useGetMeQuery } from '../entities/user/model';
+import { useGetCurrencyQuery } from '../shared/model';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
   const token = localStorage.getItem('token');
   useGetMeQuery(undefined, { skip: !token });
+  const { data } = useGetCurrencyQuery();
+
+  console.log(data);
 
   return (
     <div className="App bg-primary-background-color min-h-screen">

@@ -13,6 +13,7 @@ import { categoriesApi } from '../../features/BrowseCategories/model/index';
 import { discountedWorkApi } from '../../entities/DiscountedWork/model/index';
 import { subscribeApi } from '../../features/SubscribeByEmail/model/index';
 import { subscribeFollowersApi } from '../../entities/subscribe/model';
+import { currencyApi } from '../../shared/model/index';
 
 // ------Testing middleware
 const testMiddleware: Middleware = () => (next) => (action: any) => {
@@ -37,6 +38,7 @@ export const store = configureStore({
     [discountedWorkApi.reducerPath]: discountedWorkApi.reducer,
     [subscribeApi.reducerPath]: subscribeApi.reducer,
     [subscribeFollowersApi.reducerPath]: subscribeFollowersApi.reducer,
+    [currencyApi.reducerPath]: currencyApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -50,7 +52,8 @@ export const store = configureStore({
       // .concat(getNftsByCreateDateApi.middleware)
       .concat(discountedWorkApi.middleware)
       .concat(subscribeApi.middleware)
-      .concat(subscribeFollowersApi.middleware),
+      .concat(subscribeFollowersApi.middleware)
+      .concat(currencyApi.middleware),
 
   // .prepend(testMiddleware),
 });

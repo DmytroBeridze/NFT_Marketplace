@@ -16,6 +16,9 @@ import type { IconName } from '../../../shared/lib/icons';
 import { currencyIconsMap } from '../maps/iconsMap';
 
 // !=-------------Fake  data-------------------
+
+// "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=10&convert=usd",
+
 export const mockCategories = [
   { id: '1', name: 'Art' },
   { id: '2', name: 'Photography' },
@@ -34,8 +37,8 @@ const currentServerSource = {
   BTC: 0.00000893,
   USDT: 1.001,
   USDC: 1.0,
-  EUR: 0.85,
-  UAH: 41.2,
+  // EUR: 0.85,
+  // UAH: 41.2,
 };
 
 export const currentSource = Object.keys(currentServerSource).map(
