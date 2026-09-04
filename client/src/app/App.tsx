@@ -20,9 +20,6 @@ function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
   const token = localStorage.getItem('token');
   useGetMeQuery(undefined, { skip: !token });
-  const { data } = useGetCurrencyQuery();
-
-  console.log(data);
 
   return (
     <div className="App bg-primary-background-color min-h-screen">

@@ -9,18 +9,19 @@ export interface ISales {
 }
 
 export interface INft {
-  name?: string;
-  description?: string;
-  authorId?: mongoose.Types.ObjectId;
-  ownerId?: mongoose.Types.ObjectId;
+  name: string;
+  description: string;
+  authorId: mongoose.Types.ObjectId;
+  ownerId: mongoose.Types.ObjectId;
   gallery?: mongoose.Types.ObjectId;
   category?: mongoose.Types.ObjectId;
-  price?: number;
+  price: number;
+  // salePrice?: number;
   sold?: boolean;
 
-  imageUrl?: string;
-  deleteImageUrl?: string;
-  keywords?: string[];
+  imageUrl: string;
+  deleteImageUrl: string;
+  keywords: string[];
 
   likes?: mongoose.Types.ObjectId[];
   views?: number;
@@ -83,8 +84,12 @@ export const NftSchema = new Schema<NftDocument>(
     price: {
       type: Number,
       default: 0,
+      required: true,
     },
-
+    // salePrice: {
+    //   type: Number,
+    //   default: 0,
+    // },
     sold: {
       type: Boolean,
       default: false,
@@ -133,19 +138,50 @@ NftSchema.pre("save", function (next) {
   next();
 });
 
-// ----------знижка
-NftSchema.virtual("isSaleActive").get(function () {
-  if (!this.sales) return false;
+// ----------перевірка знишки
+
+const checkSaleActive = (sales: ISales | undefined) => {
+  if (!sales) return false;
 
   const now = new Date();
-  const { isActive, startAt, endAt } = this.sales;
+  const { isActive, startAt, endAt } = sales;
 
   if (!isActive) return false;
   if (!startAt) return false;
   if (endAt && now > endAt) return false;
 
   return true;
+};
+
+// ----------час дії знижки
+NftSchema.virtual("isSaleActive").get(function () {
+  return checkSaleActive(this.sales);
+  // if (!this.sales) return false;
+
+  // const now = new Date();
+  // const { isActive, startAt, endAt } = this.sales;
+
+  // if (!isActive) return false;
+  // if (!startAt) return false;
+  // if (endAt && now > endAt) return false;
+
+  // return true;
 });
+
+// ----------знижка
+NftSchema.virtual("salePrice").get(function () {
+  if (!checkSaleActive(this.sales)) {
+    return null;
+  }
+
+  const percent = this.sales?.percent;
+  if (!percent) {
+    return this.price;
+  }
+
+  return this.price - (this.price * percent) / 100;
+});
+
 NftSchema.set("toJSON", { virtuals: true });
 NftSchema.set("toObject", { virtuals: true });
 

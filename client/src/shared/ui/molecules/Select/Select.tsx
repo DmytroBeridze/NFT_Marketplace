@@ -10,8 +10,9 @@ import { IoChevronDownCircleOutline } from 'react-icons/io5';
 import { Icon, responsiveRadius } from '../../atoms';
 import { useField } from 'formik';
 import type { IconName } from '../../../lib/icons';
+import type { Category } from '../../../../features/BrowseCategories/model/types';
 
-type SelectData = { id: string | null; name: string } | null;
+type SelectData = { id: string | null; name: string };
 
 type SelectProps = {
   data: SelectData[];
@@ -88,7 +89,7 @@ export const Select = ({
             autoComplete="off"
             id={id}
             name={name}
-            displayValue={(selected: SelectData) => selected?.name ?? ''}
+            displayValue={(selected: Category) => selected?.name ?? ''}
             onChange={(event) => setQuery(event.target.value)}
             className={`
              ${border}

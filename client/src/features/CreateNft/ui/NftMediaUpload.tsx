@@ -9,7 +9,7 @@ import {
   type SetStateAction,
 } from 'react';
 import { Button, ErrorText, Icon, Image, Text } from '../../../shared/ui/atoms';
-import { afterRequiredStyle } from './CreateNftForm ';
+import { afterRequiredStyle } from '../lib';
 
 type NftMediaUploadProps = {
   setFile: Dispatch<SetStateAction<File | null>>;

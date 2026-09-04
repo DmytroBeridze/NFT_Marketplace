@@ -1,9 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-type Category = {
-  _id: string;
-  name: string;
-};
+import type { CategoryItem } from '../../CreateNft/model';
 
 export const categoriesApi = createApi({
   reducerPath: 'categoriesApi',
@@ -11,7 +7,7 @@ export const categoriesApi = createApi({
     baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3002/api',
   }),
   endpoints: (build) => ({
-    getCategories: build.query<Category[], void>({
+    getCategories: build.query<CategoryItem[], void>({
       query: () => `/category`,
     }),
   }),

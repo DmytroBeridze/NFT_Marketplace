@@ -9,11 +9,13 @@ import { nftApi } from '../../entities/nft/model/api';
 import { trendingCollectionApi } from '../../features/TrendingCollection/model';
 import { topCreatorsGalleryApi } from '../../features/TopCreatorsGallery/model/index';
 import { categoriesApi } from '../../features/BrowseCategories/model/index';
+import { collectionApi } from '../../entities/collection/model/index';
 // import { getNftsByCreateDateApi } from '../../entities/nft/model/api';
 import { discountedWorkApi } from '../../entities/DiscountedWork/model/index';
 import { subscribeApi } from '../../features/SubscribeByEmail/model/index';
 import { subscribeFollowersApi } from '../../entities/subscribe/model';
 import { currencyApi } from '../../shared/model/index';
+import { salesConfigApi } from '../../entities/sales-config/model/index';
 
 // ------Testing middleware
 const testMiddleware: Middleware = () => (next) => (action: any) => {
@@ -39,6 +41,8 @@ export const store = configureStore({
     [subscribeApi.reducerPath]: subscribeApi.reducer,
     [subscribeFollowersApi.reducerPath]: subscribeFollowersApi.reducer,
     [currencyApi.reducerPath]: currencyApi.reducer,
+    [collectionApi.reducerPath]: collectionApi.reducer,
+    [salesConfigApi.reducerPath]: salesConfigApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -53,7 +57,9 @@ export const store = configureStore({
       .concat(discountedWorkApi.middleware)
       .concat(subscribeApi.middleware)
       .concat(subscribeFollowersApi.middleware)
-      .concat(currencyApi.middleware),
+      .concat(currencyApi.middleware)
+      .concat(collectionApi.middleware)
+      .concat(salesConfigApi.middleware),
 
   // .prepend(testMiddleware),
 });
