@@ -18,7 +18,7 @@ export const parseSales = (salesData: SalesInput) => {
   if (salesData.percent !== undefined) {
     const parsedPercent = Number(salesData.percent);
 
-    if (!isNaN(parsedPercent) && parsedPercent >= 1 && parsedPercent <= 90) {
+    if (parsedPercent >= 1 && parsedPercent <= 90) {
       sales.percent = parsedPercent;
     }
   }
@@ -34,14 +34,6 @@ export const parseSales = (salesData: SalesInput) => {
       sales.endAt = new Date(startAt.getTime() + hours * 60 * 60 * 1000);
     }
   }
-  // if (salesData.durationHours !== undefined) {
-  //   const hours = Number(salesData.durationHours);
-  //   if ([8, 12, 24, 48].includes(hours)) {
-  //     const now = new Date();
-  //     sales.startAt = now;
-  //     sales.endAt = new Date(now.getTime() + hours * 60 * 60 * 1000);
-  //   }
-  // }
 
   if (Object.keys(sales).length > 0) return sales;
   return undefined;

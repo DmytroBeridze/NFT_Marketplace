@@ -1,8 +1,9 @@
 export interface ISales {
   isActive?: boolean;
-  percent?: number;
+  percent?: string;
   startAt?: Date;
-  endAt?: Date;
+  durationHours?: string;
+  // endAt?: Date;
 }
 
 export interface INft {
@@ -12,7 +13,6 @@ export interface INft {
   authorId: { _id: string; userName: string; avatar?: string };
   gallery?: { _id: string; name: string };
   category?: string;
-  price: number;
   sold?: boolean;
   imageUrl: string;
   deleteImageUrl: string;
@@ -23,22 +23,39 @@ export interface INft {
   rating?: number;
 
   sales?: ISales;
+  isSaleActive: boolean;
+  salePrice?: null | number;
+  price: number;
 }
 
 export interface CreateNftDto {
   name: string;
   description: string;
+  galleryId?: string | null;
+  categoryId?: string | null;
+  price: number;
+  keywords: string[] | string;
   imageUrl: string;
   deleteImageUrl: string;
 
-  galleryId?: string;
-  categoryId?: string;
-  price: number;
-
-  keywords: string[] | string;
-
-  sales?: ISales;
+  isActive?: boolean;
+  percent?: string;
+  durationHours?: string;
 }
+// export interface CreateNftDto {
+//   name: string;
+//   description: string;
+//   imageUrl: string;
+//   deleteImageUrl: string;
+
+//   galleryId?: string;
+//   categoryId?: string;
+//   price: number;
+
+//   keywords: string[] | string;
+
+//   sales?: ISales;
+// }
 
 export interface TrendingNft extends Omit<INft, 'authorId' | 'gallery'> {
   authorId: string;

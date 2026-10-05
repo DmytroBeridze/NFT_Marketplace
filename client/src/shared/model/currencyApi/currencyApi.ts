@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export type Data = 'BTC' | 'ETH' | 'USDT' | 'USDC' | 'USD';
+export type Data = 'BTC' | 'ETH' | 'USDT' | 'USDC';
 type Currency = {
   message: string;
   currency: Record<Data, number>;

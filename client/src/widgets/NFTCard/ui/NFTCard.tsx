@@ -68,8 +68,9 @@ export const NFTCard = ({
               size="t-text-xs"
               className="opacity-30"
             />
+
             <Text
-              children={`${price} ETH`}
+              children={`${price.toFixed(2)} USD`}
               Element="span"
               font="font-space-mono-regular"
               size="t-text-ms"

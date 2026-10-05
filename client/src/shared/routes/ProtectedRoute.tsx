@@ -1,10 +1,10 @@
 import { useAppSelector } from '../../app/store/reduxHooks';
 import { Outlet, useNavigate } from 'react-router';
 
-import { useGetMeQuery, userApi } from '../../entities/user/model';
+import { useGetMeQuery } from '../../entities/user/model';
 
 import { useLocalStorage } from '../lib/hooks';
-import { Spinner } from '../ui/atoms';
+
 import { useEffect } from 'react';
 
 export const ProtectedRoute = () => {
@@ -37,6 +37,7 @@ export const ProtectedRoute = () => {
 
   if (isLoading || isFetching || isError || !user)
     return (
+      // <div className=" flex items-center justify-center bg-primary-background-color ">
       // <div className=" flex items-center justify-center bg-primary-background-color ">
       <div className="h-screen flex items-center justify-center bg-primary-background-color ">
         {/* <Spinner className=" static-text-purple-color" /> */}

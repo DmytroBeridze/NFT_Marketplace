@@ -26,6 +26,7 @@ export interface InputProps {
   labelClass?: string;
   autoComplete?: string;
   wrapperClass?: string;
+  disabled?: boolean;
 }
 
 // --------------------------reusable input wrapper

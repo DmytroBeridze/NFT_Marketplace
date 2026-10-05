@@ -24,6 +24,7 @@
 @theme {
   /* backgrounds */
 
+  /* --color-test: var(--button-inversive-background); */
   --primary-background-color: var(--primary-background);
   --static-primary-background-color: #2b2b2b;
   --secondary-background-color: var(--secondary-background);

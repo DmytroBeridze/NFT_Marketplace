@@ -2,7 +2,7 @@ import type { IconName } from '../../../lib/icons';
 
 export interface IconProps {
   name: IconName;
-  size?: number;
+  size?: number | string;
   className?: string;
   style?: React.CSSProperties;
   fill?: string | undefined;

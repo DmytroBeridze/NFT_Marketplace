@@ -25,7 +25,9 @@
       "containLetters": "Повинно містити літери",
       "containNumbers": "Повинно містити цифри",
       "passwordsMustMatch": "Паролі мають співпадати",
-      "invalidEmail": "Невірний email"
+      "invalidEmail": "Невірний email",
+      "greaterThan-0": "Має бути більше ніж 0",
+      "onlyLatin": "Тільки латинські літери"
     },
     "placeholders": {
       "userName": "Ім'я",

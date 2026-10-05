@@ -7,10 +7,45 @@
   "buttons": {
     "createNFT": "Create NFT",
     "editProfile": "Edit Profile",
-    "createGallery": "Create Gallery"
+    "createGallery": "Create Gallery",
+    "uploadNFT": "Upload & Create NFT",
+    "clickToUpload": "Click to upload"
   },
   "titles": {
     "bio": "Bio",
-    "links": "Links"
+    "links": "Links",
+    "create": "Create NFT",
+    "name": "Name",
+    "enterNFTName": "Enter NFT name",
+    "description": "Description",
+    "uploadImg": "Upload an Image",
+    "keywords": "Keywords",
+    "category": "Category",
+    "collection": "Collection",
+    "price": "Price",
+    "sales": "Sales",
+    "totalPrice": "Total price",
+    "saleItems": "Item for sale",
+    "royalty": "Royalty",
+    "duration": "Duration",
+    "maxSize": "Max size",
+    "tellTheStory": "Tell the story behind your NFT"
+  },
+  "desc": {
+    "MintDigitalItem": "Mint your unique digital item on the blockchain",
+    "makePurchase": "Make this NFT available for purchase",
+    "secondarySales": "You’ll receive this % on secondary sales",
+    "howLongListed": "Set how long the term will be listed"
+  },
+  "categories": {
+    "None": "None",
+    "Art": "Art",
+    "Collectibles": "Collectibles",
+    "Music": "Music",
+    "Photography": "Photography",
+    "Gaming": "Gaming",
+    "Fantasy": "Fantasy",
+    "Sports": "Sports",
+    "Virtual Worlds": "Virtual Worlds"
   }
 }

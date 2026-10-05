@@ -1,3 +1,14 @@
+// export const convertCurrencyToUsd = (value: number, rate: number): number => {
+//   console.log('rate-----', rate);
+
+//   if (rate < 0) {
+//     throw new Error('Currency rate must be greater than 0');
+//   } else if (rate === 0) {
+//     return value;
+//   }
+
+//   return value * rate;
+// };
 export const convertCurrencyToUsd = (value: number, rate: number): number => {
   if (rate <= 0) {
     throw new Error('Currency rate must be greater than 0');

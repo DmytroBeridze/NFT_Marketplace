@@ -10,7 +10,6 @@ import { IoChevronDownCircleOutline } from 'react-icons/io5';
 import { Icon, responsiveRadius } from '../../atoms';
 import { useField } from 'formik';
 import type { IconName } from '../../../lib/icons';
-import type { Category } from '../../../../features/BrowseCategories/model/types';
 
 type SelectData = { id: string | null; name: string };
 
@@ -26,6 +25,7 @@ type SelectProps = {
   iconsMap?: Record<string, IconName>; // map for dynamic icon selection
   iconSize?: number;
   iconColor?: string;
+  validationError?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const Select = ({
@@ -44,10 +44,13 @@ export const Select = ({
   iconSize,
   iconColor = '',
   disabled = false,
+  validationError,
 }: SelectProps) => {
   const [query, setQuery] = useState('');
 
-  const [field, meta, helpers] = useField(name);
+  const [field, meta, helpers] = useField<SelectData | null>(name);
+  // const error = meta.error as { name?: string } | undefined;
+  // console.log(validationError);
 
   // -----------------------------------------filtered Data
   const filteredData =
@@ -61,7 +64,7 @@ export const Select = ({
     <div className={`relative  ${width} ${hight} ${wrapperClassName}`}>
       <Combobox
         value={field.value}
-        onChange={(value) => helpers.setValue(value)}
+        onChange={(value) => helpers.setValue(value ?? { id: null, name: '' })}
         onClose={() => {
           setQuery('');
         }}
@@ -77,7 +80,7 @@ export const Select = ({
             </div>
           )}
 
-          {iconsMap && iconsMap[field.value.name] && (
+          {iconsMap && field.value && iconsMap[field.value.name] && (
             <div
               className={`absolute  top-1/2 -translate-y-1/2 px-2.5 ${iconColor} `}
             >
@@ -89,13 +92,19 @@ export const Select = ({
             autoComplete="off"
             id={id}
             name={name}
-            displayValue={(selected: Category) => selected?.name ?? ''}
+            // displayValue={(selected: Category) => selected?.name ?? ''}
+            displayValue={() => {
+              const selected = data.find((item) => item.id === field.value?.id);
+
+              return selected?.name ?? '';
+            }}
             onChange={(event) => setQuery(event.target.value)}
             className={`
              ${border}
              ${background}
              ${responsiveRadius[radius]}
             ${className}
+            ${validationError ? '!border-red-500 !border' : ''}
             w-full 
             input-focus 
              text-sm/6 text-primary-text-color focus:not-data-focus:outline-none pr-8`}
@@ -132,6 +141,10 @@ export const Select = ({
           })}
         </ComboboxOptions>
       </Combobox>
+
+      {validationError ? (
+        <div className="text-red-500">{validationError}</div>
+      ) : null}
     </div>
   );
 };

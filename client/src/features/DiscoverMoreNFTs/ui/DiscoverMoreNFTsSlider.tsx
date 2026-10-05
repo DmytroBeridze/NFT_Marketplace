@@ -17,6 +17,7 @@ import { SLIDER_BREAKPOINTS } from '../constants/slider.constants';
 
 export const DiscoverMoreNFTsSlider = () => {
   const { isError, isLoading, data } = useGetNftsByCreateDateQuery(20);
+
   // const isError = true;
   // const isLoading = true;
 

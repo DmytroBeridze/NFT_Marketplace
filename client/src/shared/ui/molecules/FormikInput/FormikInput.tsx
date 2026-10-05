@@ -37,6 +37,7 @@ export const FormikInput = ({
   wrapperClass,
   variant = 'modal',
   size = 'default',
+  disabled,
 }: InputWrapper) => {
   const [field, meta] = useField(name);
 
@@ -63,6 +64,8 @@ export const FormikInput = ({
       accept={accept}
       label={label}
       labelClass={labelClass}
+      disabled={disabled}
+
       // value={value}
     />
   );

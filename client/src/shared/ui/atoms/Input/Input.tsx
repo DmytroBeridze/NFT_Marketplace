@@ -10,6 +10,7 @@ export const Input = ({
   leftIcon,
   rightIcon,
   onRightIconClick,
+  disabled,
   accept, // вказується для завантаження файлів
   label,
   labelClass,
@@ -43,6 +44,7 @@ export const Input = ({
             className={`placeholder:text-base font-sans  ${className}  ${meta.error && meta.touched ? '!border-red-500 !border' : ''} `}
             accept={accept}
             autoComplete={autoComplete}
+            disabled={disabled}
           />
           {rightIcon && (
             <span

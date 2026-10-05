@@ -10,7 +10,7 @@ interface useTranslateProps {
 
 export const useTranslate = <T = string>({
   translateKey,
-  options = {},
+  options,
   returnObjects = false,
   document = undefined,
 }: useTranslateProps) => {

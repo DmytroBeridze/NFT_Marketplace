@@ -7,10 +7,45 @@
   "buttons": {
     "createNFT": "Створити NFT",
     "editProfile": "Редагувати профіль",
-    "createGallery": "Створити галерею"
+    "createGallery": "Створити галерею",
+    "uploadNFT": "Завантажити й створити NFT",
+    "clickToUpload": "Натисніть, щоб завантажити"
   },
   "titles": {
     "bio": "Біографія",
-    "links": "Посилання"
+    "links": "Посилання",
+    "create": "Cтворити NFT",
+    "name": "Назва",
+    "enterNFTName": "Введіть назву NFT",
+    "description": "Опис",
+    "uploadImg": "Завантажити зображення",
+    "keywords": "Ключові слова",
+    "category": "Категорії",
+    "collection": "Колекція",
+    "price": "Ціна",
+    "sales": "Знижка",
+    "totalPrice": "Загальна ціна",
+    "saleItems": "Товар на розпродажу",
+    "royalty": "Роялті",
+    "duration": "Тривалість",
+    "maxSize": "Макс. розмір",
+    "tellTheStory": "Розкажіть історію свого NFT"
+  },
+  "desc": {
+    "MintDigitalItem": "Створіть свій унікальний цифровий актив у блокчейні",
+    "makePurchase": "Зробити цей NFT доступним для розпродажу",
+    "secondarySales": "Ви отримуватимете цей % від продажів",
+    "howLongListed": "Встановіть тривалість розміщення"
+  },
+  "categories": {
+    "None": "Жодного",
+    "Art": "Мистецтво",
+    "Collectibles": "Колекційні",
+    "Music": "Музика",
+    "Photography": "Фотографія",
+    "Gaming": "Ігри",
+    "Fantasy": "Фентезі",
+    "Sports": "Спорт",
+    "Virtual Worlds": "Віртуальні світи"
   }
 }

@@ -3,30 +3,38 @@ import {
   useRef,
   useState,
   type ChangeEvent,
-  type Dispatch,
   type MouseEvent,
   type RefObject,
-  type SetStateAction,
 } from 'react';
 import { Button, ErrorText, Icon, Image, Text } from '../../../shared/ui/atoms';
 import { afterRequiredStyle } from '../lib';
+import { useField } from 'formik';
+
+import { useTranslation } from 'react-i18next';
 
 type NftMediaUploadProps = {
-  setFile: Dispatch<SetStateAction<File | null>>;
+  setFile: (value: File | null) => void;
+  // setFile: Dispatch<SetStateAction<File | null>>;
   isLoading: boolean;
   isError: boolean;
+  isUploadSuccess?: boolean;
 };
 
 export const NftMediaUpload = ({
   setFile,
   isLoading,
   isError,
+  isUploadSuccess,
 }: NftMediaUploadProps) => {
-  // const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [isFocused, setIsFocused] = useState<boolean | null>(null);
+
   const imgContainerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [_, meta] = useField('file');
+
+  const { t } = useTranslation('translation');
+  const { t: tt } = useTranslation('dashboard');
 
   //   -------upload
   const uploadHandler = (target: RefObject<HTMLInputElement | null>) => {
@@ -36,6 +44,7 @@ export const NftMediaUpload = ({
   // ------get file
   const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (!file) return;
     const url = URL.createObjectURL(file);
     setFile(file);
@@ -48,6 +57,7 @@ export const NftMediaUpload = ({
     e.stopPropagation();
     preview && URL.revokeObjectURL(preview);
     setPreview(null);
+    setFile(null);
   };
 
   // ---------------Скидання виділення з контейнера для прев'ю при кліці не на цьому контейнері
@@ -66,25 +76,36 @@ export const NftMediaUpload = ({
     return () => document.removeEventListener('click', focusedHandler);
   }, []);
 
+  // -----------------------скмдагння прев'ю після вдалого завантаження NFT
+  useEffect(() => {
+    isUploadSuccess && preview && URL.revokeObjectURL(preview);
+    setPreview(null);
+    setFile(null);
+  }, [isUploadSuccess]);
+
   return (
-    <div className="basis-[50%]  w-full   flex flex-col  flex-1 min-w-0 relative">
+    <div
+      className={`basis-[50%] max-[1200px]:col-start-5 max-[1200px]:col-end-7 max-[900px]:col-span-1
+         w-full   flex flex-col  flex-1 min-w-0 relative min-h-[200px]`}
+    >
       <label
         htmlFor="uploadImg"
         className={`text-primary-text-color ${afterRequiredStyle}`}
       >
-        Upload Image/Video/Gif
+        {tt('titles.uploadImg')}
       </label>
 
       <div
         id="uploadImg"
-        className={`h-full   border-dashed-secondary-color 
-                  bg-secondary-background-color rounded-md input-focus relative`}
+        className={`max-h-[412px] h-full max-[900px]:max-h-[280px] border-dashed-secondary-color 
+                  bg-secondary-background-color rounded-md input-focus relative
+                   ${meta.error && meta.touched ? ' !border-red-500 !border' : ''}`}
         onClick={() => uploadHandler(inputRef)}
       >
         {preview ? (
           <div
             ref={imgContainerRef}
-            className={`max-h-[412px] h-full w-full border-dashed-secondary-color 
+            className={` h-full w-full border-dashed-secondary-color 
                   bg-secondary-background-color rounded-md overflow-hidden relative ${isFocused ? 'container-focus' : ''}`}
           >
             <Button
@@ -122,14 +143,24 @@ export const NftMediaUpload = ({
               className="absolute top-[50%] left-[50%] -translate-[50%] 
                       flex flex-col gap-2 items-center justify-center static-text-purple-color"
             >
-              <Icon name="upload-cloud" size={100} />
+              {/* <Icon
+                name="upload-cloud"
+                className="w-[clamp(1.25rem, -0.383rem + 8.16vw, 6.25rem)] "
+                className="w-[10px] "
+              /> */}
+              <Icon
+                name="upload-cloud"
+                size="clamp(1.25rem, -0.383rem + 8.16vw, 6.25rem)"
+              />
+              {/* <Icon name="upload-cloud" size={100} /> */}
 
               <Text
                 Element="h3"
                 font="font-work-sans-regular"
                 size="responsive-size-md"
+                className="text-center"
               >
-                Click to upload
+                {tt('buttons.clickToUpload')}
               </Text>
               <Text
                 Element="p"
@@ -138,7 +169,7 @@ export const NftMediaUpload = ({
                 className="opacity-40"
                 size="responsive-size-sm"
               >
-                PNG, JPG, GIF, MP4, WEBM
+                PNG, JPG, GIF
               </Text>
               <Text
                 Element="p"
@@ -147,10 +178,11 @@ export const NftMediaUpload = ({
                 className="opacity-40"
                 size="responsive-size-sm"
               >
-                Max size: 50 MB
+                {tt('titles.maxSize')}: 50 MB
               </Text>
             </div>
             <input
+              name="file"
               type="file"
               hidden={true}
               ref={inputRef}
@@ -168,6 +200,10 @@ export const NftMediaUpload = ({
         >
           Loading Error...
         </ErrorText>
+      )}
+
+      {meta.error && meta.touched && (
+        <div className="text-red-500">{t(`modal.errors.${meta.error}`)}</div>
       )}
     </div>
   );

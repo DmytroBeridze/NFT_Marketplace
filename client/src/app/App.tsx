@@ -15,6 +15,7 @@ import { WalletInstallModal } from '../widgets/WalletInstall';
 import { WalletContextProvider } from '../pages/ConnectWallet/context/connectWalletContext';
 import { useGetMeQuery } from '../entities/user/model';
 import { useGetCurrencyQuery } from '../shared/model';
+import { Toaster } from 'sonner';
 
 function App() {
   const modalType = useAppSelector((store) => store.overlay.openModalType);
@@ -22,7 +23,7 @@ function App() {
   useGetMeQuery(undefined, { skip: !token });
 
   return (
-    <div className="App bg-primary-background-color min-h-screen">
+    <div className="App bg-primary-background-color min-h-screen ">
       {/* <div className="App h-screen flex flex-col overflow-hidden"> */}
       <AppProviders>
         <ScrollToTop />
@@ -61,6 +62,13 @@ function App() {
         </WalletContextProvider>
         <ScrollToTopButton />
       </AppProviders>
+      {/*-------------------------------------- Toaster */}
+      <Toaster
+        toastOptions={{
+          className:
+            '!bg-[var(--primary-accent-color)] !border-none !text-white',
+        }}
+      />
     </div>
   );
 }

@@ -1,15 +1,27 @@
+import { useTranslation } from 'react-i18next';
 import { Select } from '../../../shared/ui/molecules/Select';
 import type { CategoryFieldProps } from '../model';
 
 export const CategoryField = ({ categories }: CategoryFieldProps) => {
+  const { t } = useTranslation('dashboard');
+
   const normalizeCategories = categories.map((category) => ({
     id: category._id,
-    name: category.name,
+    name: t(`categories.${category.name}`),
   }));
+  // const normalizeCategories = categories.map((category) => ({
+  //   id: category._id,
+  //   name: category.name,
+  // }));
+
   return (
-    <div className="flex flex-col w-full ">
+    <div
+      className="flex flex-col w-full max-[900px]:col-span-1
+    max-[1200px]:col-span-3
+    "
+    >
       <label htmlFor="NFTcategory" className={`text-primary-text-color `}>
-        Category
+        {t('titles.category')}
       </label>
       <Select
         data={normalizeCategories}

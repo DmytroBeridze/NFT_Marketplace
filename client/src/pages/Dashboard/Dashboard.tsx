@@ -30,12 +30,14 @@ const Dashboard = () => {
 
   if (!user) return null;
 
-  // const {} = useFollowAuthorMutation();
-
   return (
     <section className="bg-primary-background-color">
       {/* ----------------------------Header */}
-      <ProfileHeader coverImage={user?.coverImage} avatar={user?.avatar} />
+      <ProfileHeader
+        coverImage={user?.coverImage}
+        avatarSrc={user?.avatar}
+        showAvatar
+      />
 
       <InnerContainer>
         {/* --------------------------Statistics */}

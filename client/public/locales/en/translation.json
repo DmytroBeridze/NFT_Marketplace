@@ -25,7 +25,9 @@
       "containLetters": "Must contain letters",
       "containNumbers": "Must contain numbers",
       "passwordsMustMatch": "Passwords Must Match",
-      "invalidEmail": "Invalid email"
+      "invalidEmail": "Invalid email",
+      "greaterThan-0": "Must be greater than 0",
+      "onlyLatin": "Only Latin letters"
     },
     "placeholders": {
       "userName": "User name",

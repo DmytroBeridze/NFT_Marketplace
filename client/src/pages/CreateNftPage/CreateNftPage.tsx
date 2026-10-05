@@ -1,12 +1,20 @@
-import { useEffect } from 'react';
-import { useSetNFTMutation, type CreateNftDto } from '../../entities/nft/model';
 import { CreateNftForm } from '../../features/CreateNft';
 import { InnerContainer } from '../../shared/ui/layout';
 import { Text } from '../../shared/ui/atoms';
+import { ProfileHeader } from '../../widgets/ProfileHeader';
+import { useAppSelector } from '../../app/store/reduxHooks';
+import { useTranslation } from 'react-i18next';
 
 export const CreateNftPage = () => {
+  const { t } = useTranslation('dashboard');
+  // -------------------user
+  const user = useAppSelector((state) => state.user.data);
+
   return (
     <section>
+      {/* ----------------------------Header */}
+      <ProfileHeader coverImage={user?.coverImage} />
+
       <InnerContainer>
         <Text
           Element="h2"
@@ -15,7 +23,7 @@ export const CreateNftPage = () => {
           color="text-primary-text-color"
           className="mt-[90px] "
         >
-          Create NFT
+          {t('titles.create')}
         </Text>
         <Text
           Element="p"
@@ -24,7 +32,7 @@ export const CreateNftPage = () => {
           color="text-primary-text-color"
           className="mb-[60px] "
         >
-          Mint your unique digital item on the blockchain
+          {t('desc.MintDigitalItem')}
         </Text>
 
         <CreateNftForm />

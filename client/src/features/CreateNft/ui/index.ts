@@ -5,3 +5,4 @@ export * from './CategoryField';
 export * from './CollectionField';
 export * from './UploadField';
 export * from './KeywordsField';
+export * from './PriceSummaryField';

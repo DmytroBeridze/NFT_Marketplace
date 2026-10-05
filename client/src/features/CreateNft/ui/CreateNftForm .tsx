@@ -3,38 +3,43 @@ import {
   useUploadImageMutation,
 } from '../../../entities/nft/model';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Icon } from '../../../shared/ui/atoms';
 import { Textarea } from '@headlessui/react';
 import { NftMediaUpload } from './NftMediaUpload';
-import { useState } from 'react';
-import { useGetCurrencyQuery, type Data } from '../../../shared/model';
+import { useGetCurrencyQuery } from '../../../shared/model';
 import { convertCurrencyToUsd } from '../../../shared/lib/currencyConversion/currencyConversion';
-import { useCurrencyOptions } from '../hooks/useCurrencyOptions ';
 import { afterRequiredStyle } from '../lib';
 import { PriceField } from './PriceField';
 import { SalesField } from './SalesField';
-import type { CategoryItem, FormValues } from '../model';
+import { NFTSchema, type FormValues } from '../model';
 import { CategoryField } from './CategoryField';
 import { CollectionField } from './CollectionField';
 import { UploadField } from './UploadField';
 import { KeywordsField } from './KeywordsField';
 import { useGetCategoriesQuery } from '../../BrowseCategories/model';
-import type { CategoriesType } from '../../BrowseCategories/model/types';
 import { useGetCollectionQuery } from '../../../entities/collection/model';
 import { useGetSalesConfigApiQuery } from '../../../entities/sales-config/model';
+import { PriceSummaryField } from './PriceSummaryField';
+import { getCurrencyOptions, normalizeKeyword, totalPriceCalc } from '../utils';
+import { useAppSelector } from '../../../app/store/reduxHooks';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
+import { useState } from 'react';
 
 export const CreateNftForm = () => {
-  const [uploadFile, { isLoading, isError, data }] = useUploadImageMutation();
+  // -------------------reset preview state
+  const [isUploadSuccess, setIsUploadSuccess] = useState(false);
 
-  const [
-    uploadNFT,
-    { isError: nftError, isLoading: nftLoading, data: nftResponse },
-  ] = useSetNFTMutation();
+  const { t } = useTranslation('translation');
+  const { t: tt } = useTranslation('dashboard');
 
-  const [file, setFile] = useState<File | null>(null);
+  const [uploadFile, { isLoading, isError }] = useUploadImageMutation();
 
+  const [uploadNFT] = useSetNFTMutation();
+
+  const userId = useAppSelector((store) => store.user.data?._id);
+  if (!userId) return null;
   // --------------------------categories query
   const { data: categoriesData } = useGetCategoriesQuery();
 
@@ -43,9 +48,7 @@ export const CreateNftForm = () => {
     ...(categoriesData ?? []),
   ];
 
-  const { data: collectionData } = useGetCollectionQuery(
-    '68c9bca9ce411a86c0b8de19',
-  );
+  const { data: collectionData } = useGetCollectionQuery(userId);
 
   const optionCollections = [
     { _id: null, name: 'None' },
@@ -54,7 +57,6 @@ export const CreateNftForm = () => {
 
   // ---------------------------sales config
   const { data: salesData } = useGetSalesConfigApiQuery();
-  console.log(salesData?.config);
 
   const durations =
     salesData?.config.durations.map((elem) => ({
@@ -75,7 +77,12 @@ export const CreateNftForm = () => {
     data: currencyData,
   } = useGetCurrencyQuery();
 
-  const currentSourceCollections = useCurrencyOptions(currencyData?.currency);
+  const currencyRates = {
+    ...currencyData?.currency,
+    USD: 1,
+  };
+
+  const currentSourceCollections = getCurrencyOptions(currencyRates);
 
   // ----------------------save Img ToDb
   const saveImgToDb = async (file: File, name: string) => {
@@ -95,45 +102,75 @@ export const CreateNftForm = () => {
           name: '',
           description: '',
           keywords: '',
-          category: { id: 'None', name: 'None' },
-          collection: { id: 'None', name: 'None' },
+          category: { id: null, name: 'None' },
+          collection: { id: null, name: 'None' },
           price: '',
           currency: { id: 'USD', name: 'USD' },
-          royalty: '',
-          duration: '',
+          royalty: { id: null, name: '' },
+          duration: { id: null, name: '' },
           isForSale: false,
+          file: null,
         }}
-        // validate={} // сюда подключаем Yup
-        onSubmit={async (values, { setSubmitting, resetForm }) => {
+        validationSchema={NFTSchema}
+        onSubmit={async (values, { resetForm }) => {
           try {
-            if (!file) return;
-            const imgResp = await saveImgToDb(file, file.name);
+            // ------------------check royalty, duration
+            if (
+              values.isForSale &&
+              (!values.royalty.name || !values.duration.name)
+            )
+              return;
 
+            // ------------------save img to DB
+            if (!values.file) return;
+            const imgResp = await saveImgToDb(values.file, values.file.name);
             if (!imgResp) return;
 
-            // -----convert currency to Usd
-            const convertCurrency = convertCurrencyToUsd(
+            // ----------reset img preview in start position
+            setIsUploadSuccess(false);
+
+            // -----------------convert currency to Usd
+
+            const convertRate = currencyRates[values.currency?.name];
+            if (!convertRate) return;
+
+            const convertToUsd = convertCurrencyToUsd(
               Number(values.price),
-              currencyData?.currency[values.currency?.name as Data]!,
+              convertRate,
             );
 
             // ---------------- upload NFT
-            uploadNFT({
+            await uploadNFT({
               name: values.name,
               description: values.description,
 
-              galleryId: '100',
-              categoryId: '50',
-              price: convertCurrency,
+              galleryId: values.collection.id,
+              categoryId: values.category.id,
+              price: convertToUsd,
 
-              keywords: values.keywords,
+              keywords: normalizeKeyword(values.keywords),
 
               imageUrl: imgResp.imageUrl,
               deleteImageUrl: imgResp.deleteImageUrl,
+
+              isActive: values.isForSale,
+              percent: values.royalty.name,
+              durationHours: values.duration.name,
+            }).unwrap();
+            // ------------------success pop-up alert
+            toast.success(t('modal.serverMessages.data.nftAdded'), {
+              className: '!bg-[var(--text-success-color)]',
             });
-            // resetForm();
+
+            resetForm();
+            // ----------reset img preview
+            setIsUploadSuccess(true);
           } catch (error) {
             console.error(error);
+            // ------------------error pop-up alert
+            toast.error(t('modal.serverMessages.error.failedToCreateNft'), {
+              className: '!bg-[var(--text-error-color)]',
+            });
           }
         }}
       >
@@ -146,82 +183,141 @@ export const CreateNftForm = () => {
           handleBlur,
           handleSubmit,
           isSubmitting,
-        }) => (
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
-            {/* ---------name, description, upload img  block */}
+        }) => {
+          // ------------------calculated price
 
-            <div className=" flex flex-col basis-[50%]">
-              {/* -------------------------name */}
-              <FormikInput
-                name="name"
-                id="NFTname"
-                type="text"
-                variant="createForm"
-                label="Name"
-                size="createForm"
-                placeholder="Enter NFT name"
-                className="text-primary-text-color "
-                labelClass={`text-primary-text-color ${afterRequiredStyle}`}
-              />
+          const calculatedPrice = values.royalty?.name
+            ? totalPriceCalc(
+                +values.price,
+                +values.royalty?.name,
+                values.isForSale,
+              )
+            : values.price;
 
-              {/* -------------------------description */}
-              <label
-                htmlFor="NFTdescription"
-                className={`text-primary-text-color ${afterRequiredStyle}`}
+          // ----------calculated current change
+          const currentRate = currencyRates[values.currency.name];
+
+          const convertCurrency =
+            calculatedPrice !== undefined && currentRate
+              ? convertCurrencyToUsd(+calculatedPrice, currentRate).toFixed(2)
+              : '-';
+
+          return (
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-2 gap-5 max-[1200px]:grid-cols-6  max-[900px]:grid-cols-1"
+              // className="grid grid-cols-2 gap-5 max-[1024px]:grid-cols-1"
+            >
+              {/* ---------name, description, upload img  block */}
+
+              <div
+                className=" flex flex-col basis-[50%] 
+             max-[1200px]:col-span-4 max-[900px]:col-span-1"
+                // max-[1200px]:col-start-1 max-[1200px]:col-end-5 max-[900px]:col-span-1"
               >
-                Description
-              </label>
-              <Textarea
-                name="description"
-                value={values.description}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id="NFTdescription"
-                placeholder="Tell the story behind your NFT"
-                className="w-full h-80 p-[10px]  input-focus  border-secondary-color 
-                  bg-secondary-background-color rounded-md text-primary-text-color"
-                // rows={10}
+                {/* -------------------------name */}
+                <FormikInput
+                  name="name"
+                  id="NFTname"
+                  type="text"
+                  variant="createForm"
+                  label={tt('titles.name')}
+                  // label="Name"
+                  size="createForm"
+                  placeholder={tt('titles.enterNFTName')}
+                  // placeholder="Enter NFT name"
+                  className="text-primary-text-color "
+                  labelClass={`text-primary-text-color ${afterRequiredStyle}`}
+                />
+
+                {/* -------------------------description */}
+                <label
+                  htmlFor="NFTdescription"
+                  className={`text-primary-text-color ${afterRequiredStyle}`}
+                >
+                  {tt('titles.description')}
+                </label>
+                <Textarea
+                  name="description"
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id="NFTdescription"
+                  placeholder={tt('titles.tellTheStory')}
+                  className={`w-full h-80 max-[900px]:h-50 p-[10px]  input-focus  border-secondary-color 
+                  bg-secondary-background-color rounded-md text-primary-text-color 
+                  ${errors.description && touched.description ? '!border-red-500 !border' : ''} `}
+                  // rows={10}
+                />
+                {errors.description && touched.description ? (
+                  <div className="text-red-500">
+                    {t(`modal.errors.${errors.description}`)}
+                  </div>
+                ) : null}
+              </div>
+              {/* -----------------------upload img */}
+              <NftMediaUpload
+                setFile={(value) => setFieldValue('file', value)}
+                isLoading={isLoading}
+                isError={isError}
+                isUploadSuccess={isUploadSuccess}
               />
-            </div>
-            {/* -----------------------upload img */}
-            <NftMediaUpload
-              setFile={setFile}
-              isLoading={isLoading}
-              isError={isError}
-            />
 
-            {/* ------------- -----------keywords*/}
-            <KeywordsField
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              keywords={values.keywords}
-            />
+              {/* ------------- -----------keywords*/}
+              <KeywordsField
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                keywords={values.keywords}
+              />
 
-            {/* ----------------------- category, collection*/}
-            <CategoryField categories={optionCategories} />
-            <CollectionField categories={optionCollections} />
+              {/* ----------------------- category, collection*/}
+              <CategoryField categories={optionCategories} />
+              <CollectionField categories={optionCollections} />
 
-            {/* ------------- ---------------------price*/}
-            <PriceField currentSourceCollections={currentSourceCollections} />
+              {/* ------------- ----------price*/}
+              <PriceField
+                currentSourceCollections={currentSourceCollections}
+                error={currencyError}
+                loading={currencyLoading}
+                disabled={!currencyData}
+              />
 
-            {/* -----------sales*/}
-            <SalesField
-              values={values}
-              setFieldValue={setFieldValue}
-              // royaltyPercent={durations}
-              durations={durations}
-              discounts={discounts}
-            />
+              {/* -----------------------sales*/}
+              <SalesField
+                // values={values}
+                // setFieldValue={setFieldValue}
+                durations={durations}
+                discounts={discounts}
+              />
 
-            {/* ------------- ----------------------upload*/}
-            <UploadField isSubmitting={isSubmitting} />
+              {/* ------------- --------total price*/}
+              <PriceSummaryField
+                calculatedPrice={calculatedPrice}
+                convertCurrency={convertCurrency}
+                currencyName={values.currency.name}
+                isForSale={values.isForSale}
+                price={values.price}
+              />
 
-            {/* -------------------------------spinner */}
-            <div className="static-text-purple-color flex items-center justify-center col-span-2">
-              {isSubmitting && <Icon name="spinner" />}
-            </div>
-          </form>
-        )}
+              {/* ------------- ----------------------upload*/}
+              <UploadField isSubmitting={isSubmitting} />
+
+              {/* -------------------------------spinner */}
+              {/* <button onClick={() => toast('This is a toast')}>
+                Test tost
+              </button> */}
+              <div
+                className="static-text-purple-color flex items-center justify-center
+                col-span-2  max-[1200px]:col-span-6 max-[900px]:col-span-1"
+              >
+                {/* ----------------------------------------------------------⚠-GRID Перевірити положення */}
+                {isSubmitting && <Icon name="spinner" />}
+
+                {/* {isError && <Icon name="spinner" />} */}
+              </div>
+            </form>
+          );
+        }}
       </Formik>
     </section>
   );
