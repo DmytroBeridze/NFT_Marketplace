@@ -58,33 +58,46 @@ export const CreateNftPage = () => {
         {/* ----------------Type animation------------- */}
 
         <div className="flex flex-col" ref={ref}>
-          {isVisible && (
-            <TypeAnimation
-              sequence={[
-                800,
-                t('titles.create'),
-                (el) => {
-                  el?.classList.add('typing-done');
-                  setTitleDone(true);
-                },
-              ]}
-              wrapper="h2"
-              speed={60}
-              style={{ fontSize: '2em', display: 'inline-block' }}
-              repeat={0}
-              className="typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
-              cursor={false}
-            />
-          )}
-
           <div className="relative">
+            {/* -------------------------------Placeholder  for layout */}
+            <h2
+              aria-hidden="true"
+              className="invisible typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
+              style={{ fontSize: '2em', display: 'inline-block' }}
+            >
+              {t('titles.create')}
+            </h2>
+            {/* ----------------------------//---------------------------- */}
+            {isVisible && (
+              <div className="absolute left-0  top-0">
+                <TypeAnimation
+                  sequence={[
+                    800,
+                    t('titles.create'),
+                    (el) => {
+                      el?.classList.add('typing-done');
+                      setTitleDone(true);
+                    },
+                  ]}
+                  wrapper="h2"
+                  speed={60}
+                  style={{ fontSize: '2em', display: 'inline-block' }}
+                  repeat={0}
+                  className="typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
+                  cursor={false}
+                />
+              </div>
+            )}
+          </div>
+          <div className="relative">
+            {/* -------------------------------Placeholder  for layout  */}
             <p
               aria-hidden="true"
               className="invisible font-work-sans-regular responsive-size-md  mb-[60px]"
             >
               {t('desc.MintDigitalItem')}
             </p>
-
+            {/* ----------------------------//---------------------------- */}
             <div className="absolute left-0  top-0">
               {titleDone && (
                 <TypeAnimation
@@ -112,7 +125,6 @@ export const CreateNftPage = () => {
             </div>
           </div>
         </div>
-        {/* ----------------------------- */}
 
         <CreateNftForm />
       </InnerContainer>
