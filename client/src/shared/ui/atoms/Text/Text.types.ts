@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, Ref, RefAttributes, RefObject } from 'react';
 
 export type TextSize =
   | 't-text-xs'
@@ -49,6 +49,7 @@ export interface TextProps {
   size?: TextSize;
   font?: TextFont;
   color?: TextColor;
+  textRef?: Ref<HTMLElement | null>;
 }
 // export type TextSize = TextProps['size'];
 export type TextSecondaryProps = Omit<

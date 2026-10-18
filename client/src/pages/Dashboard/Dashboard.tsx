@@ -6,7 +6,6 @@ import { useGetNftsQuery } from '../../entities/nft/model';
 import { useGetFollowersByIdQuery } from '../../entities/subscribe/model';
 
 import { ProfileTabs } from '../../widgets/ProfileTabs';
-import { useEffect } from 'react';
 
 const Dashboard = () => {
   // -------------------user

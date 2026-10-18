@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { toast } from 'sonner';
 declare global {
   interface Window {
     ethereum?: any;
@@ -17,20 +17,44 @@ export const useConnecMetaMask = () => {
     setHasMetaMask(!!window.ethereum);
   }, []);
 
-  // -----connect, get accaunts
+  // -----connect, get accounts
   const connect = async () => {
-    if (!window.ethereum) return;
-
+    if (!window.ethereum) {
+      return;
+    }
     setLoading(true);
+
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
     try {
-      const accaunts = await window.ethereum.request({
+      // -----Metamask request
+      const request = window.ethereum.request({
         method: 'eth_requestAccounts',
       });
 
-      syncWallet(accaunts[0]);
-    } catch (error) {
-      console.error(error);
+      // -----Timer
+      const timeout = new Promise<never>((_, reject) => {
+        timeoutId = setTimeout(() => {
+          reject(new Error('METAMASK_TIMEOUT'));
+        }, 1500);
+      });
+      // ----------Race
+      const accounts = await Promise.race([request, timeout]);
+
+      syncWallet(accounts[0] ?? null);
+    } catch (error: any) {
+      if (error.code === -32002) {
+        toast.info('MetaMask вже очікує підтвердження');
+      } else if (error.message === 'METAMASK_TIMEOUT') {
+        toast.info('Перевірте MetaMask: запит ще може очікувати підтвердження');
+      } else if (error.code === 4001) {
+        toast.info('Підключення скасовано');
+      } else {
+        console.error('Помилка підключення:', error);
+      }
     } finally {
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+
       setLoading(false);
     }
   };
@@ -59,16 +83,6 @@ export const useConnecMetaMask = () => {
     const handleAccountsChanged = (acc: string[]) => {
       syncWallet(acc[0] ?? null);
     };
-
-    // const handleAccountsChanged = (acc: string[]) => {
-    //   if (acc.length === 0) {
-    //     setWallet(null);
-    //     localStorage.removeItem('metamask-wallet');
-    //   } else {
-    //     setWallet(acc[0]);
-    //     localStorage.setItem('metamask-wallet', acc[0]);
-    //   }
-    // };
 
     window.ethereum.on('accountsChanged', handleAccountsChanged);
 

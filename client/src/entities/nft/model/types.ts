@@ -3,7 +3,7 @@ export interface ISales {
   percent?: string;
   startAt?: Date;
   durationHours?: string;
-  // endAt?: Date;
+  endAt?: Date;
 }
 
 export interface INft {

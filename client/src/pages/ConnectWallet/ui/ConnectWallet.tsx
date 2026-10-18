@@ -107,7 +107,6 @@ const ConnectWallet = () => {
               />
             }
             onClick={() => item.connectWallet(item.name, item.link)}
-            // onClick={item.connectWallet}
           />
         ))}
       </section>

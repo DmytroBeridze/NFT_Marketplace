@@ -38,8 +38,9 @@ export const ProfileHeader = ({
 };
 
 // ---------------------------------Skeleton
+type ShowSkeletonAvatar = Pick<ProfileHeaderProps, 'showAvatar'>;
 
-ProfileHeader.Skeleton = () => {
+ProfileHeader.Skeleton = ({ showAvatar = false }: ShowSkeletonAvatar) => {
   return (
     <section className="relative ">
       <div
@@ -52,10 +53,12 @@ ProfileHeader.Skeleton = () => {
           className="rounded-2xl absolute -bottom-12 p-0.5  max-[834px]:left-[50%]  max-[834px]:translate-x-[-50%]
         bg-secondary-background-color"
         >
-          <div
-            className="w-[120px] h-[120px] rounded-2xl overflow-hidden
+          {showAvatar && (
+            <div
+              className="w-[120px] h-[120px] rounded-2xl overflow-hidden
           skeleton-adaptive-background "
-          ></div>
+            ></div>
+          )}
         </div>
       </InnerContainer>
     </section>
