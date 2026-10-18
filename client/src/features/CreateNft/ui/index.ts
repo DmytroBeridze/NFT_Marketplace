@@ -1,4 +1,4 @@
-export * from './CreateNftForm ';
+export * from './CreateNftForm';
 export * from './NftMediaUpload';
 export * from './PriceField';
 export * from './CategoryField';

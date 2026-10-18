@@ -206,14 +206,12 @@ export const CreateNftForm = () => {
             <form
               onSubmit={handleSubmit}
               className="grid grid-cols-2 gap-5 max-[1200px]:grid-cols-6  max-[900px]:grid-cols-1"
-              // className="grid grid-cols-2 gap-5 max-[1024px]:grid-cols-1"
             >
               {/* ---------name, description, upload img  block */}
 
               <div
                 className=" flex flex-col basis-[50%] 
              max-[1200px]:col-span-4 max-[900px]:col-span-1"
-                // max-[1200px]:col-start-1 max-[1200px]:col-end-5 max-[900px]:col-span-1"
               >
                 {/* -------------------------name */}
                 <FormikInput
@@ -222,10 +220,8 @@ export const CreateNftForm = () => {
                   type="text"
                   variant="createForm"
                   label={tt('titles.name')}
-                  // label="Name"
                   size="createForm"
                   placeholder={tt('titles.enterNFTName')}
-                  // placeholder="Enter NFT name"
                   className="text-primary-text-color "
                   labelClass={`text-primary-text-color ${afterRequiredStyle}`}
                 />
