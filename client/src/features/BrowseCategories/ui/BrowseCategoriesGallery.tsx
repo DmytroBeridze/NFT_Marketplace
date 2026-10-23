@@ -26,6 +26,7 @@ const BrowseCategoriesGallery = () => {
               <CategoriesCard.skeleton key={id} />
             ))
           : data?.map(({ _id, name }) => (
+              // <CategoriesCard name={name} key={_id} />
               <CategoriesCard id={_id} name={name} key={_id} />
             )))}
     </section>

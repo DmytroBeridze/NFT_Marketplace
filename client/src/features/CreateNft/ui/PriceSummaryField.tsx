@@ -1,5 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { Text } from '../../../shared/ui/atoms';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+gsap.registerPlugin(ScrollTrigger);
 
 type PriceSummaryFieldProps = {
   isForSale: boolean;
@@ -18,8 +23,31 @@ export const PriceSummaryField = ({
 }: PriceSummaryFieldProps) => {
   const { t } = useTranslation('dashboard');
 
+  // ----------------------GSAP
+  const summaryRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!summaryRef.current) return;
+
+      gsap.from(summaryRef.current, {
+        scrollTrigger: {
+          trigger: summaryRef.current,
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+    },
+    { scope: summaryRef },
+  );
+
   return (
     <div
+      ref={summaryRef}
       className="col-span-2 max-[1200px]:col-span-4 max-[900px]:col-span-1
       border-secondary-color  bg-secondary-background-color rounded-md  p-[10px] flex justify-between "
     >

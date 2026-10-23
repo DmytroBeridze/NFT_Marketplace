@@ -1,9 +1,14 @@
 import { Textarea } from '@headlessui/react';
 import { afterRequiredStyle } from '../lib';
-import type { ChangeEvent, FocusEvent } from 'react';
+import { useRef, type ChangeEvent, type FocusEvent } from 'react';
 import { useField } from 'formik';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
+
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 type KeywordsFieldProps = {
   handleChange: (e: ChangeEvent<any>) => void;
@@ -20,8 +25,31 @@ export const KeywordsField = ({
 
   const [field, meta] = useField('keywords');
 
+  // ----------------------GSAP
+  const keywordsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!keywordsRef.current) return;
+
+      gsap.from(keywordsRef.current, {
+        scrollTrigger: {
+          trigger: keywordsRef.current,
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+    },
+    { scope: keywordsRef },
+  );
+
   return (
     <div
+      ref={keywordsRef}
       className={`col-span-2 max-[1200px]:col-start-1 max-[1200px]:col-end-7   max-[900px]:col-span-1
     flex flex-col `}
     >

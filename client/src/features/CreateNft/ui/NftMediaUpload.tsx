@@ -9,8 +9,12 @@ import {
 import { Button, ErrorText, Icon, Image, Text } from '../../../shared/ui/atoms';
 import { afterRequiredStyle } from '../lib';
 import { useField } from 'formik';
-
 import { useTranslation } from 'react-i18next';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useInView } from '../../../shared/lib/hooks';
+gsap.registerPlugin(ScrollTrigger);
 
 type NftMediaUploadProps = {
   setFile: (value: File | null) => void;
@@ -31,6 +35,8 @@ export const NftMediaUpload = ({
 
   const imgContainerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const { isVisible, ref: containerRef } = useInView();
   const [_, meta] = useField('file');
 
   const { t } = useTranslation('translation');
@@ -83,128 +89,172 @@ export const NftMediaUpload = ({
     setFile(null);
   }, [isUploadSuccess]);
 
+  // ----------------------GSAP media
+  const mediaRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!mediaRef.current) return;
+
+      gsap.from(mediaRef.current, {
+        scrollTrigger: {
+          trigger: mediaRef.current,
+          start: 'top 78%',
+          // markers: true,
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+    },
+    { scope: mediaRef },
+  );
+  // useEffect(() => {
+  //   console.log(document.querySelectorAll('.rocket-flame'));
+  // }, []);
+
   return (
     <div
-      className={`basis-[50%] max-[1200px]:col-start-5 max-[1200px]:col-end-7 max-[900px]:col-span-1
-         w-full   flex flex-col  flex-1 min-w-0 relative min-h-[200px]`}
+      ref={containerRef}
+      className={`relative  basis-[50%] max-[1200px]:col-start-5 max-[1200px]:col-end-7 max-[900px]:col-span-1
+         w-full   flex flex-col  flex-1 min-w-0  min-h-[200px]`}
     >
-      <label
-        htmlFor="uploadImg"
-        className={`text-primary-text-color ${afterRequiredStyle}`}
+      {/* -------------------------disappearing icon */}
+      <div
+        className="absolute top-9 left-0 right-0  
+      flex items-center justify-center pulseIconOnce"
       >
-        {tt('titles.uploadImg')}
-      </label>
+        <Icon
+          name="hands-icon"
+          size={200}
+          // className="text-secondary-text-color opacity-60"
+          className="static-text-purple-color opacity-60"
+        />
+      </div>
 
       <div
-        id="uploadImg"
-        className={`max-h-[412px] h-full max-[900px]:max-h-[280px] border-dashed-secondary-color 
+        ref={mediaRef}
+        // className={`
+        //  w-full   flex flex-col  flex-1 min-w-0 relative min-h-[200px]`}
+        className={`basis-[50%] max-[1200px]:col-start-5 max-[1200px]:col-end-7 max-[900px]:col-span-1
+         w-full   flex flex-col  flex-1 min-w-0 relative min-h-[200px]`}
+      >
+        <label
+          htmlFor="uploadImg"
+          className={`text-primary-text-color ${afterRequiredStyle}`}
+        >
+          {tt('titles.uploadImg')}
+        </label>
+
+        <div
+          id="uploadImg"
+          className={`max-h-[412px] h-full max-[900px]:max-h-[280px] border-dashed-secondary-color 
                   bg-secondary-background-color rounded-md input-focus relative
                    ${meta.error && meta.touched ? ' !border-red-500 !border' : ''}`}
-        onClick={() => uploadHandler(inputRef)}
-      >
-        {preview ? (
-          <div
-            ref={imgContainerRef}
-            className={` h-full w-full border-dashed-secondary-color 
-                  bg-secondary-background-color rounded-md overflow-hidden relative ${isFocused ? 'container-focus' : ''}`}
-          >
-            <Button
-              onClick={(e) => handleRemovePreviev(e)}
-              className="absolute bottom-3 right-3 px-4 py-1 "
-              type="button"
-              variant="primary"
-              radius="xl"
-            >
-              <Text
-                Element="span"
-                color="static-text-white-color"
-                size="t-text-xs"
-              >
-                Remove
-              </Text>
-            </Button>
-            {isLoading && (
-              <div
-                className="static-text-purple-color flex items-center justify-center
-               absolute left-[50%] top-[50%]  -translate-[50%]"
-              >
-                <div className="w-20">
-                  {/*-------------------- spinner */}
-                  <div className="loader"></div>
-                </div>
-              </div>
-            )}
-
-            <Image alt="preview" src={preview} objectFit="object-cover" />
-          </div>
-        ) : (
-          <>
+          onClick={() => uploadHandler(inputRef)}
+        >
+          {preview ? (
             <div
-              className="absolute top-[50%] left-[50%] -translate-[50%] 
-                      flex flex-col gap-2 items-center justify-center static-text-purple-color"
+              ref={imgContainerRef}
+              className={` h-full w-full border-dashed-secondary-color 
+                  bg-secondary-background-color rounded-md overflow-hidden relative ${isFocused ? 'container-focus' : ''}`}
             >
-              {/* <Icon
-                name="upload-cloud"
-                className="w-[clamp(1.25rem, -0.383rem + 8.16vw, 6.25rem)] "
-                className="w-[10px] "
-              /> */}
-              <Icon
-                name="upload-cloud"
-                size="clamp(1.25rem, -0.383rem + 8.16vw, 6.25rem)"
-              />
-              {/* <Icon name="upload-cloud" size={100} /> */}
+              <Button
+                onClick={(e) => handleRemovePreviev(e)}
+                className="absolute bottom-3 right-3 px-4 py-1 "
+                type="button"
+                variant="primary"
+                radius="xl"
+              >
+                <Text
+                  Element="span"
+                  color="static-text-white-color"
+                  size="t-text-xs"
+                >
+                  Remove
+                </Text>
+              </Button>
+              {isLoading && (
+                <div
+                  className="static-text-purple-color flex items-center justify-center
+               absolute left-[50%] top-[50%]  -translate-[50%]"
+                >
+                  <div className="w-20">
+                    {/*-------------------- spinner */}
+                    <div className="loader"></div>
+                  </div>
+                </div>
+              )}
 
-              <Text
-                Element="h3"
-                font="font-work-sans-regular"
-                size="responsive-size-md"
-                className="text-center"
-              >
-                {tt('buttons.clickToUpload')}
-              </Text>
-              <Text
-                Element="p"
-                color="text-primary-text-color"
-                font="font-work-sans-regular"
-                className="opacity-40"
-                size="responsive-size-sm"
-              >
-                PNG, JPG, GIF
-              </Text>
-              <Text
-                Element="p"
-                color="text-primary-text-color"
-                font="font-work-sans-regular"
-                className="opacity-40"
-                size="responsive-size-sm"
-              >
-                {tt('titles.maxSize')}: 50 MB
-              </Text>
+              <Image alt="preview" src={preview} objectFit="object-cover" />
             </div>
-            <input
-              name="file"
-              type="file"
-              hidden={true}
-              ref={inputRef}
-              onChange={(e) => handleChangeFile(e)}
-            />
-          </>
+          ) : (
+            <>
+              <div
+                className="absolute top-[50%] left-[50%] -translate-[50%] 
+                      flex flex-col gap-2 items-center justify-center static-text-purple-color"
+              >
+                <Icon
+                  name="upload-cloud"
+                  size="clamp(1.25rem, -0.383rem + 8.16vw, 6.25rem)"
+                  className="pulseIcon"
+                />
+
+                <Text
+                  Element="h3"
+                  font="font-work-sans-regular"
+                  size="responsive-size-md"
+                  className="text-center"
+                >
+                  {tt('buttons.clickToUpload')}
+                </Text>
+                <Text
+                  Element="p"
+                  color="text-primary-text-color"
+                  font="font-work-sans-regular"
+                  className="opacity-40"
+                  size="responsive-size-sm"
+                >
+                  PNG, JPG, GIF
+                </Text>
+                <Text
+                  Element="p"
+                  color="text-primary-text-color"
+                  font="font-work-sans-regular"
+                  className="opacity-40"
+                  size="responsive-size-sm"
+                >
+                  {tt('titles.maxSize')}: 50 MB
+                </Text>
+              </div>
+              <input
+                name="file"
+                type="file"
+                hidden={true}
+                ref={inputRef}
+                onChange={(e) => handleChangeFile(e)}
+              />
+            </>
+          )}
+        </div>
+        {isError && (
+          <ErrorText
+            Element="div"
+            data-testid={'CategoriesCard-error'}
+            className="text-red-700 w-full  text-right responsive-size-sm animate-pulse
+                absolute  right-5 bottom-5"
+          >
+            Loading Error...
+          </ErrorText>
+        )}
+
+        {meta.error && meta.touched && (
+          <div className="text-red-500">{t(`modal.errors.${meta.error}`)}</div>
         )}
       </div>
-      {isError && (
-        <ErrorText
-          Element="div"
-          data-testid={'CategoriesCard-error'}
-          className="text-red-700 w-full  text-right responsive-size-sm animate-pulse
-                absolute  right-5 bottom-5"
-        >
-          Loading Error...
-        </ErrorText>
-      )}
-
-      {meta.error && meta.touched && (
-        <div className="text-red-500">{t(`modal.errors.${meta.error}`)}</div>
-      )}
     </div>
   );
 };

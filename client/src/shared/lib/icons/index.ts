@@ -38,12 +38,20 @@ import { ReactComponent as Euro } from '../../assets/icons/currency/euro.svg';
 import { ReactComponent as Usdt } from '../../assets/icons/currency/tether.svg';
 import { ReactComponent as Hryvna } from '../../assets/icons/currency/ukraine-hryvna.svg';
 import { ReactComponent as Usdc } from '../../assets/icons/currency/usdc.svg';
+import { ReactComponent as Heands } from '../../assets/icons/hands.svg';
+import { ReactComponent as RocketFly } from '../../assets/icons/rocket.svg';
+import { ReactComponent as TokenCoin } from '../../assets/icons/Token-coin.svg';
+import { ReactComponent as RocketBoost } from '../../assets/icons/rocket-boost.svg';
 
 import CoinbaseIcon from '../../assets/icons/Coinbase.png';
 import MetamaskIcon from '../../assets/icons/Metamask.png';
 import WalletConnect from '../../assets/icons/WalletConnect.png';
 
 export const iconsMap = {
+  'rocketBoost-icon': RocketBoost,
+  'tokenCoin-icon': TokenCoin,
+  'rocket-fly-icon': RocketFly,
+  'hands-icon': Heands,
   'bitcoin-icon': Bitcoin,
   'dollar-icon': Dollar,
   'etherium-icon': Etherium,

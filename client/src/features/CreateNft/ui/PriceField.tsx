@@ -4,6 +4,11 @@ import { FormikInput } from '../../../shared/ui/molecules/FormikInput';
 import { Select } from '../../../shared/ui/molecules/Select';
 import { afterRequiredStyle } from '../lib';
 import { currencyIconsMap } from '../maps/iconsMap';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+gsap.registerPlugin(ScrollTrigger);
 
 type PriceFieldProps = {
   currentSourceCollections: { id: string; name: string }[];
@@ -20,8 +25,31 @@ export const PriceField = ({
 }: PriceFieldProps) => {
   const { t } = useTranslation('dashboard');
 
+  // ----------------------GSAP
+  const priceRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!priceRef.current) return;
+
+      gsap.from(priceRef.current, {
+        scrollTrigger: {
+          trigger: priceRef.current,
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+    },
+    { scope: priceRef },
+  );
+
   return (
     <div
+      ref={priceRef}
       className="col-span-1 max-[1200px]:col-span-4 max-[900px]:col-span-1
       border-secondary-color bg-secondary-background-color rounded-md  p-[10px]"
     >

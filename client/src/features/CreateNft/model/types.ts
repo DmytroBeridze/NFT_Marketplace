@@ -16,8 +16,9 @@ export type FormValues = {
   file: File | null;
 };
 
-export type CategoryItem = { _id: string | null; name: string };
+export type CategoryItem = { _id: string; name: string };
 
+export type CategoryField = { _id: string | null; name: string };
 export type CategoryFieldProps = {
-  categories: CategoryItem[];
+  categories: CategoryField[];
 };

@@ -1,0 +1,46 @@
+.pulseIcon {
+  animation: pulseIcon ease-in-out infinite normal 5s;
+}
+
+.pulseIconOnce {
+  animation: pulseIconOnce ease-in-out forwards 5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes pulseIcon {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+
+  3%,
+  9% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  6%,
+  12% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes pulseIconOnce {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+
+  3% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  6% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}

@@ -25,9 +25,19 @@ import { getCurrencyOptions, normalizeKeyword, totalPriceCalc } from '../utils';
 import { useAppSelector } from '../../../app/store/reduxHooks';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { useState } from 'react';
+
+import { useEffect, useRef, useState } from 'react';
+
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AnimatedRocket } from './AnimatedRocket';
+gsap.registerPlugin(ScrollTrigger);
 
 export const CreateNftForm = () => {
+  // const { isVisible: isVisibleDescription, ref: refDescription } = useInView();
+  // const descriptionRef = useRef<HTMLDivElement>(null);
+
   // -------------------reset preview state
   const [isUploadSuccess, setIsUploadSuccess] = useState(false);
 
@@ -94,6 +104,31 @@ export const CreateNftForm = () => {
 
     return await uploadFile(formdata).unwrap();
   };
+
+  // ----------------------GSAP description
+  const descriptionRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!descriptionRef.current) return;
+
+      gsap.from(descriptionRef.current, {
+        scrollTrigger: {
+          trigger: descriptionRef.current,
+          start: 'top 90%',
+          // markers: true,
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+    },
+    { scope: descriptionRef },
+  );
+  // ----------------------------------------------------------!!!
 
   return (
     <section className="font-work-sans-regular text-secondary-text-color mb-8 responsive-size-sm ">
@@ -207,11 +242,12 @@ export const CreateNftForm = () => {
               onSubmit={handleSubmit}
               className="grid grid-cols-2 gap-5 max-[1200px]:grid-cols-6  max-[900px]:grid-cols-1"
             >
-              {/* ---------name, description, upload img  block */}
+              {/* ---------name, description  block */}
 
               <div
-                className=" flex flex-col basis-[50%] 
-             max-[1200px]:col-span-4 max-[900px]:col-span-1"
+                ref={descriptionRef}
+                className="flex flex-col basis-[50%]
+                           max-[1200px]:col-span-4 max-[900px]:col-span-1"
               >
                 {/* -------------------------name */}
                 <FormikInput
@@ -252,6 +288,7 @@ export const CreateNftForm = () => {
                 ) : null}
               </div>
               {/* -----------------------upload img */}
+
               <NftMediaUpload
                 setFile={(value) => setFieldValue('file', value)}
                 isLoading={isLoading}
@@ -277,6 +314,13 @@ export const CreateNftForm = () => {
                 loading={currencyLoading}
                 disabled={!currencyData}
               />
+              {/* -----------------------rocket icon */}
+              <div
+                className="overflow-hidden col-span-1 
+               max-[900px]:col-span-1 max-[1200px]:col-span-2"
+              >
+                <AnimatedRocket />
+              </div>
 
               {/* -----------------------sales*/}
               <SalesField
@@ -299,14 +343,12 @@ export const CreateNftForm = () => {
               <UploadField isSubmitting={isSubmitting} />
 
               {/* -------------------------------spinner */}
-              {/* <button onClick={() => toast('This is a toast')}>
-                Test tost
-              </button> */}
+
               <div
                 className="static-text-purple-color flex items-center justify-center
                 col-span-2  max-[1200px]:col-span-6 max-[900px]:col-span-1"
               >
-                {/* ----------------------------------------------------------⚠-GRID Перевірити положення */}
+                {/* -----------------------------------------⚠-GRID Перевірити положення */}
                 {isSubmitting && <Icon name="spinner" />}
 
                 {/* {isError && <Icon name="spinner" />} */}

@@ -1,30 +1,23 @@
-import { useFormikContext, type FormikErrors } from 'formik';
+import { useFormikContext } from 'formik';
 import { Text } from '../../../shared/ui/atoms';
 import { Select } from '../../../shared/ui/molecules/Select';
 import { SwitchButton } from '../../../shared/ui/molecules/SwitchButton';
 import type { FormValues } from '../model';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type SalesFieldProps = {
-  // values: FormValues;
-  // setFieldValue: (
-  //   field: string,
-  //   value: any,
-  //   shouldValidate?: boolean | undefined,
-  // ) => Promise<void | FormikErrors<FormValues>>;
-
   durations: { id: string; name: string }[];
   discounts: { id: string; name: string }[];
 };
 
-export const SalesField = ({
-  // values,
-  // setFieldValue,
-
-  durations,
-  discounts,
-}: SalesFieldProps) => {
+export const SalesField = ({ durations, discounts }: SalesFieldProps) => {
   const { t: tt } = useTranslation('dashboard');
 
   const { errors, touched, values, setFieldValue } =
@@ -42,8 +35,30 @@ export const SalesField = ({
       ? t(`modal.errors.${errors.duration.name ?? 'required'}`)
       : undefined;
 
+  // ----------------------GSAP
+  const salesRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!salesRef.current) return;
+
+      gsap.from(salesRef.current, {
+        scrollTrigger: {
+          trigger: salesRef.current,
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+    },
+    { scope: salesRef },
+  );
   return (
     <div
+      ref={salesRef}
       className="col-span-2 max-[1200px]:col-span-6 max-[900px]:col-span-1
        border-secondary-color  bg-secondary-background-color rounded-md  p-[10px]"
     >

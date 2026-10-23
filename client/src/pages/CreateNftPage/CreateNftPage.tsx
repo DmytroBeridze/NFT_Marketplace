@@ -29,7 +29,7 @@ export const CreateNftPage = () => {
 
       gsap.from(split.chars, {
         duration: 0.4,
-        x: 500,
+        x: 100,
         autoAlpha: 0,
         stagger: 0.03,
       });
@@ -60,16 +60,27 @@ export const CreateNftPage = () => {
         <div className="flex flex-col" ref={ref}>
           <div className="relative">
             {/* -------------------------------Placeholder  for layout */}
-            <h2
+
+            {!isVisible && (
+              <h2
+                aria-hidden="true"
+                className=" typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
+                style={{ fontSize: '2em', display: 'inline-block' }}
+              >
+                <span>|</span>
+              </h2>
+            )}
+            {/* <h2
               aria-hidden="true"
               className="invisible typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
               style={{ fontSize: '2em', display: 'inline-block' }}
             >
+            
               {t('titles.create')}
-            </h2>
+            </h2> */}
             {/* ----------------------------//---------------------------- */}
             {isVisible && (
-              <div className="absolute left-0  top-0">
+              <div>
                 <TypeAnimation
                   sequence={[
                     800,
