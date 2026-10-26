@@ -35,6 +35,7 @@ export const KeywordsField = ({
       gsap.from(keywordsRef.current, {
         scrollTrigger: {
           trigger: keywordsRef.current,
+          // start: 'top 60%',
         },
         autoAlpha: 0,
         duration: 0.5,

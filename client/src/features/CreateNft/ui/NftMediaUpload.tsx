@@ -42,6 +42,11 @@ export const NftMediaUpload = ({
   const { t } = useTranslation('translation');
   const { t: tt } = useTranslation('dashboard');
 
+  const mediaRef = useRef<HTMLDivElement | null>(null);
+  const uploadRef = useRef<HTMLDivElement | null>(null);
+  const handsIconRef = useRef<HTMLDivElement | null>(null);
+  const hexagonContainerRef = useRef<HTMLDivElement | null>(null);
+
   //   -------upload
   const uploadHandler = (target: RefObject<HTMLInputElement | null>) => {
     target.current?.click();
@@ -89,32 +94,89 @@ export const NftMediaUpload = ({
     setFile(null);
   }, [isUploadSuccess]);
 
+  // ------------------------arrow painting
+
+  useEffect(() => {
+    const arrow = uploadRef.current?.querySelector<SVGPathElement>(
+      '.Upload-cloud_svg__downloadArrow',
+    );
+
+    if (arrow) {
+      arrow.style.stroke = 'orange';
+    }
+  }, []);
+
   // ----------------------GSAP media
-  const mediaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!mediaRef.current) return;
+      if (!mediaRef.current || !handsIconRef.current) {
+        return;
+      }
 
-      gsap.from(mediaRef.current, {
-        scrollTrigger: {
-          trigger: mediaRef.current,
-          start: 'top 78%',
-          // markers: true,
-        },
-        autoAlpha: 0,
-        duration: 0.5,
-        opacity: 0,
-        stagger: 0.15,
-        y: 100,
-        ease: 'power2.out',
+      let mm = gsap.matchMedia();
+
+      const circles =
+        handsIconRef.current.querySelectorAll('.hands_svg__circle');
+
+      const hexagonContainer = handsIconRef.current.querySelector(
+        '.hands_svg__hexagon-container',
+      );
+
+      // circles rotation
+      gsap.to(circles, {
+        duration: 0.1,
+        fill: 'orange',
+        delay: 0.6,
       });
+
+      // hexagon rotation
+      if (hexagonContainer) {
+        gsap.to(hexagonContainer, {
+          rotation: 360,
+          duration: 0.5,
+          ease: 'none',
+          transformOrigin: '50% 50%',
+          scrollTrigger: {
+            trigger: handsIconRef.current,
+            start: 'top 70%',
+            // markers: true,
+          },
+        });
+      }
+
+      mm.add(
+        { isDesktop: `(min-width: 901px)`, isMobile: '(max-width: 900px)' },
+        (context) => {
+          const { isDesktop } = context.conditions as {
+            isDesktop: boolean;
+            isMobile: boolean;
+          };
+
+          gsap.fromTo(
+            mediaRef.current,
+            {
+              autoAlpha: 0,
+              y: 100,
+            },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.5,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: mediaRef.current,
+                start: isDesktop ? 'top 30%' : 'top 40%',
+                // start: 'top 60%',
+                // markers: true,
+              },
+            },
+          );
+        },
+      );
     },
     { scope: mediaRef },
   );
-  // useEffect(() => {
-  //   console.log(document.querySelectorAll('.rocket-flame'));
-  // }, []);
 
   return (
     <div
@@ -124,21 +186,19 @@ export const NftMediaUpload = ({
     >
       {/* -------------------------disappearing icon */}
       <div
+        ref={handsIconRef}
         className="absolute top-9 left-0 right-0  
-      flex items-center justify-center pulseIconOnce"
+      flex items-center justify-center pulseIconOnce "
       >
         <Icon
           name="hands-icon"
-          size={200}
-          // className="text-secondary-text-color opacity-60"
-          className="static-text-purple-color opacity-60"
+          // className="static-text-purple-color opacity-90 w-[200px] h-[200px] "
+          className="static-text-purple-color opacity-90 w-[200px] h-[200px] max-[900px]:w-[100px] max-[900px]:h-[100px]"
         />
       </div>
 
       <div
         ref={mediaRef}
-        // className={`
-        //  w-full   flex flex-col  flex-1 min-w-0 relative min-h-[200px]`}
         className={`basis-[50%] max-[1200px]:col-start-5 max-[1200px]:col-end-7 max-[900px]:col-span-1
          w-full   flex flex-col  flex-1 min-w-0 relative min-h-[200px]`}
       >
@@ -194,6 +254,7 @@ export const NftMediaUpload = ({
           ) : (
             <>
               <div
+                ref={uploadRef}
                 className="absolute top-[50%] left-[50%] -translate-[50%] 
                       flex flex-col gap-2 items-center justify-center static-text-purple-color"
               >
@@ -258,3 +319,312 @@ export const NftMediaUpload = ({
     </div>
   );
 };
+
+// import {
+//   useEffect,
+//   useRef,
+//   useState,
+//   type ChangeEvent,
+//   type MouseEvent,
+//   type RefObject,
+// } from 'react';
+// import { Button, ErrorText, Icon, Image, Text } from '../../../shared/ui/atoms';
+// import { afterRequiredStyle } from '../lib';
+// import { useField } from 'formik';
+// import { useTranslation } from 'react-i18next';
+// import gsap from 'gsap';
+// import { useGSAP } from '@gsap/react';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// import { useInView } from '../../../shared/lib/hooks';
+// gsap.registerPlugin(ScrollTrigger);
+
+// type NftMediaUploadProps = {
+//   setFile: (value: File | null) => void;
+//   // setFile: Dispatch<SetStateAction<File | null>>;
+//   isLoading: boolean;
+//   isError: boolean;
+//   isUploadSuccess?: boolean;
+// };
+
+// export const NftMediaUpload = ({
+//   setFile,
+//   isLoading,
+//   isError,
+//   isUploadSuccess,
+// }: NftMediaUploadProps) => {
+//   const [preview, setPreview] = useState<string | null>(null);
+//   const [isFocused, setIsFocused] = useState<boolean | null>(null);
+
+//   const imgContainerRef = useRef<HTMLDivElement | null>(null);
+//   const inputRef = useRef<HTMLInputElement | null>(null);
+
+//   const { isVisible, ref: containerRef } = useInView();
+//   const [_, meta] = useField('file');
+
+//   const { t } = useTranslation('translation');
+//   const { t: tt } = useTranslation('dashboard');
+
+//   const mediaRef = useRef<HTMLDivElement | null>(null);
+//   const uploadRef = useRef<HTMLDivElement | null>(null);
+//   const handsIconRef = useRef<HTMLDivElement | null>(null);
+//   const hexagonContainerRef = useRef<HTMLDivElement | null>(null);
+
+//   //   -------upload
+//   const uploadHandler = (target: RefObject<HTMLInputElement | null>) => {
+//     target.current?.click();
+//   };
+
+//   // ------get file
+//   const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0];
+
+//     if (!file) return;
+//     const url = URL.createObjectURL(file);
+//     setFile(file);
+//     setPreview(url);
+//     setIsFocused(true);
+//   };
+
+//   // ------remove previev
+//   const handleRemovePreviev = (e: MouseEvent<HTMLButtonElement>) => {
+//     e.stopPropagation();
+//     preview && URL.revokeObjectURL(preview);
+//     setPreview(null);
+//     setFile(null);
+//   };
+
+//   // ---------------Скидання виділення з контейнера для прев'ю при кліці не на цьому контейнері
+//   useEffect(() => {
+//     const focusedHandler = (e: globalThis.MouseEvent) => {
+//       if (
+//         imgContainerRef.current &&
+//         !imgContainerRef.current.contains(e.target as Node)
+//       ) {
+//         setIsFocused(false);
+//       }
+//     };
+
+//     document.addEventListener('click', focusedHandler);
+
+//     return () => document.removeEventListener('click', focusedHandler);
+//   }, []);
+
+//   // -----------------------скмдагння прев'ю після вдалого завантаження NFT
+//   useEffect(() => {
+//     isUploadSuccess && preview && URL.revokeObjectURL(preview);
+//     setPreview(null);
+//     setFile(null);
+//   }, [isUploadSuccess]);
+
+//   // ------------------------arrow painting
+
+//   useEffect(() => {
+//     const arrow = uploadRef.current?.querySelector<SVGPathElement>(
+//       '.Upload-cloud_svg__downloadArrow',
+//     );
+
+//     if (arrow) {
+//       arrow.style.stroke = 'orange';
+//     }
+//   }, []);
+
+//   // ----------------------GSAP media
+
+//   useGSAP(
+//     () => {
+//       if (!mediaRef.current || !handsIconRef.current) {
+//         return;
+//       }
+
+//       let mm = gsap.matchMedia();
+
+//       const circles =
+//         handsIconRef.current.querySelectorAll('.hands_svg__circle');
+
+//       const hexagonContainer = handsIconRef.current.querySelector(
+//         '.hands_svg__hexagon-container',
+//       );
+
+//       // Окрашивание кружков
+//       gsap.to(circles, {
+//         duration: 0.1,
+//         fill: 'orange',
+//         delay: 0.6,
+//       });
+
+//       // Вращение гексагона
+//       if (hexagonContainer) {
+//         gsap.to(hexagonContainer, {
+//           rotation: 360,
+//           duration: 0.5,
+//           ease: 'none',
+//           transformOrigin: '50% 50%',
+//           scrollTrigger: {
+//             trigger: handsIconRef.current,
+//             start: 'top 70%',
+//             // markers: true,
+//           },
+//         });
+//       }
+
+//       gsap.from(mediaRef.current, {
+//         scrollTrigger: {
+//           trigger: mediaRef.current,
+
+//           start: 'top 60%',
+//           // start: 'top 30%',
+
+//           markers: true,
+//         },
+//         autoAlpha: 0,
+//         duration: 0.5,
+//         opacity: 0,
+//         stagger: 0.15,
+//         y: 100,
+//         ease: 'power2.out',
+//       });
+//     },
+//     { scope: mediaRef },
+//   );
+
+//   return (
+//     <div
+//       ref={containerRef}
+//       className={`relative  basis-[50%] max-[1200px]:col-start-5 max-[1200px]:col-end-7 max-[900px]:col-span-1
+//          w-full   flex flex-col  flex-1 min-w-0  min-h-[200px]`}
+//     >
+//       {/* -------------------------disappearing icon */}
+//       <div
+//         ref={handsIconRef}
+//         className="absolute top-9 left-0 right-0
+//       flex items-center justify-center pulseIconOnce "
+//       >
+//         <Icon
+//           name="hands-icon"
+//           // className="static-text-purple-color opacity-90 w-[200px] h-[200px] "
+//           className="static-text-purple-color opacity-90 w-[200px] h-[200px] max-[900px]:w-[100px] max-[900px]:h-[100px]"
+//         />
+//       </div>
+
+//       <div
+//         ref={mediaRef}
+//         className={`basis-[50%] max-[1200px]:col-start-5 max-[1200px]:col-end-7 max-[900px]:col-span-1
+//          w-full   flex flex-col  flex-1 min-w-0 relative min-h-[200px]`}
+//       >
+//         <label
+//           htmlFor="uploadImg"
+//           className={`text-primary-text-color ${afterRequiredStyle}`}
+//         >
+//           {tt('titles.uploadImg')}
+//         </label>
+
+//         <div
+//           id="uploadImg"
+//           className={`max-h-[412px] h-full max-[900px]:max-h-[280px] border-dashed-secondary-color
+//                   bg-secondary-background-color rounded-md input-focus relative
+//                    ${meta.error && meta.touched ? ' !border-red-500 !border' : ''}`}
+//           onClick={() => uploadHandler(inputRef)}
+//         >
+//           {preview ? (
+//             <div
+//               ref={imgContainerRef}
+//               className={` h-full w-full border-dashed-secondary-color
+//                   bg-secondary-background-color rounded-md overflow-hidden relative ${isFocused ? 'container-focus' : ''}`}
+//             >
+//               <Button
+//                 onClick={(e) => handleRemovePreviev(e)}
+//                 className="absolute bottom-3 right-3 px-4 py-1 "
+//                 type="button"
+//                 variant="primary"
+//                 radius="xl"
+//               >
+//                 <Text
+//                   Element="span"
+//                   color="static-text-white-color"
+//                   size="t-text-xs"
+//                 >
+//                   Remove
+//                 </Text>
+//               </Button>
+//               {isLoading && (
+//                 <div
+//                   className="static-text-purple-color flex items-center justify-center
+//                absolute left-[50%] top-[50%]  -translate-[50%]"
+//                 >
+//                   <div className="w-20">
+//                     {/*-------------------- spinner */}
+//                     <div className="loader"></div>
+//                   </div>
+//                 </div>
+//               )}
+
+//               <Image alt="preview" src={preview} objectFit="object-cover" />
+//             </div>
+//           ) : (
+//             <>
+//               <div
+//                 ref={uploadRef}
+//                 className="absolute top-[50%] left-[50%] -translate-[50%]
+//                       flex flex-col gap-2 items-center justify-center static-text-purple-color"
+//               >
+//                 <Icon
+//                   name="upload-cloud"
+//                   size="clamp(1.25rem, -0.383rem + 8.16vw, 6.25rem)"
+//                   className="pulseIcon"
+//                 />
+
+//                 <Text
+//                   Element="h3"
+//                   font="font-work-sans-regular"
+//                   size="responsive-size-md"
+//                   className="text-center"
+//                 >
+//                   {tt('buttons.clickToUpload')}
+//                 </Text>
+//                 <Text
+//                   Element="p"
+//                   color="text-primary-text-color"
+//                   font="font-work-sans-regular"
+//                   className="opacity-40"
+//                   size="responsive-size-sm"
+//                 >
+//                   PNG, JPG, GIF
+//                 </Text>
+//                 <Text
+//                   Element="p"
+//                   color="text-primary-text-color"
+//                   font="font-work-sans-regular"
+//                   className="opacity-40"
+//                   size="responsive-size-sm"
+//                 >
+//                   {tt('titles.maxSize')}: 50 MB
+//                 </Text>
+//               </div>
+//               <input
+//                 name="file"
+//                 type="file"
+//                 hidden={true}
+//                 ref={inputRef}
+//                 onChange={(e) => handleChangeFile(e)}
+//               />
+//             </>
+//           )}
+//         </div>
+//         {isError && (
+//           <ErrorText
+//             Element="div"
+//             data-testid={'CategoriesCard-error'}
+//             className="text-red-700 w-full  text-right responsive-size-sm animate-pulse
+//                 absolute  right-5 bottom-5"
+//           >
+//             Loading Error...
+//           </ErrorText>
+//         )}
+
+//         {meta.error && meta.touched && (
+//           <div className="text-red-500">{t(`modal.errors.${meta.error}`)}</div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };

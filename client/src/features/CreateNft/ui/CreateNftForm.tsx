@@ -26,7 +26,7 @@ import { useAppSelector } from '../../../app/store/reduxHooks';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -128,7 +128,6 @@ export const CreateNftForm = () => {
     },
     { scope: descriptionRef },
   );
-  // ----------------------------------------------------------!!!
 
   return (
     <section className="font-work-sans-regular text-secondary-text-color mb-8 responsive-size-sm ">

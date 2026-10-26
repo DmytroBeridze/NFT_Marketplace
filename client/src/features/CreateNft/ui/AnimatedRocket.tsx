@@ -82,7 +82,6 @@ export const AnimatedRocket = () => {
         duration: 1,
         ease: 'none',
         x: -140,
-        // x: -140,
       });
 
       // -----------------------text after coin
@@ -90,7 +89,8 @@ export const AnimatedRocket = () => {
 
       gsap.set(split.chars, {
         autoAlpha: 0,
-        x: -85,
+
+        x: -150,
       });
 
       const charsReversed = [...split.chars].reverse();
@@ -107,12 +107,12 @@ export const AnimatedRocket = () => {
       );
 
       tl.to(coinRef.current, {
-        duration: 1.5,
+        duration: 0.8,
         ease: 'none',
         scale: 0.6,
       });
       tl.to(logoRef.current, {
-        x: 100,
+        x: 85,
       });
     },
 
@@ -124,30 +124,26 @@ export const AnimatedRocket = () => {
       ref={rocketContainerRef}
       className="flex items-center justify-center h-full relative "
     >
-      <div ref={logoRef} className="flex items-center  relative">
-        <div ref={coinRef} className="relative shrink-0 w-full ">
+      <div ref={logoRef} className="flex items-center relative">
+        <div ref={coinRef} className="relative shrink-0">
           <Icon
             name="tokenCoin-icon"
-            // size={60}
-
-            // size="clamp(1.25rem, -0.383rem + 8.16vw, 60px)"
             size="clamp(1rem, 0.102rem + 4.49vw, 3.75rem)"
             className="static-text-purple-color opacity-60"
           />
         </div>
+
         <div
           ref={titleRef}
-          className="absolute responsive-size-md static-text-purple-color w-[500px]"
+          className="absolute left-[calc(100%+8px)] whitespace-nowrap responsive-size-md static-text-purple-color"
         >
           NFTMarketplace
-          {/* NFT_Marketplace */}
         </div>
       </div>
 
       <div ref={rocketRef} className="relative ">
         <Icon
           name="rocketBoost-icon"
-          // size={100}
           size="clamp(1.25rem, -0.383rem + 8.16vw, 6.25rem)"
           className="static-text-purple-color opacity-60 z-50"
         />

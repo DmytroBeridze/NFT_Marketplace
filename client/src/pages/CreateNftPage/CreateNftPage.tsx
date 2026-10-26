@@ -70,14 +70,7 @@ export const CreateNftPage = () => {
                 <span>|</span>
               </h2>
             )}
-            {/* <h2
-              aria-hidden="true"
-              className="invisible typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
-              style={{ fontSize: '2em', display: 'inline-block' }}
-            >
-            
-              {t('titles.create')}
-            </h2> */}
+
             {/* ----------------------------//---------------------------- */}
             {isVisible && (
               <div>
