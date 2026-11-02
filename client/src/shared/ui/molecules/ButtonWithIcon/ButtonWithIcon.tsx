@@ -16,7 +16,7 @@ interface ButtonWithIconProps extends TextSecondaryProps {
   icon?: ReactNode;
   type?: 'button' | 'submit';
   disabled?: boolean;
-
+  dataTestid?: string;
   onClick?: () => void;
 }
 
@@ -33,7 +33,10 @@ export const ButtonWithIcon = ({
   fill,
   type,
   disabled,
+  dataTestid,
+
   iconName,
+
   // icon = 'rocket-icon',
   icon,
   // textSize = 't-text-sm',
@@ -56,6 +59,7 @@ export const ButtonWithIcon = ({
 
   return (
     <Button
+      dataTestid={dataTestid}
       className={`flex  ${className ?? ''}`}
       radius={radius}
       onClick={onClick}

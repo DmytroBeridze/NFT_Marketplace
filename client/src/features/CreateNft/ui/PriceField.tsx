@@ -97,6 +97,7 @@ export const PriceField = ({
 
         {/* -----------input currency*/}
         <FormikInput
+          dataTestid="nft-file-price"
           name="price"
           id="NFTprice"
           type="number"

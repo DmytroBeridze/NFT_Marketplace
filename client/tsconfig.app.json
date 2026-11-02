@@ -14,7 +14,7 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["react", "vitest/globals"],
+    "types": ["react", "vitest/globals", "@testing-library/jest-dom"],
 
     /* Linting */
     "strict": true,

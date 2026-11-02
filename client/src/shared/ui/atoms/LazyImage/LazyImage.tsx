@@ -35,7 +35,7 @@ export const LazyImage = ({
           src={src}
           alt={alt}
           onLoad={() => setLoaded(true)}
-          // className={`transition-opacity duration-500  ${loaded ? 'opacity-100' : 'opacity-0'} ${className || ''}`}
+          className={`transition-opacity duration-500  ${loaded ? 'opacity-100' : 'opacity-0'} ${className || ''}`}
           loading={loading}
         />
       }

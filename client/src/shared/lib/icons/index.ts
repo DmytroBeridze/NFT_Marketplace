@@ -28,7 +28,6 @@ import { ReactComponent as Telegram } from '../../assets/icons/telegram.svg';
 import { ReactComponent as ImgPlus } from '../../assets/icons/imagePlus.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Gallery } from '../../assets/icons/gallery.svg';
-import { ReactComponent as Upload } from '../../assets/icons/upload-cloud.svg';
 import { ReactComponent as Category } from '../../assets/icons/Category_icon.svg';
 import { ReactComponent as GalleryPhoto } from '../../assets/icons/gallery_photo.svg';
 import { ReactComponent as Bitcoin } from '../../assets/icons/currency/bitcoin-btc.svg';
@@ -42,6 +41,7 @@ import { ReactComponent as Heands } from '../../assets/icons/hands.svg';
 import { ReactComponent as RocketFly } from '../../assets/icons/rocket.svg';
 import { ReactComponent as TokenCoin } from '../../assets/icons/Token-coin.svg';
 import { ReactComponent as RocketBoost } from '../../assets/icons/rocket-boost.svg';
+import { ReactComponent as Upload } from '../../assets/icons/upload-cloud.svg';
 
 import CoinbaseIcon from '../../assets/icons/Coinbase.png';
 import MetamaskIcon from '../../assets/icons/Metamask.png';

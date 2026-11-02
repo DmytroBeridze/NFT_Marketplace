@@ -39,6 +39,7 @@ export const UploadField = ({ isSubmitting }: UploadFieldProps) => {
   return (
     <div ref={uploadRef} className="col-span-2 max-[900px]:col-span-1">
       <ButtonWithIcon
+        dataTestid="upload-nft-button"
         type="submit"
         className={`px-12 py-5 w-full flex items-center justify-center static-text-white-color
            max-[1200px]:col-span-2 max-[1200px]:!rounded-xl

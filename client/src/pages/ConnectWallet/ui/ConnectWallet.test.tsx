@@ -20,6 +20,21 @@ vi.mock('../../../shared/ui/molecules/Overlay', () => ({
   useToggleOverlay: vi.fn(),
 }));
 
+vi.mock('react-i18next', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('react-i18next')>();
+
+  return {
+    ...actual,
+    useTranslation: () => ({
+      t: (key: string) => key,
+    }),
+  };
+});
+
+// vi.mock('react-i18next', () => ({
+//   t: (text: any) => text,
+// }));
+
 const mockedConnecMetaMaskHook = vi.mocked(useConnecMetaMask);
 const mockedWalletContextHook = vi.mocked(useWalletContext);
 const mockedToggleOverlayHook = vi.mocked(useToggleOverlay);

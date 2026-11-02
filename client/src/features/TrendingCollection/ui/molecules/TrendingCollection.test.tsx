@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useGetTrendingCollectionQuery } from '../../model';
 import { TrendingCollection } from './TrendingCollection';
+import { useGetTrendingCollectionQuery } from '../../model';
 
 vi.mock('../../model', () => ({
   useGetTrendingCollectionQuery: vi.fn(),
@@ -10,11 +10,18 @@ vi.mock('../../model', () => ({
 vi.mock('../../../../widgets/TrendingCollection/ui/CollectionCard', () => ({
   CollectionCard: Object.assign(
     ({ author }: { author: string }) => (
-      <div data-testid={'CollectionCard'}>{author}</div>
+      <div data-testid="CollectionCard">{author}</div>
     ),
-    // (props: any) => <div data-testid={'CollectionCard'} {...props}></div>,
-    { Skeleton: () => <div data-testid={'CollectionCard-skeleton'}></div> },
+    {
+      Skeleton: () => <div data-testid="CollectionCard-skeleton" />,
+    },
   ),
+}));
+
+vi.mock('../../../../shared/lib/hooks', () => ({
+  useResponsiveValue: () => ({
+    responsiveValue: 3,
+  }),
 }));
 
 const mockedHook = vi.mocked(useGetTrendingCollectionQuery);
@@ -24,7 +31,7 @@ describe('TrendingCollection', () => {
     mockedHook.mockReset();
   });
 
-  it('show placeholder during error', () => {
+  it('shows an error message when the request fails', () => {
     mockedHook.mockReturnValue({
       isLoading: false,
       isError: true,
@@ -32,10 +39,11 @@ describe('TrendingCollection', () => {
     } as any);
 
     render(<TrendingCollection />);
+
     expect(screen.getByTestId('TrendingCollection-error')).toBeInTheDocument();
   });
 
-  it('show skeleton during loading', () => {
+  it('shows skeletons while loading', () => {
     mockedHook.mockReturnValue({
       isLoading: true,
       isError: false,
@@ -43,9 +51,8 @@ describe('TrendingCollection', () => {
     } as any);
 
     render(<TrendingCollection />);
-    expect(
-      screen.getAllByTestId('CollectionCard-skeleton')[0],
-    ).toBeInTheDocument();
+
+    expect(screen.getAllByTestId('CollectionCard-skeleton')).toHaveLength(3);
   });
 
   it('renders collection cards when data is loaded', () => {
@@ -70,6 +77,7 @@ describe('TrendingCollection', () => {
     } as any);
 
     render(<TrendingCollection />);
-    expect(screen.getAllByTestId('CollectionCard')[0]).toBeInTheDocument();
+
+    expect(screen.getByTestId('CollectionCard')).toHaveTextContent('John');
   });
 });

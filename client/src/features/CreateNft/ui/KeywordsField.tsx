@@ -61,6 +61,7 @@ export const KeywordsField = ({
         {tt('titles.keywords')}
       </label>
       <Textarea
+        data-testid="upload-nft-keywords"
         onChange={handleChange}
         onBlur={handleBlur}
         value={keywords}

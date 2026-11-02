@@ -9,7 +9,9 @@ const inputStyles = {
   modal: 'border-2 border-gray-300 rounded-sm ',
   subscribe: 'subscribeByEmailInput  px-5 w-full rounded-3xl ',
   createForm: 'rounded-md',
+
   custom: '',
+
   // subscribe: 'subscribeByEmailInput py-5 px-5 w-full rounded-3xl ',
 } as const;
 
@@ -38,6 +40,7 @@ export const FormikInput = ({
   variant = 'modal',
   size = 'default',
   disabled,
+  dataTestid,
 }: InputWrapper) => {
   const [field, meta] = useField(name);
 
@@ -49,6 +52,7 @@ export const FormikInput = ({
 
   return (
     <Input
+      dataTestid={dataTestid}
       field={field}
       meta={{ ...meta, error: translateVariables }}
       id={id}

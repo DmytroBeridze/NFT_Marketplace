@@ -27,6 +27,7 @@ export interface InputProps {
   autoComplete?: string;
   wrapperClass?: string;
   disabled?: boolean;
+  dataTestid?: string;
 }
 
 // --------------------------reusable input wrapper

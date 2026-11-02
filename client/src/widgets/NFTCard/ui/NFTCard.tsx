@@ -21,14 +21,9 @@ export const NFTCard = ({
       className="  w-full max-w-[336px] rounded-2xl flex flex-col bg-secondary-background-color
       overflow-hidden  text-primary-text-color"
     >
-      {/* <div
-     className="  max-w-full rounded-2xl flex flex-col bg-secondary-background-color 
-      overflow-hidden  text-primary-text-color"
-     > */}
       {/* ----------------------image */}
       <div className="w-full max-h-[295px] aspect-[400/295] overflow-hidden">
         <LazyImage alt={name} src={src} className=" max-h-[295px]" />
-        {/* <Image alt={name} src={src} /> */}
       </div>
 
       <div className=" py-5 px-7  flex flex-col gap-5 ">

@@ -3,7 +3,7 @@ import { InnerContainer } from '../../shared/ui/layout';
 import { ProfileHeader } from '../../widgets/ProfileHeader';
 import { useAppSelector } from '../../app/store/reduxHooks';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';

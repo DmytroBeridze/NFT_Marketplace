@@ -1,6 +1,7 @@
 import type { InputProps } from './types';
 
 export const Input = ({
+  dataTestid,
   id,
   type = 'text',
   field,
@@ -45,6 +46,7 @@ export const Input = ({
             accept={accept}
             autoComplete={autoComplete}
             disabled={disabled}
+            data-testid={dataTestid}
           />
           {rightIcon && (
             <span

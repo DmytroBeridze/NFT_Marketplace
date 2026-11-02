@@ -8,6 +8,7 @@ interface IButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   radius?: 'sm' | 'md' | 'lg' | 'xl' | 'responsive';
   disabled?: boolean;
+  dataTestid?: string;
 }
 
 const variantClasses = {
@@ -23,6 +24,8 @@ const variantClasses = {
 const baseClass = 'cursor-pointer';
 
 export const Button = ({
+  dataTestid,
+
   type = 'button',
   children,
   variant = 'primary',
@@ -33,6 +36,7 @@ export const Button = ({
 }: IButtonProps) => {
   return (
     <button
+      data-testid={dataTestid}
       type={type}
       onClick={onClick}
       className={`${baseClass} ${variantClasses[variant]} ${responsiveRadius[radius]} ${className} `}
