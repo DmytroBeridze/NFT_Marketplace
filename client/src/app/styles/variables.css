@@ -49,6 +49,7 @@
   --text-burger-color: var(--burger-text);
   --text-error-color: #ef4444;
   --text-success-color: #22c55e;
+  --color-amber-primary: rgb(252 211 77);
 
   /* accents */
   --primary-accent-color: #a259ff;
@@ -127,6 +128,8 @@
     1rem
   ); /*от 8 px до 16 px*/
 
+  /*от 20 px до 67 px*/
+  --font-size-heading-responsive: clamp(1.25rem, 0.291rem + 4.8vw, 4.188rem);
   --responsive-size-xxL: clamp(6.25rem, 2.546rem + 18.52vw, 18.75rem);
   /* --responsive-size-xxL: clamp(3.75rem, -0.694rem + 22.22vw, 18.75rem); */
   --gap-nav-responsive: clamp(0.125rem, -0.667rem + 3.96vw, 2.5rem);

@@ -255,6 +255,12 @@
 .responsive-size-lg {
   font-size: var(--responsive-size-lg);
 }
+
+/*от 20 px до 67 px*/
+.heading-responsive {
+  font-size: var(--font-size-heading-responsive);
+}
+
 .responsive-size-xxl {
   /* font-size: var(--responsive-size-lg); */
   font-size: var(--responsive-size-xxL);

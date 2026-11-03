@@ -15,7 +15,8 @@ export const CreateNftPage = () => {
   const [titleDone, setTitleDone] = useState(false);
   const { isVisible, ref } = useInView();
 
-  const { t } = useTranslation('dashboard');
+  const { t, i18n } = useTranslation('dashboard');
+  const currentLanguage = i18n.resolvedLanguage;
 
   const user = useAppSelector((state) => state.user.data);
 
@@ -45,11 +46,11 @@ export const CreateNftPage = () => {
 
         <InnerContainer className="absolute  left-1/2  top-1/2 -translate-x-1/2  -translate-y-1/2">
           <h1
-            className="text-amber-300  font-space-mono-bold   text-4xl 
-           t-text-3xl"
+            className=" text-amber-primary  font-space-mono-bold   text-4xl 
+           heading-responsive"
             ref={headerRef}
           >
-            Bring Your Art to Life
+            {t('titles.bringYourArt')}
           </h1>
         </InnerContainer>
       </div>
@@ -75,6 +76,7 @@ export const CreateNftPage = () => {
             {isVisible && (
               <div>
                 <TypeAnimation
+                  key={currentLanguage}
                   sequence={[
                     800,
                     t('titles.create'),
@@ -105,6 +107,7 @@ export const CreateNftPage = () => {
             <div className="absolute left-0  top-0">
               {titleDone && (
                 <TypeAnimation
+                  key={currentLanguage}
                   sequence={[
                     0,
 

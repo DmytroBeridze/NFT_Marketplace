@@ -29,7 +29,8 @@
     "royalty": "Royalty",
     "duration": "Duration",
     "maxSize": "Max size",
-    "tellTheStory": "Tell the story behind your NFT"
+    "tellTheStory": "Tell the story behind your NFT",
+    "bringYourArt": "Bring Your Art to Life"
   },
   "desc": {
     "MintDigitalItem": "Mint your unique digital item on the blockchain",

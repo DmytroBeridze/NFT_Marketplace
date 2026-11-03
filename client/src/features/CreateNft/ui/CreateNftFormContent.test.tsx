@@ -111,7 +111,6 @@ describe('createNftFormContent', () => {
     });
 
     render(<CreateNftFormContent userId="test-user" />);
-    // console.log('Наш мок:-------------------------', uploadFileMock);
 
     const nameField = screen.getByTestId('nft-name-input');
     const descriptionField = screen.getByLabelText('titles.description');
