@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { register, login, getMe } from "../controllers/authController.js";
 import { checkAuth } from "../middleware/checkAuth.js";
-import { body, check } from "express-validator";
+import { check } from "express-validator";
 import { checkValidation } from "../middleware/checkValidation.js";
 const router = Router();
 
@@ -13,7 +13,7 @@ router.post(
   [
     check("userName", "usernameIsRequired").notEmpty(),
     check("userPass", "passwordLength").isLength({
-      min: 3,
+      min: 8,
     }),
     checkValidation,
   ],

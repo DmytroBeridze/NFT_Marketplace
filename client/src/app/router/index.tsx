@@ -15,6 +15,7 @@ import { ProtectedRoute } from '../../shared/routes';
 import AuthorizationPage from '../../pages/AuthorizationPage/AuthorizationPage';
 import { NotFoundPage } from '../../pages/NotFoundPage';
 import { CreateNftPage } from '../../pages/CreateNftPage';
+import { EditProfile } from '../../pages/EditProfile/EditProfile';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, Component: Dashboard },
           { path: 'createNftPage', Component: CreateNftPage },
+          { path: 'editProfile', Component: EditProfile },
           // { path: 'dashboard/createNftPage', Component: CreateNftPage },
         ],
       },

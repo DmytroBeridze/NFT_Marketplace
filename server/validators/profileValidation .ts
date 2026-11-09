@@ -6,6 +6,12 @@ export const profileValidation = [
     .isString()
     .isLength({ max: 500 })
     .withMessage("invalidBio"),
+  body("email").optional().isEmail().withMessage("invalidMail"),
+  body("userPass")
+    .optional()
+    .isString()
+    .isLength({ min: 8 })
+    .withMessage("invalidPassword"),
   body("socialLinks.instagram")
     .optional()
     .isURL()

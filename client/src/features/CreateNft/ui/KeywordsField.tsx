@@ -23,7 +23,7 @@ export const KeywordsField = ({
 }: KeywordsFieldProps) => {
   const { t: tt } = useTranslation('dashboard');
 
-  const [field, meta] = useField('keywords');
+  const [_, meta] = useField('keywords');
 
   // ----------------------GSAP
   const keywordsRef = useRef<HTMLDivElement>(null);

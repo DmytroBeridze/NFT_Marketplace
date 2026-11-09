@@ -22,6 +22,7 @@ import { handleControllerError } from "../utils/handleControllerError.js";
 export const register = async (req: Request, res: Response) => {
   try {
     const { userName, userPass, userMail, userType, bio } = req.body;
+
     const isUsed = await User.findOne({ userName });
     const isUsedMail = await User.findOne({ userMail });
     // const role = await Roles.findOne("USER");

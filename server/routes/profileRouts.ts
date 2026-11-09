@@ -14,6 +14,7 @@ import { checkValidation } from "../middleware/checkValidation.js";
 import { profileValidation } from "../validators/profileValidation .js";
 const router = express.Router();
 console.log("PROFILE ROUTER LOADED");
+
 // ---change profile
 router.patch(
   "/change",

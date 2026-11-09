@@ -1,6 +1,6 @@
 import { CreateNftForm } from '../../features/CreateNft';
 import { InnerContainer } from '../../shared/ui/layout';
-import { ProfileHeader } from '../../widgets/ProfileHeader';
+
 import { useAppSelector } from '../../app/store/reduxHooks';
 import { useTranslation } from 'react-i18next';
 import { useRef, useState } from 'react';
@@ -9,6 +9,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
 import { useInView } from '../../shared/lib/hooks';
+import { PageHeader } from '../../shared/ui/organisms/PageHeader/PageHeader';
 gsap.registerPlugin(SplitText);
 
 export const CreateNftPage = () => {
@@ -19,6 +20,7 @@ export const CreateNftPage = () => {
   const currentLanguage = i18n.resolvedLanguage;
 
   const user = useAppSelector((state) => state.user.data);
+  if (!user) return null;
 
   const headerRef = useRef<HTMLParagraphElement>(null);
 
@@ -41,19 +43,11 @@ export const CreateNftPage = () => {
   return (
     <section>
       {/* ----------------------------Header */}
-      <div className="relative ">
-        <ProfileHeader coverImage={user?.coverImage} />
-
-        <InnerContainer className="absolute  left-1/2  top-1/2 -translate-x-1/2  -translate-y-1/2">
-          <h1
-            className=" text-amber-primary  font-space-mono-bold   text-4xl 
-           heading-responsive"
-            ref={headerRef}
-          >
-            {t('titles.bringYourArt')}
-          </h1>
-        </InnerContainer>
-      </div>
+      <PageHeader
+        headerRef={headerRef}
+        coverImage={user.coverImage}
+        title={t('titles.bringYourArt')}
+      />
 
       <InnerContainer>
         {/* ----------------Type animation------------- */}
@@ -87,7 +81,8 @@ export const CreateNftPage = () => {
                   ]}
                   wrapper="h2"
                   speed={60}
-                  style={{ fontSize: '2em', display: 'inline-block' }}
+                  style={{ display: 'inline-block' }}
+                  // style={{ fontSize: '2em', display: 'inline-block' }}
                   repeat={0}
                   className="typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
                   cursor={false}

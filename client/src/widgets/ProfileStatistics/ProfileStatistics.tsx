@@ -6,6 +6,11 @@ import { ButtonWithIcon } from '../../shared/ui/molecules/ButtonWithIcon';
 import { linksMap } from './socialIconMap';
 import { useTranslation } from 'react-i18next';
 import { useTranslate } from '../../shared/lib/i18n';
+import { useInView } from '../../shared/lib/hooks';
+import { TypeAnimation } from 'react-type-animation';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 type ProfileStatisticsProps = {
   bio?: string;
@@ -29,7 +34,8 @@ export const ProfileStatistics = ({
 }: ProfileStatisticsProps) => {
   const nftSold = nfts?.filter((elem) => elem.sold);
 
-  const { t } = useTranslation('dashboard');
+  const { t, i18n } = useTranslation('dashboard');
+  const currentLanguage = i18n.resolvedLanguage;
 
   const { translateVariables } = useTranslate<Statistics>({
     translateKey: 'statistics',
@@ -38,7 +44,7 @@ export const ProfileStatistics = ({
   });
 
   let navigate = useNavigate();
-
+  const { isVisible, ref } = useInView();
   // -----------------------statistics
   const statistics = [
     { itemName: translateVariables.works, value: nfts?.length },
@@ -53,6 +59,113 @@ export const ProfileStatistics = ({
       )
     : [];
 
+  // !-----------------------Винести в хук
+  // ----------------------GSAP
+  const statisticsRef = useRef<HTMLUListElement>(null);
+  const bioRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
+  const createBtnRef = useRef<HTMLDivElement>(null);
+  const editBtnRef = useRef<HTMLDivElement>(null);
+  const galleryBtnRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (
+        !statisticsRef.current ||
+        !bioRef ||
+        !linksRef ||
+        !createBtnRef ||
+        !editBtnRef ||
+        !galleryBtnRef
+      )
+        return;
+      // -------------------statistics
+      gsap.from(statisticsRef.current, {
+        scrollTrigger: {
+          trigger: statisticsRef.current,
+          // start: 'top 60%',
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+
+      // -------------------bio
+      gsap.from(bioRef.current, {
+        scrollTrigger: {
+          trigger: bioRef.current,
+          // start: 'top 60%',
+        },
+        autoAlpha: 0,
+        duration: 0.9,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+
+      // -------------------links
+      gsap.from(linksRef.current, {
+        scrollTrigger: {
+          trigger: linksRef.current,
+          // start: 'top 60%',
+        },
+        autoAlpha: 0,
+        duration: 0.9,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+
+      // -------------------create
+      gsap.from(createBtnRef.current, {
+        scrollTrigger: {
+          trigger: createBtnRef.current,
+          // start: 'top 60%',
+        },
+        autoAlpha: 0,
+        duration: 0.5,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+
+      // -------------------edit Btn
+      gsap.from(editBtnRef.current, {
+        scrollTrigger: {
+          trigger: editBtnRef.current,
+          // start: 'top 60%',
+        },
+        autoAlpha: 0,
+        duration: 0.9,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+
+      // -------------------gallery Btn
+      gsap.from(galleryBtnRef.current, {
+        scrollTrigger: {
+          trigger: galleryBtnRef.current,
+          // start: 'top 60%',
+        },
+        autoAlpha: 0,
+        duration: 1.2,
+        opacity: 0,
+        stagger: 0.15,
+        y: 100,
+        ease: 'power2.out',
+      });
+    },
+    { scope: statisticsRef },
+  );
+  // !-----------------//-----
   return (
     <section
       className="flex justify-between mt-[90px] text-primary-text-color mb-10
@@ -77,18 +190,53 @@ export const ProfileStatistics = ({
       max-[1300px]:order-2
       "
       >
-        <Text
-          className="max-[1300px]:hidden"
-          Element="h2"
-          font="font-work-sans-semibold"
-          size="responsive-size-lg"
-          // color="text-primary-text-color"
-          // className="mt-[90px] "
-        >
-          {name}
-        </Text>
+        {/* -------------------------------Type animation */}
+        <div className="relative">
+          {/* -------------------------------Placeholder  for layout */}
+
+          {!isVisible && (
+            <h2
+              aria-hidden="true"
+              className=" typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
+              style={{ fontSize: '2em', display: 'inline-block' }}
+            >
+              <span>|</span>
+            </h2>
+          )}
+
+          <div ref={ref}>
+            {isVisible && (
+              <div>
+                <TypeAnimation
+                  key={currentLanguage}
+                  sequence={[
+                    800,
+                    name,
+                    (el) => {
+                      el?.classList.add('typing-done');
+                      // setTitleDone(true);
+                    },
+                  ]}
+                  wrapper="h2"
+                  speed={60}
+                  style={{ display: 'inline-block' }}
+                  // style={{ fontSize: '2em', display: 'inline-block' }}
+                  repeat={0}
+                  className="typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color "
+                  cursor={false}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ------------------------------- */}
+
         {/* -------statistics */}
-        <ul className="grid grid-cols-3 gap-4 max-w-[600px]">
+        <ul
+          className="grid grid-cols-3 gap-4 max-w-[600px]"
+          ref={statisticsRef}
+        >
           {statistics.map((elem) => (
             <li key={elem.itemName}>
               <Text font="font-space-mono-bold" size="responsive-size-mdl">
@@ -105,7 +253,7 @@ export const ProfileStatistics = ({
           ))}
         </ul>
         {/* -------bio */}
-        <div>
+        <div ref={bioRef}>
           <Text
             font="font-space-mono-bold"
             size="t-text-md"
@@ -119,7 +267,7 @@ export const ProfileStatistics = ({
         </div>
 
         {/* -------links */}
-        <div>
+        <div ref={linksRef}>
           <Text
             font="font-space-mono-bold"
             size="t-text-md"
@@ -146,40 +294,53 @@ export const ProfileStatistics = ({
           </ul>
         </div>
       </div>
+
+      {/* ---------------------------------Buttons */}
       <div className="basis-[50%]  self-start max-[834px]:self-auto flex justify-end  max-[834px]:justify-normal  max-[1300px]:order-1">
         <div className="grid  grid-cols-2 gap-4 w-full max-w-[400px] justify-end   max-[834px]:grid-cols-1">
-          <ButtonWithIcon
-            radius="xl"
-            iconName="imgPlus-icon"
-            className="py-5 px-12  col-start-1 col-end-3 items-center
-            max-[834px]:col-end-1
-            "
-            fill="none"
-            iconClassName="static-text-white-color "
-            onClick={() => navigate('createNftPage')}
-            // onClick={() => navigate('/dashboard/createNftPage')}
+          <div
+            ref={createBtnRef}
+            className="col-start-1 col-end-3  max-[834px]:col-end-1"
           >
-            {t('buttons.createNFT')}
-          </ButtonWithIcon>
-          <ButtonWithIcon
-            radius="xl"
-            variant="outline"
-            iconName="edit-icon"
-            className="py-[18px]  max-[834px]:py-[20px] px-10 items-center"
-            textClassName="text-primary-text-color leading-[normal]"
-            iconClassName="text-primary-text-color"
-          >
-            {t('buttons.editProfile')}
-          </ButtonWithIcon>
-          <ButtonWithIcon
-            radius="xl"
-            variant="secondary"
-            iconName="gallery-icon"
-            className="py-[18px] max-[834px]:py-[20px] px-10 items-center "
-            textClassName="text-inversive-text-color text-base leading-[normal] "
-          >
-            {t('buttons.createGallery')}
-          </ButtonWithIcon>
+            <ButtonWithIcon
+              radius="xl"
+              iconName="imgPlus-icon"
+              className="py-5 px-12 items-center w-full"
+              // className="py-5 px-12 items-center  col-start-1 col-end-3  max-[834px]:col-end-1 "
+              fill="none"
+              iconClassName="static-text-white-color "
+              onClick={() => navigate('createNftPage')}
+              // onClick={() => navigate('/dashboard/createNftPage')}
+            >
+              {t('buttons.createNFT')}
+            </ButtonWithIcon>
+          </div>
+          <div ref={editBtnRef}>
+            <ButtonWithIcon
+              radius="xl"
+              variant="outline"
+              iconName="edit-icon"
+              className="py-[18px]  max-[834px]:py-[20px] px-10 items-center w-full"
+              // className="py-[18px]  max-[834px]:py-[20px] px-10 items-center"
+              textClassName="text-primary-text-color leading-[normal]"
+              iconClassName="text-primary-text-color"
+              onClick={() => navigate('editProfile', { state: 'test state' })}
+            >
+              {t('buttons.editProfile')}
+            </ButtonWithIcon>
+          </div>
+
+          <div ref={galleryBtnRef}>
+            <ButtonWithIcon
+              radius="xl"
+              variant="secondary"
+              iconName="gallery-icon"
+              className="py-[18px] max-[834px]:py-[20px] px-10 items-center w-full"
+              textClassName="text-inversive-text-color text-base leading-[normal] "
+            >
+              {t('buttons.createGallery')}
+            </ButtonWithIcon>
+          </div>
         </div>
       </div>
     </section>
