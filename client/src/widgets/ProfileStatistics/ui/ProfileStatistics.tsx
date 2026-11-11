@@ -1,16 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
-import type { INft } from '../../entities/nft/model';
-import type { SocialLinks } from '../../entities/user/model';
-import { ErrorText, Icon, Text } from '../../shared/ui/atoms';
-import { ButtonWithIcon } from '../../shared/ui/molecules/ButtonWithIcon';
-import { linksMap } from './socialIconMap';
+import type { INft } from '../../../entities/nft/model';
+import type { SocialLinks } from '../../../entities/user/model';
+import { ErrorText, Icon, Text } from '../../../shared/ui/atoms';
+import { ButtonWithIcon } from '../../../shared/ui/molecules/ButtonWithIcon';
+import { linksMap } from '../model/socialIconMap';
 import { useTranslation } from 'react-i18next';
-import { useTranslate } from '../../shared/lib/i18n';
-import { useInView } from '../../shared/lib/hooks';
-import { TypeAnimation } from 'react-type-animation';
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
+import { useTranslate } from '../../../shared/lib/i18n';
+import { AnimatedPageHeading } from '../../../shared/ui/organisms/AnimatedPageHeading/AnimatedPageHeading';
+import { useProfileStatisticsAnimation } from '../model/useProfileStatisticsAnimation';
 
 type ProfileStatisticsProps = {
   bio?: string;
@@ -35,7 +32,6 @@ export const ProfileStatistics = ({
   const nftSold = nfts?.filter((elem) => elem.sold);
 
   const { t, i18n } = useTranslation('dashboard');
-  const currentLanguage = i18n.resolvedLanguage;
 
   const { translateVariables } = useTranslate<Statistics>({
     translateKey: 'statistics',
@@ -44,7 +40,7 @@ export const ProfileStatistics = ({
   });
 
   let navigate = useNavigate();
-  const { isVisible, ref } = useInView();
+  // const { isVisible, ref } = useInView();
   // -----------------------statistics
   const statistics = [
     { itemName: translateVariables.works, value: nfts?.length },
@@ -59,180 +55,38 @@ export const ProfileStatistics = ({
       )
     : [];
 
-  // !-----------------------Винести в хук
   // ----------------------GSAP
-  const statisticsRef = useRef<HTMLUListElement>(null);
-  const bioRef = useRef<HTMLDivElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
-  const createBtnRef = useRef<HTMLDivElement>(null);
-  const editBtnRef = useRef<HTMLDivElement>(null);
-  const galleryBtnRef = useRef<HTMLDivElement>(null);
+  const {
+    bioRef,
+    createBtnRef,
+    editBtnRef,
+    galleryBtnRef,
+    linksRef,
+    statisticsRef,
+  } = useProfileStatisticsAnimation();
 
-  useGSAP(
-    () => {
-      if (
-        !statisticsRef.current ||
-        !bioRef ||
-        !linksRef ||
-        !createBtnRef ||
-        !editBtnRef ||
-        !galleryBtnRef
-      )
-        return;
-      // -------------------statistics
-      gsap.from(statisticsRef.current, {
-        scrollTrigger: {
-          trigger: statisticsRef.current,
-          // start: 'top 60%',
-        },
-        autoAlpha: 0,
-        duration: 0.5,
-        opacity: 0,
-        stagger: 0.15,
-        y: 100,
-        ease: 'power2.out',
-      });
-
-      // -------------------bio
-      gsap.from(bioRef.current, {
-        scrollTrigger: {
-          trigger: bioRef.current,
-          // start: 'top 60%',
-        },
-        autoAlpha: 0,
-        duration: 0.9,
-        opacity: 0,
-        stagger: 0.15,
-        y: 100,
-        ease: 'power2.out',
-      });
-
-      // -------------------links
-      gsap.from(linksRef.current, {
-        scrollTrigger: {
-          trigger: linksRef.current,
-          // start: 'top 60%',
-        },
-        autoAlpha: 0,
-        duration: 0.9,
-        opacity: 0,
-        stagger: 0.15,
-        y: 100,
-        ease: 'power2.out',
-      });
-
-      // -------------------create
-      gsap.from(createBtnRef.current, {
-        scrollTrigger: {
-          trigger: createBtnRef.current,
-          // start: 'top 60%',
-        },
-        autoAlpha: 0,
-        duration: 0.5,
-        opacity: 0,
-        stagger: 0.15,
-        y: 100,
-        ease: 'power2.out',
-      });
-
-      // -------------------edit Btn
-      gsap.from(editBtnRef.current, {
-        scrollTrigger: {
-          trigger: editBtnRef.current,
-          // start: 'top 60%',
-        },
-        autoAlpha: 0,
-        duration: 0.9,
-        opacity: 0,
-        stagger: 0.15,
-        y: 100,
-        ease: 'power2.out',
-      });
-
-      // -------------------gallery Btn
-      gsap.from(galleryBtnRef.current, {
-        scrollTrigger: {
-          trigger: galleryBtnRef.current,
-          // start: 'top 60%',
-        },
-        autoAlpha: 0,
-        duration: 1.2,
-        opacity: 0,
-        stagger: 0.15,
-        y: 100,
-        ease: 'power2.out',
-      });
-    },
-    { scope: statisticsRef },
-  );
-  // !-----------------//-----
   return (
     <section
       className="flex justify-between mt-[90px] text-primary-text-color mb-10
     max-[1300px]:flex-col gap-7
     "
     >
-      {/* ------responsive-hidden block------ */}
-
-      <Text
-        className="hidden  max-[1300px]:block"
-        Element="h2"
-        font="font-work-sans-semibold"
-        size="responsive-size-lg"
-      >
-        {name}
-      </Text>
-
-      {/* ------------------------- */}
+      {/* ------------------responsive-hidden block- */}
+      <div className="hidden  max-[1300px]:block">
+        <AnimatedPageHeading title={name} />
+      </div>
 
       <div
         className="basis-[50%] grow shrink flex flex-col gap-8 max-w-[800px] 
       max-[1300px]:order-2
       "
       >
-        {/* -------------------------------Type animation */}
-        <div className="relative">
-          {/* -------------------------------Placeholder  for layout */}
-
-          {!isVisible && (
-            <h2
-              aria-hidden="true"
-              className=" typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color mt-[90px]"
-              style={{ fontSize: '2em', display: 'inline-block' }}
-            >
-              <span>|</span>
-            </h2>
-          )}
-
-          <div ref={ref}>
-            {isVisible && (
-              <div>
-                <TypeAnimation
-                  key={currentLanguage}
-                  sequence={[
-                    800,
-                    name,
-                    (el) => {
-                      el?.classList.add('typing-done');
-                      // setTitleDone(true);
-                    },
-                  ]}
-                  wrapper="h2"
-                  speed={60}
-                  style={{ display: 'inline-block' }}
-                  // style={{ fontSize: '2em', display: 'inline-block' }}
-                  repeat={0}
-                  className="typing-title font-work-sans-semibold responsive-size-lg text-primary-text-color "
-                  cursor={false}
-                />
-              </div>
-            )}
-          </div>
+        {/* ----------------Type animation title */}
+        <div className=" block max-[1300px]:hidden">
+          <AnimatedPageHeading title={name} />
         </div>
 
-        {/* ------------------------------- */}
-
-        {/* -------statistics */}
+        {/* ---------------statistics */}
         <ul
           className="grid grid-cols-3 gap-4 max-w-[600px]"
           ref={statisticsRef}
@@ -252,6 +106,7 @@ export const ProfileStatistics = ({
             </li>
           ))}
         </ul>
+
         {/* -------bio */}
         <div ref={bioRef}>
           <Text

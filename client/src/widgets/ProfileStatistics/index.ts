@@ -1,2 +1,2 @@
-export * from './ProfileStatistics';
-export * from './socialIconMap';
+export * from './ui/ProfileStatistics';
+export * from './model/socialIconMap';
